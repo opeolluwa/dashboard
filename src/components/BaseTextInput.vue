@@ -75,7 +75,7 @@ button {
 
   .form-field input,
   button {
-    width: unset;
+    width: 100%;
   }
 }
 </style>

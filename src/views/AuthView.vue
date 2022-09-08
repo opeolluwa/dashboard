@@ -90,7 +90,7 @@ main .container>div:last-child h1 {
   }
 
   main .container>div:last-child h1 {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     line-height: 26px;
     font-size: 24px;
     text-align: center;
