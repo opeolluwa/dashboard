@@ -1,7 +1,5 @@
 <template>
-  <div class="form-field">
     <button>{{ text }}</button>
-  </div>
 </template>
 
 <style scoped>
@@ -25,7 +23,6 @@ button:focus {
   cursor: pointer;
 }
 @media screen and (max-width: 400px) {
-  .form-field 
   button {
     width: 100%;
   }

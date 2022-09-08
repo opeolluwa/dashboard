@@ -1,18 +1,17 @@
 <script lang="ts">
-import DashboardHeaderVue from '@/components/DashboardHeader.vue';
+import ViewLayout from '../components/ViewLayout.vue';
 export default {
   name: "HomeView",
   components: {
-    DashboardHeader:DashboardHeaderVue
+    ViewLayout
   }
 };
 </script>
 
 <template>
- <div>
-  <DashboardHeader />
- 
- </div>
+  <ViewLayout>
+    home view
+  </ViewLayout>
 </template>
 
 <style scoped>

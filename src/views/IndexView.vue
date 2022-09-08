@@ -1,8 +1,12 @@
 <script lang="ts">
 import DashboardSidebarVue from '@/components/DashboardSidebar.vue';
+import BaseTextInputVue from '@/components/BaseTextInput.vue';
+import DashboardHeaderVue from '@/components/DashboardHeader.vue';
 export default {
     components: {
         DashboardSidebar: DashboardSidebarVue,
+        BaseTextInput: BaseTextInputVue,
+        DashboardHeader: DashboardHeaderVue
     }
 };
 </script>
@@ -11,6 +15,7 @@ export default {
     <div class="container">
         <DashboardSidebar />
         <main>
+            <DashboardHeader />
             <RouterView />
         </main>
     </div>
