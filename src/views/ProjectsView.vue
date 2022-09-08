@@ -5,7 +5,9 @@ export default {
 </script>
 
 <template>
-  <main></main>
+  <main>
+    <h1>projects</h1>
+  </main>
 </template>
 
 <style scoped></style>

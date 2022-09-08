@@ -1,6 +1,7 @@
 <script lang="ts">
 import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
+import router from "@/router";
 export default {
   name: "AuthView",
   components: {
@@ -13,6 +14,13 @@ export default {
       password: null,
     },
   }),
+  methods: {
+    login() {
+      console.log("login");
+      //head over to the next page, which essentially the home page
+      router.push({ name: "dashboard" });
+    },
+  }
 };
 </script>
 
@@ -42,7 +50,7 @@ main .container {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  column-gap: 150px;
+  column-gap: 100px;
   grid-template-rows: 1fr;
   grid-template-areas: "bg form";
   min-height: 100vh;
@@ -59,7 +67,7 @@ main .container>div:last-child {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-content: center; */
+  align-content: center;
 }
 
 main .container>div:last-child h1 {
@@ -74,6 +82,8 @@ main .container>div:last-child h1 {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "bg" "form";
+    justify-content: center;
+    align-items: center;
   }
 
   main .container>div:first-child {
@@ -86,14 +96,14 @@ main .container>div:last-child h1 {
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    padding: 30px;
+    padding:0 30px;
   }
 
   main .container>div:last-child h1 {
     margin-bottom: 20px;
     line-height: 26px;
-    font-size: 24px;
-    text-align: center;
+    font-size: 28px;
+    /* text-align: center; */
   }
 
 }
