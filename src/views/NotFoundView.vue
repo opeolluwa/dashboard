@@ -1,11 +1,14 @@
 <script lang="ts">
 export default {
-  name: "TodoView",
+  name: "NotFoundView",
 };
 </script>
 
 <template>
-  <main></main>
+  <main>
+    <h1>404</h1>
+    <p>Page not found</p>
+  </main>
 </template>
 
 <style scoped></style>
