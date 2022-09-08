@@ -18,7 +18,7 @@ export default {
     login() {
       console.log("login");
       //head over to the next page, which essentially the home page
-      router.push({ name: "dashboard" });
+      router.push({ name: "home" });
     },
   }
 };

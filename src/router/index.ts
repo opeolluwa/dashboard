@@ -12,7 +12,6 @@ const router = createRouter({
     },
     {
       path: "/u",
-      name:"dashboard",
       component: BaseLayout,
       children: [
         {
@@ -40,11 +39,6 @@ const router = createRouter({
           name: "todo",
           component: () => import("@/views/TodoView.vue"),
         },
-        /* {
-      path: "*",
-      name: "404",
-      component: () => import("@/views/NotFoundView.vue"),
-    }, */
       ]
     },
   ],
