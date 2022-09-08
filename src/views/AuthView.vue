@@ -97,13 +97,14 @@ main .container>div:last-child h1 {
     justify-content: center;
     align-content: center;
     padding:0 30px;
+    min-height: 85vh;
   }
 
   main .container>div:last-child h1 {
-    margin-bottom: 20px;
+    margin-bottom: 35px;
     line-height: 26px;
     font-size: 28px;
-    /* text-align: center; */
+    text-align: center;
   }
 
 }

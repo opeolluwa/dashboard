@@ -38,8 +38,9 @@ export default {
 
 .form-field label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 7.5px;
   text-transform: capitalize;
+  font-family: 'Open Sans';
 }
 
 .form-field input,
@@ -49,7 +50,7 @@ button {
   left: 0px;
   border-radius: 8px;
   padding: 7px 25px 7px 25px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
 }
 
@@ -65,7 +66,7 @@ button {
 
 .form-field input:hover,
 .form-field input:focus {
-  border: 1.5px solid var(--tertiary);
+  border: 1.75px solid var(--tertiary);
   transition: 0.5s border;
   outline: none;
 }
