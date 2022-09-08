@@ -1,12 +1,7 @@
 <template>
   <div class="form-field">
     <label :for="label">{{ label }}</label>
-    <input
-      :type="type"
-      :id="label"
-      :placeholder="'-- ' + placeholder + ' --'"
-      v-model="model"
-    />
+    <input :type="type" :id="label" :placeholder="'-- ' + placeholder + ' --'" v-model="model" />
   </div>
 </template>
 
@@ -66,5 +61,21 @@ button {
   line-height: 21px;
   letter-spacing: 0em;
   text-align: left;
+}
+
+.form-field input:hover,
+.form-field input:focus {
+  border: 1.5px solid var(--tertiary);
+  transition: 0.5s border;
+  outline: none;
+}
+
+
+@media screen and (max-width: 400px) {
+
+  .form-field input,
+  button {
+    width: unset;
+  }
 }
 </style>
