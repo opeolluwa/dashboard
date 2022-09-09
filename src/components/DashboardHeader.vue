@@ -36,6 +36,7 @@ header {
     justify-content: space-between;
     padding: 20px 100px;
     border-bottom: 1px solid rgba(0, 0, 0, .15);
+    background-color: #fff;
 }
 
 h1 {

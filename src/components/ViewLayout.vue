@@ -1,6 +1,6 @@
 <template>
     <div class="view">
-        <slot class="slot"></slot>
+        <slot name="content"></slot>
     </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
 
 
 <style scoped>
-.view{
+.view {
     padding: 25px 100px;
     transition: all .5s ease-in-out;
 }

@@ -9,9 +9,7 @@ export default {
 </script>
 
 <template>
-  <ViewLayout>
-    hi
-  </ViewLayout>
+ <h1>email</h1>
 </template>
 
 <style scoped>

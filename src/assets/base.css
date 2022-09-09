@@ -25,34 +25,24 @@ body {
 :root {
   --default: #101010;
   --white: #f5f5f5;
-  --backgroundLighten: lighten(--baseColor, 10%);
-  --gradient: linear-gradient(#df56ad 0%, #0d1023 96.23%, #702b57 100%);
-  --border: #707070;
   --text-color: #ffffff;
-  --sec-color: #df56ad;
-  --default-border: #707070;
   --border-color: #ccc;
-  --default-dark-color: #0d1023;
-  --default-pink: #df56ad;
+  --default-dark: #0d1023;
   --default-white: #f1f1f1;
   --default-red: #f62b2b;
   --default-green: #39b545;
   --default-yellow: #fdca00;
   --light-bg: #0d1023;
   --light-text: #fff;
-
+  --dark-text: #101010;
   --default-content-color: #7714f1;
-  /* default for mail and documentation items*/
   --primary: #00cfe8;
   --secondary: #707070;
   --tertiary: #7714f1;
   --warning: #fdca00;
   --danger: #f62b2b;
   --success: #39b545;
-  --light: #f1f1f1;
   --background: #020514;
-  --dark: var(--background);
-  --foreground: rgba(255, 255, 255, 0.08);
   --text: #ccced2
 }
 

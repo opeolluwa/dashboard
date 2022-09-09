@@ -1,10 +1,38 @@
 <template>
+    <!--
+    *   Custom modal 
+    *  example use case
+    
+    * -- add  @click="showModal = true" to any element to show modal, 
+    * this will listen to click events on the modal---
+    *
+    * <button @click="showModal = true">show modal</button>
+    
+    * --- build the modal content in the template slots ---
+    * <Modal v-show="showModal" @close-modal="showModal = false">
+    *    --- icon slot to hold icons/ illustration if any
+    *    <template #icon>
+    *        <img src="path-to-icon.ext" />
+    *    </template>
+
+    *    --- content slot to hold the modal content
+    *    <template #content>
+    *        some content here
+    *    </template>
+    *</Modal>
+    -->
     <div class="modal-overlay">
         <div class="modal">
-            <!-- <img class="check" src="~/assets/check-icon.png" alt="" /> -->
-            <h6>Saved!</h6>
-            <p>Your Details have been saved Successfully</p>
-            <BaseButton text="Close" />
+
+            <!-- the modal icons placeholder-->
+            <div class="check">
+                <slot name="icon"></slot>
+            </div>
+            <!--the modal content goes here-->
+            <slot>
+                <h6>{{title}}</h6>
+            </slot>
+            <!-- <BaseButton text="Close" /> -->
         </div>
         <div class="close" @click="$emit('close-modal')">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
@@ -20,7 +48,14 @@
 <script lang="ts">
 import BaseButton from "./BaseButton.vue";
 export default {
-    components: { BaseButton }
+    components: { BaseButton },
+    props: {
+        title: {
+            type: String,
+            required: true,
+            default: "Alert"
+        }
+    }
 }
 </script>
 
@@ -66,7 +101,7 @@ export default {
     width: 25px;
 }
 
-.check {
+.check img {
     width: 150px;
 }
 

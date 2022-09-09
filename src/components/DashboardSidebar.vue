@@ -20,7 +20,7 @@ export default {
     },
     methods: {
         logout() {
-            router.push({name:"auth"})
+            router.push({ name: "auth" })
             // this.$store.dispatch('logout');
         }
     }
@@ -68,6 +68,8 @@ nav {
     background-color: var(--default-content-color);
     color: var(--light-text);
     position: relative;
+    top: 0;
+    left: 0;
 }
 
 nav .link-item {
@@ -80,7 +82,7 @@ nav .link-item {
     display: inline-flex;
     align-items: flex-end;
     text-decoration: none;
-    color: var(--default-dark);
+    color: var(--light-text);
     column-gap: 15px;
     font-size: 18px;
     transition: all 0.2s ease-in-out;
@@ -100,6 +102,7 @@ nav .link-item:hover {
     display: block;
     left: 10%;
     color: var(--default-content-color);
+    color: var(--dark-text);
     box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
     -webkit-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
     -moz-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);

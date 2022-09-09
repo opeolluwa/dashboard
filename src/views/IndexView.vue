@@ -2,11 +2,13 @@
 import DashboardSidebarVue from '@/components/DashboardSidebar.vue';
 import BaseTextInputVue from '@/components/BaseTextInput.vue';
 import DashboardHeaderVue from '@/components/DashboardHeader.vue';
+import ViewLayoutVue from '@/components/ViewLayout.vue';
 export default {
     components: {
         DashboardSidebar: DashboardSidebarVue,
         BaseTextInput: BaseTextInputVue,
-        DashboardHeader: DashboardHeaderVue
+        DashboardHeader: DashboardHeaderVue,
+        ViewLayout: ViewLayoutVue
     }
 };
 </script>
@@ -16,7 +18,13 @@ export default {
         <DashboardSidebar />
         <main>
             <DashboardHeader />
-            <RouterView />
+            <div>
+                <ViewLayout>
+                    <template #content>
+                        <RouterView />
+                    </template>
+                </ViewLayout>
+            </div>
         </main>
     </div>
 </template>
@@ -28,10 +36,30 @@ export default {
     grid-template-rows: 1fr;
     grid-template-areas: "sidebar content";
     column-gap: 0px;
-    min-height: 100vh;
+    height: 100vh;
 }
 
-/* .container > * {
-    padding-top: 75px;
-} */
+nav {
+    grid-area: sidebar;
+    height: 100vh !important;
+}
+
+main {
+    grid-area: content;
+    height: 100vh;
+    overflow-y: scroll;
+    scrollbar-color: red;
+}
+
+main header {
+    grid-area: header;
+
+}
+
+main>div {
+    grid-area: view;
+    background-color: #f9f9f9;
+}
+
+
 </style>

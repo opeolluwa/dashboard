@@ -9,9 +9,9 @@ export default {
 </script>
 
 <template>
-  <ViewLayout>
-    hi
-  </ViewLayout>
+ <h1>
+  projects
+ </h1>
 </template>
 
 <style scoped>
