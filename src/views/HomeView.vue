@@ -1,16 +1,24 @@
 <script lang="ts">
 import ViewLayout from '../components/ViewLayout.vue';
+import Modal from '@/components/AppModal.vue';
 export default {
   name: "HomeView",
   components: {
-    ViewLayout
-  }
+    ViewLayout,
+    Modal
+  },
+  data: () => ({
+    showModal: false
+  }),
 };
 </script>
 
 <template>
   <ViewLayout>
-    home view
+    <!--first row for analytics-->
+    <button @click="showModal = true">show modal</button>
+
+    <Modal v-show="showModal" @close-modal="showModal = false" />
   </ViewLayout>
 </template>
 

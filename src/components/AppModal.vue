@@ -1,94 +1,92 @@
-<!-- template for the modal component -->
-<template id="modal-template">
-    <div class="modal-mask">
-        <div class="modal-wrapper">
-            <div class="modal-container">
-
-                <div class="modal-header">
-                    <slot name="header">
-                        default header
-                    </slot>
-                </div>
-
-                <div class="modal-body">
-                    <slot name="body">
-                        default body
-                    </slot>
-                </div>
-
-                <div class="modal-footer">
-                    <slot name="footer">
-                        default footer
-                        <button class="modal-default-button" @click="$emit('close')">
-                            OK
-                        </button>
-                    </slot>
-                </div>
-            </div>
+<template>
+    <div class="modal-overlay">
+        <div class="modal">
+            <!-- <img class="check" src="~/assets/check-icon.png" alt="" /> -->
+            <h6>Saved!</h6>
+            <p>Your Details have been saved Successfully</p>
+            <BaseButton text="Close" />
+        </div>
+        <div class="close" @click="$emit('close-modal')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                fill="var(--default-red)">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path
+                    d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" />
+            </svg>
         </div>
     </div>
 </template>
 
+<script lang="ts">
+import BaseButton from "./BaseButton.vue";
+export default {
+    components: { BaseButton }
+}
+</script>
+
 
 <style scoped>
-.modal-mask {
+.modal-overlay {
     position: fixed;
-    z-index: 9998;
     top: 0;
+    bottom: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: table;
-    transition: opacity 0.3s ease;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .75);
 }
 
-.modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
+.modal {
+    text-align: center;
+    background-color: white;
+    height: 500px;
+    width: 500px;
+    margin-top: 10%;
+    padding: 60px 0;
+    border-radius: 20px;
 }
 
-.modal-container {
-    width: 300px;
-    margin: 0px auto;
-    padding: 20px 30px;
+.close {
+    margin: 10% 0 0 16px;
+    cursor: pointer;
     background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-    transition: all 0.3s ease;
-    font-family: Helvetica, Arial, sans-serif;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-size: 30px;
+    align-items: center;
+    padding: 5px;
 }
 
-.modal-header h3 {
-    margin-top: 0;
-    color: #42b983;
+.close-img {
+    width: 25px;
 }
 
-.modal-body {
+.check {
+    width: 150px;
+}
+
+h6 {
+    font-weight: 500;
+    font-size: 28px;
     margin: 20px 0;
 }
 
-.modal-default-button {
-    float: right;
+p {
+    font-size: 16px;
+    margin: 20px 0;
 }
 
-/*
-     * The following styles are auto-applied to elements with
-     * transition="modal" when their visibility is toggled
-     * by Vue.js.
-     *
-     * You can easily play with the modal transition by editing
-     * these styles.
-     */
-
-.modal-enter-from,
-.modal-leave-to {
-    opacity: 0;
-}
-
-.modal-enter-active .modal-container,
-.modal-leave-active .modal-container {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+button {
+    background-color: #ac003e;
+    /* width: 150px; */
+    width: 35%;
+    height: 40px;
+    color: white;
+    font-size: 14px;
 }
 </style>

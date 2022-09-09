@@ -15,5 +15,6 @@ export default {
 <style scoped>
 .view{
     padding: 25px 100px;
+    transition: all .5s ease-in-out;
 }
 </style>
