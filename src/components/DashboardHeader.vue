@@ -1,7 +1,7 @@
 <script lang="ts">
 import greetings from "./greetings"
-import IconCommunity from "./icons/IconCommunity.vue"
-import IconEcosystem from "./icons/IconEcosystem.vue"
+import IconEmail from "./icons/IconEmail.vue"
+import IconMenu from "./icons/IconMenu.vue"
 import IconNotification from "./icons/IconNotification.vue"
 export default {
     name: "DashboardHeader",
@@ -9,23 +9,29 @@ export default {
         greetings,
     }),
     components: {
-        IconCommunity,
-        IconNotification
+        IconEmail,
+        IconNotification,
+        IconMenu
     }
 };
 </script>
 <template>
     <header class="view">
         <!--navigation button for small devices go here-->
+        <div class="header__nav__mobile">
+            <IconMenu />
+            <h1> Opeoluwa</h1>
+        </div>
+
         <!--greetings-->
-        <div>
+        <div class="header__nav__desktop">
             <h1>Hi Opeoluwa,</h1>
             <small>{{greetings}}</small>
         </div>
         <!--pictures and icons-->
         <div class="icons">
-            <IconCommunity />
-            <IconNotification/>
+            <IconEmail />
+            <IconNotification />
         </div>
     </header>
 </template>
@@ -51,10 +57,70 @@ small {
     display: block;
 }
 
+.header__nav__mobile {
+    display: none;
+}
+
 .icons {
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 100px;
+}
+
+.icons svg{
+    width: 24px;
+    height: 24px;
+    /* fill: #000; */
+}
+/**--------------------mobile devices styling------------------------ */
+@media screen and (max-width: 400px) {
+    header {
+        padding: 15px 30px;
+        background-color: var(--primary);
+        color: var(--light-text)
+    }
+
+    /** hide desktop greeting */
+    .header__nav__desktop {
+        display: none;
+    }
+
+    .header__nav__mobile {
+        display: flex;
+        align-items: center;
+    }
+
+    .header__nav__mobile h1 {
+        font-size: 22px;
+        font-weight: 500;
+        font-family: 'Bakbak One', cursive;
+        line-height: 36px;
+        margin-left: 10px;
+    }
+
+    .header__nav__mobile svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .icons {
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 10px;
+        width: unset;
+        padding: 0;
+        /* display: none; */
+    }
+
+    .icons svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+svg{
+    cursor: pointer;
 }
 </style>

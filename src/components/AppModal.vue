@@ -23,7 +23,14 @@
     -->
     <div class="modal-overlay">
         <div class="modal">
-
+            <div class="close mobile" @click="$emit('close-modal')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                    fill="var(--default-red)">
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path
+                        d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" />
+                </svg>
+            </div>
             <!-- the modal icons placeholder-->
             <div class="check">
                 <slot name="icon"></slot>
@@ -34,7 +41,7 @@
             </slot>
             <!-- <BaseButton text="Close" /> -->
         </div>
-        <div class="close" @click="$emit('close-modal')">
+        <div class="close desktop" @click="$emit('close-modal')">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                 fill="var(--default-red)">
                 <path fill="none" d="M0 0h24v24H0z" />
@@ -97,6 +104,10 @@ export default {
     padding: 5px;
 }
 
+.close.mobile {
+    display: none;
+}
+
 .close-img {
     width: 25px;
 }
@@ -123,5 +134,43 @@ button {
     height: 40px;
     color: white;
     font-size: 14px;
+}
+
+@media screen and (max-width: 400px) {
+    .modal-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .modal {
+        width: 90%;
+        height: auto;
+        min-height: 200px;
+        max-height: 500px;
+        margin-top: 35%;
+        border-radius: 10px;
+        position: relative;
+    }
+
+    .close.mobile {
+        margin: 0;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: block;
+
+    }
+
+    .close.mobile svg {
+        width: 24px;
+        height: 24px;
+        /* margin: 5px; */
+    }
+
+    .close.desktop {
+        display: none;
+    }
 }
 </style>

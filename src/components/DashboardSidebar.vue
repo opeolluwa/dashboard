@@ -65,7 +65,7 @@ export default {
 <style scoped>
 nav {
     padding-top: 100px;
-    background-color: var(--default-content-color);
+    background-color: var(--primary);
     color: var(--light-text);
     position: relative;
     top: 0;
@@ -101,7 +101,7 @@ nav .link-item:hover {
     margin: 0 auto;
     display: block;
     left: 10%;
-    color: var(--default-content-color);
+    color: var(--primary);
     color: var(--dark-text);
     box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
     -webkit-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);

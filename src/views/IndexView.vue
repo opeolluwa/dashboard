@@ -59,6 +59,35 @@ main header {
 main>div {
     grid-area: view;
     background-color: #f9f9f9;
-    height: 100vh!important;
+    height: 100vh !important;
+}
+
+/**------------------styling on mobile devices----------------------- */
+@media screen and (max-width:400px) {
+    .container {
+        display: unset;
+    }
+
+    nav {
+        height: 65vh !important;
+        display: none;
+    }
+
+    main {
+        height: unset;
+    }
+
+    main header {
+        height: unset;
+        /* padding: 0 30px; */
+    }
+
+    main>div {
+        grid-area: view;
+        background-color: #f9f9f9;
+        height: unset !important;
+    }
+
+
 }
 </style>

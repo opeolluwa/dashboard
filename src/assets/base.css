@@ -35,8 +35,8 @@ body {
   --light-bg: #0d1023;
   --light-text: #fff;
   --dark-text: #101010;
-  --default-content-color: #7714f1;
-  --primary: #00cfe8;
+  --primary: #7714f1;
+  /* --primary: #00cfe8; */
   --secondary: #707070;
   --tertiary: #7714f1;
   --warning: #fdca00;
@@ -98,5 +98,11 @@ button {
 }
 
 .emphasis {
-  color: var(--default-content-color);
+  color: var(--primary);
+}
+
+svg {
+  width: 24px;
+  height: 24px;
+  /* fill: #000; */
 }
