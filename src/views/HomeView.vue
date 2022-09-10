@@ -28,28 +28,7 @@ export default {
       244
     </Card>
   </div>
-  <div class="analytics">
-    <Card>
-      244
-    </Card>
-    <Card>
-      244
-    </Card>
-    <Card>
-      244
-    </Card>
-  </div>
-  <div class="analytics">
-    <Card>
-      244
-    </Card>
-    <Card>
-      244
-    </Card>
-    <Card>
-      244
-    </Card>
-  </div>
+  
   <button @click="showModal = true">show modal</button>
 
   <Modal v-show="showModal" @close-modal="showModal = false">

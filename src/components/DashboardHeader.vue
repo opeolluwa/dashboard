@@ -16,6 +16,7 @@ export default {
 </script>
 <template>
     <header class="view">
+        <!--navigation button for small devices go here-->
         <!--greetings-->
         <div>
             <h1>Hi Opeoluwa,</h1>

@@ -96,8 +96,8 @@ main .container>div:last-child h1 {
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    padding:0 30px;
-    min-height: 85vh;
+    padding: 0 30px;
+    height: 85vh;
   }
 
   main .container>div:last-child h1 {

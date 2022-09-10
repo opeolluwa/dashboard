@@ -48,7 +48,7 @@ main {
     grid-area: content;
     height: 100vh;
     overflow-y: scroll;
-    scrollbar-color: red;
+    scrollbar-color: var(--tertiary) var(--default-dark);
 }
 
 main header {
@@ -59,7 +59,6 @@ main header {
 main>div {
     grid-area: view;
     background-color: #f9f9f9;
+    height: 100vh!important;
 }
-
-
 </style>
