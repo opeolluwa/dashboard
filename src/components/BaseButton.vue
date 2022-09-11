@@ -22,7 +22,7 @@ button:focus {
   visibility: .9;
   cursor: pointer;
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
   button {
     width: 100%;
   }

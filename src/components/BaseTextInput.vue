@@ -72,7 +72,7 @@ button {
 }
 
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
   .form-field input{
     width: 100%;
   }

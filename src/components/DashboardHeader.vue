@@ -19,7 +19,7 @@ export default {
     <header class="view">
         <!--navigation button for small devices go here-->
         <div class="header__nav__mobile">
-            <IconMenu />
+            <IconMenu @click="showMobileNav" />
             <h1> Opeoluwa</h1>
         </div>
 
@@ -74,7 +74,7 @@ small {
     /* fill: #000; */
 }
 /**--------------------mobile devices styling------------------------ */
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
     header {
         padding: 15px 30px;
         background-color: var(--primary);

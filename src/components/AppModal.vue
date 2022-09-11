@@ -136,7 +136,7 @@ button {
     font-size: 14px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
     .modal-overlay {
         display: flex;
         justify-content: center;

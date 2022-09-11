@@ -77,7 +77,7 @@ main .container>div:last-child h1 {
 }
 
 /** -----------------------------small devices------------------------ */
-@media screen and (max-width:400px) {
+@media screen and (max-width:768px) {
   main .container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
@@ -97,7 +97,7 @@ main .container>div:last-child h1 {
     justify-content: center;
     align-content: center;
     padding: 0 30px;
-    height: 85vh;
+    height: 50vh;
   }
 
   main .container>div:last-child h1 {

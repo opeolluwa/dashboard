@@ -63,14 +63,23 @@ main>div {
 }
 
 /**------------------styling on mobile devices----------------------- */
-@media screen and (max-width:400px) {
+@media screen and (max-width:768px) {
     .container {
         display: unset;
+        /* position: relative; */
     }
 
     nav {
-        height: 65vh !important;
-        display: none;
+        height: 60vh !important;
+        padding-top: 55px;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
+        -webkit-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
+        -moz-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
     }
 
     main {

@@ -48,4 +48,13 @@ export default {
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
+/**--------------mobile screen navigation---------- */
+@media screen and (max-width: 768px) {
+  .analytics {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  
+}
 </style>
