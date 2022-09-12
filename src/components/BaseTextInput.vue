@@ -1,7 +1,20 @@
 <template>
+  <!--
+    This is a base component for all the text inputs
+    It takes in a label and a type
+    It also takes in a v-model
+
+    Example usage:
+    <BaseTextInput label="Name" type="text" v-model="name" />
+  -->
   <div class="form-field">
     <label :for="label">{{ label }}</label>
-    <input :type="type" :id="label" :placeholder="'-- ' + placeholder + ' --'" v-model="model" />
+    <input
+      :type="type"
+      :id="label"
+      :placeholder="'-- ' + placeholder + ' --'"
+      v-model="model"
+    />
   </div>
 </template>
 
@@ -34,19 +47,19 @@ export default {
 .form-field {
   margin-bottom: 35px;
   font-size: 18px;
+  width: 500px;
 }
 
 .form-field label {
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
 }
 
-.form-field input,
-button {
+.form-field input {
+  width: 100%;
   height: 50px;
-  width: 500px;
   left: 0px;
   border-radius: 8px;
   padding: 7px 25px 7px 25px;
@@ -71,9 +84,8 @@ button {
   outline: none;
 }
 
-
 @media screen and (max-width: 768px) {
-  .form-field input{
+  .form-field input {
     width: 100%;
   }
 }

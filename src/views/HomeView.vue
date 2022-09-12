@@ -1,16 +1,16 @@
 <script lang="ts">
-import ViewLayout from '../components/ViewLayout.vue';
-import Modal from '@/components/AppModal.vue';
-import Card from "@/components/AppCard.vue"
+import ViewLayout from "../components/ViewLayout.vue";
+import Modal from "@/components/AppModal.vue";
+import Card from "@/components/AppCard.vue";
 export default {
   name: "HomeView",
   components: {
     ViewLayout,
     Modal,
-    Card
+    Card,
   },
   data: () => ({
-    showModal: false
+    showModal: false,
   }),
 };
 </script>
@@ -18,25 +18,16 @@ export default {
 <template>
   <!--first row for analytics-->
   <div class="analytics">
-    <Card>
-      244
-    </Card>
-    <Card>
-      244
-    </Card>
-    <Card>
-      244
-    </Card>
+    <Card> 244 </Card>
+    <Card> 244 </Card>
+    <Card> 244 </Card>
   </div>
-  
+
   <button @click="showModal = true">show modal</button>
 
   <Modal v-show="showModal" @close-modal="showModal = false">
-    <template #icon>
-    </template>
-    <template #content>
-      some content heree
-    </template>
+    <template #icon> </template>
+    <template #content> some content heree </template>
   </Modal>
 </template>
 
@@ -54,7 +45,5 @@ export default {
   .analytics {
     grid-template-columns: repeat(1, 1fr);
   }
-
-  
 }
 </style>

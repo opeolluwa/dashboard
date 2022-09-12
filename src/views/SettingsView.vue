@@ -1,17 +1,15 @@
 <script lang="ts">
-import ViewLayout from '../components/ViewLayout.vue';
+import ViewLayout from "../components/ViewLayout.vue";
 export default {
   name: "HomeView",
   components: {
-    ViewLayout
-  }
+    ViewLayout,
+  },
 };
 </script>
 
 <template>
-<h1>settings</h1>
+  <h1>settings</h1>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

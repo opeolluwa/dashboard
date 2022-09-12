@@ -1,11 +1,11 @@
 <template>
-    <button>{{ text }}</button>
+  <button><slot></slot> {{ text }}</button>
 </template>
 
 <style scoped>
 button {
   height: 50px;
-  width: 500px;
+  /* width: 500px; */
   left: 0px;
   border-radius: 8px;
   padding: 7px 25px 7px 25px;
@@ -19,7 +19,7 @@ button {
 
 button:hover,
 button:focus {
-  visibility: .9;
+  visibility: 0.75;
   cursor: pointer;
 }
 @media screen and (max-width: 768px) {
