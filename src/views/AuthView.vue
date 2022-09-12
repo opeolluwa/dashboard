@@ -34,18 +34,9 @@ export default {
         <h1>Login</h1>
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
-          <BaseTextInput
-            placeholder="email"
-            label="email"
-            :model="form.email"
-          />
+          <BaseTextInput placeholder="email" label="email" :model="form.email" />
           <!--form field password-->
-          <BaseTextInput
-            placeholder="password"
-            type="password"
-            label="password"
-            :model="form.password"
-          />
+          <BaseTextInput placeholder="password" type="password" label="password" :model="form.password" />
           <!--form field submit-->
           <BaseButton @click="login" text="login" />
         </form>
@@ -66,12 +57,12 @@ main .container {
 }
 
 /**the background container */
-main .container > div:first-child {
+main .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
 }
 
-main .container > div:last-child {
+main .container>div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -79,7 +70,7 @@ main .container > div:last-child {
   align-content: center;
 }
 
-main .container > div:last-child h1 {
+main .container>div:last-child h1 {
   margin-bottom: 30px;
   line-height: 64px;
   font-size: 48px;
@@ -89,9 +80,11 @@ input,
 button {
   width: 500px;
 }
+
 /** -----------------------------small devices------------------------ */
 @media screen and (max-width: 768px) {
   main .container {
+    display: block;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "bg" "form";
@@ -99,25 +92,39 @@ button {
     align-items: center;
   }
 
-  main .container > div:first-child {
+  main .container>div:first-child {
     display: none;
   }
 
-  main .container > div:last-child {
+  main .container>div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     padding: 0 30px;
-    height: 50vh;
+    height: auto;
+    margin-top: 100px;
   }
 
-  main .container > div:last-child h1 {
+  main .container>div:last-child h1 {
     margin-bottom: 35px;
     line-height: 26px;
     font-size: 28px;
     text-align: center;
+  }
+
+  main .container div:last-child form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    column-gap: 15px;
+  }
+
+  .form-field,
+  button {
+    width: auto;
   }
 }
 </style>

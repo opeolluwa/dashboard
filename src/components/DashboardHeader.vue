@@ -13,13 +13,18 @@ export default {
     IconNotification,
     IconMenu,
   },
+  methods: {
+    toggleSidebar() {
+      // this.$emit("toggleSidebar");
+    },
+  },
 };
 </script>
 <template>
   <header class="view">
     <!--navigation button for small devices go here-->
     <div class="header__nav__mobile">
-      <IconMenu @click="showMobileNav" />
+      <IconMenu @click="$emit('open-sidebar')" />
       <h1>Opeoluwa</h1>
     </div>
 

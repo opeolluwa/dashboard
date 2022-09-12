@@ -8,14 +8,17 @@ export default {
     DashboardHeader: DashboardHeaderVue,
     ViewLayout: ViewLayoutVue,
   },
+  data: () => ({
+    showSidebar: true,
+  })
 };
 </script>
 
 <template>
   <div class="container">
-    <DashboardSidebar />
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
     <main>
-      <DashboardHeader />
+      <DashboardHeader @open-sidebar="showSidebar=true" />
       <div>
         <ViewLayout>
           <template #content>
@@ -53,7 +56,7 @@ main header {
   grid-area: header;
 }
 
-main > div {
+main>div {
   grid-area: view;
   background-color: #f9f9f9;
   height: 100vh !important;
@@ -88,7 +91,7 @@ main > div {
     /* padding: 0 30px; */
   }
 
-  main > div {
+  main>div {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;
