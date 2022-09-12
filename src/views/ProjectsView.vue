@@ -27,18 +27,42 @@ export default {
 
 <template>
   <div class="header">
-    <BaseButton text="add new" class="add-new-button" @click="showProjectModal = true">
+    <BaseButton
+      text="add new"
+      class="add-new-button"
+      @click="showProjectModal = true"
+    >
       <IconPlus />
     </BaseButton>
   </div>
 
   <!--the project modal-->
-  <AppModal v-show="showProjectModal" @close-modal="showProjectModal = false" title="Add New Project">
+  <AppModal
+    v-show="showProjectModal"
+    @close-modal="showProjectModal = false"
+    title="Add New Project"
+  >
     <template #content>
       <form action="" @click="addNewProject">
-        <BaseTextInput label="" type="text" placeholder="project name" :model="addProject.name" class="field" />
-        <BaseTextInput placeholder=" project description" label="" :model="addProject.description" class="field" />
-        <BaseTextInput placeholder="github url" label="" :model="addProject.description" class="field" />
+        <BaseTextInput
+          label=""
+          type="text"
+          placeholder="project name"
+          :model="addProject.name"
+          class="field"
+        />
+        <BaseTextInput
+          placeholder=" project description"
+          label=""
+          :model="addProject.description"
+          class="field"
+        />
+        <BaseTextInput
+          placeholder="github url"
+          label=""
+          :model="addProject.description"
+          class="field"
+        />
         <BaseButton text="add project" class="field" />
       </form>
     </template>
@@ -79,11 +103,10 @@ form {
 }
 
 form .field {
-  /* width: 30px; */
   width: fit-content;
 }
-form button{
 
-  width: 500px;
+form button.field {
+  width: 300px;
 }
 </style>

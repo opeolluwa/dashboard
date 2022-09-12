@@ -1,5 +1,4 @@
 <script lang="ts">
-import IconDashboard from "./icons/IconDashboard.vue";
 import IconEmail from "./icons/IconEmail.vue";
 import IconHome from "./icons/IconHome.vue";
 import IconProjects from "./icons/IconProjects.vue";
@@ -15,7 +14,6 @@ export default {
     IconProjects,
     IconSettings,
     IconTodo,
-    IconDashboard,
     BaseButton,
   },
   data: () => ({

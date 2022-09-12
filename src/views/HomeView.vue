@@ -1,12 +1,8 @@
 <script lang="ts">
-import ViewLayout from "../components/ViewLayout.vue";
-import Modal from "@/components/AppModal.vue";
 import Card from "@/components/AppCard.vue";
 export default {
   name: "HomeView",
   components: {
-    ViewLayout,
-    Modal,
     Card,
   },
   data: () => ({
@@ -18,17 +14,10 @@ export default {
 <template>
   <!--first row for analytics-->
   <div class="analytics">
-    <Card> 244 </Card>
-    <Card> 244 </Card>
-    <Card> 244 </Card>
+    <Card> </Card>
+    <Card> </Card>
+    <Card> </Card>
   </div>
-
-  <button @click="showModal = true">show modal</button>
-
-  <Modal v-show="showModal" @close-modal="showModal = false">
-    <template #icon> </template>
-    <template #content> some content heree </template>
-  </Modal>
 </template>
 
 <style scoped>
@@ -38,6 +27,10 @@ export default {
   column-gap: 35px;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.card {
+  text-align: unset;
 }
 
 /**--------------mobile screen navigation---------- */

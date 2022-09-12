@@ -1,12 +1,10 @@
 <script lang="ts">
 import DashboardSidebarVue from "@/components/DashboardSidebar.vue";
-import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import DashboardHeaderVue from "@/components/DashboardHeader.vue";
 import ViewLayoutVue from "@/components/ViewLayout.vue";
 export default {
   components: {
     DashboardSidebar: DashboardSidebarVue,
-    BaseTextInput: BaseTextInputVue,
     DashboardHeader: DashboardHeaderVue,
     ViewLayout: ViewLayoutVue,
   },

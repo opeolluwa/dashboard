@@ -1,15 +1,12 @@
 <script lang="ts">
-import ViewLayout from "../components/ViewLayout.vue";
 export default {
-  name: "HomeView",
-  components: {
-    ViewLayout,
-  },
+  name: "TodoView",
+  components: {},
 };
 </script>
 
 <template>
-  <ViewLayout> hi </ViewLayout>
+  <div></div>
 </template>
 
 <style scoped></style>

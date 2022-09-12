@@ -13,7 +13,7 @@
       :type="type"
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"
-      v-model="model"
+      :v-model="model"
     />
   </div>
 </template>

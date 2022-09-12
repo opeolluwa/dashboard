@@ -19,7 +19,8 @@ button {
 
 button:hover,
 button:focus {
-  visibility: 0.75;
+  opacity: 0.75;
+  transition: 0.5s opacity;
   cursor: pointer;
 }
 @media screen and (max-width: 768px) {
