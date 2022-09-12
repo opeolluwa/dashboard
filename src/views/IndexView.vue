@@ -9,7 +9,7 @@ export default {
     ViewLayout: ViewLayoutVue,
   },
   data: () => ({
-    showSidebar: true,
+    showSidebar: false,
   })
 };
 </script>

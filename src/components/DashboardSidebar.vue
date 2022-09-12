@@ -29,11 +29,8 @@ export default {
 </script>
 
 <template>
-  <!-- <nav :class="showMobileMenu ? '' : 'hide__mobile__menu'">
-     -->
-  <nav>
-
-    <!--close button for mobile devices-->
+   <nav :class="showMobileMenu ? '' : 'hide__mobile__menu'"> 
+    
     <!-- @click="$emit('close-navigation')" -->
     <div class="close mobile" @click="$emit('close-sidebar')">
       <svg
