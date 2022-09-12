@@ -21,7 +21,7 @@
     *    </template>
     *</Modal>
     -->
-  <div class="modal-overlay">
+  <div class="modal-overlay" @click="$emit('close-modal')">
     <div class="modal">
       <div class="close mobile" @click="$emit('close-modal')">
         <svg
@@ -160,11 +160,12 @@ button {
   }
 
   .modal {
-    width: 90%;
+    width: 95%;
     height: auto;
+    padding: 25px 10px 45px;
     min-height: 200px;
     max-height: 500px;
-    margin-top: 35%;
+    margin-top: 25%;
     border-radius: 10px;
     position: relative;
   }

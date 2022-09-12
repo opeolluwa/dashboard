@@ -11,8 +11,5 @@ export default {
 </script>
 
 <style scoped>
-.view {
-  padding: 25px 100px;
-  transition: all 0.5s ease-in-out;
-}
+
 </style>

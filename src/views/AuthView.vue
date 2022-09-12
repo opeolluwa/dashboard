@@ -103,8 +103,7 @@ button {
     justify-content: center;
     align-content: center;
     padding: 0 30px;
-    height: auto;
-    margin-top: 100px;
+    height: 75vh;
   }
 
   main .container>div:last-child h1 {

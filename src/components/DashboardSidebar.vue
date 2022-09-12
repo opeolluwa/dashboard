@@ -47,23 +47,23 @@ export default {
       </svg>
     </div>
     <div>
-      <router-link class="link-item" :to="{ name: 'home' }">
+      <router-link class="link-item" :to="{ name: 'home' }"  @click="$emit('close-sidebar')">
         <IconHome /> Home
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'emails' }">
+      <router-link class="link-item" :to="{ name: 'emails' }"  @click="$emit('close-sidebar')">
         <IconEmail /> Emails
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'projects' }">
+      <router-link class="link-item" :to="{ name: 'projects' }"  @click="$emit('close-sidebar')">
         <IconProjects /> Projects
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'todo' }">
+      <router-link class="link-item" :to="{ name: 'todo' }"  @click="$emit('close-sidebar')">
         <IconTodo /> Todo
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'settings' }">
+      <router-link class="link-item" :to="{ name: 'settings' }"  @click="$emit('close-sidebar')">
         <IconSettings /> Settings
       </router-link>
     </div>
