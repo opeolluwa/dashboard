@@ -161,7 +161,7 @@ button {
   }
 
   .modal {
-    width: 90%;
+    width: 87%;
     height: auto;
     padding: 25px 10px 45px;
     min-height: 200px;
