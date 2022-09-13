@@ -1,6 +1,6 @@
 <script lang="ts">
+import { Icon } from '@iconify/vue';
 import IconEmail from "./icons/IconEmail.vue";
-import IconHome from "./icons/IconHome.vue";
 import IconProjects from "./icons/IconProjects.vue";
 import IconSettings from "./icons/IconSettings.vue";
 import IconTodo from "./icons/IconTodo.vue";
@@ -12,13 +12,13 @@ export default defineComponent({
   name: "AppNavigation",
   components: {
     IconEmail,
-    IconHome,
     IconProjects,
     IconSettings,
     IconTodo,
     BaseButton,
-    IconNotification
-},
+    IconNotification,
+    Icon
+  },
   data: () => ({
     showMobileMenu: true,
   }),
@@ -44,14 +44,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <nav >
+  <nav>
     <div>
       <router-link class="link-item" :to="{ name: 'home' }" @click="closeSidebar">
-        <IconHome /> Home
+        <Icon icon="mdi:home-variant-outline" /> Home
       </router-link>
 
       <router-link class="link-item" :to="{ name: 'emails' }" @click="closeSidebar">
-        <IconEmail /> Emails
+      <Icon icon="mdi:email-outline" /> Emails
       </router-link>
 
       <router-link class="link-item" :to="{ name: 'projects' }" @click="closeSidebar">
@@ -62,9 +62,9 @@ export default defineComponent({
         <IconTodo /> Todo
       </router-link>
 
-        <router-link class="link-item" :to="{ name: 'notification' }" @click="closeSidebar">
-          <IconNotification /> Notifications
-        </router-link>
+      <router-link class="link-item" :to="{ name: 'notification' }" @click="closeSidebar">
+        <IconNotification /> Notifications
+      </router-link>
 
       <router-link class="link-item" :to="{ name: 'settings' }" @click="closeSidebar">
         <IconSettings /> Settings

@@ -13,6 +13,7 @@ export default {
 <style scoped>
   .view{
     position: relative;
+    padding-top: 50px;
   }
 @media screen and (max-width:768px){
   .view {
