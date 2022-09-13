@@ -30,16 +30,16 @@ export default {
 
     <!--greetings-->
     <div class="header__nav__desktop">
-      <h1>Hi Opeoluwa,</h1>
+      <h1>Hi Opeoluwa 😊</h1>
       <small>{{ greetings }}</small>
     </div>
     <!--pictures and icons-->
     <div class="icons">
       <RouterLink :to="{name:'emails'}">
-        <IconEmail />
+        <IconEmail /><sup>23</sup>
       </RouterLink>
       <RouterLink :to="{name:'notification'}">
-        <IconNotification />
+        <IconNotification /> <sup>3</sup>
       </RouterLink>
     </div>
   </header>
@@ -74,13 +74,31 @@ small {
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 10px;
+  column-gap: 15px;
   width: 100px;
 }
 
 .icons a {
   text-decoration: none;
   color: inherit;
+  position: relative;
+}
+sup{
+  /* vertical-align: super; */
+  position: absolute;
+  top: -13px;
+  right: -5px;
+  background-color: var(--default-red);
+  color: var(--light-text);
+  font-size: 13px;
+  padding: 3px;
+  border-radius: 50%;
+  font-weight: 500;
+  width: 20px;
+  display: flex;
+  place-items: center;
+  height: 20px;
+  text-align: center;
 }
 
 .icons svg {
