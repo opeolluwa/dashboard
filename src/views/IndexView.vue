@@ -75,7 +75,7 @@ main>div {
   }
 
   nav {
-    height: 60vh !important;
+    height: unset !important;
     padding-top: 55px;
     position: fixed;
     z-index: 1000;
@@ -93,7 +93,6 @@ main>div {
 
   main header {
     height: unset;
-    /* padding: 0 30px; */
   }
 
   main>div {

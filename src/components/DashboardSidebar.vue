@@ -137,10 +137,18 @@ nav .link-item:hover {
     height: auto;
   }
 
+  .logout-button{
+    margin-top: 35px;
+    position: static;
+  }
+
   nav .link-item {
     padding: 15px 30px;
   }
 
+  nav .link-item:first-child{
+    margin-top: 35px;
+  }
   .close {
     position: absolute;
     top: 20px;
