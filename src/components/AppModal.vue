@@ -83,6 +83,7 @@ export default {
   right: 0;
   display: flex;
   justify-content: center;
+  z-index: 1500;
   background-color: rgba(0, 0, 0, 0.75);
 }
 
@@ -164,7 +165,7 @@ button {
     height: auto;
     padding: 25px 10px 45px;
     min-height: 200px;
-    max-height: 500px;
+    /* max-height: 500px; */
     margin-top: 25%;
     border-radius: 10px;
     position: relative;
