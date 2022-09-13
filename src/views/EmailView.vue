@@ -1,12 +1,16 @@
 <script lang="ts">
+import EmailItem from "../components/EmailItem.vue";
 export default {
   name: "EmailView",
-  components: {},
+  components: { EmailItem },
 };
 </script>
 
 <template>
   <h1>email</h1>
+  <EmailItem title="do something" />
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
