@@ -2,34 +2,61 @@
 import DashboardSidebarVue from "@/components/DashboardSidebar.vue";
 import DashboardHeaderVue from "@/components/DashboardHeader.vue";
 import ViewLayoutVue from "@/components/ViewLayout.vue";
-export default {
+import { defineComponent } from "vue";
+export default defineComponent({
   components: {
     DashboardSidebar: DashboardSidebarVue,
     DashboardHeader: DashboardHeaderVue,
     ViewLayout: ViewLayoutVue,
   },
   data: () => ({
-    showSidebar: false,
+    showSidebar: true,
+    // mediaQuery: window.matchMedia('(max-width: 400px)'),
   }),
   computed: {
-    showSidebanr() {
-      return window.matchMedia("(min-width: 756px)") ? true : false 
-    }
-  }
-};
+    /*  showSidebar(): boolean {
+       const isMobileDevice = window.matchMedia("(max-width: 400px)").matches
+       if (!isMobileDevice) {
+         return true;
+       }
+       return false
+     } */
+  },
+  mounted() {
+    this.isDeviceMobile()
+  },
+  watch: {
+    // this.isDeviceMobile()
+  },
+  methods: {
+    isDeviceMobile() {
+      /**
+       * use JavaScript to detect if the device is mobile via media query
+       * if device is mobile, return true, else return false
+       * pass this function to watch lifecycle hook
+       */
+      const isMobileDevice = window.matchMedia("(max-width: 400px)").matches
+      if (!isMobileDevice) {
+        return true;
+      }
+      return false
+  },
+}
+});
 </script>
 
 <template>
   <div class="container">
     <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
     <main>
-      <DashboardHeader @open-sidebar="showSidebar  =!showSidebar" />
+      <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
       <div>
         <ViewLayout>
           <template #content>
             <RouterView />
           </template>
         </ViewLayout>
+        {{showSidebar}}
       </div>
     </main>
   </div>
