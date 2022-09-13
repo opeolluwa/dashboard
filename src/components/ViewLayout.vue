@@ -11,5 +11,9 @@ export default {
 </script>
 
 <style scoped>
-
+@media screen and (max-width:768px){
+  .view {
+    padding-top: 100px;
+  }
+ }
 </style>

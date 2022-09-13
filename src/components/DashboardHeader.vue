@@ -69,7 +69,8 @@ small {
 .icons {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  column-gap: 10px;
   width: 100px;
 }
 
@@ -82,6 +83,11 @@ small {
 @media screen and (max-width: 768px) {
   header {
     padding: 15px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1200;
+    width: 100%;
     background-color: var(--primary);
     color: var(--light-text);
   }

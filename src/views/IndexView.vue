@@ -10,7 +10,12 @@ export default {
   },
   data: () => ({
     showSidebar: false,
-  })
+  }),
+  computed: {
+    showSidebanr() {
+      return window.matchMedia("(min-width: 756px)") ? true : false 
+    }
+  }
 };
 </script>
 
@@ -18,7 +23,7 @@ export default {
   <div class="container">
     <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
     <main>
-      <DashboardHeader @open-sidebar="showSidebar=true" />
+      <DashboardHeader @open-sidebar="showSidebar  =!showSidebar" />
       <div>
         <ViewLayout>
           <template #content>
@@ -95,6 +100,7 @@ main>div {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;
+    min-height: 100vh;
   }
 }
 </style>

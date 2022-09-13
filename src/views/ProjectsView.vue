@@ -112,9 +112,7 @@ form button.field {
 
 /**--------------------------smaller screens ----------------------------- */
 @media screen and (max-width: 768px) {
-
-.add-new-button{
-  
+  .add-new-button {
+  }
 }
-}
-  </style>
+</style>
