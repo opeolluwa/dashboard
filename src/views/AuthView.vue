@@ -112,7 +112,9 @@ button {
     justify-content: center;
     align-content: center;
     padding: 0 30px;
-    height: 75vh;
+    /* place-content: center; */
+    /* place-items: center; */
+    min-height: 60vh;
   }
 
   main .container > div:last-child h1 {

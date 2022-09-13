@@ -6,7 +6,9 @@ import IconSettings from "./icons/IconSettings.vue";
 import IconTodo from "./icons/IconTodo.vue";
 import BaseButton from "./BaseButton.vue";
 import router from "@/router";
-export default {
+import { defineComponent } from "vue";
+import IconNotification from "./icons/IconNotification.vue";
+export default defineComponent({
   name: "AppNavigation",
   components: {
     IconEmail,
@@ -15,7 +17,8 @@ export default {
     IconSettings,
     IconTodo,
     BaseButton,
-  },
+    IconNotification
+},
   data: () => ({
     showMobileMenu: true,
   }),
@@ -24,38 +27,46 @@ export default {
       router.push({ name: "auth" });
       // this.$store.dispatch('logout');
     },
-  },
-};
+    closeSidebar() {
+      /**
+       * check if the device is mobile
+       * if true, close the sidebar when a nav link is clicked 
+       * if not do nothing
+       */
+      const isMobileDevice = window.matchMedia("(max-width: 400px)").matches
+      if (isMobileDevice) {
+        this.$emit('close-sidebar')
+      }
+      return
+    }
+  }
+});
 </script>
 
 <template>
-  <nav :class="showMobileMenu ? '' : 'hide__mobile__menu'">
-    <!-- @click="$emit('close-navigation')" -->
-    <div class="close mobile" @click="$emit('close-sidebar')">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-        <path fill="none" d="M0 0h24v24H0z" />
-        <path
-          d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9.414l2.828-2.829 1.415 1.415L13.414 12l2.829 2.828-1.415 1.415L12 13.414l-2.828 2.829-1.415-1.415L10.586 12 7.757 9.172l1.415-1.415L12 10.586z" />
-      </svg>
-    </div>
+  <nav >
     <div>
-      <router-link class="link-item" :to="{ name: 'home' }" @click="$emit('close-sidebar')">
+      <router-link class="link-item" :to="{ name: 'home' }" @click="closeSidebar">
         <IconHome /> Home
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'emails' }" @click="$emit('close-sidebar')">
+      <router-link class="link-item" :to="{ name: 'emails' }" @click="closeSidebar">
         <IconEmail /> Emails
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'projects' }" @click="$emit('close-sidebar')">
+      <router-link class="link-item" :to="{ name: 'projects' }" @click="closeSidebar">
         <IconProjects /> Projects
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'todo' }" @click="$emit('close-sidebar')">
+      <router-link class="link-item" :to="{ name: 'todo' }" @click="closeSidebar">
         <IconTodo /> Todo
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'settings' }" @click="$emit('close-sidebar')">
+        <router-link class="link-item" :to="{ name: 'notification' }" @click="closeSidebar">
+          <IconNotification /> Notifications
+        </router-link>
+
+      <router-link class="link-item" :to="{ name: 'settings' }" @click="closeSidebar">
         <IconSettings /> Settings
       </router-link>
     </div>
@@ -137,7 +148,7 @@ nav .link-item:hover {
     height: auto;
   }
 
-  .logout-button{
+  .logout-button {
     margin-top: 35px;
     position: static;
   }
@@ -146,9 +157,10 @@ nav .link-item:hover {
     padding: 15px 30px;
   }
 
-  nav .link-item:first-child{
+  nav .link-item:first-child {
     margin-top: 35px;
   }
+
   .close {
     position: absolute;
     top: 20px;

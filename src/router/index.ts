@@ -35,11 +35,21 @@ const router = createRouter({
           component: () => import("@/views/SettingsView.vue"),
         },
         {
+          path: "notification",
+          name: "notification",
+          component: () => import("@/views/NotificationView.vue"),
+        },
+        {
           path: "todo",
           name: "todo",
           component: () => import("@/views/TodoView.vue"),
         },
       ],
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "404",
+      component: () => import("@/views/NotFoundView.vue"),
     },
   ],
 });

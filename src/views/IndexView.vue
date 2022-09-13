@@ -10,23 +10,13 @@ export default defineComponent({
     ViewLayout: ViewLayoutVue,
   },
   data: () => ({
-    showSidebar: true,
-    // mediaQuery: window.matchMedia('(max-width: 400px)'),
+    showSidebar: false,
   }),
   computed: {
-    /*  showSidebar(): boolean {
-       const isMobileDevice = window.matchMedia("(max-width: 400px)").matches
-       if (!isMobileDevice) {
-         return true;
-       }
-       return false
-     } */
+    
   },
   mounted() {
-    this.isDeviceMobile()
-  },
-  watch: {
-    // this.isDeviceMobile()
+    this.showSidebar = window.matchMedia("(max-width: 400px)").matches ? false : true;
   },
   methods: {
     isDeviceMobile() {
@@ -39,9 +29,9 @@ export default defineComponent({
       if (!isMobileDevice) {
         return true;
       }
-      return false
-  },
-}
+      // return false
+    },
+  }
 });
 </script>
 
@@ -56,7 +46,6 @@ export default defineComponent({
             <RouterView />
           </template>
         </ViewLayout>
-        {{showSidebar}}
       </div>
     </main>
   </div>

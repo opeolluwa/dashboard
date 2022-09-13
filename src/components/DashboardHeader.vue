@@ -35,8 +35,12 @@ export default {
     </div>
     <!--pictures and icons-->
     <div class="icons">
-      <IconEmail />
-      <IconNotification />
+      <RouterLink :to="{name:'emails'}">
+        <IconEmail />
+      </RouterLink>
+      <RouterLink :to="{name:'notification'}">
+        <IconNotification />
+      </RouterLink>
     </div>
   </header>
 </template>
@@ -74,11 +78,17 @@ small {
   width: 100px;
 }
 
+.icons a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .icons svg {
   width: 24px;
   height: 24px;
   /* fill: #000; */
 }
+
 /**--------------------mobile devices styling------------------------ */
 @media screen and (max-width: 768px) {
   header {
@@ -131,6 +141,7 @@ small {
     height: 24px;
   }
 }
+
 svg {
   cursor: pointer;
 }
