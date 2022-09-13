@@ -80,9 +80,14 @@ button {
     padding: 0 132px;
   }
 
+  .d-sm-none {
+    display: unset;
+  }
 }
 
-.d-none {
+
+.d-none,
+.d-sm-none {
   display: none;
 }
 
@@ -109,9 +114,9 @@ svg {
 }
 
 /* .show__mobile_menu{ */
-  /* display: block; */
+/* display: block; */
 /* } */
 /*  */
 /* .hide__mobile_menu{ */
-  /* display: none; */
+/* display: none; */
 /* } */

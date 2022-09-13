@@ -11,9 +11,13 @@ export default {
 </script>
 
 <style scoped>
+  .view{
+    position: relative;
+  }
 @media screen and (max-width:768px){
   .view {
     padding-top: 100px;
+    min-height: 100vh;
   }
  }
 </style>

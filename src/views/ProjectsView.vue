@@ -27,46 +27,28 @@ export default {
 
 <template>
   <div class="header">
-    <BaseButton
-      text="add new"
-      class="add-new-button"
-      @click="showProjectModal = true"
-    >
+    <BaseButton text="add new" class="add-new-button" @click="showProjectModal = true">
       <IconPlus />
     </BaseButton>
   </div>
 
+    <!--add new project fab button-->
+    <BaseButton text="" class="add-new-fab" @click="showProjectModal = true">
+      <IconPlus />
+    </BaseButton>
   <!--the project modal-->
-  <AppModal
-    v-show="showProjectModal"
-    @close-modal="showProjectModal = false"
-    title="Add New Project"
-  >
+  <AppModal v-show="showProjectModal" @close-modal="showProjectModal = false" title="Add New Project">
     <template #content>
       <form action="" @click="addNewProject">
-        <BaseTextInput
-          label=""
-          type="text"
-          placeholder="project name"
-          :model="addProject.name"
-          class="field"
-        />
-        <BaseTextInput
-          placeholder=" project description"
-          label=""
-          :model="addProject.description"
-          class="field"
-        />
-        <BaseTextInput
-          placeholder="github url"
-          label=""
-          :model="addProject.description"
-          class="field"
-        />
+        <BaseTextInput label="" type="text" placeholder="project name" :model="addProject.name" class="field" />
+        <BaseTextInput placeholder=" project description" label="" :model="addProject.description" class="field" />
+        <BaseTextInput placeholder="github url" label="" :model="addProject.description" class="field" />
         <BaseButton text="add project" class="field" />
       </form>
     </template>
   </AppModal>
+
+
 </template>
 
 <style scoped>
@@ -76,14 +58,15 @@ export default {
   justify-content: flex-end;
 }
 
-.add-new-button {
+.add-new-button,
+.add-new-fab {
   display: flex;
   column-gap: 15px;
   align-items: center;
   justify-content: center;
   width: auto;
   background-color: var(--default-dark);
-  float: right;
+  /* float: right; */
   left: 0px;
   border-radius: 8px;
   padding: 7px 25px 7px 25px;
@@ -92,6 +75,10 @@ export default {
   font-size: 18px;
   color: var(--light-text);
   text-transform: capitalize;
+}
+
+.add-new-fab {
+  display: none;
 }
 
 form {
@@ -113,6 +100,25 @@ form button.field {
 /**--------------------------smaller screens ----------------------------- */
 @media screen and (max-width: 768px) {
   .add-new-button {
+    display: none;
+  }
+
+  .add-new-fab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: calc(100vw - 80px);
+    position: fixed;
+    bottom: 20px;
+    border-radius: 50%;
+    border-color: transparent;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
+    z-index: 10;
   }
 }
 </style>
