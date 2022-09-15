@@ -15,6 +15,10 @@ export default {
   position: relative;
   padding-top: 50px;
 }
+.view, .view *{
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
 @media screen and (max-width: 768px) {
   .view {
     padding-top: 100px;

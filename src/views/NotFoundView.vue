@@ -1847,7 +1847,7 @@ svg#freepik_stories-404-error-with-a-cute-animal.animated
 /**--------------------------------smaller devices------------------ */
 @media screen and (max-width: 768px) {
   .container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     row-gap: 10px;
     align-items: center;
     justify-content: center;
@@ -1857,6 +1857,10 @@ svg#freepik_stories-404-error-with-a-cute-animal.animated
     border-right: none;
     padding-right: 0;
     text-align: center;
+  }
+  h1,h2{
+    font-family :mulish;
+    display: none;
   }
 }
 </style>
