@@ -1,14 +1,12 @@
 <script lang="ts">
 export default {
-    name: "NotificationView",
-    components: {},
+  name: "NotificationView",
+  components: {},
 };
 </script>
 
 <template>
-    <div></div>
+  <div></div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -35,10 +35,10 @@ export default {
     </div>
     <!--pictures and icons-->
     <div class="icons">
-      <RouterLink :to="{name:'emails'}">
+      <RouterLink :to="{ name: 'emails' }">
         <IconEmail /><sup></sup>
       </RouterLink>
-      <RouterLink :to="{name:'notification'}">
+      <RouterLink :to="{ name: 'notification' }">
         <IconNotification /> <sup></sup>
       </RouterLink>
     </div>
@@ -83,7 +83,7 @@ small {
   color: inherit;
   position: relative;
 }
-sup{
+sup {
   /* vertical-align: super; */
   position: absolute;
   top: -4px;

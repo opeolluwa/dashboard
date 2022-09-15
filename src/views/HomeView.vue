@@ -1,9 +1,13 @@
 <script lang="ts">
 import Card from "@/components/AppCard.vue";
+// import Bar from "../components/Bar.vue";
+// import { Bar } from "vue-chartjs";
+
 export default {
   name: "HomeView",
   components: {
     Card,
+    // Bar,
   },
   data: () => ({
     showModal: false,
@@ -14,8 +18,9 @@ export default {
 <template>
   <!--first row for analytics-->
   <div class="analytics">
-    <Card> </Card>
-    <Card> </Card>
+    <Card>
+      <!-- <Bar /> -->
+    </Card>
     <Card> </Card>
   </div>
 </template>
@@ -23,7 +28,7 @@ export default {
 <style scoped>
 .analytics {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   column-gap: 35px;
   justify-content: space-between;
   margin-bottom: 20px;

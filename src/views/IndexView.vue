@@ -12,11 +12,11 @@ export default defineComponent({
   data: () => ({
     showSidebar: false,
   }),
-  computed: {
-    
-  },
+  computed: {},
   mounted() {
-    this.showSidebar = window.matchMedia("(max-width: 400px)").matches ? false : true;
+    this.showSidebar = window.matchMedia("(max-width: 400px)").matches
+      ? false
+      : true;
   },
   methods: {
     isDeviceMobile() {
@@ -25,19 +25,22 @@ export default defineComponent({
        * if device is mobile, return true, else return false
        * pass this function to watch lifecycle hook
        */
-      const isMobileDevice = window.matchMedia("(max-width: 400px)").matches
+      const isMobileDevice = window.matchMedia("(max-width: 400px)").matches;
       if (!isMobileDevice) {
         return true;
       }
       // return false
     },
-  }
+  },
 });
 </script>
 
 <template>
   <div class="container">
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
+    <DashboardSidebar
+      v-show="showSidebar"
+      @close-sidebar="showSidebar = false"
+    />
     <main>
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
       <div>
@@ -77,7 +80,7 @@ main header {
   grid-area: header;
 }
 
-main>div {
+main > div {
   grid-area: view;
   background-color: #f9f9f9;
   height: 100vh !important;
@@ -111,7 +114,7 @@ main>div {
     height: unset;
   }
 
-  main>div {
+  main > div {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;

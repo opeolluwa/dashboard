@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Icon } from '@iconify/vue';
+import { Icon } from "@iconify/vue";
 import IconEmail from "./icons/IconEmail.vue";
 import IconProjects from "./icons/IconProjects.vue";
 import IconSettings from "./icons/IconSettings.vue";
@@ -17,7 +17,7 @@ export default defineComponent({
     IconTodo,
     BaseButton,
     IconNotification,
-    Icon
+    Icon,
   },
   data: () => ({
     showMobileMenu: true,
@@ -30,43 +30,67 @@ export default defineComponent({
     closeSidebar() {
       /**
        * check if the device is mobile
-       * if true, close the sidebar when a nav link is clicked 
+       * if true, close the sidebar when a nav link is clicked
        * if not do nothing
        */
-      const isMobileDevice = window.matchMedia("(max-width: 400px)").matches
+      const isMobileDevice = window.matchMedia("(max-width: 400px)").matches;
       if (isMobileDevice) {
-        this.$emit('close-sidebar')
+        this.$emit("close-sidebar");
       }
-      return
-    }
-  }
+      return;
+    },
+  },
 });
 </script>
 
 <template>
   <nav>
     <div>
-      <router-link class="link-item" :to="{ name: 'home' }" @click="closeSidebar">
+      <router-link
+        class="link-item"
+        :to="{ name: 'home' }"
+        @click="closeSidebar"
+      >
         <Icon icon="mdi:home-variant-outline" /> Home
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'emails' }" @click="closeSidebar">
-      <Icon icon="mdi:email-outline" /> Emails
+      <router-link
+        class="link-item"
+        :to="{ name: 'emails' }"
+        @click="closeSidebar"
+      >
+        <Icon icon="mdi:email-outline" /> Emails
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'projects' }" @click="closeSidebar">
+      <router-link
+        class="link-item"
+        :to="{ name: 'projects' }"
+        @click="closeSidebar"
+      >
         <IconProjects /> Projects
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'todo' }" @click="closeSidebar">
+      <router-link
+        class="link-item"
+        :to="{ name: 'todo' }"
+        @click="closeSidebar"
+      >
         <IconTodo /> Todo
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'notification' }" @click="closeSidebar">
+      <router-link
+        class="link-item"
+        :to="{ name: 'notification' }"
+        @click="closeSidebar"
+      >
         <IconNotification /> Notifications
       </router-link>
 
-      <router-link class="link-item" :to="{ name: 'settings' }" @click="closeSidebar">
+      <router-link
+        class="link-item"
+        :to="{ name: 'settings' }"
+        @click="closeSidebar"
+      >
         <IconSettings /> Settings
       </router-link>
     </div>
