@@ -36,10 +36,10 @@ export default {
     <!--pictures and icons-->
     <div class="icons">
       <RouterLink :to="{name:'emails'}">
-        <IconEmail /><sup>23</sup>
+        <IconEmail /><sup></sup>
       </RouterLink>
       <RouterLink :to="{name:'notification'}">
-        <IconNotification /> <sup>3</sup>
+        <IconNotification /> <sup></sup>
       </RouterLink>
     </div>
   </header>
@@ -86,18 +86,18 @@ small {
 sup{
   /* vertical-align: super; */
   position: absolute;
-  top: -13px;
-  right: -5px;
+  top: -4px;
+  right: -3px;
   background-color: var(--default-red);
   color: var(--light-text);
   font-size: 13px;
   padding: 3px;
   border-radius: 50%;
   font-weight: 500;
-  width: 20px;
+  width: 10px;
   display: flex;
   place-items: center;
-  height: 20px;
+  height: 10px;
   text-align: center;
 }
 
