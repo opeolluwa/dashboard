@@ -15,7 +15,8 @@ export default {
   position: relative;
   padding-top: 50px;
 }
-.view, .view *{
+.view,
+.view * {
   box-sizing: border-box;
   overflow-x: hidden;
 }

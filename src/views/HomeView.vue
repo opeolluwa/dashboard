@@ -1,5 +1,7 @@
 <script lang="ts">
 import Card from "@/components/AppCard.vue";
+import Quotes from "../components/Quotes.vue";
+// import Greetings from "../components/Greetings.vue";
 // import Bar from "../components/Bar.vue";
 // import { Bar } from "vue-chartjs";
 
@@ -7,8 +9,9 @@ export default {
   name: "HomeView",
   components: {
     Card,
-    // Bar,
-  },
+    Quotes,
+    // Greetings
+},
   data: () => ({
     showModal: false,
   }),
@@ -16,16 +19,28 @@ export default {
 </script>
 
 <template>
+  <!--greetings-->
+  <!-- <Greetings username="Opeoluwa"/> -->
+
   <!--first row for analytics-->
   <div class="analytics">
-    <Card>
+    <Card id="quotes-container">
+      <Quotes :duration=120 />
+
       <!-- <Bar /> -->
     </Card>
-    <Card> </Card>
+
   </div>
 </template>
 
 <style scoped>
+#quotes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .analytics {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

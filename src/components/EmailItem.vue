@@ -150,7 +150,7 @@ div.email-controls {
 }
 
 @media screen and (max-width: 768px) {
- /*  div.email-item input {
+  /*  div.email-item input {
     -webkit-appearance: none;
     appearance: none;
     background-color: #fff;

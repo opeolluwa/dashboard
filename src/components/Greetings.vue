@@ -1,5 +1,9 @@
 <template>
-  <div class="vue__greetings">{{ message }}</div>
+  <div>
+    <!-- <h6>{{ username }}</h6> -->
+    <small class="vue__greetings">{{ greetings }}</small>
+  </div>
+  <!-- <div >{{ message }}</div> -->
 </template>
 
 <script lang="ts">
@@ -10,7 +14,6 @@ export default {
       greetings,
     };
   },
-  //TODO:
   props: {
     username: {
       type: String,

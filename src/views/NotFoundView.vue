@@ -1858,8 +1858,9 @@ svg#freepik_stories-404-error-with-a-cute-animal.animated
     padding-right: 0;
     text-align: center;
   }
-  h1,h2{
-    font-family :mulish;
+  h1,
+  h2 {
+    font-family: mulish;
     display: none;
   }
 }
