@@ -12,14 +12,14 @@ export default defineConfig({
       // registerType: "prompt",
       registerType: "autoUpdate", //default
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+        // globPatterns: ['**/*.{js,css,html,ico,png,svg}']
       },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Nitride',
-        short_name: 'Nitride',
-        description: 'opeolluwa portfolio dashboard',
-        theme_color: '#ffffff',
+        name: 'nitride',
+        short_name: 'nitride',
+        description: 'an oxide of nitrogen',
+        theme_color: '#101010',
         icons: [
           {
             src: 'src/assets/favicon/android-chrome-192x192.png',
