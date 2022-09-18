@@ -8,13 +8,9 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
-      injectRegister: 'auto',
-      // registerType: "prompt",
-      registerType: "autoUpdate", //default
-      workbox: {
-        // globPatterns: ['**/*.{js,css,html,ico,png,svg}']
-      },
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      // injectRegister: 'auto',
+      // registerType: "autoUpdate", //default
+      // includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
         name: 'nitride',
         short_name: 'nitride',
