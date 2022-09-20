@@ -86,7 +86,7 @@ main .container > div:last-child h1 {
 }
 
 input,
-button {
+button , .form-field{
   width: 500px;
 }
 
