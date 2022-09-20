@@ -8,10 +8,12 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
-      mode: "development",
+      // mode: "development",
+      registerType: 'autoUpdate',
       base: "/",
       srcDir: "src",
-      filename: "service-worker.ts",
+      // filename: "service-worker.ts",
+      injectRegister: 'auto',
       includeAssets: ["/favicon.png"],
       manifest: {
         name: "nitride",
