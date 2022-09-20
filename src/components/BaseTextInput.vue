@@ -52,7 +52,7 @@ export default  defineComponent({
 });
 </script>
 
-<style scoped>
+<style>
 .form-field {
   margin-bottom: 35px;
   font-size: 18px;

@@ -55,8 +55,10 @@
 .quote {
  font-size: 110%;
  font-weight: 200;
- font-family: quoterfont;
+ /* font-family: quoterfont; */
+ font-family: "mulish";
  text-align: center;
+ font-weight: 400;
  margin-bottom: 1rem;
  width: 85%;
  margin:15px auto;
@@ -82,7 +84,7 @@
  text-align: center;
  display: block;
  font-size: 80%;
- font-family: quoterfont;
+ /* font-family: quoterfont; */
  color: #6c757d;
 }
 

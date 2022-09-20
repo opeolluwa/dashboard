@@ -2,7 +2,9 @@
 import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import router from "@/router";
-export default {
+import axios from "axios";
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "AuthView",
   components: {
     BaseTextInput: BaseTextInputVue,
@@ -10,18 +12,34 @@ export default {
   },
   data: () => ({
     form: {
-      email: null,
-      password: null,
+      email: "",
+      password: "",
     },
+    //destructure the api response into this variable
+    apiResponse: {
+      message: "",
+      token: "",
+    },
+    apiError: false
   }),
   methods: {
-    login() {
-      console.log("login");
+    async login() {
+      try {
+        const { data: response } = await axios.post("http://127.0.0.1:8405/api/v1/auth/login", this.form);
+        console.log(JSON.stringify(response));
+      } catch (error: any) {
+        const { data: response } = error.response;
+        if (!response.success) {
+          Object.assign(this.apiResponse, response);
+          this.apiError = true;
+        }
+        // console.log(JSON.stringify(error.response.data));
+      }
       //head over to the next page, which essentially the home page
-      router.push({ name: "home" });
+      // router.push({ name: "home" });
     },
   },
-};
+});
 </script>
 
 <template>
@@ -32,20 +50,13 @@ export default {
       <!--logon form-->
       <div>
         <h1>Login</h1>
+        <small v-show="apiError" class="error">Error: {{apiResponse.message}}</small>
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
-          <BaseTextInput
-            placeholder="email"
-            label="email"
-            :model="form.email"
-          />
+          <BaseTextInput placeholder="email" label="email" v-model:modelValue="form.email" type="email" />
           <!--form field password-->
-          <BaseTextInput
-            placeholder="password"
-            type="password"
-            label="password"
-            :model="form.password"
-          />
+          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
+            class="field" />
           <!--form field submit-->
           <BaseButton @click="login" text="login" />
         </form>
@@ -66,12 +77,12 @@ main .container {
 }
 
 /**the background container */
-main .container > div:first-child {
+main .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
 }
 
-main .container > div:last-child {
+main .container>div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -79,16 +90,21 @@ main .container > div:last-child {
   align-content: center;
 }
 
-main .container > div:last-child h1 {
-  margin-bottom: 30px;
+main .container>div:last-child h1 {
+  margin-bottom: 5px;
   line-height: 64px;
   font-size: 48px;
 }
-
+main .container>div:last-child h1 + small{
+  margin-bottom: 30px;
+}
 input,
-button , .form-field{
+button,
+.form-field,
+.field {
   width: 500px;
 }
+
 
 /** -----------------------------small devices------------------------ */
 @media screen and (max-width: 768px) {
@@ -101,11 +117,11 @@ button , .form-field{
     align-items: center;
   }
 
-  main .container > div:first-child {
+  main .container>div:first-child {
     display: none;
   }
 
-  main .container > div:last-child {
+  main .container>div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -118,11 +134,15 @@ button , .form-field{
     margin: 0 auto;
   }
 
-  main .container > div:last-child h1 {
-    margin-bottom: 35px;
+  main .container>div:last-child h1 {
+    margin-bottom: 7.5px;
     line-height: 26px;
     font-size: 28px;
     text-align: center;
+  }
+
+  main .container>div:last-child h1+small.error {
+    margin-bottom: 35px;
   }
 
   main .container div:last-child form {
