@@ -1,5 +1,8 @@
 <template>
   <!--
+    binding v-model to custom components
+    https://www.digitalocean.com/community/tutorials/how-to-add-v-model-support-to-custom-vue-js-components
+
     This is a base component for all the text inputs
     It takes in a label and a type
     It also takes in a v-model
@@ -13,13 +16,15 @@
       :type="type"
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"
-      :v-model="model"
+      @input="updateModelValue"
+      :value="modelValue"
     />
   </div>
 </template>
 
 <script lang="ts">
-export default {
+  import { defineComponent } from "vue";
+export default  defineComponent({
   name: "BaseTextInput",
   props: {
     label: {
@@ -30,9 +35,8 @@ export default {
       type: String,
       required: true,
     },
-    model: {
+    modelValue: {
       type: String,
-      required: true,
     },
     type: {
       type: String,
@@ -40,7 +44,12 @@ export default {
       default: "text",
     },
   },
-};
+  methods: {
+    updateModelValue(event:any) {
+      this.$emit("update:modelValue", event.target.value);
+    },
+  },
+});
 </script>
 
 <style scoped>
@@ -58,7 +67,7 @@ export default {
 }
 
 .form-field input {
-  /* width: 100%; */
+  width: 100%;
   height: 50px;
   left: 0px;
   border-radius: 8px;
