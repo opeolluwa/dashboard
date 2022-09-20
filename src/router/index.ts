@@ -22,7 +22,14 @@ const router = createRouter({
         {
           path: "emails",
           name: "emails",
-          component: () => import("@/views/EmailView.vue"),
+          component: () => import("@/views/email/IndexEmailView.vue"),
+          children: [
+            {
+              path: "new-email",
+              name: "new-email",
+              component: () => import("@/views/EmailView.vue"),
+            }
+          ],
         },
         {
           path: "projects",

@@ -25,7 +25,9 @@ export default {
     <!--navigation button for small devices go here-->
     <div class="header__nav__mobile">
       <IconMenu @click="$emit('open-sidebar')" />
-      <h1>Opeoluwa</h1>
+      <h1>
+        <RouterLink to="/dashboard">Opeoluwa</RouterLink>
+      </h1>
     </div>
 
     <!--greetings-->

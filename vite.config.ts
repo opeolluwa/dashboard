@@ -8,14 +8,18 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
-      // injectRegister: 'auto',
-      // registerType: "autoUpdate", //default
-      // includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
+      mode: "development",
+      base: "/",
+      srcDir: "src",
+      filename: "service-worker.ts",
+      includeAssets:["/favicon.png"],
       manifest: {
         name: 'nitride',
         short_name: 'nitride',
         description: 'an oxide of nitrogen',
-        theme_color: '#101010',
+        theme_color: '#ffffff',
+        display: "standalone",
+        background_color:"#ffffff",
         icons: [
           {
             src: 'src/assets/favicon/android-chrome-192x192.png',
@@ -31,7 +35,7 @@ export default defineConfig({
             src: 'src/assets/favicon/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose:'any maskable'
+            purpose: 'any maskable'
           }
         ]
       }
