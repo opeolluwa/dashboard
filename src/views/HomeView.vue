@@ -1,6 +1,6 @@
 <script lang="ts">
 import Card from "@/components/AppCard.vue";
-import Quotes from "../components/Quotes.vue";
+import Quotes from "@/components/AppQuotes.vue";
 // import Greetings from "../components/Greetings.vue";
 // import Bar from "../components/Bar.vue";
 // import { Bar } from "vue-chartjs";
@@ -11,7 +11,7 @@ export default {
     Card,
     Quotes,
     // Greetings
-},
+  },
   data: () => ({
     showModal: false,
   }),
@@ -25,11 +25,10 @@ export default {
   <!--first row for analytics-->
   <div class="analytics">
     <Card id="quotes-container">
-      <Quotes :duration=120 />
+      <Quotes :duration="120" />
 
       <!-- <Bar /> -->
     </Card>
-
   </div>
 </template>
 

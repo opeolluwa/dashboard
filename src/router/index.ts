@@ -21,14 +21,20 @@ const router = createRouter({
         },
         {
           path: "emails",
-          name: "emails",
-          component: () => import("@/views/email/IndexEmailView.vue"),
+          component: () => import("@/views/email/EmailIndexView.vue"),
           children: [
             {
+              // get all emails
+              path: "",
+              name: "emails",
+              component: () => import("@/views/email/EmailView.vue"),
+            },
+            {
+              // create new email
               path: "new-email",
               name: "new-email",
-              component: () => import("@/views/EmailView.vue"),
-            }
+              component: () => import("@/views/email/CreateEmail.vue"),
+            },
           ],
         },
         {

@@ -78,7 +78,6 @@ export default {
 div.email-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   text-align: center;
   background-color: white;
   margin: 0.75rem 0;
@@ -87,18 +86,22 @@ div.email-item {
   box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
   -webkit-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
   -moz-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
+  position: relative;
 }
 
 .email-item div.email-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   text-align: center;
 }
 
 div.email-item input {
-  margin-right: 20px;
+  margin-right: 0px;
   cursor: pointer;
+  padding: 0;
+  margin: 0;
+  /* display: none; */
 }
 
 div.email-item div.title {
@@ -147,26 +150,20 @@ div.email-controls {
   display: grid;
   grid-template-columns: repeat(3, 25px);
   column-gap: 5px;
+  position: absolute;
+  right: 20px;
 }
 
 @media screen and (max-width: 768px) {
-  /*  div.email-item input {
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    margin: 0;
-    font: inherit;
-      color: currentColor;
-      width: 2.15em;
-      height: 1.15em;
-      border: 0.15em solid currentColor;
-      border-radius: 0.15em;
-      transform: translateY(-0.075em);
-      /* width: 1rem; *
-  } */
+  div.email-item input {
+    margin-right: 15px;
+    /* width: 1rem; * */
+  }
 
   div.email-item {
     column-gap: 5px;
+    justify-content: space-between;
+    justify-items: center;
     align-items: center;
   }
 
@@ -198,6 +195,8 @@ div.email-controls {
   }
 
   div.email-item div.email-controls {
+    position: static;
+    right: 0;
     column-gap: 2px;
     font-size: 20px;
   }

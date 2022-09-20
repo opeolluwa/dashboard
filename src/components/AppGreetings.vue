@@ -9,6 +9,7 @@
 <script lang="ts">
 import greetings from "./greetings";
 export default {
+  name: "AppGreetings",
   data() {
     return {
       greetings,

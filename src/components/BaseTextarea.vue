@@ -1,26 +1,28 @@
 <template>
   <!--
-    This is a base component for all the text inputs
+    This is a base component for all the text textareas
     It takes in a label and a type
     It also takes in a v-model
 
     Example usage:
-    <BaseTextInput label="Name" type="text" v-model="name" />
+    <BaseTexttextarea label="Name" type="text" v-model="name" />
   -->
   <div class="form-field">
     <label :for="label">{{ label }}</label>
-    <input
+    <textarea
       :type="type"
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"
       :v-model="model"
-    />
+      cols="30"
+      rows="10"
+    ></textarea>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "BaseTextInput",
+  name: "BaseTextArea",
   props: {
     label: {
       type: String,
@@ -34,11 +36,6 @@ export default {
       type: String,
       required: true,
     },
-    type: {
-      type: String,
-      required: true,
-      default: "text",
-    },
   },
 };
 </script>
@@ -47,7 +44,6 @@ export default {
 .form-field {
   margin-bottom: 35px;
   font-size: 18px;
-  width: 500px;
 }
 
 .form-field label {
@@ -57,17 +53,16 @@ export default {
   font-family: "Open Sans";
 }
 
-.form-field input {
-  /* width: 100%; */
-  height: 50px;
+.form-field textarea {
   left: 0px;
   border-radius: 8px;
-  padding: 7px 25px 7px 25px;
+  padding: 10px 25px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
+  text-align: center;
 }
 
-.form-field input::placeholder {
+.form-field textarea::placeholder {
   display: inline-block;
   letter-spacing: 1.25px;
   font-size: 15px;
@@ -77,16 +72,10 @@ export default {
   text-align: left;
 }
 
-.form-field input:hover,
-.form-field input:focus {
+.form-field textarea:hover,
+.form-field textarea:focus {
   border: 1.75px solid var(--tertiary);
   transition: 0.5s border;
   outline: none;
 }
-
-/* @media screen and (max-width: 768px) {
-  .form-field input {
-    width: 100%;
-  }
-} */
 </style>

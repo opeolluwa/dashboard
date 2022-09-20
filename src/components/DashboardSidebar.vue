@@ -1,6 +1,5 @@
 <script lang="ts">
 import { Icon } from "@iconify/vue";
-import IconEmail from "./icons/IconEmail.vue";
 import IconProjects from "./icons/IconProjects.vue";
 import IconSettings from "./icons/IconSettings.vue";
 import IconTodo from "./icons/IconTodo.vue";
@@ -11,7 +10,6 @@ import IconNotification from "./icons/IconNotification.vue";
 export default defineComponent({
   name: "AppNavigation",
   components: {
-    IconEmail,
     IconProjects,
     IconSettings,
     IconTodo,

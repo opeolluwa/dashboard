@@ -26,13 +26,13 @@ export default {
     <div class="header__nav__mobile">
       <IconMenu @click="$emit('open-sidebar')" />
       <h1>
-        <RouterLink to="/dashboard">Opeoluwa</RouterLink>
+        <RouterLink :to="{ name: 'home' }">Opeoluwa</RouterLink>
       </h1>
     </div>
 
     <!--greetings-->
     <div class="header__nav__desktop">
-      <h1>Hi Opeoluwa 😊</h1>
+      <h2>Hi Opeoluwa 😊</h2>
       <small>{{ greetings }}</small>
     </div>
     <!--pictures and icons-->
@@ -57,11 +57,13 @@ header {
   background-color: #fff;
 }
 
-h1 {
+h1 a {
   font-size: 20px;
   font-weight: 500;
   font-family: "Bakbak One", cursive;
   line-height: 36px;
+  text-decoration: none;
+  color: var(--light-text);
 }
 
 small {
@@ -85,6 +87,7 @@ small {
   color: inherit;
   position: relative;
 }
+
 sup {
   /* vertical-align: super; */
   position: absolute;

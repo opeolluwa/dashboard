@@ -1,17 +1,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Icon } from "@iconify/vue";
-export default {
-  name: "Fab",
+export default defineComponent({
+  name: "FavActionButton",
   components: { Icon },
   props: {
     route: {
       type: String,
       required: true,
-      default: "projects",
+      default: "404",
     },
   },
-};
+});
 </script>
 
 <template>
