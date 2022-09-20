@@ -57,7 +57,7 @@ header {
   background-color: #fff;
 }
 
-h1 a {
+h1 a, h2 a {
   font-size: 20px;
   font-weight: 500;
   font-family: "Bakbak One", cursive;

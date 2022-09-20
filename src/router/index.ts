@@ -33,7 +33,7 @@ const router = createRouter({
               // create new email
               path: "new-email",
               name: "new-email",
-              component: () => import("@/views/email/CreateEmail.vue"),
+              component: () => import("@/views/email/CreateEmailView.vue"),
             },
           ],
         },
