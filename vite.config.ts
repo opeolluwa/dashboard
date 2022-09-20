@@ -10,9 +10,6 @@ export default defineConfig({
     VitePWA({
       // mode: "development",
       registerType: 'autoUpdate',
-      base: "/",
-      srcDir: "src",
-      // filename: "service-worker.ts",
       injectRegister: 'auto',
       includeAssets: ["/favicon.png"],
       manifest: {
