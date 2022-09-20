@@ -59,7 +59,6 @@ export default {
   padding: 10px 25px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
-  text-align: center;
 }
 
 .form-field textarea::placeholder {

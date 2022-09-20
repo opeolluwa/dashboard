@@ -1,31 +1,3 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-import BaseButton from "@/components/BaseButton.vue";
-import BaseTextInput from "@/components/BaseTextInput.vue";
-import BaseTextarea from "@/components/BaseTextarea.vue";
-export default defineComponent({
-    name: "CreateEmailView",
-    components: {
-        BaseButton,
-        BaseTextInput,
-        BaseTextarea,
-    },
-    data: () => ({
-        newEmail: {
-            email: "",
-            recipient: "",
-            subject: "",
-            message: "",
-        },
-    }),
-    methods: {
-        sendEmail() {
-            console.log(JSON.stringify(this.newEmail));
-            console.log("add new project");
-        },
-    },
-});
-</script>
 
 <template>
     <h2>Compose new email</h2>
@@ -49,6 +21,39 @@ export default defineComponent({
         </form>
     </div>
 </template>
+<script lang="ts">
+import { defineComponent } from "vue";
+import BaseButton from "@/components/BaseButton.vue";
+import BaseTextInput from "@/components/BaseTextInput.vue";
+import BaseTextarea from "@/components/BaseTextarea.vue";
+import axios from "axios"
+export default defineComponent({
+    name: "CreateEmailView",
+    components: {
+        BaseButton,
+        BaseTextInput,
+        BaseTextarea,
+    },
+    data: () => ({
+        newEmail: {
+            email: "",
+            recipient: "",
+            subject: "",
+            message: "",
+        },
+    }),
+    methods: {
+        async sendEmail() {
+            //get the email data
+            const payload = {
+                ...this.newEmail,
+            };
+            console.log(payload);
+            // const response = await axios.post("http://localhost:3000/emails", payload);
+        },
+    },
+});
+</script>
 
 <style>
 form {
@@ -64,9 +69,10 @@ form label {
     font-size: 16px;
 }
 
-form button{
+form button {
     width: 100%;
 }
+
 /**---------smaller screens ------------ */
 @media screen and (max-width: 768px) {
     form {
