@@ -6,15 +6,15 @@
             <div>
                 <!--the recipient email-->
                 <BaseTextInput label="recipient email" type="email" placeholder="recipient email"
-                    :model="newEmail.email" />
+                    v-model="newEmail.email" />
                 <!--the recipient name-->
-                <BaseTextInput placeholder="recipient name" label="recipient name" :model="newEmail.recipient" />
+                <BaseTextInput placeholder="recipient name" label="recipient name" v-model="newEmail.recipient" />
                 <!--the email subject-->
-                <BaseTextInput placeholder="email subject" label="email subject" :model="newEmail.subject" />
+                <BaseTextInput placeholder="email subject" label="email subject" v-model="newEmail.subject" />
             </div>
             <div>
                 <!--the email body-->
-                <BaseTextarea placeholder="email body" label="email body" :model="newEmail.message" />
+                <BaseTextarea placeholder="email body" label="email body" v-model="newEmail.message" />
                 <!--send button-->
                 <BaseButton text="send message" />
             </div>
@@ -55,13 +55,14 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 form {
-    margin-top: 2rem;
+    margin: 2rem auto 4rem;
 }
 
 form {
     display: flex;
+    align-items: flex-start;
     gap: 0.75rem;
 }
 
@@ -70,13 +71,16 @@ form label {
 }
 
 form button {
-    width: 100%;
+    width: 300px;
 }
 
 /**---------smaller screens ------------ */
 @media screen and (max-width: 768px) {
     form {
         flex-direction: column;
+    }
+    button{
+        width: 100%;
     }
 }
 </style>

@@ -53,7 +53,7 @@ export default defineComponent({
         <small v-show="apiError" class="error">Error: {{apiResponse.message}}</small>
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
-          <BaseTextInput placeholder="email" label="email" v-model:modelValue="form.email" type="email" />
+          <BaseTextInput placeholder="email" label="email" v-model="form.email" type="email" />
           <!--form field password-->
           <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
             class="field" />

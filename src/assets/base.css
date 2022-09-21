@@ -107,13 +107,14 @@ button {
   color: var(--primary);
 }
 
-.error{
+.error {
   color: var(--default-red);
   display: block;
   font-size: 12px;
   /* text-align: ; */
   margin-bottom: 1.2rem;
 }
+
 svg {
   width: 24px;
   height: 24px;
@@ -127,3 +128,21 @@ svg {
 /* .hide__mobile_menu{ */
 /* display: none; */
 /* } */
+
+.add-new-button {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  background-color: var(--default-dark);
+  /* float: right; */
+  left: 0px;
+  border-radius: 8px;
+  padding: 7px 25px 7px 25px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 18px;
+  color: var(--light-text);
+  text-transform: capitalize;
+}

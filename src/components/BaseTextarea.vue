@@ -14,8 +14,8 @@
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"
       :v-model="model"
-      cols="30"
       rows="10"
+      cols="35"
     ></textarea>
   </div>
 </template>
@@ -55,6 +55,8 @@ export default {
 
 .form-field textarea {
   left: 0px;
+  /* width: calc(100% - 100px); */
+  object-fit: contain;
   border-radius: 8px;
   padding: 10px 25px;
   border: 1px solid var(--border-color);

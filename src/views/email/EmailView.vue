@@ -1,13 +1,16 @@
 <script lang="ts">
 import EmailItem from "@/components/EmailItem.vue";
 import AppFavActionBtnVue from "@/components/AppFavActionBtn.vue";
-export default {
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "EmailView",
-  components: { EmailItem, Fab: AppFavActionBtnVue },
-};
+  components: { EmailItem, Fab: AppFavActionBtnVue, },
+});
 </script>
 
 <template>
+
+
   <EmailItem title="Re: charles@example.com"
     content="past compound cast solution observe word typical major thy smoke tone recently sport appropriate wherever feed discovery universe fall probably due dead me learn" />
   <EmailItem title="Invitation for interview"

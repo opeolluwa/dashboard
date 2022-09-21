@@ -67,13 +67,13 @@ export default  defineComponent({
 }
 
 .form-field input {
-  width: 100%;
+  /* width: 100%; */
   height: 50px;
-  left: 0px;
   border-radius: 8px;
   padding: 7px 25px 7px 25px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
+  display: block;
 }
 
 .form-field input::placeholder {
