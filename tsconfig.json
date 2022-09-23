@@ -6,9 +6,7 @@
     "src/**/*.vue"
     
   ],
-"files": [
-  "node_modules/vite-plugin-pwa/client.d.ts"
-],
+
   "exclude": [
     "dist",
     "test",
