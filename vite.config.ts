@@ -7,7 +7,7 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig({
   plugins: [
     vue(),
- /*    VitePWA({
+    /*    VitePWA({
       // mode: "development",
       registerType: 'autoUpdate',
       injectRegister: 'auto',

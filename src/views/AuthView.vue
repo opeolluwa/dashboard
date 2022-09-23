@@ -20,12 +20,15 @@ export default defineComponent({
       message: "",
       token: "",
     },
-    apiError: false
+    apiError: false,
   }),
   methods: {
     async login() {
       try {
-        const { data: response } = await axios.post("http://127.0.0.1:8405/api/v1/auth/login", this.form);
+        const { data: response } = await axios.post(
+          "http://127.0.0.1:8405/api/v1/auth/login",
+          this.form
+        );
         console.log(JSON.stringify(response));
       } catch (error: any) {
         const { data: response } = error.response;
@@ -50,13 +53,25 @@ export default defineComponent({
       <!--logon form-->
       <div>
         <h1>Login</h1>
-        <small v-show="apiError" class="error">Error: {{apiResponse.message}}</small>
+        <small v-show="apiError" class="error"
+          >Error: {{ apiResponse.message }}</small
+        >
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
-          <BaseTextInput placeholder="email" label="email" v-model="form.email" type="email" />
+          <BaseTextInput
+            placeholder="email"
+            label="email"
+            v-model="form.email"
+            type="email"
+          />
           <!--form field password-->
-          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
-            class="field" />
+          <BaseTextInput
+            placeholder="password"
+            type="password"
+            label="password"
+            v-model="form.password"
+            class="field"
+          />
           <!--form field submit-->
           <BaseButton @click="login" text="login" />
         </form>
@@ -77,12 +92,12 @@ main .container {
 }
 
 /**the background container */
-main .container>div:first-child {
+main .container > div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
 }
 
-main .container>div:last-child {
+main .container > div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -90,12 +105,12 @@ main .container>div:last-child {
   align-content: center;
 }
 
-main .container>div:last-child h1 {
+main .container > div:last-child h1 {
   margin-bottom: 5px;
   line-height: 64px;
   font-size: 48px;
 }
-main .container>div:last-child h1 + small{
+main .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
 input,
@@ -104,7 +119,6 @@ button,
 .field {
   width: 500px;
 }
-
 
 /** -----------------------------small devices------------------------ */
 @media screen and (max-width: 768px) {
@@ -117,11 +131,11 @@ button,
     align-items: center;
   }
 
-  main .container>div:first-child {
+  main .container > div:first-child {
     display: none;
   }
 
-  main .container>div:last-child {
+  main .container > div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -134,14 +148,14 @@ button,
     margin: 0 auto;
   }
 
-  main .container>div:last-child h1 {
+  main .container > div:last-child h1 {
     margin-bottom: 7.5px;
     line-height: 26px;
     font-size: 28px;
     text-align: center;
   }
 
-  main .container>div:last-child h1+small.error {
+  main .container > div:last-child h1 + small.error {
     margin-bottom: 35px;
   }
 

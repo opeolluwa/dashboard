@@ -12,19 +12,14 @@
   -->
   <div class="form-field">
     <label :for="label">{{ label }}</label>
-    <input
-      :type="type"
-      :id="label"
-      :placeholder="'-- ' + placeholder + ' --'"
-      @input="updateModelValue"
-      :value="modelValue"
-    />
+    <input :type="type" :id="label" :placeholder="'-- ' + placeholder + ' --'" @input="updateModelValue"
+      :value="modelValue" />
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from "vue";
-export default  defineComponent({
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "BaseTextInput",
   props: {
     label: {
@@ -45,7 +40,7 @@ export default  defineComponent({
     },
   },
   methods: {
-    updateModelValue(event:any) {
+    updateModelValue(event: any) {
       this.$emit("update:modelValue", event.target.value);
     },
   },
@@ -56,7 +51,7 @@ export default  defineComponent({
 .form-field {
   margin-bottom: 35px;
   font-size: 18px;
-  width: 500px;
+  /* width: 500px; */
 }
 
 .form-field label {
@@ -93,9 +88,9 @@ export default  defineComponent({
   outline: none;
 }
 
-/* @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .form-field input {
     width: 100%;
   }
-} */
+}
 </style>
