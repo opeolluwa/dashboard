@@ -115,7 +115,7 @@ main .container > div:last-child h1 + small {
 }
 input,
 button,
-.form-field,
+.form-field input,
 .field {
   width: 500px;
 }

@@ -50,8 +50,8 @@ export default defineComponent({
 <style>
 .form-field {
   margin-bottom: 35px;
-  font-size: 18px;
-  /* width: 500px; */
+  font-size: 16px;
+  width: 500px;
 }
 
 .form-field label {
@@ -62,7 +62,7 @@ export default defineComponent({
 }
 
 .form-field input {
-  /* width: 100%; */
+  width: 500px;
   height: 50px;
   border-radius: 8px;
   padding: 7px 25px 7px 25px;

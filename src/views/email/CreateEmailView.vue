@@ -56,10 +56,7 @@ export default defineComponent({
 <style scoped>
 form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  column-gap: 20px;
+  column-gap: 100px;
   margin: 2.5rem 0;
 }
 
@@ -82,6 +79,12 @@ form textarea {
 @media screen and (max-width: 768px) {
   form {
     flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    flex-direction: column;
+    column-gap: 20px;
   }
 
   button {
