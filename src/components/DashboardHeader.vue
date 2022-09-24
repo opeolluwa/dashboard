@@ -1,17 +1,13 @@
 <script lang="ts">
 import greetings from "./greetings";
-import IconEmail from "./icons/IconEmail.vue";
-import IconMenu from "./icons/IconMenu.vue";
-import IconNotification from "./icons/IconNotification.vue";
+import { Icon } from "@iconify/vue";
 export default {
   name: "DashboardHeader",
   data: () => ({
     greetings,
   }),
   components: {
-    IconEmail,
-    IconNotification,
-    IconMenu,
+    Icon
   },
   methods: {
     toggleSidebar() {
@@ -24,7 +20,7 @@ export default {
   <header class="view">
     <!--navigation button for small devices go here-->
     <div class="header__nav__mobile">
-      <IconMenu @click="$emit('open-sidebar')" />
+      <Icon icon="mdi:menu" @click="$emit('open-sidebar')" />
       <h1>
         <RouterLink :to="{ name: 'home' }">Opeoluwa</RouterLink>
       </h1>
@@ -38,10 +34,10 @@ export default {
     <!--pictures and icons-->
     <div class="icons">
       <RouterLink :to="{ name: 'emails' }">
-        <IconEmail /><sup></sup>
+        <Icon icon="mdi:email-outline" /><sup></sup>
       </RouterLink>
       <RouterLink :to="{ name: 'notification' }">
-        <IconNotification /> <sup></sup>
+        <Icon icon="mdi:bell-outline" /> <sup></sup>
       </RouterLink>
     </div>
   </header>

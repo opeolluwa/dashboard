@@ -1,20 +1,12 @@
 <script lang="ts">
 import { Icon } from "@iconify/vue";
-import IconProjects from "./icons/IconProjects.vue";
-import IconSettings from "./icons/IconSettings.vue";
-import IconTodo from "./icons/IconTodo.vue";
 import BaseButton from "./BaseButton.vue";
 import router from "@/router";
 import { defineComponent } from "vue";
-import IconNotification from "./icons/IconNotification.vue";
 export default defineComponent({
   name: "AppNavigation",
   components: {
-    IconProjects,
-    IconSettings,
-    IconTodo,
     BaseButton,
-    IconNotification,
     Icon,
   },
   data: () => ({
@@ -65,7 +57,7 @@ export default defineComponent({
         :to="{ name: 'projects' }"
         @click="closeSidebar"
       >
-        <IconProjects /> Projects
+        <Icon icon="mdi:lightbulb-on-30"/> Projects
       </router-link>
 
       <router-link
@@ -73,7 +65,7 @@ export default defineComponent({
         :to="{ name: 'todo' }"
         @click="closeSidebar"
       >
-        <IconTodo /> Todo
+        <Icon icon="mdi:format-list-checks" /> Todo
       </router-link>
 
       <router-link
@@ -81,7 +73,7 @@ export default defineComponent({
         :to="{ name: 'notification' }"
         @click="closeSidebar"
       >
-        <IconNotification /> Notifications
+        <Icon icon="mdi:bell-outline" /> Notifications
       </router-link>
 
       <router-link
@@ -89,7 +81,7 @@ export default defineComponent({
         :to="{ name: 'settings' }"
         @click="closeSidebar"
       >
-        <IconSettings /> Settings
+        <Icon icon="mdi:cog-outline" /> Settings
       </router-link>
     </div>
     <BaseButton @click="logout" class="logout-button" text="Logout" />

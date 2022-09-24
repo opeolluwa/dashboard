@@ -1,13 +1,13 @@
 <script lang="ts">
 import BaseButton from "@/components/BaseButton.vue";
-import IconPlus from "@/components/icons/IconPlus.vue";
 import AppModal from "@/components/AppModal.vue";
 import BaseTextInput from "@/components/BaseTextInput.vue";
+import { Icon } from "@iconify/vue";
 export default {
   name: "ProjectView",
   components: {
     BaseButton,
-    IconPlus,
+    Icon,
     AppModal,
     BaseTextInput,
   },
@@ -38,7 +38,7 @@ export default {
 
   <!--add new project fab button-->
   <BaseButton text="" class="add-new-fab" @click="showProjectModal = true">
-    <IconPlus />
+    <Icon icon="mdi:plus" />
   </BaseButton>
   <!--the project modal-->
   <AppModal
@@ -108,21 +108,20 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 25px;
   gap: 10px;
 }
-
-form .field {
-  width: fit-content;
-}
-
-form button.field {
-  width: 300px;
-}
-
+ .field{
+  width: 100%;
+ }
 /**--------------------------smaller screens ----------------------------- */
 @media screen and (max-width: 768px) {
   .add-new-button {
     display: none;
+  }
+
+  form{
+    padding: 10px;
   }
 
   .add-new-fab {

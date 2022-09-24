@@ -43,7 +43,7 @@ export default {
 <style scoped>
 .form-field {
   margin-bottom: 35px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .form-field label {
@@ -75,8 +75,19 @@ export default {
 
 .form-field textarea:hover,
 .form-field textarea:focus {
-  border: 1.75px solid var(--tertiary);
+  border: 1px solid var(--default-dark);
   transition: 0.5s border;
   outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .form-field textarea {
+    width: 100%;
+  }
+
+  .form-field {
+    margin-bottom: 35px;
+    font-size: 14px;
+  }
 }
 </style>

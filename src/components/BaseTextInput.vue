@@ -51,7 +51,6 @@ export default defineComponent({
 .form-field {
   margin-bottom: 35px;
   font-size: 16px;
-  width: 500px;
 }
 
 .form-field label {
@@ -62,7 +61,8 @@ export default defineComponent({
 }
 
 .form-field input {
-  width: 500px;
+  /* width: 500px; */
+  width: 100%;
   height: 50px;
   border-radius: 8px;
   padding: 7px 25px 7px 25px;
@@ -83,7 +83,7 @@ export default defineComponent({
 
 .form-field input:hover,
 .form-field input:focus {
-  border: 1.75px solid var(--tertiary);
+  border: 1px solid var(--default-dark);
   transition: 0.5s border;
   outline: none;
 }
@@ -91,6 +91,11 @@ export default defineComponent({
 @media screen and (max-width: 768px) {
   .form-field input {
     width: 100%;
+  }
+
+  .form-field {
+    margin-bottom: 35px;
+    font-size: 14px;
   }
 }
 </style>
