@@ -26,7 +26,7 @@ export default defineComponent({
     async login() {
       try {
         const { data: response } = await axios.post(
-          "http://127.0.0.1:8405/api/v1/auth/login",
+          "/auth/login",
           this.form
         );
         console.log(JSON.stringify(response));
