@@ -1,5 +1,5 @@
 <template>
-  <button>
+  <button :disabled="disabled">
    {{ text }}<slot></slot> 
   </button>
 </template>
@@ -51,6 +51,10 @@ export default {
     text: {
       type: String,
       required: true,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 };

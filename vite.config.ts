@@ -11,7 +11,7 @@ export default defineConfig({
   plugins: [
     vue(),
        VitePWA({
-      mode: "development",
+      // mode: "development",
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       includeAssets: ["/favicon.png"],

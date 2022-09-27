@@ -4,17 +4,22 @@ import BaseButtonVue from "@/components/BaseButton.vue";
 import router from "@/router";
 import axios from "axios";
 import { defineComponent } from "vue";
+
+import { HollowDotsSpinner } from 'epic-spinners'
 export default defineComponent({
   name: "AuthView",
   components: {
     BaseTextInput: BaseTextInputVue,
     BaseButton: BaseButtonVue,
+    HollowDotsSpinner
   },
   data: () => ({
     form: {
       email: "",
       password: "",
     },
+    loading: false,
+    disabled: false,
     //destructure the api response into this variable
     apiResponse: {
       message: "",
@@ -85,22 +90,38 @@ export default defineComponent({
   },
   methods: {
     async login() {
-      /*  try {
-         const { data: response } = await axios.post(
-           "/auth/login",
-           this.form
-         );
-         console.log(JSON.stringify(response));
-       } catch (error: any) {
-         const { data: response } = error.response;
-         if (!response.success) {
-           Object.assign(this.apiResponse, response);
-           this.apiError = true;
-         }
-         // console.log(JSON.stringify(error.response.data));
-       } */
+      this.loading = true;
+      this.disabled = true;
+      try {
+        //login the user
+        const { data: response } = await axios.post(
+          "/auth/login",
+          this.form
+        );
+        //destructure the response
+        console.log(JSON.stringify(response));
+        if (response.success) {
+          this.apiResponse = response;
+          //save the token to local storage
+          localStorage.setItem("token", this.apiResponse.token);
+          //redirect to the dashboard
+          router.push({ name: "home" });
+        } else {
+          this.apiError = true;
+          this.apiResponse.message = response.message;
+        }
+      } catch (error: any) {
+        this.loading = false;
+        this.disabled = false;
+        const { data: response } = error.response;
+        if (!response.success) {
+          Object.assign(this.apiResponse, response);
+          this.apiError = true;
+        }
+        console.log(JSON.stringify(error.response.data));
+      }
       //head over to the next page, which essentially the home page
-      router.push({ name: "home" });
+      // router.push({ name: "home" });
     },
   },
 });
@@ -114,6 +135,7 @@ export default defineComponent({
       <!--logon form-->
       <div>
         <h1>Sign In</h1>
+
         <small v-show="apiError" class="error">Error: {{ apiResponse.message }}</small>
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
@@ -122,8 +144,11 @@ export default defineComponent({
           <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
             class="field" />
           <!--form field submit-->
-          <BaseButton @click="login" text="login" />
-          <!-- <a ref="installApp" id="install-button" href="#">install application</a> -->
+          <BaseButton @click="" text="" :disabled="disabled">
+            <span v-show="!loading">Login</span>
+            <HollowDotsSpinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="loading" />
+          </BaseButton>
+          <small ref="installApp" id="install-button">install application</small>
         </form>
 
         <!--custom install script-->
