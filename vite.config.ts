@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from "node:url";
-// import { VitePWA } from "vite-plugin-pwa";
+import { VitePWA } from "vite-plugin-pwa";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
@@ -10,15 +10,15 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    /*    VitePWA({
-      // mode: "development",
+       VitePWA({
+      mode: "development",
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       includeAssets: ["/favicon.png"],
       manifest: {
         name: "nitride",
         short_name: "nitride",
-        description: "an oxide of nitrogen",
+        description: "a compound of nitrogen",
         theme_color: "#ffffff",
         display: "standalone",
         background_color: "#ffffff",
@@ -41,7 +41,7 @@ export default defineConfig({
           },
         ],
       },
-    }), */
+    }), 
   ],
   resolve: {
     alias: {

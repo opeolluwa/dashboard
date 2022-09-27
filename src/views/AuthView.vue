@@ -24,7 +24,7 @@ export default defineComponent({
   }),
   methods: {
     async login() {
-      try {
+     /*  try {
         const { data: response } = await axios.post(
           "/auth/login",
           this.form
@@ -37,9 +37,9 @@ export default defineComponent({
           this.apiError = true;
         }
         // console.log(JSON.stringify(error.response.data));
-      }
+      } */
       //head over to the next page, which essentially the home page
-      // router.push({ name: "home" });
+      router.push({ name: "home" });
     },
   },
 });
@@ -52,7 +52,7 @@ export default defineComponent({
       <div></div>
       <!--logon form-->
       <div>
-        <h1>Login</h1>
+        <h1>Sign In</h1>
         <small v-show="apiError" class="error">Error: {{ apiResponse.message }}</small>
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->

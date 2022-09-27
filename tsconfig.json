@@ -4,9 +4,10 @@
     "env.d.ts",
     "src/**/*",
     "src/**/*.vue"
-    
   ],
-
+  "files": [
+    "node_modules/vite-plugin-pwa/client.d.ts"
+  ],
   "exclude": [
     "dist",
     "test",
@@ -19,6 +20,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "virtual:pwa-register": [
+        "node_modules/vite-plugin-pwa"
       ]
     },
     "lib": [
