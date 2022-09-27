@@ -22,22 +22,83 @@ export default defineComponent({
     },
     apiError: false,
   }),
+  mounted() {
+    //refrence the install button from the dom
+    const divInstall = document?.getElementById('installContainer');
+    const butInstall = document?.getElementById('butInstall');
+
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      // Prevent the mini-infobar from appearing on mobile.
+      event.preventDefault();
+      console.log('👍', 'beforeinstallprompt', event);
+      // Stash the event so it can be triggered later.
+      window.deferredPrompt = event;
+      // Remove the 'hidden' class from the install button container.
+      divInstall?.classList.toggle('hidden', false);
+    });
+
+    butInstall?.addEventListener('click', async () => {
+      console.log('👍', 'butInstall-clicked');
+      const promptEvent = window.deferredPrompt;
+      if (!promptEvent) {
+        // The deferred prompt isn't available.
+        return;
+      }
+      // Show the install prompt.
+      promptEvent.prompt();
+      // Log the result
+      const result = await promptEvent.userChoice;
+      console.log('👍', 'userChoice', result);
+      // Reset the deferred prompt variable, since
+      // prompt() can only be called once.
+      window.deferredPrompt = null;
+      // Hide the install button.
+      divInstall?.classList.toggle('hidden', true);
+    });
+
+
+    butInstall?.addEventListener('click', async () => {
+      console.log('👍', 'butInstall-clicked');
+      const promptEvent = window.deferredPrompt;
+      if (!promptEvent) {
+        // The deferred prompt isn't available.
+        return;
+      }
+      // Show the install prompt.
+      promptEvent.prompt();
+      // Log the result
+      const result = await promptEvent.userChoice;
+      console.log('👍', 'userChoice', result);
+      // Reset the deferred prompt variable, since
+      // prompt() can only be called once.
+      window.deferredPrompt = null;
+      // Hide the install button.
+      divInstall?.classList.toggle('hidden', true);
+    });
+
+    window.addEventListener('appinstalled', (event) => {
+      console.log('👍', 'appinstalled', event);
+      // Clear the deferredPrompt so it can be garbage collected
+      window.deferredPrompt = null;
+    });
+  },
   methods: {
     async login() {
-     /*  try {
-        const { data: response } = await axios.post(
-          "/auth/login",
-          this.form
-        );
-        console.log(JSON.stringify(response));
-      } catch (error: any) {
-        const { data: response } = error.response;
-        if (!response.success) {
-          Object.assign(this.apiResponse, response);
-          this.apiError = true;
-        }
-        // console.log(JSON.stringify(error.response.data));
-      } */
+      /*  try {
+         const { data: response } = await axios.post(
+           "/auth/login",
+           this.form
+         );
+         console.log(JSON.stringify(response));
+       } catch (error: any) {
+         const { data: response } = error.response;
+         if (!response.success) {
+           Object.assign(this.apiResponse, response);
+           this.apiError = true;
+         }
+         // console.log(JSON.stringify(error.response.data));
+       } */
       //head over to the next page, which essentially the home page
       router.push({ name: "home" });
     },
@@ -62,13 +123,44 @@ export default defineComponent({
             class="field" />
           <!--form field submit-->
           <BaseButton @click="login" text="login" />
+          <!-- <a ref="installApp" id="install-button" href="#">install application</a> -->
         </form>
+
+        <!--custom install script-->
+        <!-- Install button, hidden by default -->
+        <div id="installContainer" class="hidden">
+          <button id="butInstall" type="button">
+            Install
+          </button>
+        </div>
       </div>
     </div>
   </main>
 </template>
 
 <style scoped>
+.hidden {
+  display: none !important;
+}
+
+#installContainer {
+  background-color: red;
+  /* position: absolute; */
+  bottom: 1em;
+  display: flex;
+  justify-content: center;
+  /* width: 100%; */
+  /* z-index: 1500; */
+}
+
+#installContainer button {
+  background-color: inherit;
+  border: 1px solid white;
+  color: white;
+  font-size: 1em;
+  padding: 0.75em;
+}
+
 main .container {
   width: 100%;
   display: grid;
@@ -77,6 +169,7 @@ main .container {
   grid-template-rows: 1fr;
   grid-template-areas: "bg form";
   min-height: 100vh;
+  position: relative;
 }
 
 /**the background container */
@@ -139,7 +232,7 @@ button,
     place-items: center;
     height: 90vh;
     margin: 0 auto;
-   
+
   }
 
   main .container>div:last-child h1 {
