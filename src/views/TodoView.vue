@@ -50,7 +50,8 @@ export default {
       <form action="" @click="addNewTodo">
         <BaseTextInput label="" type="text" placeholder="Todo name" :model="addTodo.name" class="field" />
         <BaseTextInput placeholder=" Todo description" label="" :model="addTodo.description" class="field" />
-        <BaseTextInput placeholder="github url" label="" type="date" :model="addTodo.description" class="field" />
+      
+        <BaseTextInput placeholder="github url" label="" type="datetime-local" :model="addTodo.description" class="field" />
         <BaseButton text="add Todo" class="field" />
       </form>
     </template>

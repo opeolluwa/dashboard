@@ -2,7 +2,7 @@
     <div class="empty-state">
         <img src="@/assets/img/illustration/empty-state.svg" alt="empty state">
         <div>
-            <h1>Oops!</h1>
+            <!-- <h1>Oops!</h1> -->
             <p v-html="message"></p>
         </div>
         <BaseButton @click="goBack">
@@ -42,7 +42,8 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: 150%;
+    min-height: 50vh;
     padding: 40px auto;
     margin: 40px auto;
     row-gap: 20px;
@@ -71,13 +72,13 @@ export default defineComponent({
 
 .empty-state button {
     width: 100%;
-    max-width: 150px;
-    padding: 10px 20px;
+    max-width: fit-content;
+    padding: 10px;
     border-radius: 5px;
-    background-color: var(--default-dark) !important;
-    border: none;
+    background-color: transparent !important;
+    border: 1px solid var(--default-dark);
+    color: var(--default-dark);
     font-size: 16px;
-    font-weight: 500;
     line-height: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -89,7 +90,7 @@ export default defineComponent({
 /**--------------mobile screen navigation---------- */
 @media screen and (max-width: 768px) {
     .empty-state img {
-        width: 75%;
+        width: 35%;
     }
 }
 </style>
