@@ -1,7 +1,5 @@
 <template>
-  <button :disabled="disabled">
-   {{ text }}<slot></slot> 
-  </button>
+  <button :disabled="disabled">{{ text }}<slot></slot></button>
 </template>
 
 <style scoped>

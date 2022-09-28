@@ -4,15 +4,32 @@
     <form @submit.prevent="sendEmail">
       <div>
         <!--the recipient email-->
-        <BaseTextInput label="recipient email" type="email" placeholder="recipient email" v-model="newEmail.email" />
+        <BaseTextInput
+          label="recipient email"
+          type="email"
+          placeholder="recipient email"
+          v-model="newEmail.email"
+        />
         <!--the recipient name-->
-        <BaseTextInput placeholder="recipient name" label="recipient name" v-model="newEmail.recipient" />
+        <BaseTextInput
+          placeholder="recipient name"
+          label="recipient name"
+          v-model="newEmail.recipient"
+        />
         <!--the email subject-->
-        <BaseTextInput placeholder="email subject" label="email subject" v-model="newEmail.subject" />
+        <BaseTextInput
+          placeholder="email subject"
+          label="email subject"
+          v-model="newEmail.subject"
+        />
       </div>
       <div>
         <!--the email body-->
-        <BaseTextarea placeholder="email body" label="email body" v-model="newEmail.message" />
+        <BaseTextarea
+          placeholder="email body"
+          label="email body"
+          v-model="newEmail.message"
+        />
         <!--send button-->
         <BaseButton text="send message">
           <!-- <Icon icon="mdi:home" /> -->
@@ -29,7 +46,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 import BaseTextarea from "@/components/BaseTextarea.vue";
 import axios from "axios";
-import { Icon } from "@iconify/vue"
+import { Icon } from "@iconify/vue";
 import IconCommunity from "@/components/icons/IconCommunity.vue";
 export default defineComponent({
   name: "CreateEmailView",
@@ -38,8 +55,7 @@ export default defineComponent({
     BaseTextInput,
     BaseTextarea,
     Icon,
-    IconCommunity
-
+    IconCommunity,
   },
   data: () => ({
     newEmail: {
@@ -69,7 +85,6 @@ form {
   margin: 2.5rem 0;
 }
 
-
 form label {
   font-size: 14px;
 }
@@ -83,7 +98,6 @@ form textarea {
   padding: 10px;
   /* display: none; */
 }
-
 
 /**---------smaller screens ------------ */
 @media screen and (max-width: 768px) {

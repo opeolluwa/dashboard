@@ -1,12 +1,18 @@
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+import AppEmptyState from '@/components/AppEmptyState.vue';
+export default defineComponent({
   name: "NotificationView",
-  components: {},
-};
+  components: {
+    AppEmptyState
+  },
+});
 </script>
 
 <template>
-  <div></div>
+  <AppEmptyState />
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

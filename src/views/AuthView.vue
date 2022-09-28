@@ -5,13 +5,13 @@ import router from "@/router";
 import axios from "axios";
 import { defineComponent } from "vue";
 
-import { HollowDotsSpinner } from 'epic-spinners'
+import { HollowDotsSpinner } from "epic-spinners";
 export default defineComponent({
   name: "AuthView",
   components: {
     BaseTextInput: BaseTextInputVue,
     BaseButton: BaseButtonVue,
-    HollowDotsSpinner
+    HollowDotsSpinner,
   },
   data: () => ({
     form: {
@@ -29,22 +29,21 @@ export default defineComponent({
   }),
   mounted() {
     //refrence the install button from the dom
-    const divInstall = document?.getElementById('installContainer');
-    const butInstall = document?.getElementById('butInstall');
+    const divInstall = document?.getElementById("installContainer");
+    const butInstall = document?.getElementById("butInstall");
 
-
-    window.addEventListener('beforeinstallprompt', (event) => {
+    window.addEventListener("beforeinstallprompt", (event) => {
       // Prevent the mini-infobar from appearing on mobile.
       event.preventDefault();
-      console.log('👍', 'beforeinstallprompt', event);
+      console.log("👍", "beforeinstallprompt", event);
       // Stash the event so it can be triggered later.
       window.deferredPrompt = event;
       // Remove the 'hidden' class from the install button container.
-      divInstall?.classList.toggle('hidden', false);
+      divInstall?.classList.toggle("hidden", false);
     });
 
-    butInstall?.addEventListener('click', async () => {
-      console.log('👍', 'butInstall-clicked');
+    butInstall?.addEventListener("click", async () => {
+      console.log("👍", "butInstall-clicked");
       const promptEvent = window.deferredPrompt;
       if (!promptEvent) {
         // The deferred prompt isn't available.
@@ -54,17 +53,16 @@ export default defineComponent({
       promptEvent.prompt();
       // Log the result
       const result = await promptEvent.userChoice;
-      console.log('👍', 'userChoice', result);
+      console.log("👍", "userChoice", result);
       // Reset the deferred prompt variable, since
       // prompt() can only be called once.
       window.deferredPrompt = null;
       // Hide the install button.
-      divInstall?.classList.toggle('hidden', true);
+      divInstall?.classList.toggle("hidden", true);
     });
 
-
-    butInstall?.addEventListener('click', async () => {
-      console.log('👍', 'butInstall-clicked');
+    butInstall?.addEventListener("click", async () => {
+      console.log("👍", "butInstall-clicked");
       const promptEvent = window.deferredPrompt;
       if (!promptEvent) {
         // The deferred prompt isn't available.
@@ -74,16 +72,16 @@ export default defineComponent({
       promptEvent.prompt();
       // Log the result
       const result = await promptEvent.userChoice;
-      console.log('👍', 'userChoice', result);
+      console.log("👍", "userChoice", result);
       // Reset the deferred prompt variable, since
       // prompt() can only be called once.
       window.deferredPrompt = null;
       // Hide the install button.
-      divInstall?.classList.toggle('hidden', true);
+      divInstall?.classList.toggle("hidden", true);
     });
 
-    window.addEventListener('appinstalled', (event) => {
-      console.log('👍', 'appinstalled', event);
+    window.addEventListener("appinstalled", (event) => {
+      console.log("👍", "appinstalled", event);
       // Clear the deferredPrompt so it can be garbage collected
       window.deferredPrompt = null;
     });
@@ -94,10 +92,7 @@ export default defineComponent({
       this.disabled = true;
       try {
         //login the user
-        const { data: response } = await axios.post(
-          "/auth/login",
-          this.form
-        );
+        const { data: response } = await axios.post("/auth/login", this.form);
         //destructure the response
         console.log(JSON.stringify(response));
         if (response.success) {
@@ -136,27 +131,45 @@ export default defineComponent({
       <div>
         <h1>Sign In</h1>
 
-        <small v-show="apiError" class="error">Error: {{ apiResponse.message }}</small>
+        <small v-show="apiError" class="error"
+          >Error: {{ apiResponse.message }}</small
+        >
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
-          <BaseTextInput placeholder="email" label="email" v-model="form.email" type="email" class="field" />
+          <BaseTextInput
+            placeholder="email"
+            label="email"
+            v-model="form.email"
+            type="email"
+            class="field"
+          />
           <!--form field password-->
-          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
-            class="field" />
+          <BaseTextInput
+            placeholder="password"
+            type="password"
+            label="password"
+            v-model="form.password"
+            class="field"
+          />
           <!--form field submit-->
           <BaseButton @click="" text="" :disabled="disabled">
             <span v-show="!loading">Login</span>
-            <HollowDotsSpinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="loading" />
+            <HollowDotsSpinner
+              :animation-duration="1000"
+              :size="30"
+              :color="'#ffffff'"
+              v-show="loading"
+            />
           </BaseButton>
-          <small ref="installApp" id="install-button">install application</small>
+          <small ref="installApp" id="install-button"
+            >install application</small
+          >
         </form>
 
         <!--custom install script-->
         <!-- Install button, hidden by default -->
         <div id="installContainer" class="hidden">
-          <button id="butInstall" type="button">
-            Install
-          </button>
+          <button id="butInstall" type="button">Install</button>
         </div>
       </div>
     </div>
@@ -198,13 +211,13 @@ main .container {
 }
 
 /**the background container */
-main .container>div:first-child {
+main .container > div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-main .container>div:last-child {
+main .container > div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -212,13 +225,13 @@ main .container>div:last-child {
   align-content: center;
 }
 
-main .container>div:last-child h1 {
+main .container > div:last-child h1 {
   margin-bottom: 5px;
   line-height: 64px;
   font-size: 48px;
 }
 
-main .container>div:last-child h1+small {
+main .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
 
@@ -242,11 +255,11 @@ button,
     padding: 0;
   }
 
-  main .container>div:first-child {
+  main .container > div:first-child {
     display: none;
   }
 
-  main .container>div:last-child {
+  main .container > div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -257,17 +270,16 @@ button,
     place-items: center;
     height: 90vh;
     margin: 0 auto;
-
   }
 
-  main .container>div:last-child h1 {
+  main .container > div:last-child h1 {
     margin-bottom: 7.5px;
     line-height: 26px;
     font-size: 28px;
     text-align: center;
   }
 
-  main .container>div:last-child h1+small.error {
+  main .container > div:last-child h1 + small.error {
     margin-bottom: 35px;
   }
 

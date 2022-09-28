@@ -81,13 +81,12 @@ button {
   }
 
   .d-sm-none {
-    display: unset;
+    display: none;
   }
 }
 
 
-.d-none,
-.d-sm-none {
+.d-none{
   display: none;
 }
 

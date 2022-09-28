@@ -111,16 +111,16 @@ form {
   padding: 25px;
   gap: 10px;
 }
- .field{
+.field {
   width: 100%;
- }
+}
 /**--------------------------smaller screens ----------------------------- */
 @media screen and (max-width: 768px) {
   .add-new-button {
     display: none;
   }
 
-  form{
+  form {
     padding: 10px;
   }
 

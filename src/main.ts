@@ -16,14 +16,12 @@ const app = createApp(App);
 //     onOfflineReady() { },
 // })
 
-
-export { };
+export {};
 declare global {
-    interface Window {
-        deferredPrompt: any;
-    }
+  interface Window {
+    deferredPrompt: any;
+  }
 }
-
 
 app.use(createPinia());
 app.use(router);

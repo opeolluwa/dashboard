@@ -12,8 +12,13 @@
   -->
   <div class="form-field">
     <label :for="label">{{ label }}</label>
-    <input :type="type" :id="label" :placeholder="'-- ' + placeholder + ' --'" @input="updateModelValue"
-      :value="modelValue" />
+    <input
+      :type="type"
+      :id="label"
+      :placeholder="'-- ' + placeholder + ' --'"
+      @input="updateModelValue"
+      :value="modelValue"
+    />
   </div>
 </template>
 

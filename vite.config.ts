@@ -5,15 +5,15 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server:{
-    host:true
+  server: {
+    host: true,
   },
   plugins: [
     vue(),
-       VitePWA({
+    VitePWA({
       // mode: "development",
-      registerType: 'autoUpdate',
-      injectRegister: 'auto',
+      registerType: "autoUpdate",
+      injectRegister: "auto",
       includeAssets: ["/favicon.png"],
       manifest: {
         name: "nitride",
@@ -41,7 +41,7 @@ export default defineConfig({
           },
         ],
       },
-    }), 
+    }),
   ],
   resolve: {
     alias: {

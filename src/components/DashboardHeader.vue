@@ -7,7 +7,7 @@ export default {
     greetings,
   }),
   components: {
-    Icon
+    Icon,
   },
   methods: {
     toggleSidebar() {

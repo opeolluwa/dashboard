@@ -26,29 +26,18 @@ export default {
     <small>{{ greetings }}</small>
   </div>
 
-  <!--analytics overview-->
-  <div class="analytics-overview">
-    <AppListItem>
-      234
-    </AppListItem>
+  <AppCard>
+    hey
+  </AppCard>
+  <!--quotes-->
+  <AppCard id="quotes-continer">
+    <Quotes :duration="120" />
+  </AppCard>
 
-    <AppListItem>
-      234
-    </AppListItem>
-
-    <AppListItem>
-      234
-    </AppListItem>
-  </div>
-  <!--quotes and analytics header-->
-  <div id="header">
-    <AppCard id="quotes-container">
-      <Quotes :duration="120" />
-    </AppCard>
-  </div>
+  
 
 
-
+  <!--recent actives-->
 </template>
 
 <style scoped>
@@ -59,22 +48,7 @@ export default {
   align-items: center;
 }
 
-.analytics-overview {
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-content: space-between;
-  gap: 40px;
-  align-items: center;
-  display: none;
-}
-
-.analytics-overview>div {
-  border-radius: 5px;
-  min-height: 75px;
-}
-
-#header {
+.analytics {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 35px;
@@ -88,20 +62,8 @@ export default {
 
 /**--------------mobile screen navigation---------- */
 @media screen and (max-width: 768px) {
-
-  #header {
+  .analytics {
     grid-template-columns: repeat(1, 1fr);
-    margin-bottom: 45px;
-  }
-
-  .analytics-overview {
-    column-gap: 5px;
-    margin: 20px 0 10px;
-    display: none;
-  }
-
-  .analytics-overview>div {
-    min-height: 40px;
   }
 }
 </style>

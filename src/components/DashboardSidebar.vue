@@ -57,7 +57,7 @@ export default defineComponent({
         :to="{ name: 'projects' }"
         @click="closeSidebar"
       >
-        <Icon icon="mdi:lightbulb-on-30"/> Projects
+        <Icon icon="mdi:lightbulb-on-30" /> Projects
       </router-link>
 
       <router-link
