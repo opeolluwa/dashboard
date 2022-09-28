@@ -5,9 +5,9 @@
             <!-- <h1>Oops!</h1> -->
             <p v-html="message"></p>
         </div>
-        <BaseButton @click="goBack">
+       <!--  <BaseButton @click="goBack" class="d-none">
             <Icon icon="mdi:chevron-left" /> Go Back
-        </BaseButton>
+        </BaseButton> -->
     </div>
 </template>
 

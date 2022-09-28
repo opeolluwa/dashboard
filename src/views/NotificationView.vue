@@ -1,16 +1,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import AppEmptyState from '@/components/AppEmptyState.vue';
+import AppNetworkError from '../components/AppNetworkError.vue';
 export default defineComponent({
   name: "NotificationView",
   components: {
-    AppEmptyState
-  },
+    AppNetworkError
+},
 });
 </script>
 
 <template>
-  <AppEmptyState />
+<h2>Notification</h2>
+<AppNetworkError />
 </template>
 
 <style scoped>

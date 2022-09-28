@@ -1,12 +1,16 @@
 <script lang="ts">
+import AppNetworkError from "../components/AppNetworkError.vue";
 export default {
   name: "SettingsView",
-  components: {},
+  components: { AppNetworkError },
 };
 </script>
 
 <template>
-  <h1>settings</h1>
+  <h2>settings</h2>
+  <AppNetworkError />
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
