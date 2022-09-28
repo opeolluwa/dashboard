@@ -26,6 +26,8 @@ export default {
 </script>
 
 <template>
+  <h2>Projects</h2>
+
   <div class="header">
     <BaseButton
       text="add new"

@@ -5,30 +5,46 @@
             <h1>Oops!</h1>
             <p v-html="message"></p>
         </div>
+        <BaseButton @click="goBack">
+            <Icon icon="mdi:chevron-left" /> Go Back
+        </BaseButton>
     </div>
 </template>
 
 <script lang="ts">
-export default {
+import BaseButton from "./BaseButton.vue";
+import { Icon } from "@iconify/vue"
+import { defineComponent } from "vue";
+export default defineComponent({
     name: "AppEmptyState",
     props: {
         message: {
             type: String,
-            default: "No data found! <br/> will be displayed once you add them",
+            default: "No data found! They will be displayed once you add them",
         },
+    },
+    components: {
+        BaseButton,
+        Icon
+    },
+    methods: {
+        goBack() {
+            this.$router.back();
+        }
     }
-}
+})
 </script>
 
 
-<style>
+<style scoped>
 .empty-state {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 20px;
+    padding: 40px auto;
+    margin: 40px auto;
     row-gap: 20px;
     text-align: center;
 }
@@ -37,24 +53,43 @@ export default {
     width: 30%;
 }
 
-h1 {
+.empty-state h1 {
     font-size: 2rem;
     font-weight: 500;
-    color: var(--default-red);
     line-height: 36px;
     margin-bottom: 10px;
 }
 
-.p {
-    font-size: 24px;
-    line-height: 26px;
+.empty-state p {
+    font-size: 16px;
+    line-height: 24px;
+    width: 80%;
+    align-items: center;
+    margin: 0 auto;
     font-family: 'mulish', sans-serif;
+}
+
+.empty-state button {
+    width: 100%;
+    max-width: 150px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--default-dark) !important;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /**--------------mobile screen navigation---------- */
 @media screen and (max-width: 768px) {
     .empty-state img {
-        width: 80%;
+        width: 75%;
     }
 }
 </style>
