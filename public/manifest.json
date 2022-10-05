@@ -1,13 +1,13 @@
 {
     "name": "nitride",
     "short_name": "nitride",
-    "start_url": "index.html",
+    "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
+    "background_color": "#101010",
     "lang": "en",
     "scope": "/",
     "description": "an admin dashboard built on vue, Rust, Typescript and Postgres",
-    "theme_color": "#ffffff",
+    "theme_color": "#101010",
     "icons": [
         {
             "src": "favicon/android-chrome-192x192.png",
