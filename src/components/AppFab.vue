@@ -38,6 +38,8 @@ export default defineComponent({
   padding: 10px;
   width: 50px;
   height: 50px;
+  background-color: var(--default-dark);
+  color: var(--white);
   box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
@@ -45,7 +47,6 @@ export default defineComponent({
 }
 
 .fab:hover {
-  background-color: var(--primary);
   color: var(--white);
   cursor: pointer;
 }

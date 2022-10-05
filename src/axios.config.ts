@@ -6,7 +6,7 @@ if (NODE_ENV === "development" || !import.meta.env.PROD) {
 } else {
   axios.defaults.baseURL = `api/v1`;
 }
-axios.defaults.timeout = 3500;
+axios.defaults.timeout = 12500;
 console.log({ base_url: import.meta.env.PROD });
 
 // axios.defaults.withCredentials = true;
