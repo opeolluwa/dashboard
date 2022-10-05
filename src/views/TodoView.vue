@@ -31,11 +31,14 @@ export default {
 <template>
   <h2>Todo</h2>
   <div class="header">
-    <BaseButton text="add new" class="add-new-button" @click="showTodoModal = true">
+    <BaseButton
+      text="add new"
+      class="add-new-button"
+      @click="showTodoModal = true"
+    >
       <IconPlus />
     </BaseButton>
   </div>
-
 
   <!--add new Todo fab button-->
   <AppEmptyState />
@@ -45,13 +48,34 @@ export default {
     <Icon icon="mdi:plus" />
   </BaseButton>
   <!--the Todo modal-->
-  <AppModal v-show="showTodoModal" @close-modal="showTodoModal = false" title="Add New Todo">
+  <AppModal
+    v-show="showTodoModal"
+    @close-modal="showTodoModal = false"
+    title="Add New Todo"
+  >
     <template #content>
       <form action="" @click="addNewTodo">
-        <BaseTextInput label="" type="text" placeholder="Todo name" :model="addTodo.name" class="field" />
-        <BaseTextInput placeholder=" Todo description" label="" :model="addTodo.description" class="field" />
-      
-        <BaseTextInput placeholder="github url" label="" type="datetime-local" :model="addTodo.description" class="field" />
+        <BaseTextInput
+          label=""
+          type="text"
+          placeholder="Todo name"
+          :model="addTodo.name"
+          class="field"
+        />
+        <BaseTextInput
+          placeholder=" Todo description"
+          label=""
+          :model="addTodo.description"
+          class="field"
+        />
+
+        <BaseTextInput
+          placeholder="github url"
+          label=""
+          type="datetime-local"
+          :model="addTodo.description"
+          class="field"
+        />
         <BaseButton text="add Todo" class="field" />
       </form>
     </template>

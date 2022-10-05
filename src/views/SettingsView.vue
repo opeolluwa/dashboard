@@ -11,6 +11,4 @@ export default {
   <AppNetworkError />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

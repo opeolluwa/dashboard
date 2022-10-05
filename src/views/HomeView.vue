@@ -10,7 +10,7 @@ export default {
   components: {
     AppCard,
     Quotes,
-    AppListItem
+    AppListItem,
   },
   data: () => ({
     showModal: false,
@@ -28,17 +28,11 @@ export default {
 
   <!--analytics overview-->
   <div class="analytics-overview">
-    <AppListItem>
-      234
-    </AppListItem>
+    <AppListItem> 234 </AppListItem>
 
-    <AppListItem>
-      234
-    </AppListItem>
+    <AppListItem> 234 </AppListItem>
 
-    <AppListItem>
-      234
-    </AppListItem>
+    <AppListItem> 234 </AppListItem>
   </div>
   <!--quotes and analytics header-->
   <div id="header">
@@ -46,9 +40,6 @@ export default {
       <Quotes :duration="120" />
     </AppCard>
   </div>
-
-
-
 </template>
 
 <style scoped>
@@ -60,7 +51,6 @@ export default {
 }
 
 .analytics-overview {
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
@@ -69,7 +59,7 @@ export default {
   display: none;
 }
 
-.analytics-overview>div {
+.analytics-overview > div {
   border-radius: 5px;
   min-height: 75px;
 }
@@ -88,7 +78,6 @@ export default {
 
 /**--------------mobile screen navigation---------- */
 @media screen and (max-width: 768px) {
-
   #header {
     grid-template-columns: repeat(1, 1fr);
     margin-bottom: 45px;
@@ -100,7 +89,7 @@ export default {
     display: none;
   }
 
-  .analytics-overview>div {
+  .analytics-overview > div {
     min-height: 40px;
   }
 }

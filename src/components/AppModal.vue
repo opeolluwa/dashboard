@@ -22,7 +22,7 @@
     *</Modal>
     -->
   <div class="modal-overlay">
-  <!-- TODO: fixme <div class="modal-overlay" @click="$emit('close-modal')"> -->
+    <!-- TODO: fixme <div class="modal-overlay" @click="$emit('close-modal')"> -->
 
     <div class="modal">
       <div class="close mobile" @click="$emit('close-modal')">

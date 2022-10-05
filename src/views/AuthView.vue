@@ -26,8 +26,16 @@ export default defineComponent({
     },
     apiError: false,
   }),
- 
+
+  mounted() {
+    //check if the user is already logged in
+    /*  if (localStorage.getItem("token")) {
+       router.push("/dashboard");
+     } */
+  },
   methods: {
+    //prompt for app installation
+    //
     async login() {
       this.loading = true;
       this.disabled = true;
@@ -102,14 +110,10 @@ export default defineComponent({
               v-show="loading"
             />
           </BaseButton>
-         
         </form>
 
         <!--custom install script-->
         <!-- Install button, hidden by default -->
-        <div id="installContainer" class="hidden">
-          <button id="butInstall" type="button">Install</button>
-        </div>
       </div>
     </div>
   </main>
