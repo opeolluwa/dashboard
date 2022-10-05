@@ -3,11 +3,11 @@
     "short_name": "nitride",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#101010",
+    "background_color": "#ffffff",
     "lang": "en",
     "scope": "/",
     "description": "an admin dashboard built on vue, Rust, Typescript and Postgres",
-    "theme_color": "#101010",
+    "theme_color": "#ffffff",
     "icons": [
         {
             "src": "favicon/android-chrome-192x192.png",
