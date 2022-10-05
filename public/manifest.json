@@ -29,12 +29,6 @@
             "sizes": "16x16",
             "type": "image/png"
         },
-        {
-            "src": "favicon/icon-2x72.png",
-            "sizes": "72x72",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
           {
             "src": "favicon/icon-72x72.png",
             "sizes": "72x72",
