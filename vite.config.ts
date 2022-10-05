@@ -26,7 +26,7 @@ export default defineConfig({
         description:
           "an admin dashboard built on vue, Rust, Typescript and Postgres",
         theme_color: "#ffffff",
-        /*  "icons": [
+          "icons": [
           {
             "src": "src/assets/favicon/android-chrome-192x192.png",
             "sizes": "192x192",
@@ -43,8 +43,8 @@ export default defineConfig({
             "type": "image/png",
             "purpose": "any maskable"
           }
-        ], */
-        icons: [
+        ], 
+       /*  icons: [
           {
             src: "icons/icon-72x72.png",
             sizes: "72x72",
@@ -93,7 +93,7 @@ export default defineConfig({
             type: "image/png",
             purpose: "maskable any",
           },
-        ],
+        ], */
         prefer_related_applications: false,
         orientation: "portrait",
       },

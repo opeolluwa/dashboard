@@ -5,7 +5,8 @@ import BaseTextInput from "@/components/BaseTextInput.vue";
 import { Icon } from "@iconify/vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
 import { defineComponent } from "vue";
-export default {
+import axios from "axios";
+export default defineComponent({
   name: "TodoView",
   components: {
     BaseButton,
@@ -16,7 +17,7 @@ export default {
   },
   data: () => ({
     showTodoModal: false,
-    addTodo: {
+    todo: {
       name: "",
       description: "",
       url: "",
@@ -25,7 +26,20 @@ export default {
       technologies: "",
     },
   }),
-};
+  methods: {
+    async createTodo() {
+      try {
+        const { data: response } = await axios.post("/todo", this.todo);
+        if (response.success) {
+          //TODO this.$store.dispatch("todo/getTodos");
+          this.showTodoModal = false;
+        }
+      } catch (error: any) {
+        console.log(error);
+      }
+    },
+  },
+});
 </script>
 
 <template>
@@ -54,18 +68,18 @@ export default {
     title="Add New Todo"
   >
     <template #content>
-      <form action="" @click="addNewTodo">
+      <form action="" @submit.prevent="createTodo">
         <BaseTextInput
           label=""
           type="text"
           placeholder="Todo name"
-          :model="addTodo.name"
+          :model="todo.name"
           class="field"
         />
         <BaseTextInput
           placeholder=" Todo description"
           label=""
-          :model="addTodo.description"
+          :model="todo.description"
           class="field"
         />
 
@@ -73,7 +87,7 @@ export default {
           placeholder="github url"
           label=""
           type="datetime-local"
-          :model="addTodo.description"
+          :model="todo.description"
           class="field"
         />
         <BaseButton text="add Todo" class="field" />

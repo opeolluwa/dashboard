@@ -10,13 +10,18 @@ export default defineComponent({
       required: true,
       default: "404",
     },
+    icon: {
+      type: String,
+      required: true,
+      default: "mdi:plus",
+    },
   },
 });
 </script>
 
 <template>
   <RouterLink :to="{ name: route }" class="fab">
-    <Icon icon="mdi:plus" />
+    <Icon :icon="icon" />
   </RouterLink>
 </template>
 

@@ -47,7 +47,6 @@ import BaseTextInput from "@/components/BaseTextInput.vue";
 import BaseTextarea from "@/components/BaseTextarea.vue";
 import axios from "axios";
 import { Icon } from "@iconify/vue";
-import IconCommunity from "@/components/icons/IconCommunity.vue";
 export default defineComponent({
   name: "CreateEmailView",
   components: {
@@ -55,7 +54,6 @@ export default defineComponent({
     BaseTextInput,
     BaseTextarea,
     Icon,
-    IconCommunity,
   },
   data: () => ({
     newEmail: {
@@ -72,7 +70,10 @@ export default defineComponent({
         ...this.newEmail,
       };
       console.log(payload);
-      // const response = await axios.post("http://localhost:3000/emails", payload);
+      const response = await axios.post(
+        "http://localhost:3000/emails",
+        payload
+      );
     },
   },
 });

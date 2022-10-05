@@ -1,6 +1,6 @@
 <script lang="ts">
 import EmailItem from "@/components/EmailItem.vue";
-import NewEmail from "@/components/AppChat.vue";
+import NewEmail from "@/components/AppFab.vue";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "EmailView",
@@ -23,7 +23,7 @@ export default defineComponent({
   />
 
   <!--add new email fab-->
-  <Fab route="new-email" />
+  <Fab route="new-email" icon="mdi:email-plus-outline" />
 </template>
 
 <style scoped></style>
