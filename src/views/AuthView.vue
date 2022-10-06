@@ -2,7 +2,7 @@
 import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
-import { HollowDotsSpinner } from "epic-spinners";
+import Spinner from "@/components/AppLoader.vue"
 import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from 'pinia'
 import router from "@/router";
@@ -11,7 +11,7 @@ export default defineComponent({
   components: {
     BaseTextInput: BaseTextInputVue,
     BaseButton: BaseButtonVue,
-    HollowDotsSpinner,
+    Spinner,
   },
   data: () => ({
     form: {
@@ -77,7 +77,7 @@ export default defineComponent({
           <!--form field submit-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Login</span>
-            <HollowDotsSpinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+            <Spinner  :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
         </form>
 
