@@ -37,10 +37,7 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <DashboardSidebar
-      v-show="showSidebar"
-      @close-sidebar="showSidebar = false"
-    />
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
     <main>
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
       <div>
@@ -62,6 +59,7 @@ export default defineComponent({
   grid-template-areas: "sidebar content";
   column-gap: 0px;
   height: 100vh;
+  /* overflow-y: scroll; */
 }
 
 nav {
@@ -80,7 +78,7 @@ main header {
   grid-area: header;
 }
 
-main > div {
+main>div {
   grid-area: view;
   background-color: #f9f9f9;
   height: 100vh !important;
@@ -90,7 +88,7 @@ main > div {
 @media screen and (max-width: 768px) {
   .container {
     display: unset;
-    /* position: relative; */
+ 
   }
 
   nav {
@@ -108,13 +106,14 @@ main > div {
 
   main {
     height: unset;
+    overflow-y: scroll;
   }
 
   main header {
     height: unset;
   }
 
-  main > div {
+  main>div {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;

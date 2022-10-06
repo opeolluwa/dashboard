@@ -22,9 +22,10 @@ export default {
 <template>
   <!--greetings-->
   <div class="d-sm-none">
-    <h3>Hi there! 👋</h3>
+    <h3>Hi Opeoluwa! 😊 </h3>
     <small>{{ greetings }}</small>
   </div>
+
 
   <!--analytics overview-->
   <div class="analytics-overview">
@@ -59,7 +60,7 @@ export default {
   display: none;
 }
 
-.analytics-overview > div {
+.analytics-overview>div {
   border-radius: 5px;
   min-height: 75px;
 }
@@ -89,7 +90,7 @@ export default {
     display: none;
   }
 
-  .analytics-overview > div {
+  .analytics-overview>div {
     min-height: 40px;
   }
 }

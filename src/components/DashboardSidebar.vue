@@ -3,6 +3,8 @@ import { Icon } from "@iconify/vue";
 import BaseButton from "./BaseButton.vue";
 import router from "@/router";
 import { defineComponent } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { mapActions } from "pinia";
 export default defineComponent({
   name: "AppNavigation",
   components: {
@@ -13,9 +15,12 @@ export default defineComponent({
     showMobileMenu: true,
   }),
   methods: {
+    //get the logout action from the store
+    ...mapActions(useAuthStore, ["logoutRequest"]),
     logout() {
+      //exec the call to the store mapped logout action
       router.push({ name: "auth" });
-      // this.$store.dispatch('logout');
+      this.logoutRequest();
     },
     closeSidebar() {
       /**
@@ -36,51 +41,27 @@ export default defineComponent({
 <template>
   <nav>
     <div>
-      <router-link
-        class="link-item"
-        :to="{ name: 'home' }"
-        @click="closeSidebar"
-      >
+      <router-link class="link-item" :to="{ name: 'home' }" @click="closeSidebar">
         <Icon icon="mdi:home-variant-outline" /> Home
       </router-link>
 
-      <router-link
-        class="link-item"
-        :to="{ name: 'emails' }"
-        @click="closeSidebar"
-      >
+      <router-link class="link-item" :to="{ name: 'emails' }" @click="closeSidebar">
         <Icon icon="mdi:email-outline" /> Emails
       </router-link>
 
-      <router-link
-        class="link-item"
-        :to="{ name: 'projects' }"
-        @click="closeSidebar"
-      >
+      <router-link class="link-item" :to="{ name: 'projects' }" @click="closeSidebar">
         <Icon icon="mdi:lightbulb-on-30" /> Projects
       </router-link>
 
-      <router-link
-        class="link-item"
-        :to="{ name: 'todo' }"
-        @click="closeSidebar"
-      >
+      <router-link class="link-item" :to="{ name: 'todo' }" @click="closeSidebar">
         <Icon icon="mdi:format-list-checks" /> Todo
       </router-link>
 
-      <router-link
-        class="link-item"
-        :to="{ name: 'notification' }"
-        @click="closeSidebar"
-      >
+      <router-link class="link-item" :to="{ name: 'notification' }" @click="closeSidebar">
         <Icon icon="mdi:bell-outline" /> Notifications
       </router-link>
 
-      <router-link
-        class="link-item"
-        :to="{ name: 'settings' }"
-        @click="closeSidebar"
-      >
+      <router-link class="link-item" :to="{ name: 'settings' }" @click="closeSidebar">
         <Icon icon="mdi:cog-outline" /> Settings
       </router-link>
     </div>

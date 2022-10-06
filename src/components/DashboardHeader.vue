@@ -1,20 +1,27 @@
 <script lang="ts">
+import { defineComponent } from "vue";
 import greetings from "./greetings";
 import { Icon } from "@iconify/vue";
-export default {
+import { useAuthStore } from "@/stores/auth";
+import { mapActions } from "pinia";
+export default defineComponent({
   name: "DashboardHeader",
   data: () => ({
     greetings,
+    //get the notification and messages from the store
+    notifications: [],
+    messages: [],
   }),
   components: {
     Icon,
   },
   methods: {
+    //control the nav bar visibility
     toggleSidebar() {
-      // this.$emit("toggleSidebar");
     },
+    ...mapActions(useAuthStore, ["logoutRequest"]),
   },
-};
+});
 </script>
 <template>
   <header class="view">
@@ -22,7 +29,7 @@ export default {
     <div class="header__nav__mobile">
       <Icon icon="mdi:menu" @click="$emit('open-sidebar')" />
       <h1>
-        <RouterLink :to="{ name: 'home' }">Opeoluwa</RouterLink>
+        <RouterLink :to="{ name: 'home' }">nitride</RouterLink>
       </h1>
     </div>
 
@@ -34,7 +41,8 @@ export default {
     <!--pictures and icons-->
     <div class="icons">
       <RouterLink :to="{ name: 'emails' }">
-        <Icon icon="mdi:email-outline" /><sup></sup>
+        <!--todo make this new messages-->
+        <Icon icon="mdi:email-outline" /><sup v-if="messages.length>=1"></sup>
       </RouterLink>
       <RouterLink :to="{ name: 'notification' }">
         <Icon icon="mdi:bell-outline" /> <sup></sup>
