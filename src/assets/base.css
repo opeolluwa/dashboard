@@ -145,3 +145,8 @@ svg {
   color: var(--light-text);
   text-transform: capitalize;
 }
+
+
+input[type=checkbox] {
+  accent-color: var(--primary);
+}
