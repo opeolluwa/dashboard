@@ -16,8 +16,19 @@ const app = createApp(App);
 //     onOfflineReady() { },
 // })
 
-export {};
+// Set the badge
+// const unreadCount = 24;
+// await navigator.setAppBadge(unreadCount).catch((error: Error) => {
+//   //Do something with the error.
+//   console.log("error setting badge", (error as Error).message)
+// });
+
+
+export { };
 declare global {
+  interface Navigator {
+    setAppBadge: Promise<void>
+  }
   interface Window {
     deferredPrompt: any;
   }

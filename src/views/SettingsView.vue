@@ -23,13 +23,13 @@ export default {
     <h2>Settings</h2>
     <div id="settings-control">
       <div>
-        <AppSwitch v-model="settings.darkMode" /> Turn on dark mode
+        <AppSwitch v-model="settings.darkMode" />  dark mode
       </div>
       <div>
-        <AppSwitch v-model="settings.showNetworkError" /> Turn on network error message
+        <AppSwitch v-model="settings.showNetworkError" />  network error message
       </div>
       <div>
-        <AppSwitch v-model="settings.allowPushNotifications" /> Turn on network push notifications
+        <AppSwitch v-model="settings.allowPushNotifications" />  allow push notifications
       </div>
     </div>
   </div>
