@@ -64,13 +64,9 @@ export default {
 }
 
 .form-field textarea::placeholder {
-  display: inline-block;
-  letter-spacing: 1.25px;
   font-size: 15px;
   font-weight: 400;
   line-height: 21px;
-  letter-spacing: 0em;
-  text-align: left;
 }
 
 .form-field textarea:hover,

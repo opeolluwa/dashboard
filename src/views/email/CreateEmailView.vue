@@ -32,9 +32,6 @@
         />
         <!--send button-->
         <BaseButton text="send message">
-          <!-- <Icon icon="mdi:home" /> -->
-          <Icon icon="mdi:send-circle-outline" />
-          <!-- <IconCommunity /> -->
         </BaseButton>
       </div>
     </form>
@@ -46,14 +43,12 @@ import BaseButton from "@/components/BaseButton.vue";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 import BaseTextarea from "@/components/BaseTextarea.vue";
 import axios from "axios";
-import { Icon } from "@iconify/vue";
 export default defineComponent({
   name: "CreateEmailView",
   components: {
     BaseButton,
     BaseTextInput,
     BaseTextarea,
-    Icon,
   },
   data: () => ({
     newEmail: {
@@ -92,6 +87,7 @@ form label {
 
 form button {
   width: 100%;
+  background-color: var(--default-dark);
 }
 
 form textarea {
