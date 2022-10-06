@@ -70,7 +70,7 @@ const options = {
   day_break: [
     "How is your day going",
     "How has the day being",
-    "A fresh motning, huh?",
+    "A fresh morning, huh?",
     "How's the weather?",
     "Howdy?",
   ],

@@ -36,7 +36,7 @@ body {
   --light-text: #fff;
   --dark-text: #101010;
   --primary: #7714f1;
-  /* --primary: #00cfe8; */
+  /* --primary: rgb(36, 170, 36); */
   --secondary: #707070;
   --tertiary: #7714f1;
   --warning: #fdca00;
