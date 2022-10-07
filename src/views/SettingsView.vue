@@ -2,18 +2,27 @@
 import AppNetworkError from "@/components/AppNetworkError.vue";
 import AppSwitch from '@vueform/toggle'
 import "@vueform/toggle/themes/default.css";
-export default {
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "SettingsView",
   components: { AppNetworkError, AppSwitch },
+  methods: {
+    toggleTheme() {
+      this.settings.theme = this.settings.theme == 'darkMode' ? '' : 'darkMode'; //toggles theme value
+      document.documentElement.setAttribute('data-theme', this.settings.theme); // sets the data-theme attribute
+      localStorage.setItem('theme', this.settings.theme); // stores theme value on local storage
+    }
+  },
   data: () => ({
     networkError: false,
     settings: {
       darkMode: true,
+      theme: "",
       showNetworkError: false,
       allowPushNotifications: false,
     }
   }),
-};
+});
 </script>
 
 <template>
@@ -23,13 +32,13 @@ export default {
     <h2>Settings</h2>
     <div id="settings-control">
       <div>
-        <AppSwitch v-model="settings.darkMode" />  dark mode
+        <AppSwitch v-model="settings.darkMode"  @click="toggleTheme"/> dark mode
       </div>
       <div>
-        <AppSwitch v-model="settings.showNetworkError" />  network error message
+        <AppSwitch v-model="settings.showNetworkError" /> network error message
       </div>
       <div>
-        <AppSwitch v-model="settings.allowPushNotifications" />  allow push notifications
+        <AppSwitch v-model="settings.allowPushNotifications" /> allow push notifications
       </div>
     </div>
   </div>
@@ -38,7 +47,7 @@ export default {
 
 <style scoped>
 :root {
---toggle-width: 3rem;
+  --toggle-width: 3rem;
   --toggle-height: 1.25rem;
   --toggle-border: 0.125rem;
   --toggle-font-size: 0.75rem;
@@ -60,6 +69,7 @@ export default {
   --toggle-handle-enabled: #ffffff;
   --toggle-handle-disabled: #f3f4f6;
 }
+
 #settings-control {
   margin-top: 20px;
   display: flex;

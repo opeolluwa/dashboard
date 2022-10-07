@@ -61,6 +61,10 @@ header {
   background-color: #fff;
 }
 
+header * {
+  background-color: transparent !important;
+}
+
 h1 a,
 h2 a {
   font-size: 20px;

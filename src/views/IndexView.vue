@@ -17,6 +17,12 @@ export default defineComponent({
     this.showSidebar = window.matchMedia("(max-width: 400px)").matches
       ? false
       : true;
+
+
+    // mounted() {
+    let localTheme = localStorage.getItem('theme'); //gets stored theme value if any
+    document.documentElement.setAttribute('data-theme', localTheme as string); // updates the data-theme attribute
+
   },
   methods: {
     isDeviceMobile() {
@@ -88,7 +94,7 @@ main>div {
 @media screen and (max-width: 768px) {
   .container {
     display: unset;
- 
+
   }
 
   nav {

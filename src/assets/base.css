@@ -8,10 +8,15 @@
   font-weight: normal;
 }
 
+/* #app main, */
+/* #app .view :not() { */
+  /* color: var(--text-color); */
+  /* background: var(--background-color) !important; */
+/* } */
+
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  /* background: var(--color-background); */
+
   /* transition: color 0.5s, background-color 0.5s; */
   /* line-height: 1.6; */
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
@@ -34,6 +39,7 @@ body {
   --default-yellow: #fdca00;
   --light-bg: #0d1023;
   --light-text: #fff;
+  --text-color: #101010;
   --dark-text: #101010;
   --primary: #7714f1;
   /* --primary: rgb(36, 170, 36); */
@@ -48,26 +54,33 @@ body {
 
 
   --toggle-width: 3rem;
-    --toggle-height: 1.25rem;
-    --toggle-border: 0.125rem;
-    --toggle-font-size: 0.75rem;
-    --toggle-duration: 150ms;
-    --toggle-bg-on: var(--primary);
-    --toggle-bg-off: #e5e7eb;
-    --toggle-bg-on-disabled: #8dabd8;
-    --toggle-bg-off-disabled: #e5e7eb;
-    --toggle-border-on: #aeb1b0;
-    --toggle-border-off: #e5e7eb;
-    --toggle-border-on-disabled: #d1d5db;
-    --toggle-border-off-disabled: #e5e7eb;
-    --toggle-ring-width: 3px;
-    --toggle-ring-color: transparent;
-    --toggle-text-on: #ffffff;
-    --toggle-text-off: hsl(217, 19%, 27%);
-    --toggle-text-on-disabled: #9ca3af;
-    --toggle-text-off-disabled: #9ca3af;
-    --toggle-handle-enabled: #ffffff;
-    --toggle-handle-disabled: #f3f4f6;
+  --toggle-height: 1.25rem;
+  --toggle-border: 0.125rem;
+  --toggle-font-size: 0.75rem;
+  --toggle-duration: 150ms;
+  --toggle-bg-on: var(--primary);
+  --toggle-bg-off: #e5e7eb;
+  --toggle-bg-on-disabled: #8dabd8;
+  --toggle-bg-off-disabled: #e5e7eb;
+  --toggle-border-on: #aeb1b0;
+  --toggle-border-off: #e5e7eb;
+  --toggle-border-on-disabled: #d1d5db;
+  --toggle-border-off-disabled: #e5e7eb;
+  --toggle-ring-width: 3px;
+  --toggle-ring-color: transparent;
+  --toggle-text-on: #ffffff;
+  --toggle-text-off: hsl(217, 19%, 27%);
+  --toggle-text-on-disabled: #9ca3af;
+  --toggle-text-off-disabled: #9ca3af;
+  --toggle-handle-enabled: #ffffff;
+  --toggle-handle-disabled: #f3f4f6;
+}
+
+
+[data-theme="darkMode"] {
+  /* Variables for dark mode */
+  --background-color: rgb(51, 48, 48);
+  --text-color: #f2f2f2!important;
 }
 
 h1,
@@ -110,7 +123,7 @@ button {
 }
 
 
-.d-none{
+.d-none {
   display: none;
 }
 
