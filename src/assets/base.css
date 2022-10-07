@@ -10,8 +10,8 @@
 
 /* #app main, */
 /* #app .view :not() { */
-  /* color: var(--text-color); */
-  /* background: var(--background-color) !important; */
+/* color: var(--text-color); */
+/* background: var(--background-color) !important; */
 /* } */
 
 body {
@@ -76,11 +76,15 @@ body {
   --toggle-handle-disabled: #f3f4f6;
 }
 
+/**give disabled button dark background**/
+button.disabled__button {
+  background-color: var(--default-dark);
+}
 
 [data-theme="darkMode"] {
   /* Variables for dark mode */
   --background-color: rgb(51, 48, 48);
-  --text-color: #f2f2f2!important;
+  --text-color: #f2f2f2 !important;
 }
 
 h1,

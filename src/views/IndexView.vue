@@ -18,11 +18,9 @@ export default defineComponent({
       ? false
       : true;
 
-
     // mounted() {
-    let localTheme = localStorage.getItem('theme'); //gets stored theme value if any
-    document.documentElement.setAttribute('data-theme', localTheme as string); // updates the data-theme attribute
-
+    let localTheme = localStorage.getItem("theme"); //gets stored theme value if any
+    document.documentElement.setAttribute("data-theme", localTheme as string); // updates the data-theme attribute
   },
   methods: {
     isDeviceMobile() {
@@ -43,7 +41,10 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
+    <DashboardSidebar
+      v-show="showSidebar"
+      @close-sidebar="showSidebar = false"
+    />
     <main>
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
       <div>
@@ -84,7 +85,7 @@ main header {
   grid-area: header;
 }
 
-main>div {
+main > div {
   grid-area: view;
   background-color: #f9f9f9;
   height: 100vh !important;
@@ -94,7 +95,6 @@ main>div {
 @media screen and (max-width: 768px) {
   .container {
     display: unset;
-
   }
 
   nav {
@@ -119,7 +119,7 @@ main>div {
     height: unset;
   }
 
-  main>div {
+  main > div {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;

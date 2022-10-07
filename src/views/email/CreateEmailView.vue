@@ -31,8 +31,7 @@
           v-model="newEmail.message"
         />
         <!--send button-->
-        <BaseButton text="send message">
-        </BaseButton>
+        <BaseButton text="send message"> </BaseButton>
       </div>
     </form>
   </div>

@@ -17,8 +17,7 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() {
-    },
+    toggleSidebar() {},
     ...mapActions(useAuthStore, ["logoutRequest"]),
   },
 });
@@ -42,7 +41,7 @@ export default defineComponent({
     <div class="icons">
       <RouterLink :to="{ name: 'emails' }">
         <!--todo make this new messages-->
-        <Icon icon="mdi:email-outline" /><sup v-if="messages.length>=1"></sup>
+        <Icon icon="mdi:email-outline" /><sup v-if="messages.length >= 1"></sup>
       </RouterLink>
       <RouterLink :to="{ name: 'notification' }">
         <Icon icon="mdi:bell-outline" /> <sup></sup>

@@ -5,12 +5,12 @@ import router from "@/router";
 export const useAuthStore = defineStore("authStore", {
   state: (): State => ({
     isLoading: false, // the request is in progress
-    // a user is authenticated when he have an email and bearer token 
+    // a user is authenticated when he have an email and bearer token
     isAuthenticated: false,
     userInformation: null,
     authorizationToken: localStorage.getItem("token") || null,
     apiResponseMsg: "",
-    apiError: false
+    apiError: false,
   }),
   getters: {
     getUser: (state) => state.userInformation,
@@ -35,14 +35,17 @@ export const useAuthStore = defineStore("authStore", {
       this.isLoading = true;
       try {
         //login the user and destructure the API response
-        const { data: response } = await axios.post("/auth/login", { email, password });
+        const { data: response } = await axios.post("/auth/login", {
+          email,
+          password,
+        });
         console.log({ token: response.data.token });
         if (response.success) {
           this.isLoading = false;
           //save the token to local storage,
           localStorage.setItem("token", response.data.token);
-          //redirect to the dashboard 
-          this.getUserInformation(response.data.token)
+          //redirect to the dashboard
+          this.getUserInformation(response.data.token);
         } else {
           this.isLoading = false;
           this.apiResponseMsg = response.message;
@@ -59,53 +62,51 @@ export const useAuthStore = defineStore("authStore", {
       }
     },
 
-    //use the provided token to get the user profile 
+    //use the provided token to get the user profile
     async getUserInformation(bearerToken: String) {
       try {
-        const { data: response } = await axios.get("/auth/me", { headers: { "Authorization": `Bearer ${bearerToken}` } });
-        //if the request is successful, store the data and 
+        const { data: response } = await axios.get("/auth/me", {
+          headers: { Authorization: `Bearer ${bearerToken}` },
+        });
+        //if the request is successful, store the data and
         if (response.success) {
           this.userInformation = response.data.user;
           localStorage.setItem("user", response.data.user);
           router.push({ name: "home" });
-        }
-        else {
-          //handle the error here 
-          console.log("something bad happened ")
+        } else {
+          //handle the error here
+          console.log("something bad happened ");
         }
         console.log({ response });
-
       } catch (error: any) {
-        console.log(error.response.data)
+        console.log(error.response.data);
       }
-
     },
     /**
      * to make a logout request,
      * remove the bearer token from the localhost
-     * send the token to the server 
+     * send the token to the server
      */
     logoutRequest() {
       // get the token
       const bearerToken = localStorage.getItem("token");
-      //remove the item from the local storage 
+      //remove the item from the local storage
       localStorage.removeItem("token");
 
-      //send the server to the server to be blacklisted 
+      //send the server to the server to be blacklisted
       //TODO
-    }
+    },
   },
-
 });
 
 //the state interface
 interface State {
-  isLoading: boolean,
+  isLoading: boolean;
   isAuthenticated: boolean;
-  userInformation: UserInformation | null,
-  authorizationToken: String | null,
-  apiResponseMsg: String | null,
-  apiError: boolean
+  userInformation: UserInformation | null;
+  authorizationToken: String | null;
+  apiResponseMsg: String | null;
+  apiError: boolean;
 }
 
 /**

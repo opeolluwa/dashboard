@@ -1,6 +1,6 @@
 <script lang="ts">
 import AppNetworkError from "@/components/AppNetworkError.vue";
-import AppSwitch from '@vueform/toggle'
+import AppSwitch from "@vueform/toggle";
 import "@vueform/toggle/themes/default.css";
 import { defineComponent } from "vue";
 export default defineComponent({
@@ -8,10 +8,10 @@ export default defineComponent({
   components: { AppNetworkError, AppSwitch },
   methods: {
     toggleTheme() {
-      this.settings.theme = this.settings.theme == 'darkMode' ? '' : 'darkMode'; //toggles theme value
-      document.documentElement.setAttribute('data-theme', this.settings.theme); // sets the data-theme attribute
-      localStorage.setItem('theme', this.settings.theme); // stores theme value on local storage
-    }
+      this.settings.theme = this.settings.theme == "darkMode" ? "" : "darkMode"; //toggles theme value
+      document.documentElement.setAttribute("data-theme", this.settings.theme); // sets the data-theme attribute
+      localStorage.setItem("theme", this.settings.theme); // stores theme value on local storage
+    },
   },
   data: () => ({
     networkError: false,
@@ -20,7 +20,7 @@ export default defineComponent({
       theme: "",
       showNetworkError: false,
       allowPushNotifications: false,
-    }
+    },
   }),
 });
 </script>
@@ -32,17 +32,17 @@ export default defineComponent({
     <h2>Settings</h2>
     <div id="settings-control">
       <div>
-        <AppSwitch v-model="settings.darkMode"  @click="toggleTheme"/> dark mode
+        <AppSwitch v-model="settings.darkMode" @click="toggleTheme" /> dark mode
       </div>
       <div>
         <AppSwitch v-model="settings.showNetworkError" /> network error message
       </div>
       <div>
-        <AppSwitch v-model="settings.allowPushNotifications" /> allow push notifications
+        <AppSwitch v-model="settings.allowPushNotifications" /> allow push
+        notifications
       </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>
@@ -77,7 +77,7 @@ export default defineComponent({
   gap: 20px;
 }
 
-#settings-control>div {
+#settings-control > div {
   display: flex;
   align-items: center;
   align-content: center;

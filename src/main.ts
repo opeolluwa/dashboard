@@ -23,11 +23,10 @@ const app = createApp(App);
 //   console.log("error setting badge", (error as Error).message)
 // });
 
-
-export { };
+export {};
 declare global {
   interface Navigator {
-    setAppBadge: Promise<void>
+    setAppBadge: Promise<void>;
   }
   interface Window {
     deferredPrompt: any;
