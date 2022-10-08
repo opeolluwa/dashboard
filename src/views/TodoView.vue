@@ -6,6 +6,12 @@ import { Icon } from "@iconify/vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
 import { defineComponent } from "vue";
 import axios from "axios";
+import { useAuthStore } from "@/stores/auth";
+import { useTodoStore, type TodoModel } from "@/stores/todo";
+import { mapActions, mapState } from "pinia";
+import AppListItem from "../components/AppListItem.vue";
+import AppTodoItem from "../components/AppTodoItem.vue";
+import AppNetworkError from "../components/AppNetworkError.vue";
 export default defineComponent({
   name: "TodoView",
   components: {
@@ -14,29 +20,47 @@ export default defineComponent({
     AppModal,
     BaseTextInput,
     AppEmptyState,
+    AppListItem,
+    AppTodoItem,
+    AppNetworkError
   },
   data: () => ({
     showTodoModal: false,
     todo: {
-      name: "",
+      title: "",
       description: "",
-      url: "",
-      image: "",
-      github: "",
-      technologies: "",
+      date: "",
     },
   }),
+  mounted() {
+    console.log("mounted");
+    // this.makeTodoRequest();
+  },
+  beforeMount() {
+    this.makeTodoRequest();
+    console.log("beforeMount");
+  },
   methods: {
-    async createTodo() {
-      try {
-        const { data: response } = await axios.post("/todo", this.todo);
-        if (response.success) {
-          //TODO this.$store.dispatch("todo/getTodos");
-          this.showTodoModal = false;
-        }
-      } catch (error: any) {
-        console.log(error);
-      }
+    //fetch the todos request from from the store
+    ...mapActions(useTodoStore, {
+      makeTodoRequest: "fetchAllTodo",
+      createTodo: "createTodo",
+    }),
+    async makeCreateTodo() {
+      this.createTodo({
+        title: this.todo.title,
+        description: this.todo.description,
+        // date: this.todo.date,
+      } as TodoModel);
+      this.showTodoModal = false;
+    },
+  },
+  computed: {
+    ...mapState(useTodoStore, ["todoArray", "isLoading"]),
+    ...mapState(useAuthStore, { bearerToken: "authorizationToken" }),
+    //disabled state is true if the isLoading is true
+    disabledState() {
+      return this.isLoading === true ? true : false;
     },
   },
 });
@@ -44,53 +68,44 @@ export default defineComponent({
 
 <template>
   <h2>Todo</h2>
+  <!--if no todo was found-->
+  <AppNetworkError v-if="!todoArray.length " />
+
+  <!--render the todo-->
+  <div v-else>
+    <!--render the todolist -->
+    <AppListItem v-for="todo in todoArray">
+      <AppTodoItem :todo="todo" />
+    </AppListItem>
+  </div>
+
+  <!--default components-->
   <div class="header">
-    <BaseButton
-      text="add new"
-      class="add-new-button"
-      @click="showTodoModal = true"
-    >
+    <BaseButton text="add new" class="add-new-button" @click="showTodoModal = true">
       <IconPlus />
     </BaseButton>
   </div>
 
   <!--add new Todo fab button-->
-  <AppEmptyState />
 
   <!--add new Todo fab button-->
   <BaseButton text="" class="add-new-fab" @click="showTodoModal = true">
     <Icon icon="mdi:plus" />
   </BaseButton>
   <!--the Todo modal-->
-  <AppModal
-    v-show="showTodoModal"
-    @close-modal="showTodoModal = false"
-    title="Add New Todo"
-  >
+  <AppModal v-show="showTodoModal" @close-modal="showTodoModal = false" title="Add New Todo">
     <template #content>
-      <form action="" @submit.prevent="createTodo">
-        <BaseTextInput
-          label=""
-          type="text"
-          placeholder="Todo name"
-          :model="todo.name"
-          class="field"
-        />
-        <BaseTextInput
-          placeholder=" Todo description"
-          label=""
-          :model="todo.description"
-          class="field"
-        />
+      <form action="" @submit.prevent="makeCreateTodo">
+        <BaseTextInput label="" type="text" placeholder="Todo name" v-model="todo.title" class="field" />
+        <BaseTextInput placeholder=" Todo description" label="" v-model="todo.description" class="field" />
 
-        <BaseTextInput
-          placeholder="github url"
-          label=""
-          type="datetime-local"
-          :model="todo.description"
-          class="field"
-        />
-        <BaseButton text="add Todo" class="field" />
+        <BaseTextInput placeholder="github url" label="" type="date" :model="todo.date" class="field" />
+
+        <!--form field submit, change color to black while waiting for response from server-->
+        <BaseButton text="" :disabled="disabledState" :class="[(disabledState == true) ? 'disabled__button' : '']">
+          <span v-show="!isLoading">Add Todo</span>
+          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+        </BaseButton>
       </form>
     </template>
   </AppModal>

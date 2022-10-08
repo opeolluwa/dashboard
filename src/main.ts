@@ -6,6 +6,7 @@ import router from "./router";
 
 import "./assets/main.css";
 import "./axios.config";
+import { useAuthStore } from "@/stores/auth";
 
 const app = createApp(App);
 
@@ -23,7 +24,7 @@ const app = createApp(App);
 //   console.log("error setting badge", (error as Error).message)
 // });
 
-export {};
+export { };
 declare global {
   interface Navigator {
     setAppBadge: Promise<void>;
@@ -37,3 +38,6 @@ app.use(createPinia());
 app.use(router);
 
 app.mount("#app");
+
+//export the auth store to make it accessible globally 
+export const authStore = useAuthStore();

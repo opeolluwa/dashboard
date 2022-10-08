@@ -182,5 +182,5 @@ greetings.other = _r(options.other);
 // set in message and export
 const message =
   greetings.occasion || greetings.time || greetings.day || greetings.other;
-console.log(message);
+// console.log(message);
 export default message as String;
