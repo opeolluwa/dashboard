@@ -3,7 +3,7 @@ import { defineComponent } from "vue";
 import greetings from "./greetings";
 import { Icon } from "@iconify/vue";
 import { useAuthStore } from "@/stores/auth";
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 export default defineComponent({
   name: "DashboardHeader",
   data: () => ({
@@ -17,8 +17,15 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() {},
+    toggleSidebar() { },
     ...mapActions(useAuthStore, ["logoutRequest"]),
+  },
+  computed: {
+    //get the user from the store
+    ...mapState(useAuthStore, { "user": "userInformation" }),
+    username() {
+      return this.user?.username || "";
+    }
   },
 });
 </script>
@@ -34,7 +41,7 @@ export default defineComponent({
 
     <!--greetings-->
     <div class="header__nav__desktop">
-      <h2>Hi Opeoluwa 😊</h2>
+      <h2>Hi <span style="text-transform: capitalize;">{{username}} </span> 😊</h2>
       <small>{{ greetings }}</small>
     </div>
     <!--pictures and icons-->

@@ -1,9 +1,13 @@
 <template>
-  <div class="network-error">
+  <div class="network__error">
     <img src="@/assets/img/illustration/network-error.svg" alt="empty state" />
     <div>
       <p v-html="message"></p>
     </div>
+    <!--refresh button-->
+    <BaseButton text="refresh" class="refresh__button" @click="refreshPage">
+      <Icon icon="mdi:refresh" />
+    </BaseButton>
   </div>
 </template>
 
@@ -24,11 +28,28 @@ export default defineComponent({
     BaseButton,
     Icon,
   },
+  methods: {
+    refreshPage() {
+      window.location.reload();
+    },
+  },
 });
 </script>
 
 <style scoped>
-.network-error {
+.refresh__button {
+  /* margin-top: 2rem; */
+  background-color: transparent;
+  border: 0.5px solid var(--default-dark);
+  color: var(--default-dark);
+  padding: 5px 12px;
+  width: fit-content;
+  box-shadow: 0px 3px 13px -7px rgba(0, 0, 0, 0.79);
+  -webkit-box-shadow: 0px 3px 13px -7px rgba(0, 0, 0, 0.79);
+  -moz-box-shadow: 0px 3px 13px -7px rgba(0, 0, 0, 0.79);
+}
+
+.network__error {
   display: flex;
   flex-direction: column;
   align-items: center;

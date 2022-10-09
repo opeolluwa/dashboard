@@ -7,7 +7,7 @@ export const useAuthStore = defineStore("authStore", {
     isLoading: false, // the request is in progress
     // a user is authenticated when he have an email and bearer token
     isAuthenticated: false,
-    userInformation: null,
+    userInformation: localStorage.getItem("user") as unknown as UserInformation || null,
     authorizationToken: localStorage.getItem("token") || null,
     apiResponseMsg: "",
     apiError: false,
@@ -74,12 +74,16 @@ export const useAuthStore = defineStore("authStore", {
           localStorage.setItem("user", response.data.user);
           router.push({ name: "home" });
         } else {
-          //handle the error here
+          //handle the error here bu going back to login page 
+          localStorage.removeItem("token")
+          router.push({ name: "auth" });
           console.log("something bad happened ");
         }
-        console.log({ response });
+        // console.log({ response });
       } catch (error: any) {
-        console.log(error.response.data);
+        console.log({ error: error.message });
+        console.log("something bad happened ");
+
       }
     },
     /**
@@ -89,12 +93,34 @@ export const useAuthStore = defineStore("authStore", {
      */
     logoutRequest() {
       // get the token
-      const bearerToken = localStorage.getItem("token");
+      // const bearerToken = localStorage.getItem("token");
       //remove the item from the local storage
       localStorage.removeItem("token");
-
+      router.push({ name: "auth" })
       //send the server to the server to be blacklisted
       //TODO
+    },
+
+    /**
+     * @function getRefreshToken
+     * @param {null} - takes no parameter
+     * @returns refresh token from the server and update the store
+     */
+    async getRefreshToken() {
+      // console.log("go new token")
+      try {
+        const { data: response } = await axios.get("/auth", {
+          headers: { Authorization: `Bearer ${this.authorizationToken}` },
+        });
+        //if the request is successful, store the data and
+        if (response.success) {
+          localStorage.setItem("token", response.data.bearerToken);
+        } else {
+          console.log("something bad happened ");
+        }
+      } catch (error: any) {
+        console.log("something bad happened ", error.message);
+      }
     },
   },
 });

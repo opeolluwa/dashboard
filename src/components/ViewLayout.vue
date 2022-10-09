@@ -13,8 +13,14 @@ export default {
 <style scoped>
 .view {
   position: relative;
-  padding-top: 50px;
+  padding-bottom: 75px;
+  /* padding-bottom: 120px; */
 }
+/**set top padding for first child element of view layout */
+.view > *:first-child {
+  padding-top: 75px;
+}
+
 .view,
 .view * {
   box-sizing: border-box;

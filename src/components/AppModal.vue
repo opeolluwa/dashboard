@@ -21,7 +21,7 @@
     *    </template>
     *</Modal>
     -->
-  <div class="modal-overlay">
+  <div class="modal__overlay">
     <!-- TODO: fixme <div class="modal-overlay" @click="$emit('close-modal')"> -->
 
     <div class="modal">
@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style scoped>
-.modal-overlay {
+.modal__overlay {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -99,6 +99,7 @@ export default {
   padding: 60px 0;
   border-radius: 20px;
   overflow-y: scroll;
+  border: 1px solid var(--border-color);
 }
 
 .close {

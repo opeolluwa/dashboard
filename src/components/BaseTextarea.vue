@@ -10,13 +10,20 @@
   <div class="form-field">
     <label :for="label">{{ label }}</label>
     <textarea
-      :type="type"
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"
-      :v-model="model"
+      :value="modelValue"
       rows="10"
       cols="35"
     ></textarea>
+    <!--  <textarea
+      :id="label"
+      :placeholder="'-- ' + placeholder + ' --'"
+      @input="updateModelValue"
+      :value="modelValue"
+      rows="10"
+      cols="35"
+    ></textarea> -->
   </div>
 </template>
 
@@ -32,10 +39,15 @@ export default {
       type: String,
       required: true,
     },
-    model: {
+    modelValue: {
       type: String,
       required: true,
     },
+  },
+  methods: {
+    /*  updateModelValue(event: any) {
+       this.$emit("update:modelValue", event.target.value);
+     }, */
   },
 };
 </script>

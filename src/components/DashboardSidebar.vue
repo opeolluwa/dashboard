@@ -19,7 +19,7 @@ export default defineComponent({
     ...mapActions(useAuthStore, ["logoutRequest"]),
     logout() {
       //exec the call to the store mapped logout action
-      router.push({ name: "auth" });
+      // router.push({ name: "auth" });
       this.logoutRequest();
     },
     closeSidebar() {

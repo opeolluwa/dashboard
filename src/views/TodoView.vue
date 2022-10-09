@@ -5,13 +5,16 @@ import BaseTextInput from "@/components/BaseTextInput.vue";
 import { Icon } from "@iconify/vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
 import { defineComponent } from "vue";
-import axios from "axios";
 import { useAuthStore } from "@/stores/auth";
-import { useTodoStore, type TodoModel } from "@/stores/todo";
+import {
+  useTodoStore,
+  type TodoInterface,
+  type FetchedTodoInterface,
+} from "@/stores/todo";
 import { mapActions, mapState } from "pinia";
-import AppListItem from "../components/AppListItem.vue";
 import AppTodoItem from "../components/AppTodoItem.vue";
 import AppNetworkError from "../components/AppNetworkError.vue";
+import Spinner from "@/components/AppLoader.vue";
 export default defineComponent({
   name: "TodoView",
   components: {
@@ -20,9 +23,9 @@ export default defineComponent({
     AppModal,
     BaseTextInput,
     AppEmptyState,
-    AppListItem,
     AppTodoItem,
-    AppNetworkError
+    AppNetworkError,
+    Spinner,
   },
   data: () => ({
     showTodoModal: false,
@@ -36,27 +39,33 @@ export default defineComponent({
     console.log("mounted");
     // this.makeTodoRequest();
   },
-  beforeMount() {
+  created() {
     this.makeTodoRequest();
-    console.log("beforeMount");
+    console.log("created hook");
   },
   methods: {
     //fetch the todos request from from the store
     ...mapActions(useTodoStore, {
       makeTodoRequest: "fetchAllTodo",
       createTodo: "createTodo",
+      deleteTodo: "deleteTodo",
     }),
     async makeCreateTodo() {
       this.createTodo({
         title: this.todo.title,
         description: this.todo.description,
         // date: this.todo.date,
-      } as TodoModel);
+      } as TodoInterface);
       this.showTodoModal = false;
     },
   },
   computed: {
-    ...mapState(useTodoStore, ["todoArray", "isLoading"]),
+    ...mapState(useTodoStore, [
+      "todoArray",
+      "isLoading",
+      "isFetchingTodoArray",
+      "errorFetchingTodo",
+    ]),
     ...mapState(useAuthStore, { bearerToken: "authorizationToken" }),
     //disabled state is true if the isLoading is true
     disabledState() {
@@ -68,20 +77,28 @@ export default defineComponent({
 
 <template>
   <h2>Todo</h2>
-  <!--if no todo was found-->
-  <AppNetworkError v-if="!todoArray.length " />
-
-  <!--render the todo-->
-  <div v-else>
-    <!--render the todolist -->
-    <AppListItem v-for="todo in todoArray">
-      <AppTodoItem :todo="todo" />
-    </AppListItem>
+  <!--show loader if fetching all todo-->
+  <div v-show="isFetchingTodoArray" class="fetching__todo">
+    <Spinner />
+    <p>fetching todo</p>
   </div>
-
+  <!--id there is an error fetching the todo -->
+  <AppNetworkError v-show="todoArray == null" />
+  <!--if no todo was found bu it's empty-->
+  <AppEmptyState v-if="todoArray?.length == 0" />
+  <!--render the todo list -->
+  <AppTodoItem
+    v-for="{ title, description, id } in todoArray"
+    :todo="{ title, description, id }"
+    @delete-todo="deleteTodo(id)"
+  />
   <!--default components-->
   <div class="header">
-    <BaseButton text="add new" class="add-new-button" @click="showTodoModal = true">
+    <BaseButton
+      text="add new"
+      class="add-new-button"
+      @click="showTodoModal = true"
+    >
       <IconPlus />
     </BaseButton>
   </div>
@@ -93,18 +110,49 @@ export default defineComponent({
     <Icon icon="mdi:plus" />
   </BaseButton>
   <!--the Todo modal-->
-  <AppModal v-show="showTodoModal" @close-modal="showTodoModal = false" title="Add New Todo">
+  <AppModal
+    v-show="showTodoModal"
+    @close-modal="showTodoModal = false"
+    title="Add New Todo"
+  >
     <template #content>
       <form action="" @submit.prevent="makeCreateTodo">
-        <BaseTextInput label="" type="text" placeholder="Todo name" v-model="todo.title" class="field" />
-        <BaseTextInput placeholder=" Todo description" label="" v-model="todo.description" class="field" />
+        <BaseTextInput
+          label="heading"
+          type="text"
+          placeholder="heading"
+          v-model="todo.title"
+          class="field"
+        />
+        <BaseTextInput
+          placeholder="description"
+          label="description"
+          v-model="todo.description"
+          class="field"
+        />
 
-        <BaseTextInput placeholder="github url" label="" type="date" :model="todo.date" class="field" />
+        <BaseTextInput
+          placeholder="github url"
+          label="due date"
+          type="date"
+          :model="todo.date"
+          class="field"
+        />
 
         <!--form field submit, change color to black while waiting for response from server-->
-        <BaseButton text="" :disabled="disabledState" :class="[(disabledState == true) ? 'disabled__button' : '']">
+        <BaseButton
+          text=""
+          type="submit"
+          :disabled="disabledState"
+          :class="[disabledState == true ? 'disabled__button' : '']"
+        >
           <span v-show="!isLoading">Add Todo</span>
-          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+          <Spinner
+            :animation-duration="1000"
+            :size="30"
+            :color="'#ffffff'"
+            v-show="isLoading"
+          />
         </BaseButton>
       </form>
     </template>
@@ -112,6 +160,14 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.fetching__todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 30vh;
+}
+
 .header {
   display: flex;
   flex-direction: flex-end;
@@ -152,6 +208,7 @@ form {
 
 .field {
   width: 100%;
+  text-align: left;
 }
 
 /**--------------------------smaller screens ----------------------------- */

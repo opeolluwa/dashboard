@@ -9,6 +9,7 @@ const router = createRouter({
       path: "/",
       name: "auth",
       component: AuthView,
+      alias:"/login"
     },
     {
       path: "/u",

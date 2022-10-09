@@ -2,10 +2,12 @@
 import AppCard from "@/components/AppCard.vue";
 import Quotes from "@/components/AppQuotes.vue";
 import greetings from "@/components/greetings";
-import { Bar } from "vue-chartjs";
+import { useAuthStore } from "@/stores/auth";
+import { mapState } from "pinia";
+import { defineComponent } from "vue";
 import AppListItem from "../components/AppListItem.vue";
 
-export default {
+export default defineComponent({
   name: "HomeView",
   components: {
     AppCard,
@@ -16,13 +18,20 @@ export default {
     showModal: false,
     greetings,
   }),
-};
+  computed: {
+    //get the user from the store
+    ...mapState(useAuthStore, { "user": "userInformation" }),
+    username() {
+      return this.user?.username || "";
+    }
+  }
+});
 </script>
 
 <template>
   <!--greetings-->
   <div class="d-sm-none">
-    <h3>Hi Opeoluwa! 😊</h3>
+    <h3>Hi <span style="text-transform: capitalize;">{{username}}! 😊 </span></h3>
     <small>{{ greetings }}</small>
   </div>
 

@@ -3,6 +3,8 @@ import DashboardSidebarVue from "@/components/DashboardSidebar.vue";
 import DashboardHeaderVue from "@/components/DashboardHeader.vue";
 import ViewLayoutVue from "@/components/ViewLayout.vue";
 import { defineComponent } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { mapActions, mapState } from "pinia";
 export default defineComponent({
   components: {
     DashboardSidebar: DashboardSidebarVue,
@@ -12,17 +14,57 @@ export default defineComponent({
   data: () => ({
     showSidebar: false,
   }),
-  computed: {},
+  /**
+   * before entering the route we check if the user is logged in
+   * to do this, try to get the token from the  local storage
+   * if token does not exists, redirect to login page
+   * else use the token to make request to the server, if the server return a valid response, enter this routes else redirect to login page
+   */
+  beforeRouteEnter(to, from, next) {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      next("/login");
+    } else {
+      next();
+    }
+  },
+
+  computed: {
+    ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
+  },
+  created() {
+    this.makeAuthRequest();
+  },
   mounted() {
     this.showSidebar = window.matchMedia("(max-width: 400px)").matches
       ? false
       : true;
 
-    // mounted() {
+    //the dark theme configuration
     let localTheme = localStorage.getItem("theme"); //gets stored theme value if any
     document.documentElement.setAttribute("data-theme", localTheme as string); // updates the data-theme attribute
+
+    //  * get the refresh token every 20 minutes
+    const refreshToken = () => {
+      this.refreshToken();
+    };
+    window.setInterval(refreshToken, 1000 * 20 * 60);
   },
   methods: {
+    ...mapActions(useAuthStore, {
+      getUser: "getUserInformation",
+      refreshToken: "getRefreshToken",
+    }),
+
+    /**
+     * @function makeAuthRequest - make request to the server to get the user information
+     * @returns {userInformation} - returns the user information
+     * @param {authorizationToken} - the authorization token
+     */
+    makeAuthRequest() {
+      const token = String(this.authorizationToken);
+      this.getUser(token);
+    },
     isDeviceMobile() {
       /**
        * use JavaScript to detect if the device is mobile via media query
@@ -41,10 +83,7 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <DashboardSidebar
-      v-show="showSidebar"
-      @close-sidebar="showSidebar = false"
-    />
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
     <main>
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
       <div>
@@ -85,7 +124,7 @@ main header {
   grid-area: header;
 }
 
-main > div {
+main>div {
   grid-area: view;
   background-color: #f9f9f9;
   height: 100vh !important;
@@ -119,7 +158,7 @@ main > div {
     height: unset;
   }
 
-  main > div {
+  main>div {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;
