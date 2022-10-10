@@ -25,7 +25,10 @@ export default defineComponent({
     if (!token) {
       next("/login");
     } else {
-      next();
+      next((vm) => {
+        vm.$route.path;
+        console.log({ "path": vm.$route.fullPath , to, from})
+      });
     }
   },
 

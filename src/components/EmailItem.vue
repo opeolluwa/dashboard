@@ -1,8 +1,8 @@
 <template>
-  <div class="email-item">
+  <div class="email__item">
     <input type="checkbox" name="select" class="" />
 
-    <div class="email-content">
+    <div class="email__content">
       <div class="title">
         {{ title }}
       </div>
@@ -10,7 +10,7 @@
         {{ content }}
       </span>
     </div>
-    <div class="email-controls">
+    <div class="email__controls">
       <Icon icon="mdi:star-outline" class="star-email" />
       <Icon icon="mdi:trash-can-outline" class="delete" />
       <Icon icon="mdi:dots-vertical" class="more-options" />
@@ -43,7 +43,7 @@ export default {
       // Set number of milliseconds for longPress
       var longPress = 1300;
 
-      var emailItems = document.getElementsByClassName('email-item');
+      var emailItems = document.getElementsByClassName('email__item');
       var listItem;
 
       for (const item of emailItems) {
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style>
-div.email-item {
+div.email__item {
   display: flex;
   align-items: center;
   text-align: center;
@@ -89,14 +89,14 @@ div.email-item {
   position: relative;
 }
 
-.email-item div.email-content {
+.email__item div.email__content {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   text-align: center;
 }
 
-div.email-item input {
+div.email__item input {
   margin-right: 0px;
   cursor: pointer;
   padding: 0;
@@ -104,7 +104,7 @@ div.email-item input {
   /* display: none; */
 }
 
-div.email-item div.title {
+div.email__item div.title {
   width: 150px;
   white-space: nowrap;
   overflow: hidden;
@@ -118,7 +118,7 @@ div.email-item div.title {
   text-align: left;
 }
 
-div.email-item span.content {
+div.email__item span.content {
   text-align: left;
   width: 400px;
   color: var(--secondary);
@@ -127,26 +127,26 @@ div.email-item span.content {
   text-overflow: ellipsis;
 }
 
-div.email-item div.title::first-letter {
+div.email__item div.title::first-letter {
   text-transform: capitalize;
   cursor: pointer;
 }
 
-div.email-item svg {
+div.email__item svg {
   align-self: flex-end;
   cursor: pointer;
   color: var(--secondary);
 }
 
-div.email-item svg.delete:hover {
+div.email__item svg.delete:hover {
   color: var(--default-red);
 }
 
-div.email-item svg.star-email:hover {
+div.email__item svg.star-email:hover {
   color: var(--default-yellow);
 }
 
-div.email-controls {
+div.email__controls {
   display: grid;
   grid-template-columns: repeat(3, 25px);
   column-gap: 5px;
@@ -155,19 +155,19 @@ div.email-controls {
 }
 
 @media screen and (max-width: 768px) {
-  div.email-item input {
+  div.email__item input {
     margin-right: 15px;
     /* width: 1rem; * */
   }
 
-  div.email-item {
+  div.email__item {
     column-gap: 5px;
     justify-content: space-between;
     justify-items: center;
     align-items: center;
   }
 
-  .email-item div.email-content {
+  .email__item div.email__content {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -176,7 +176,7 @@ div.email-controls {
     row-gap: 2px;
   }
 
-  div.email-item div.title {
+  div.email__item div.title {
     font-size: 13.5px;
     width: 170px;
     border: none;
@@ -184,25 +184,25 @@ div.email-controls {
     margin: 0;
   }
 
-  div.email-item span.content {
+  div.email__item span.content {
     width: 200px;
     font-size: 12.5px;
   }
 
-  div.email-item div.title::first-letter {
+  div.email__item div.title::first-letter {
     text-transform: capitalize;
     cursor: pointer;
   }
 
-  div.email-item div.email-controls {
+  div.email__item div.email__controls {
     position: static;
     right: 0;
     column-gap: 2px;
     font-size: 20px;
   }
 
-  div.email-item svg.more-options,
-  div.email-item svg.delete {
+  div.email__item svg.more-options,
+  div.email__item svg.delete {
     display: none;
   }
 }

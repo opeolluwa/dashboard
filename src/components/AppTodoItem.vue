@@ -9,35 +9,41 @@
         <Icon icon="mdi:close-circle-outline" @click="$emit('delete-todo')" />
       </div>
       <div>
-        <div class="todo__item__header">
+        <div class="todo__item__header trim__text">
           <div class="todo__item__header__title">
             <h3>{{ todo.title }}</h3>
           </div>
-          <div class="todo__item__header__actions">
-            <div class="todo__item__header__actions__edit">
-              <Icon icon="mdi:clipboard-edit-outline" />
-            </div>
-          </div>
+
         </div>
-        <div class="todo__item__content">
-          <p>{{ todo.description }}</p>
+        <div class="todo__item__content ">
+          <p class="trim__text">{{ todo.description }}</p>
         </div>
       </div>
+
+      <div class="todo__item__header__actions" v-show="isSelected">
+        <Icon icon="mdi:dots-vertical" />
+      </div>
     </div>
+
   </AppListItem>
+
 </template>
 
 <script lang="ts">
 // import type { defineComponent } from 'vue';
 import { Icon } from "@iconify/vue";
+import { defineComponent } from "vue";
 import AppListItem from "./AppListItem.vue";
+let isSelected = true;
 
-export default {
+export default defineComponent({
   name: "AppTodoItem",
   components: {
     Icon,
     AppListItem,
   },
+  data: () => ({
+  }),
   props: {
     todo: {
       type: Object,
@@ -48,23 +54,66 @@ export default {
       }),
     },
   },
-};
+
+  computed: {
+    // return ttru if element is long pressed 
+    isSelected(): boolean {
+      return isSelected;
+      // return htmlElement.classList.contains("is__selected") ? true : false;
+    }
+  },
+
+  mounted() {
+    // reference all the todo
+    const todoItems: any = document.getElementsByClassName("todo__item");
+    let delay: any;
+    const longPress = 1300;
+    // let isSelected = this.isSelected;
+    // loop through all the todo items and add key up and down event listeners
+    for (const item of todoItems) {
+      //mouse down
+      item.addEventListener("mousedown", function (e: any) {
+        delay = setTimeout(check, longPress);
+        function check() {
+          isSelected = false;
+          console.log("long press ", isSelected);
+          item.classList.add("is__selected");
+        }
+      });
+
+      //mouse up
+      item.addEventListener("mouseup", function (e: any) {
+        delay = setTimeout(check, longPress);
+        function check() {
+          console.log("long press");
+          item.classList.add("is__selected");
+        }
+      });
+    }
+
+  }
+});
 </script>
 
 <style scoped>
 .list__item {
-  border: 1px solid var(--border-color);
-  /* border-left: 1.5px solid  green ; */
-  /* border-bottom: 1.5px solid green; */
+  border-radius: 7.5px;
 }
+
+.is__selected {
+  display: block;
+}
+
 .todo__item {
   display: grid;
-  grid-template-columns: 24px auto;
+  grid-template-columns: 24px auto 24px;
   align-items: center;
   padding: 5px;
   padding-left: 15px;
   gap: 15px;
+
 }
+
 
 .todo__item__header__actions__delete {
   cursor: pointer;
@@ -73,6 +122,7 @@ export default {
 
 .todo__item__content {
   font-size: 14px;
+  width: 200px;
   color: var(--secondary);
 }
 
@@ -84,22 +134,24 @@ export default {
 
 .todo__item__header__title h3 {
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 3px;
+  font-family: "mulish";
+  font-weight: 600;
+  font-size: 15.5px;
+  width: 170px;
+}
+
+.todo__item__header__title h3::first-letter {
   text-transform: capitalize;
 }
 
-.todo__item__header__actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: 13px;
-  display: none;
-}
+
 
 .todo__item__content p {
-  /* margin-top: 10px; */
+  /* margin-top: 5px; */
   font-size: 14px;
+  line-height: 18px;
   color: var(--secondary);
 }
 
@@ -107,7 +159,7 @@ export default {
   text-transform: capitalize;
 }
 
-.todo__item__header__actions__edit {
+.todo__item__header__actions {
   cursor: pointer;
   color: var(--default-dark);
   margin-right: 10px;
