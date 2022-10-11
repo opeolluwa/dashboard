@@ -15,27 +15,44 @@
     <!--use this template if the text input style is password template -->
     <template v-if="isPassword">
       <div class="password__input__field">
-        <input :type="passwordField" :id="label" :placeholder="'-- ' + placeholder + ' --'" @input="updateModelValue"
-          :value="modelValue" />
+        <input
+          :type="passwordField"
+          :id="label"
+          :placeholder="'-- ' + placeholder + ' --'"
+          @input="updateModelValue"
+          :value="modelValue"
+        />
         <!--icon to hid and show password visibility-->
-        <Icon v-show="!isPasswordInput" icon="mdi:eye-off-outline" class="password__toggler"
-          @click=" togglePasswordVisibility" />
-        <Icon v-show="isPasswordInput" icon="mdi:eye-outline" class="password__toggler"
-          @click=" togglePasswordVisibility" />
-
+        <Icon
+          v-show="!isPasswordInput"
+          icon="mdi:eye-off-outline"
+          class="password__toggler"
+          @click="togglePasswordVisibility"
+        />
+        <Icon
+          v-show="isPasswordInput"
+          icon="mdi:eye-outline"
+          class="password__toggler"
+          @click="togglePasswordVisibility"
+        />
       </div>
     </template>
 
     <!--for other input types-->
     <template v-else>
-      <input :type="type" :id="label" :placeholder="'-- ' + placeholder + ' --'" @input="updateModelValue"
-        :value="modelValue" />
+      <input
+        :type="type"
+        :id="label"
+        :placeholder="'-- ' + placeholder + ' --'"
+        @input="updateModelValue"
+        :value="modelValue"
+      />
     </template>
   </div>
 </template>
 
 <script lang="ts">
-import { Icon } from "@iconify/vue"
+import { Icon } from "@iconify/vue";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "BaseTextInput",
@@ -43,7 +60,7 @@ export default defineComponent({
     Icon,
   },
   data: () => ({
-    isPasswordInput: true
+    isPasswordInput: true,
   }),
   props: {
     label: {
@@ -70,15 +87,16 @@ export default defineComponent({
     //change password visibility
     togglePasswordVisibility() {
       // get the password field
-      const passwordField = document?.querySelector(".password__toggler")?.previousElementSibling;
+      const passwordField =
+        document?.querySelector(".password__toggler")?.previousElementSibling;
       const inputFieldType = passwordField?.getAttribute("type");
 
       if (inputFieldType === "password") {
         passwordField?.setAttribute("type", "text");
-        this.isPasswordInput = false
+        this.isPasswordInput = false;
       } else {
         passwordField?.setAttribute("type", "password");
-        this.isPasswordInput = true
+        this.isPasswordInput = true;
         // this.passwordField = "password";
       }
       // console.log({ parentElement });
@@ -89,7 +107,7 @@ export default defineComponent({
     /**
      * decide if the input type is password
      * if true, render the password template
-     * else use text input template 
+     * else use text input template
      */
     isPassword(): boolean {
       return this.type.toLowerCase().trim() === "password";
@@ -99,8 +117,7 @@ export default defineComponent({
       // document.getElementById("myLI").parentElement.nodeName;
       return this.isPassword ? "password" : "text";
     },
-
-  }
+  },
 });
 </script>
 

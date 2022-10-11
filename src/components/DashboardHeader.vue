@@ -17,15 +17,15 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() { },
+    toggleSidebar() {},
     ...mapActions(useAuthStore, ["logoutRequest"]),
   },
   computed: {
     //get the user from the store
-    ...mapState(useAuthStore, { "user": "userInformation" }),
+    ...mapState(useAuthStore, { user: "userInformation" }),
     username() {
       return this.user?.username || "";
-    }
+    },
   },
 });
 </script>
@@ -41,7 +41,9 @@ export default defineComponent({
 
     <!--greetings-->
     <div class="header__nav__desktop">
-      <h2>Hi <span style="text-transform: capitalize;">{{username}} </span> 😊</h2>
+      <h2>
+        Hi <span style="text-transform: capitalize">{{ username }} </span> 😊
+      </h2>
       <small>{{ greetings }}</small>
     </div>
     <!--pictures and icons-->

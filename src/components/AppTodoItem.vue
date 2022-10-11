@@ -1,5 +1,5 @@
 <template>
-  <AppListItem>
+  <AppListItem :class="priority">
     <div class="todo__item">
       <!--delete icon 
             The delete icon will emit the delete event to the parent component,
@@ -13,9 +13,8 @@
           <div class="todo__item__header__title">
             <h3>{{ todo.title }}</h3>
           </div>
-
         </div>
-        <div class="todo__item__content ">
+        <div class="todo__item__content">
           <p class="trim__text">{{ todo.description }}</p>
         </div>
       </div>
@@ -24,9 +23,7 @@
         <Icon icon="mdi:dots-vertical" />
       </div>
     </div>
-
   </AppListItem>
-
 </template>
 
 <script lang="ts">
@@ -42,8 +39,7 @@ export default defineComponent({
     Icon,
     AppListItem,
   },
-  data: () => ({
-  }),
+  data: () => ({}),
   props: {
     todo: {
       type: Object,
@@ -51,16 +47,31 @@ export default defineComponent({
       default: () => ({
         title: "Todo title",
         description: "Todo description",
+        // priority: "urgent",
       }),
     },
   },
 
   computed: {
-    // return ttru if element is long pressed 
+    // return ttru if element is long pressed
     isSelected(): boolean {
       return isSelected;
       // return htmlElement.classList.contains("is__selected") ? true : false;
-    }
+    },
+    priority() {
+      const type = this.todo.priority.toLowerCase().trim();
+      if (type === "urgent") {
+        return "todo__item--urgent";
+      } else if (type === "delicate") {
+        return "todo__item--delicate";
+      } else if (type === "not-urgent") {
+        return "todo__item--not__urgent";
+      } else if (type === "delete") {
+        return "todo__item--delete";
+      } else {
+        return "todo__item--normal";
+      }
+    },
   },
 
   mounted() {
@@ -90,8 +101,7 @@ export default defineComponent({
         }
       });
     }
-
-  }
+  },
 });
 </script>
 
@@ -111,9 +121,32 @@ export default defineComponent({
   padding: 5px;
   padding-left: 15px;
   gap: 15px;
-
 }
 
+/**implement eisenhower matrix*/
+.todo__item--normal {
+  border: none;
+}
+
+.todo__item--urgent {
+  border-bottom: 2.5px solid var(--default-green);
+  border-right: 2.5px solid var(--default-green);
+}
+
+.todo__item--not__urgent {
+  border-bottom: 2.5px solid var(--default-orange);
+  border-right: 2.5px solid var(--default-orange);
+}
+
+.todo__item--delete {
+  border-bottom: 2.5px solid var(--default-red);
+  border-right: 2.5px solid var(--default-red);
+}
+
+.todo__item--delicate {
+  border-bottom: 2.5px solid var(--primary);
+  border-right: 2.5px solid var(--primary);
+}
 
 .todo__item__header__actions__delete {
   cursor: pointer;
@@ -145,8 +178,6 @@ export default defineComponent({
 .todo__item__header__title h3::first-letter {
   text-transform: capitalize;
 }
-
-
 
 .todo__item__content p {
   /* margin-top: 5px; */

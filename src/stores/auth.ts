@@ -7,7 +7,8 @@ export const useAuthStore = defineStore("authStore", {
     isLoading: false, // the request is in progress
     // a user is authenticated when he have an email and bearer token
     isAuthenticated: false,
-    userInformation: localStorage.getItem("user") as unknown as UserInformation || null,
+    userInformation:
+      (localStorage.getItem("user") as unknown as UserInformation) || null,
     authorizationToken: localStorage.getItem("token") || null,
     apiResponseMsg: "",
     apiError: false,
@@ -74,8 +75,8 @@ export const useAuthStore = defineStore("authStore", {
           localStorage.setItem("user", response.data.user);
           router.push({ name: "home" });
         } else {
-          //handle the error here bu going back to login page 
-          localStorage.removeItem("token")
+          //handle the error here bu going back to login page
+          localStorage.removeItem("token");
           router.push({ name: "auth" });
           console.log("something bad happened ");
         }
@@ -83,7 +84,6 @@ export const useAuthStore = defineStore("authStore", {
       } catch (error: any) {
         console.log({ error: error.message });
         console.log("something bad happened ");
-
       }
     },
     /**
@@ -96,7 +96,7 @@ export const useAuthStore = defineStore("authStore", {
       // const bearerToken = localStorage.getItem("token");
       //remove the item from the local storage
       localStorage.removeItem("token");
-      router.push({ name: "auth" })
+      router.push({ name: "auth" });
       //send the server to the server to be blacklisted
       //TODO
     },

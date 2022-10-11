@@ -52,7 +52,7 @@ export default defineComponent({
     //import the methods from store
     ...mapActions(useAuthStore, {
       makeLoginRequest: "loginRequest",
-      getUserInformation: "getUserInformation"
+      getUserInformation: "getUserInformation",
     }),
 
     //exec the login action coming from the store mapped actions
@@ -75,14 +75,34 @@ export default defineComponent({
         <small class="error"> {{ apiResponseMsg }}</small>
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
-          <BaseTextInput placeholder="email" label="email" v-model="form.email" type="email" class="field" />
+          <BaseTextInput
+            placeholder="email"
+            label="email"
+            v-model="form.email"
+            type="email"
+            class="field"
+          />
           <!--form field password-->
-          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
-            class="field" />
+          <BaseTextInput
+            placeholder="password"
+            type="password"
+            label="password"
+            v-model="form.password"
+            class="field"
+          />
           <!--form field submit, change color to black while waiting for response from server-->
-          <BaseButton text="" :disabled="disabledState" :class="[disabledState == true ? 'disabled__button' : '']">
+          <BaseButton
+            text=""
+            :disabled="disabledState"
+            :class="[disabledState == true ? 'disabled__button' : '']"
+          >
             <span v-show="!isLoading">Login</span>
-            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+            <Spinner
+              :animation-duration="1000"
+              :size="30"
+              :color="'#ffffff'"
+              v-show="isLoading"
+            />
           </BaseButton>
         </form>
 
@@ -128,13 +148,13 @@ main .container {
 }
 
 /**the background container */
-main .container>div:first-child {
+main .container > div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-main .container>div:last-child {
+main .container > div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -142,13 +162,13 @@ main .container>div:last-child {
   align-content: center;
 }
 
-main .container>div:last-child h1 {
+main .container > div:last-child h1 {
   margin-bottom: 5px;
   line-height: 64px;
   font-size: 48px;
 }
 
-main .container>div:last-child h1+small {
+main .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
 
@@ -172,11 +192,11 @@ button,
     padding: 0;
   }
 
-  main .container>div:first-child {
+  main .container > div:first-child {
     display: none;
   }
 
-  main .container>div:last-child {
+  main .container > div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -189,14 +209,14 @@ button,
     margin: 0 auto;
   }
 
-  main .container>div:last-child h1 {
+  main .container > div:last-child h1 {
     margin-bottom: 7.5px;
     line-height: 26px;
     font-size: 28px;
     text-align: center;
   }
 
-  main .container>div:last-child h1+small.error {
+  main .container > div:last-child h1 + small.error {
     margin-bottom: 35px;
   }
 
@@ -208,7 +228,7 @@ button,
     column-gap: 15px;
   }
 
-    .form__field,
+  .form__field,
   button {
     width: auto;
   }

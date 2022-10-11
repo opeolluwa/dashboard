@@ -27,7 +27,7 @@ export default defineComponent({
     } else {
       next((vm) => {
         vm.$route.path;
-        console.log({ "path": vm.$route.fullPath , to, from})
+        console.log({ path: vm.$route.fullPath, to, from });
       });
     }
   },
@@ -86,7 +86,10 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
+    <DashboardSidebar
+      v-show="showSidebar"
+      @close-sidebar="showSidebar = false"
+    />
     <main>
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
       <div>
@@ -127,7 +130,7 @@ main header {
   grid-area: header;
 }
 
-main>div {
+main > div {
   grid-area: view;
   background-color: #f9f9f9;
   height: 100vh !important;
@@ -161,7 +164,7 @@ main>div {
     height: unset;
   }
 
-  main>div {
+  main > div {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;

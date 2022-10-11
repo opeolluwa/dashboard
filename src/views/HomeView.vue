@@ -20,18 +20,20 @@ export default defineComponent({
   }),
   computed: {
     //get the user from the store
-    ...mapState(useAuthStore, { "user": "userInformation" }),
+    ...mapState(useAuthStore, { user: "userInformation" }),
     username() {
       return this.user?.username || "";
-    }
-  }
+    },
+  },
 });
 </script>
 
 <template>
   <!--greetings-->
   <div class="d-sm-none">
-    <h3>Hi <span style="text-transform: capitalize;">{{username}}! 😊 </span></h3>
+    <h3>
+      Hi <span style="text-transform: capitalize">{{ username }}! 😊 </span>
+    </h3>
     <small>{{ greetings }}</small>
   </div>
 

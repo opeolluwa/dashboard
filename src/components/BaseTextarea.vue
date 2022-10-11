@@ -93,7 +93,7 @@ export default {
     width: 100%;
   }
 
-    .form__field {
+  .form__field {
     margin-bottom: 35px;
     font-size: 14px;
   }
