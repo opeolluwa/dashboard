@@ -32,7 +32,8 @@ export default defineComponent({
      * once on the dashboard, make request for refresh token.
      */
     if (this.authorizationToken) {
-      router.push({ name: "home" });
+      this.getUserInformation(this.authorizationToken);
+      // router.push({ name: "home" });
     }
   },
   computed: {
@@ -51,6 +52,7 @@ export default defineComponent({
     //import the methods from store
     ...mapActions(useAuthStore, {
       makeLoginRequest: "loginRequest",
+      getUserInformation: "getUserInformation"
     }),
 
     //exec the login action coming from the store mapped actions
@@ -152,7 +154,7 @@ main .container>div:last-child h1+small {
 
 input,
 button,
-.form-field input,
+.form__field input,
 .field {
   width: 500px;
 }
@@ -206,7 +208,7 @@ button,
     column-gap: 15px;
   }
 
-  .form-field,
+    .form__field,
   button {
     width: auto;
   }

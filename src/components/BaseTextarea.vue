@@ -7,7 +7,7 @@
     Example usage:
     <BaseTexttextarea label="Name" type="text" v-model="name" />
   -->
-  <div class="form-field">
+  <div class="form__field">
     <label :for="label">{{ label }}</label>
     <textarea
       :id="label"
@@ -53,19 +53,19 @@ export default {
 </script>
 
 <style scoped>
-.form-field {
+.form__field {
   margin-bottom: 35px;
   font-size: 16px;
 }
 
-.form-field label {
+.form__field label {
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
   font-family: "Open Sans";
 }
 
-.form-field textarea {
+.form__field textarea {
   left: 0px;
   /* width: calc(100% - 100px); */
   object-fit: contain;
@@ -75,25 +75,25 @@ export default {
   border-radius: 5px;
 }
 
-.form-field textarea::placeholder {
+.form__field textarea::placeholder {
   font-size: 15px;
   font-weight: 400;
   line-height: 21px;
 }
 
-.form-field textarea:hover,
-.form-field textarea:focus {
+.form__field textarea:hover,
+.form__field textarea:focus {
   border: 1px solid var(--default-dark);
   transition: 0.5s border;
   outline: none;
 }
 
 @media screen and (max-width: 768px) {
-  .form-field textarea {
+  .form__field textarea {
     width: 100%;
   }
 
-  .form-field {
+    .form__field {
     margin-bottom: 35px;
     font-size: 14px;
   }

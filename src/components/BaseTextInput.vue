@@ -10,22 +10,41 @@
     Example usage:
     <BaseTextInput label="Name" type="text" v-model="name" />
   -->
-  <div class="form-field">
+  <div class="form__field">
     <label :for="label">{{ label }}</label>
-    <input
-      :type="type"
-      :id="label"
-      :placeholder="'-- ' + placeholder + ' --'"
-      @input="updateModelValue"
-      :value="modelValue"
-    />
+    <!--use this template if the text input style is password template -->
+    <template v-if="isPassword">
+      <div class="password__input__field">
+        <input :type="passwordField" :id="label" :placeholder="'-- ' + placeholder + ' --'" @input="updateModelValue"
+          :value="modelValue" />
+        <!--icon to hid and show password visibility-->
+        <Icon v-show="!isPasswordInput" icon="mdi:eye-off-outline" class="password__toggler"
+          @click=" togglePasswordVisibility" />
+        <Icon v-show="isPasswordInput" icon="mdi:eye-outline" class="password__toggler"
+          @click=" togglePasswordVisibility" />
+
+      </div>
+    </template>
+
+    <!--for other input types-->
+    <template v-else>
+      <input :type="type" :id="label" :placeholder="'-- ' + placeholder + ' --'" @input="updateModelValue"
+        :value="modelValue" />
+    </template>
   </div>
 </template>
 
 <script lang="ts">
+import { Icon } from "@iconify/vue"
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "BaseTextInput",
+  components: {
+    Icon,
+  },
+  data: () => ({
+    isPasswordInput: true
+  }),
   props: {
     label: {
       type: String,
@@ -48,24 +67,57 @@ export default defineComponent({
     updateModelValue(event: any) {
       this.$emit("update:modelValue", event.target.value);
     },
+    //change password visibility
+    togglePasswordVisibility() {
+      // get the password field
+      const passwordField = document?.querySelector(".password__toggler")?.previousElementSibling;
+      const inputFieldType = passwordField?.getAttribute("type");
+
+      if (inputFieldType === "password") {
+        passwordField?.setAttribute("type", "text");
+        this.isPasswordInput = false
+      } else {
+        passwordField?.setAttribute("type", "password");
+        this.isPasswordInput = true
+        // this.passwordField = "password";
+      }
+      // console.log({ parentElement });
+      // this.passwordField = this.passwordField === "password" ? "text" : "password";
+    },
   },
+  computed: {
+    /**
+     * decide if the input type is password
+     * if true, render the password template
+     * else use text input template 
+     */
+    isPassword(): boolean {
+      return this.type.toLowerCase().trim() === "password";
+    },
+    // password field has default value as password, then the  eye icon is clicked, it changed to text
+    passwordField(): string {
+      // document.getElementById("myLI").parentElement.nodeName;
+      return this.isPassword ? "password" : "text";
+    },
+
+  }
 });
 </script>
 
 <style>
-.form-field {
+.form__field {
   margin-bottom: 35px;
   font-size: 16px;
 }
 
-.form-field label {
+.form__field label {
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
   font-family: "Open Sans";
 }
 
-.form-field input {
+.form__field input {
   /* width: 500px; */
   width: 100%;
   height: 50px;
@@ -76,7 +128,7 @@ export default defineComponent({
   display: block;
 }
 
-.form-field input::placeholder {
+.form__field input::placeholder {
   display: inline-block;
   letter-spacing: 1.25px;
   font-size: 15px;
@@ -86,19 +138,35 @@ export default defineComponent({
   text-align: left;
 }
 
-.form-field input:hover,
-.form-field input:focus {
+.form__field input:hover,
+.form__field input:focus {
   border: 1px solid var(--default-dark);
   transition: 0.5s border;
   outline: none;
 }
 
+.form__field .password__input__field {
+  position: relative;
+}
+
+.form__field .password__input__field .password__toggler {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  display: flex;
+  transform: translateY(-50%);
+  justify-content: center;
+  align-items: center;
+  color: rgb(19, 18, 18);
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
-  .form-field input {
+  .form__field input {
     width: 100%;
   }
 
-  .form-field {
+  .form__field {
     margin-bottom: 35px;
     font-size: 14px;
   }
