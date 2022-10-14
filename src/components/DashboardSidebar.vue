@@ -163,7 +163,6 @@ nav .link-item:hover {
 @media screen and (max-width: 768px) {
   nav {
     padding: 65px 0;
-    /* min-height: 65vh; */
     height: auto;
   }
 

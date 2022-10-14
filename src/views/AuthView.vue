@@ -91,11 +91,7 @@ export default defineComponent({
             class="field"
           />
           <!--form field submit, change color to black while waiting for response from server-->
-          <BaseButton
-            text=""
-            :disabled="disabledState"
-            :class="[disabledState == true ? 'disabled__button' : '']"
-          >
+          <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Login</span>
             <Spinner
               :animation-duration="1000"

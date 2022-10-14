@@ -24,7 +24,7 @@ button {
 button:hover,
 button:focus {
   opacity: 0.75;
-  transition: 0.5s opacity;
+  /* transition: 0.5s opacity; */
   cursor: pointer;
 }
 

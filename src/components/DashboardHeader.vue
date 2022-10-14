@@ -64,9 +64,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 100px;
+  padding: 10px 100px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px;
 }
 
 header * {
@@ -132,7 +133,7 @@ sup {
 /**--------------------mobile devices styling------------------------ */
 @media screen and (max-width: 768px) {
   header {
-    padding: 15px 30px;
+    padding: 8px 30px;
     position: fixed;
     top: 0;
     left: 0;

@@ -5,6 +5,8 @@ import ViewLayoutVue from "@/components/ViewLayout.vue";
 import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
+import router from "@/router";
+import axios from "axios";
 export default defineComponent({
   components: {
     DashboardSidebar: DashboardSidebarVue,
@@ -21,15 +23,48 @@ export default defineComponent({
    * else use the token to make request to the server, if the server return a valid response, enter this routes else redirect to login page
    */
   beforeRouteEnter(to, from, next) {
+    // async function checkBearerTokenValidity() {
     const token = localStorage.getItem("token");
     if (!token) {
       next("/login");
     } else {
-      next((vm) => {
-        vm.$route.path;
-        console.log({ path: vm.$route.fullPath, to, from });
-      });
+      //try to get the user information from the server
+      try {
+        axios
+          .get("/auth/me", {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((severResponse) => {
+            const responseData = severResponse.data;
+            //if the request is successful, store the data and
+            /*  if (responseData.success) {
+            // this.userInformation = response.data.user;
+            localStorage.setItem("user", responseData.data.user);
+            router.push({ name: "home" });
+          } else {
+            //handle the error here bu going back to login page
+            localStorage.removeItem("token");
+            router.push({ name: "auth" });
+            console.log("something bad happened ");
+          } */
+            console.log(JSON.stringify(responseData));
+            if (responseData.success) {
+              next();
+            } else {
+              localStorage.removeItem("token");
+              router.push({ name: "auth" });
+              console.log("something bad happened ");
+            }
+          });
+
+        // console.log({ response });
+      } catch (error: any) {
+        console.log({ error: error.message });
+        console.log("something bad happened ");
+      }
     }
+    // }
+    // checkBearerTokenValidity();
   },
 
   computed: {
