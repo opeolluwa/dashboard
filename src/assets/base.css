@@ -25,6 +25,9 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  /* background-color: #020514!important; */
 }
 
 :root {
@@ -42,6 +45,7 @@ body {
   --text-color: #101010;
   --dark-text: #101010;
   --primary: #7714f1;
+  --primary: var(--default-dark);
   /* --primary: rgb(36, 170, 36); */
   --secondary: #707070;
   --tertiary: #7714f1;

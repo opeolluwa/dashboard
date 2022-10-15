@@ -12,7 +12,7 @@ button {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 18px;
-  background-color: var(--tertiary);
+  background-color: var(--primary);
   color: var(--light-text);
   text-transform: capitalize;
   display: flex;
