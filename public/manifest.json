@@ -1,12 +1,12 @@
 {
-    "name": "nitride",
-    "short_name": "nitride",
+    "name": "360 Devs",
+    "short_name": "360 Devs",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
+    "background_color": "#101010",
     "lang": "en",
     "scope": "/",
-    "description": "an admin dashboard built on vue, Rust, Typescript and Postgres",
+    "description": "An utility to help developers manage their emails, notes and tasks.",
     "theme_color": "#101010",
     "icons": [
         {

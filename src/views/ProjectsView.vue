@@ -28,7 +28,6 @@ export default {
 </script>
 
 <template>
-  <h2>Projects</h2>
   <!--empty state-->
   <AppEmptyState />
   <div class="header">

@@ -10,7 +10,6 @@ export default defineComponent({
 </script>
 
 <template>
-  <h2>Notification</h2>
   <AppNetworkError />
 </template>
 
