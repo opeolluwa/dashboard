@@ -17,7 +17,7 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() {},
+    toggleSidebar() { },
     ...mapActions(useAuthStore, ["logoutRequest"]),
   },
   computed: {
@@ -26,6 +26,11 @@ export default defineComponent({
     username() {
       return this.user?.username || "";
     },
+
+    // the current route name
+    currentRouteName() {
+      return this.$route.name || "";
+    }
   },
 });
 </script>
@@ -34,8 +39,8 @@ export default defineComponent({
     <!--navigation button for small devices go here-->
     <div class="header__nav__mobile">
       <Icon icon="mdi:menu" @click="$emit('open-sidebar')" />
-      <h1>
-        <RouterLink :to="{ name: 'home' }">nitride</RouterLink>
+      <h1 id="current__route">
+        <RouterLink :to="{ name: 'home' }">{{currentRouteName}}</RouterLink>
       </h1>
     </div>
 
@@ -66,8 +71,8 @@ header {
   justify-content: space-between;
   padding: 10px 100px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px;
+  background-color: var(--white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px -1px;
 }
 
 header * {
@@ -81,7 +86,17 @@ h2 a {
   font-family: "Bakbak One", cursive;
   line-height: 36px;
   text-decoration: none;
-  color: var(--light-text);
+  color: var(--default-dark);
+}
+
+#current__route {
+  font-size: 20px;
+  font-weight: 300;
+  font-family: mulish;
+  line-height: 36px;
+  text-decoration: none;
+  color: var(--default-dark);
+  text-transform: capitalize;
 }
 
 small {
@@ -139,8 +154,8 @@ sup {
     left: 0;
     z-index: 1200;
     width: 100%;
-    background-color: var(--primary);
-    color: var(--light-text);
+    background-color: #fff;
+    color: var(--default-dark);
   }
 
   /** hide desktop greeting */

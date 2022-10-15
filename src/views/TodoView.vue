@@ -76,7 +76,6 @@ export default defineComponent({
 </script>
 
 <template>
-  <h2>Todo</h2>
   <!--show loader if fetching all todo-->
   <div v-show="isFetchingTodoArray" class="fetching__todo">
     <Spinner />

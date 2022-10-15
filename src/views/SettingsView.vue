@@ -29,7 +29,6 @@ export default defineComponent({
   <AppNetworkError v-if="networkError" />
   <!---->
   <div v-else>
-    <h2>Settings</h2>
     <div id="settings-control">
       <div>
         <AppSwitch v-model="settings.darkMode" @click="toggleTheme" /> dark mode

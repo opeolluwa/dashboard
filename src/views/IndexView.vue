@@ -22,7 +22,7 @@ export default defineComponent({
    * if token does not exists, redirect to login page
    * else use the token to make request to the server, if the server return a valid response, enter this routes else redirect to login page
    */
-  beforeRouteEnter(to, from, next) {
+ /* beforeRouteEnter(to, from, next) {
     // async function checkBearerTokenValidity() {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -36,18 +36,7 @@ export default defineComponent({
           })
           .then((severResponse) => {
             const responseData = severResponse.data;
-            //if the request is successful, store the data and
-            /*  if (responseData.success) {
-            // this.userInformation = response.data.user;
-            localStorage.setItem("user", responseData.data.user);
-            router.push({ name: "home" });
-          } else {
-            //handle the error here bu going back to login page
-            localStorage.removeItem("token");
-            router.push({ name: "auth" });
-            console.log("something bad happened ");
-          } */
-            console.log(JSON.stringify(responseData));
+      
             if (responseData.success) {
               next();
             } else {
@@ -65,7 +54,7 @@ export default defineComponent({
     }
     // }
     // checkBearerTokenValidity();
-  },
+  },*/
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
