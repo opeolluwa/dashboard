@@ -40,7 +40,7 @@ export default defineComponent({
 .refresh__button {
   /* margin-top: 2rem; */
   background-color: transparent;
-  border: 0.5px solid var(--default-dark);
+  /* border: 0.5px solid var(--default-dark); */
   color: var(--default-dark);
   padding: 5px 12px;
   width: fit-content;
