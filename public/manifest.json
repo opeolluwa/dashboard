@@ -3,11 +3,11 @@
     "short_name": "360 Devs",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#101010",
+    "background_color": "#000",
     "lang": "en",
     "scope": "/",
     "description": "An utility to help developers manage their emails, notes and tasks.",
-    "theme_color": "#101010",
+    "theme_color": "#000",
     "icons": [
         {
             "src": "pwa/android-chrome-512x512.png",
