@@ -8,6 +8,10 @@
   font-weight: normal;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* #app main, */
 /* #app .view :not() { */
 /* color: var(--text-color); */
