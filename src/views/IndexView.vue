@@ -38,7 +38,12 @@ export default defineComponent({
             const responseData = severResponse.data;
 
             if (responseData.success) {
-              next();
+              next(()=>{
+                console.log("user is logged in ", from.name, to.name);
+                const desiredRoute = String(to.name);
+                router.push({ name: desiredRoute });
+              });
+            
             } else {
               localStorage.removeItem("token");
               router.push({ name: "auth" });

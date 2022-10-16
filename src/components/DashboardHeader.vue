@@ -71,7 +71,7 @@ header {
   justify-content: space-between;
   padding: 10px 100px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-  background-color: var(--white);
+
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px -1px;
 }
 
@@ -154,8 +154,8 @@ sup {
     left: 0;
     z-index: 1200;
     width: 100%;
-    background-color: #fff;
-    color: var(--default-dark);
+  background-color: var(--primary);
+    color: var(--white);
   }
 
   /** hide desktop greeting */
@@ -174,8 +174,13 @@ sup {
     font-family: "Bakbak One", cursive;
     line-height: 36px;
     margin-left: 10px;
+    color: var(--light-text);
   }
 
+  header  h1 a,
+ header   h2 a{
+color: var(--light-text);
+    }
   .header__nav__mobile svg {
     width: 24px;
     height: 24px;
