@@ -1,4 +1,4 @@
-name: Copy
+name: Update SSR User Interface
 on: push
 jobs:
   copy:
@@ -12,7 +12,7 @@ jobs:
         dst_path: /views/
         dst_owner: opeolluwa
         dst_repo_name: nitride
-        dst_branch: producrion
+        dst_branch: production
         src_branch: build
         username: opeolluwa
         commit_message: "updated views"
