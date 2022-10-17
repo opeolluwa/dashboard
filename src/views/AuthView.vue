@@ -5,7 +5,6 @@ import { defineComponent } from "vue";
 import Spinner from "@/components/AppLoader.vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
-import router from "@/router";
 export default defineComponent({
   name: "AuthView",
   components: {

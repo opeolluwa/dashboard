@@ -5,15 +5,10 @@
       <!-- <h1>Oops!</h1> -->
       <p v-html="message"></p>
     </div>
-    <!--  <BaseButton @click="goBack" class="d-none">
-            <Icon icon="mdi:chevron-left" /> Go Back
-        </BaseButton> -->
   </div>
 </template>
 
 <script lang="ts">
-import BaseButton from "./BaseButton.vue";
-import { Icon } from "@iconify/vue";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "AppEmptyState",
@@ -23,15 +18,7 @@ export default defineComponent({
       default: "No data found! They will be displayed once you add them",
     },
   },
-  components: {
-    BaseButton,
-    Icon,
-  },
-  methods: {
-    goBack() {
-      this.$router.back();
-    },
-  },
+ 
 });
 </script>
 

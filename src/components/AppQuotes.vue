@@ -2,7 +2,7 @@
 import quoteData from "./quote-data";
 import { defineComponent } from "vue";
 export default defineComponent({
-  name: "Quotes",
+  name: "QuotesComponent",
   data: () => ({
     // quoteData
   }),

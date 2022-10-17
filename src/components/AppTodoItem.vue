@@ -19,7 +19,11 @@
         </div>
       </div>
 
-      <div class="todo__item__header__actions" v-show="isSelected" @click="$emit('show-options')">
+      <div
+        class="todo__item__header__actions"
+        v-show="isSelected"
+        @click="$emit('show-options')"
+      >
         <Icon icon="mdi:dots-vertical" />
       </div>
     </div>
@@ -132,26 +136,26 @@ export default defineComponent({
 .todo__item--urgent {
   border-left: 2px solid var(--default-green);
   background-color: var(--default-green);
-  color: var(--default-white)
+  color: var(--default-white);
 }
 
 .todo__item--not__urgent {
   /* display: none; */
   background-color: var(--default-yellow);
   border-left: 2px solid var(--default-yellow);
-  color: var(--default-white)
+  color: var(--default-white);
 }
 
 .todo__item--delete {
   border-left: 2px solid var(--default-red);
   background-color: var(--default-red);
-  color: var(--default-white)
+  color: var(--default-white);
 }
 
 .todo__item--delicate {
   border-left: 2px solid var(--primary);
   background-color: var(--primary);
-  color: var(--default-white)
+  color: var(--default-white);
 }
 
 .todo__item__header__actions__delete {
@@ -163,7 +167,6 @@ export default defineComponent({
 .todo__item--delicate .todo__item__header__actions__delete,
 .todo__item--not__urgent .todo__item__header__actions__delete,
 .todo__item--urgent .todo__item__header__actions__delete {
-
   color: var(--default-dark);
 }
 

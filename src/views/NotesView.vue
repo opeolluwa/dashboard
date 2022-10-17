@@ -52,7 +52,7 @@ export default {
     title="Add New Project"
   >
     <template #content>
-      <form action="" @click="">
+      <form>
         <BaseTextInput
           label="name"
           type="text"

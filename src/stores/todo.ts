@@ -73,7 +73,8 @@ export const useTodoStore = defineStore("todoStore", {
          * make the request and updates the store on response
          */
         //convert priority to joint word, (not important -> "not-important")
-        const jointPriority = payload.priority.split(" ").join("-") || payload.priority;
+        const jointPriority =
+          payload.priority.split(" ").join("-") || payload.priority;
         const { data: response } = await axios.post(
           "/todo",
           { ...payload, priority: jointPriority },
@@ -86,7 +87,7 @@ export const useTodoStore = defineStore("todoStore", {
           payload.title = "";
           payload.description = "";
         }
-        console.log(JSON.stringify(response));
+        // console.log(JSON.stringify(response));
       } catch (error: any) {
         this.errorFetchingTodo = true;
         this.isLoading = false;
@@ -108,7 +109,7 @@ export const useTodoStore = defineStore("todoStore", {
         }
         console.log("the todo id is ", todoId);
         console.log(JSON.stringify(response));
-      } catch (error) { }
+      } catch (error) {}
     },
   },
 });
@@ -129,7 +130,7 @@ interface State {
 export interface TodoInterface {
   title: String;
   description: String;
-  priority: String
+  priority: String;
 }
 
 /**

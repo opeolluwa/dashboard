@@ -9,13 +9,7 @@
   -->
   <div class="form__field">
     <label :for="label">{{ label }}</label>
-    <textarea
-      :id="label"
-      :placeholder="'-- ' + placeholder + ' --'"
-      :value="modelValue"
-      rows="10"
-      cols="35"
-    ></textarea>
+    <textarea :id="label" :placeholder=" placeholder " :value="modelValue" rows="10" cols="35"></textarea>
     <!--  <textarea
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"

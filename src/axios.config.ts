@@ -1,16 +1,28 @@
 import axios from "axios";
-const baseUrl = import.meta.env.VITE_APP_URL;
+const BASE_URL = import.meta.env.VITE_APP_URL;
+// const BASE_URL = import.meta.env.VITE_ENVIRONMENT
+const NODE_ENV = import.meta.env.MODE;
 
-console.log({ baseUrl });
+/**
+ * if the VITE_APP_ENVIRONMENT is not equal to local,
+ * use the deployed url
+ * else use the base url
+ */
+console.log({ BASE_URL });
 axios.defaults.timeout = 12500;
-axios.defaults.baseURL = baseUrl;
+if (import.meta.env.VITE_APP_ENVIRONMENT == "development") {
+  axios.defaults.baseURL = "https://127.0.0.1:4835/api/v1";
+}
+else {
+  axios.defaults.baseURL = "https://nitride.onrender.com/api/v1"
+}
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   "token"
 )}`;
 
 console.log(
   JSON.stringify({
-    base_url: import.meta.env.PROD,
+    base_url: axios.defaults.baseURL,
     token: `Bearer ${localStorage.getItem("token")}`,
   })
 );

@@ -1,15 +1,14 @@
 <script lang="ts">
 import { Icon } from "@iconify/vue";
-import AppNetworkError from "@/components/AppNetworkError.vue";
 import AppSwitch from "@vueform/toggle";
 import "@vueform/toggle/themes/default.css";
 import { defineComponent } from "vue";
-import { mapActions, mapState } from "pinia";
+import { mapState } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 export default defineComponent({
   name: "SettingsView",
-  components: { AppNetworkError, AppSwitch, Icon, BaseTextInput },
+  components: { AppSwitch, Icon, BaseTextInput },
   methods: {
     toggleTheme() {
       this.settings.theme = this.settings.theme == "darkMode" ? "" : "darkMode"; //toggles theme value
