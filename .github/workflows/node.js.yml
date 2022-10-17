@@ -1,0 +1,35 @@
+name: Build and Push to Serv Content
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  serv_content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+
+      - name: Install
+        run: npm ci
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Push
+        uses: nicholasgriffintn/github-branch-deployment-action@0.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEPLOYMENT_GITHUB_TOKEN }}
+          BRANCH: production
+          FOLDER: dist
+          MESSAGE: 'Build: ({sha}) {msg}'
+          REPO: https://github.com/opeolluwa/nitride.git
