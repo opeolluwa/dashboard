@@ -1,6 +1,6 @@
 import axios from "axios";
 const BASE_URL = import.meta.env.VITE_APP_URL;
-// const BASE_URL = import.meta.enT
+// const BASE_URL = import.meta.env.VITE_ENVIRONMENT
 const NODE_ENV = import.meta.env.MODE;
 
 /**
@@ -10,10 +10,11 @@ const NODE_ENV = import.meta.env.MODE;
  */
 console.log({ BASE_URL });
 axios.defaults.timeout = 12500;
-if (NODE_ENV === "development" || !import.meta.env.PROD) {
-  axios.defaults.baseURL = BASE_URL;
-} else {
-  axios.defaults.baseURL = `/api/v1`;
+if (import.meta.env.VITE_APP_ENVIRONMENT == "development") {
+  axios.defaults.baseURL = "https://127.0.0.1:4835/api/v1";
+}
+else {
+  axios.defaults.baseURL = "https://nitride.onrender.com/api/v1"
 }
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   "token"
@@ -21,7 +22,7 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
 
 console.log(
   JSON.stringify({
-    base_url: import.meta.env.PROD,
+    base_url: axios.defaults.baseURL,
     token: `Bearer ${localStorage.getItem("token")}`,
   })
 );
