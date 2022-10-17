@@ -116,6 +116,7 @@ export default defineComponent({
             <option>delicate</option>
             <option>normal</option>
           </select>
+          <Icon icon="mdi:menu-down" class="select__arrow__down" />
         </div>
 
         <!--form field submit, change color to black while waiting for response from server-->
@@ -159,7 +160,23 @@ export default defineComponent({
   border-radius: 5px;
   height: 50px;
   font-size: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
+
+.select__form__field .select__arrow__down {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(19, 18, 18);
+  cursor: pointer;
+}
+
+
 
 .form__field {
   margin-bottom: 35px;
