@@ -1,0 +1,12 @@
+- name: Copy views to rest of SSR
+  uses: andstor/copycat-action@v3
+  with:
+    personal_token: ${{ secrets.PERSONAL_TOKEN }}
+    src_path: /.
+    dst_path: /views/
+    dst_owner: opeolluwa
+    dst_repo_name: nitride
+    src_branch: build
+    dst_branch: production
+    clean: true
+    commit_message: "Updated views"
