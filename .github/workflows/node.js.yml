@@ -25,8 +25,8 @@ jobs:
       - name: Push
         uses: nicholasgriffintn/github-branch-deployment-action@0.0.1
         env:
-          BRANCH: production
+          BRANCH: dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FOLDER: dist
           MESSAGE: 'Build: ({sha}) {msg}'
-          REPO: https://github.com/opeolluwa/nitride.git
+        
