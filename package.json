@@ -5,7 +5,7 @@
     "build": "run-p type-check build-only",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "build-only": "vite build",
-    "build:ssr": "vite build --outDir ../nitride/views  --emptyOutDir",
+    "build:ssr": "vite build --outDir views  --emptyOutDir",
     "dev": "vite",
     "preview": "vite preview --port 4173",
     "type-check": "vue-tsc --noEmit"
