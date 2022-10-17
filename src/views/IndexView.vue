@@ -58,7 +58,7 @@ export default defineComponent({
     }
     // }
     // checkBearerTokenValidity();
-  }, 
+  },
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),

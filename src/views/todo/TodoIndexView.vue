@@ -6,11 +6,7 @@ import { Icon } from "@iconify/vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
 import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
-import {
-  useTodoStore,
-  type TodoInterface,
-  type FetchedTodoInterface,
-} from "@/stores/todo";
+import { useTodoStore, type TodoInterface } from "@/stores/todo";
 import { mapActions, mapState } from "pinia";
 import AppTodoItem from "../../components/AppTodoItem.vue";
 import AppNetworkError from "../../components/AppNetworkError.vue";
@@ -53,7 +49,7 @@ export default defineComponent({
     }),
     async makeCreateTodo() {
       this.createTodo({
-        ...this.todo
+        ...this.todo,
         // date: this.todo.date,
       } as TodoInterface);
       this.showTodoModal = false;
@@ -86,7 +82,7 @@ export default defineComponent({
   <!--if no todo was found bu it's empty-->
   <AppEmptyState v-if="todoArray?.length == 0" />
   <!--render the todo list -->
-  <AppTodoItem v-for="{ title, description, id , priority} in todoArray" :todo="{ title, description, id, priority }"
+  <AppTodoItem v-for="{ title, description, id, priority } in todoArray" :todo="{ title, description, id, priority }"
     @delete-todo="deleteTodo(id)" />
   <!--default components-->
   <div class="header">
@@ -110,7 +106,7 @@ export default defineComponent({
 
         <BaseTextInput placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
 
-        <div class="form-field field">
+        <div class="select__form__field">
           <label for="priority">Priority</label>
           <select v-model="todo.priority">
             <option disabled value="">Please select priority</option>
@@ -119,7 +115,6 @@ export default defineComponent({
             <option>delete</option>
             <option>delicate</option>
             <option>normal</option>
-
           </select>
         </div>
 
@@ -135,6 +130,37 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.select__form__field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  text-align: left;
+  width: 100%;
+  gap: 0px;
+}
+
+.select__form__field label {
+  margin-bottom: 7.5px;
+  text-transform: capitalize;
+  font-family: "Open Sans";
+}
+
+.select__form__field select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0 1em 0 0;
+  cursor: pointer;
+  line-height: 21px;
+  border-radius: 8px;
+  padding: 7px 25px 7px 25px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  height: 50px;
+  font-size: 16px;
+}
+
 .form__field {
   margin-bottom: 35px;
   font-size: 16px;
