@@ -1,0 +1,19 @@
+name: Update SSR User Interface
+on: push
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copycat
+      uses: andstor/copycat-action@v3
+      with:
+        personal_token: ${{ secrets.GITHUB_TOKEN }}
+        src_path: /.
+        dst_path: /views/
+        dst_owner: opeolluwa
+        dst_repo_name: nitride
+        dst_branch: production
+        src_branch: build
+        username: opeolluwa
+        email: adefemiadeoye@yahoo.com
+        commit_message: "updated views"
