@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="todo__item__header__actions" v-show="isSelected">
+      <div class="todo__item__header__actions" v-show="isSelected" @click="$emit('show-options')">
         <Icon icon="mdi:dots-vertical" />
       </div>
     </div>
@@ -107,7 +107,8 @@ export default defineComponent({
 
 <style scoped>
 .list__item {
-  border-radius: 7.5px;
+  border-radius: 3px;
+  margin-bottom: 15px;
 }
 
 .is__selected {
@@ -129,28 +130,41 @@ export default defineComponent({
 }
 
 .todo__item--urgent {
-  border-bottom: 2.5px solid var(--default-green);
-  border-right: 2.5px solid var(--default-green);
+  border-left: 2px solid var(--default-green);
+  background-color: var(--default-green);
+  color: var(--default-white)
 }
 
 .todo__item--not__urgent {
-  border-bottom: 2.5px solid var(--default-orange);
-  border-right: 2.5px solid var(--default-orange);
+  /* display: none; */
+  background-color: var(--default-yellow);
+  border-left: 2px solid var(--default-yellow);
+  color: var(--default-white)
 }
 
 .todo__item--delete {
-  border-bottom: 2.5px solid var(--default-red);
-  border-right: 2.5px solid var(--default-red);
+  border-left: 2px solid var(--default-red);
+  background-color: var(--default-red);
+  color: var(--default-white)
 }
 
 .todo__item--delicate {
-  border-bottom: 2.5px solid var(--primary);
-  border-right: 2.5px solid var(--primary);
+  border-left: 2px solid var(--primary);
+  background-color: var(--primary);
+  color: var(--default-white)
 }
 
 .todo__item__header__actions__delete {
   cursor: pointer;
   color: var(--default-red);
+}
+
+.todo__item--delete .todo__item__header__actions__delete,
+.todo__item--delicate .todo__item__header__actions__delete,
+.todo__item--not__urgent .todo__item__header__actions__delete,
+.todo__item--urgent .todo__item__header__actions__delete {
+
+  color: var(--default-dark);
 }
 
 .todo__item__content {
@@ -184,6 +198,13 @@ export default defineComponent({
   font-size: 14px;
   line-height: 18px;
   color: var(--secondary);
+}
+
+.todo__item--delete p,
+.todo__item--delicate p,
+.todo__item--not__urgent p,
+.todo__item--urgent p {
+  color: var(--default-white);
 }
 
 .todo__item__content::first-letter {

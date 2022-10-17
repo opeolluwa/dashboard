@@ -54,18 +54,26 @@ export default defineComponent({
 
       <!---name and email-->
       <div id="user">
-        <h3>{{fullname}}</h3>
-        <small>{{email}}</small>
+        <h3>{{ fullname }}</h3>
+        <small>{{ email }}</small>
       </div>
     </div>
-
-
 
     <section>
       <h3>Account Information</h3>
       <BaseTextInput placeholder="fullname" label="fullname" />
-      <BaseTextInput placeholder="email" label="email" type="email" class="field" />
-      <BaseTextInput placeholder="email" label="email" type="email" class="field" />
+      <BaseTextInput
+        placeholder="email"
+        label="email"
+        type="email"
+        class="field"
+      />
+      <BaseTextInput
+        placeholder="email"
+        label="email"
+        type="email"
+        class="field"
+      />
     </section>
 
     <section>
@@ -85,7 +93,6 @@ export default defineComponent({
     <section>
       <h3>Security</h3>
     </section>
-
   </div>
 </template>
 
@@ -126,16 +133,16 @@ export default defineComponent({
 }
 
 #settings #user h3 {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: capitalize;
 }
 
 #settings small {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 400;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: lowercase;
   color: #9ca3af;
 }
@@ -170,7 +177,7 @@ export default defineComponent({
   display: none;
 }
 
-#settings-control>div {
+#settings-control > div {
   display: flex;
   align-items: center;
   align-content: center;

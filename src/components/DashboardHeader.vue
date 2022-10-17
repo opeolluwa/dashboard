@@ -17,7 +17,7 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() { },
+    toggleSidebar() {},
     ...mapActions(useAuthStore, ["logoutRequest"]),
   },
   computed: {
@@ -30,7 +30,7 @@ export default defineComponent({
     // the current route name
     currentRouteName() {
       return this.$route.name || "";
-    }
+    },
   },
 });
 </script>
@@ -40,7 +40,7 @@ export default defineComponent({
     <div class="header__nav__mobile">
       <Icon icon="mdi:menu" @click="$emit('open-sidebar')" />
       <h1 id="current__route">
-        <RouterLink :to="{ name: 'home' }">{{currentRouteName}}</RouterLink>
+        <RouterLink :to="{ name: 'home' }">{{ currentRouteName }}</RouterLink>
       </h1>
     </div>
 
@@ -154,7 +154,7 @@ sup {
     left: 0;
     z-index: 1200;
     width: 100%;
-  background-color: var(--primary);
+    background-color: var(--primary);
     color: var(--white);
   }
 
@@ -177,10 +177,10 @@ sup {
     color: var(--light-text);
   }
 
-  header  h1 a,
- header   h2 a{
-color: var(--light-text);
-    }
+  header h1 a,
+  header h2 a {
+    color: var(--light-text);
+  }
   .header__nav__mobile svg {
     width: 24px;
     height: 24px;

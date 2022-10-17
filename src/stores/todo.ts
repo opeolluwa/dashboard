@@ -72,9 +72,11 @@ export const useTodoStore = defineStore("todoStore", {
          * add the auth credentials to the payload
          * make the request and updates the store on response
          */
+        //convert priority to joint word, (not important -> "not-important")
+        const jointPriority = payload.priority.split(" ").join("-") || payload.priority;
         const { data: response } = await axios.post(
           "/todo",
-          { ...payload },
+          { ...payload, priority: jointPriority },
           { headers: { Authorization: `Bearer ${AUTH_TOKEN}` } }
         );
         if (response.success) {
@@ -106,7 +108,7 @@ export const useTodoStore = defineStore("todoStore", {
         }
         console.log("the todo id is ", todoId);
         console.log(JSON.stringify(response));
-      } catch (error) {}
+      } catch (error) { }
     },
   },
 });
@@ -127,6 +129,7 @@ interface State {
 export interface TodoInterface {
   title: String;
   description: String;
+  priority: String
 }
 
 /**
@@ -137,4 +140,5 @@ export interface TodoInterface {
  */
 export interface FetchedTodoInterface extends TodoInterface {
   id: String;
+  dateAdded: String | Date;
 }

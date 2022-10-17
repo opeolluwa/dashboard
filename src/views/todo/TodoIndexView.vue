@@ -12,8 +12,8 @@ import {
   type FetchedTodoInterface,
 } from "@/stores/todo";
 import { mapActions, mapState } from "pinia";
-import AppTodoItem from "../components/AppTodoItem.vue";
-import AppNetworkError from "../components/AppNetworkError.vue";
+import AppTodoItem from "../../components/AppTodoItem.vue";
+import AppNetworkError from "../../components/AppNetworkError.vue";
 import Spinner from "@/components/AppLoader.vue";
 export default defineComponent({
   name: "TodoView",
@@ -33,6 +33,7 @@ export default defineComponent({
       title: "",
       description: "",
       date: "",
+      priority: "",
     },
   }),
   mounted() {
@@ -52,8 +53,7 @@ export default defineComponent({
     }),
     async makeCreateTodo() {
       this.createTodo({
-        title: this.todo.title,
-        description: this.todo.description,
+        ...this.todo
         // date: this.todo.date,
       } as TodoInterface);
       this.showTodoModal = false;
@@ -86,18 +86,11 @@ export default defineComponent({
   <!--if no todo was found bu it's empty-->
   <AppEmptyState v-if="todoArray?.length == 0" />
   <!--render the todo list -->
-  <AppTodoItem
-    v-for="{ title, description, id } in todoArray"
-    :todo="{ title, description, id, priority: 'urgent' }"
-    @delete-todo="deleteTodo(id)"
-  />
+  <AppTodoItem v-for="{ title, description, id , priority} in todoArray" :todo="{ title, description, id, priority }"
+    @delete-todo="deleteTodo(id)" />
   <!--default components-->
   <div class="header">
-    <BaseButton
-      text="add new"
-      class="add-new-button"
-      @click="showTodoModal = true"
-    >
+    <BaseButton text="add new" class="add-new-button" @click="showTodoModal = true">
       <IconPlus />
     </BaseButton>
   </div>
@@ -109,49 +102,32 @@ export default defineComponent({
     <Icon icon="mdi:plus" />
   </BaseButton>
   <!--the Todo modal-->
-  <AppModal
-    v-show="showTodoModal"
-    @close-modal="showTodoModal = false"
-    title="Add New Todo"
-  >
+  <AppModal v-show="showTodoModal" @close-modal="showTodoModal = false" title="Add New Todo">
     <template #content>
       <form action="" @submit.prevent="makeCreateTodo">
-        <BaseTextInput
-          label="heading"
-          type="text"
-          placeholder="heading"
-          v-model="todo.title"
-          class="field"
-        />
-        <BaseTextInput
-          placeholder="description"
-          label="description"
-          v-model="todo.description"
-          class="field"
-        />
+        <BaseTextInput label="heading" type="text" placeholder="heading" v-model="todo.title" class="field" />
+        <BaseTextInput placeholder="description" label="description" v-model="todo.description" class="field" />
 
-        <BaseTextInput
-          placeholder="github url"
-          label="due date"
-          type="date"
-          :model="todo.date"
-          class="field"
-        />
+        <BaseTextInput placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
+
+        <div class="form-field field">
+          <label for="priority">Priority</label>
+          <select v-model="todo.priority">
+            <option disabled value="">Please select priority</option>
+            <option>urgent</option>
+            <option>not urgent</option>
+            <option>delete</option>
+            <option>delicate</option>
+            <option>normal</option>
+
+          </select>
+        </div>
 
         <!--form field submit, change color to black while waiting for response from server-->
-        <BaseButton
-          text=""
-          type="submit"
-          :disabled="disabledState"
-          :class="[disabledState == true ? 'disabled__button' : '']"
-        >
+        <BaseButton text="" type="submit" :disabled="disabledState"
+          :class="[disabledState == true ? 'disabled__button' : '']">
           <span v-show="!isLoading">Add Todo</span>
-          <Spinner
-            :animation-duration="1000"
-            :size="30"
-            :color="'#ffffff'"
-            v-show="isLoading"
-          />
+          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
         </BaseButton>
       </form>
     </template>
@@ -159,6 +135,33 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.form__field {
+  margin-bottom: 35px;
+  font-size: 16px;
+}
+
+.form__field * {
+  display: block;
+}
+
+.form__field label {
+  display: block;
+  margin-bottom: 7.5px;
+  text-transform: capitalize;
+  font-family: "Open Sans";
+}
+
+.form__field select option {
+  /* width: 500px; */
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  padding: 7px 25px 7px 25px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  display: block;
+}
+
 .fetching__todo {
   display: flex;
   flex-direction: column;
