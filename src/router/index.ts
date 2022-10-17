@@ -56,9 +56,10 @@ const router = createRouter({
         {
           path: "todo",
           name: "todo",
-          component: () => import("@/views/TodoView.vue"),
+          component: () => import("@/views/todo/TodoIndexView.vue"),
         },
       ],
+      //add navigation guards here
     },
     {
       path: "/:pathMatch(.*)*",

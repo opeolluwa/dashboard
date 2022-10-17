@@ -38,7 +38,11 @@ export default defineComponent({
             const responseData = severResponse.data;
 
             if (responseData.success) {
-              next();
+              next(() => {
+                console.log("user is logged in ", from.name, to.name);
+                const desiredRoute = String(to.name);
+                router.push({ name: desiredRoute });
+              });
             } else {
               localStorage.removeItem("token");
               router.push({ name: "auth" });
@@ -54,7 +58,7 @@ export default defineComponent({
     }
     // }
     // checkBearerTokenValidity();
-  },
+  }, 
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
@@ -110,7 +114,10 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
+    <DashboardSidebar
+      v-show="showSidebar"
+      @close-sidebar="showSidebar = false"
+    />
     <main>
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
       <div>
@@ -151,7 +158,7 @@ main header {
   grid-area: header;
 }
 
-main>div {
+main > div {
   grid-area: view;
   background-color: #f9f9f9;
   height: 100vh !important;
@@ -185,7 +192,7 @@ main>div {
     height: unset;
   }
 
-  main>div {
+  main > div {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;
