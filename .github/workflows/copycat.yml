@@ -7,7 +7,7 @@ jobs:
     - name: Copycat
       uses: andstor/copycat-action@v3
       with:
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        personal_token: ${{ secrets.GITHUB_TOKEN }}
         src_path: /.
         dst_path: /views/
         dst_owner: opeolluwa
@@ -15,4 +15,5 @@ jobs:
         dst_branch: production
         src_branch: build
         username: opeolluwa
+        email: adefemiadeoye@yahoo.com
         commit_message: "updated views"
