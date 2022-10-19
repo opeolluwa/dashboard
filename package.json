@@ -6,11 +6,15 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "build-only": "vite build",
     "build:ssr": "vite build --outDir views  --emptyOutDir",
+    "build:apk": "npm run build && npm run build:sync",
+    "build:sync":"npx cap sync",
     "dev": "vite",
     "preview": "vite preview --port 4173",
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@capacitor/android": "^4.3.0",
+    "@capacitor/core": "^4.3.0",
     "@vueform/multiselect": "^2.5.6",
     "@vueform/toggle": "^2.1.2",
     "axios": "^0.27.2",
@@ -25,6 +29,7 @@
     "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
+    "@capacitor/cli": "^4.3.0",
     "@iconify/vue": "^4.0.0",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/dotenv": "^8.2.0",
