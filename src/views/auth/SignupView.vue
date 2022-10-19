@@ -16,8 +16,6 @@ export default defineComponent({
         form: {
             email: "",
             password: "",
-            username: "",
-            fullname: ""
         },
         //destructure the api response into this variable
         apiResponse: {
@@ -70,39 +68,38 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="container view">
-        <!--bg-->
-        <div></div>
-        <!--logon form-->
-        <div>
-            <img src="@/assets/illustrations/onbaording-screen-two.png" alt="illustration" class="d-none">
-            <h1>Sign Up</h1>
-            <p class="sub__hero__text">Create an account to begin</p>
-            <!--api response -->
-            <small class="error"> {{ apiResponseMsg }}</small>
-            <form action="" method="post">
-                <!--form field fullname-->
-                <BaseTextInput placeholder="fullname" label="fullname" v-model="form.fullname" type="text"
-                    class="field" />
-                <!--username-->
-                <BaseTextInput placeholder="username" label="username" v-model="form.username" type="text"
-                    class="field" />
-                <!--form field email-->
-                <BaseTextInput placeholder="email" label="email" v-model="form.email" type="email" class="field" />
-                <!--form field password-->
-                <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
-                    class="field" />
-                <!--form field submit, change color to black while waiting for response from server-->
-                <BaseButton text="" :disabled="disabledState" @click="goToHome">
-                    <span v-show="!isLoading">Login</span>
-                    <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
-                </BaseButton>
-            </form>
+    <main>
+        <div class="container">
+            <!--bg-->
+            <div></div>
+            <!--logon form-->
+            <div>
+                <h1>Sign Up</h1>
+                <!--api response -->
+                <small class="error"> {{ apiResponseMsg }}</small>
+                <form action="" method="post" @submit.prevent="login">
+                    <!--form field email-->
+                    <BaseTextInput placeholder="email" label="email" v-model="form.email" type="email" class="field" />
+                    <!--form field password-->
+                    <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
+                        class="field" />
+                    <!--form field submit, change color to black while waiting for response from server-->
+                    <BaseButton text="" :disabled="disabledState">
+                        <span v-show="!isLoading">Proceed</span>
+                        <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+                    </BaseButton>
+                </form>
 
-            <!--custom install script-->
-            <!-- Install button, hidden by default -->
+                <!--custom install script-->
+                <!-- Install button, hidden by default -->
+                <div class="goto__sign__up">Already have an account? <RouterLink :to="{name:'login'}">Login
+                    </RouterLink>
+                </div>
+            </div>
+
         </div>
-    </div>
+
+    </main>
 </template>
 
 <style scoped>
@@ -110,11 +107,37 @@ export default defineComponent({
     display: none !important;
 }
 
+.goto__sign__up {
+    font-size: 14px;
+    margin-top: 30px;
+    color: var(--secondary);
+    text-align: left !important;
+}
 
+.goto__sign__up a {
+    text-decoration: underline;
 
+}
 
-.container {
-    padding-top: 200px;
+#installContainer {
+    background-color: red;
+    /* position: absolute; */
+    bottom: 1em;
+    display: flex;
+    justify-content: center;
+    /* width: 100%; */
+    /* z-index: 1500; */
+}
+
+#installContainer button {
+    background-color: inherit;
+    border: 1px solid white;
+    color: white;
+    font-size: 1em;
+    padding: 0.75em;
+}
+
+main .container {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -126,13 +149,13 @@ export default defineComponent({
 }
 
 /**the background container */
-.container>div:first-child {
+main .container>div:first-child {
     background-image: url("@/assets/img/bg/login-bg.svg");
     background-size: cover;
     background-position: center center;
 }
 
-.container>div:last-child {
+main .container>div:last-child {
     padding: 100px 0;
     display: flex;
     flex-direction: column;
@@ -140,13 +163,13 @@ export default defineComponent({
     align-content: center;
 }
 
-.container>div:last-child h1 {
+main .container>div:last-child h1 {
     margin-bottom: 5px;
     line-height: 64px;
     font-size: 48px;
 }
 
-.container>div:last-child h1+small {
+main .container>div:last-child h1+small {
     margin-bottom: 30px;
 }
 
@@ -159,7 +182,7 @@ button,
 
 /** -----------------------------small devices------------------------ */
 @media screen and (max-width: 768px) {
-    .container {
+    main .container {
         display: block;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
@@ -170,11 +193,11 @@ button,
         padding: 0;
     }
 
-    .container>div:first-child {
+    main .container>div:first-child {
         display: none;
     }
 
-    .container>div:last-child {
+    main .container>div:last-child {
         padding: 0;
         display: flex;
         flex-direction: column;
@@ -187,18 +210,18 @@ button,
         margin: 0 auto;
     }
 
-    .container>div:last-child h1 {
+    main .container>div:last-child h1 {
         margin-bottom: 7.5px;
         line-height: 26px;
         font-size: 28px;
         text-align: center;
     }
 
-    .container>div:last-child h1+small.error {
+    main .container>div:last-child h1+small.error {
         margin-bottom: 35px;
     }
 
-    .container div:last-child form {
+    main .container div:last-child form {
         display: flex;
         flex-direction: column;
         justify-content: center;

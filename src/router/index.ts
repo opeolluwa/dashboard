@@ -2,10 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import AuthenticationView from "@/views/auth/AuthIndexView.vue";
 import BaseLayout from "@/views/IndexView.vue";
 import HomeView from "@/views/HomeView.vue";
-import OnboardingIndexView from "@/views/onboarding/OnboardingIndexView.vue";
-import OnboardingViewOne from "@/views/onboarding/OnboardingViewOne.vue";
-import OnboardingViewTwo from "@/views/onboarding/OnboardingViewTwo.vue";
-import OnboardingViewThree from "@/views/onboarding/OnboardingViewThree.vue";
+import OnboardingView from "@/views/OnboardingIndexView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
 import PasswordResetView from "@/views/auth/PasswordResetView.vue";
 import SignupView from "@/views/auth/SignupView.vue"
@@ -15,24 +12,8 @@ const router = createRouter({
     {
       path: "/",
       name: "onboarding",
-      component: OnboardingIndexView,
-      children: [
-        {
-          path: "",
-          name: "onboarding-screen-one",
-          component: OnboardingViewOne,
-        },
-        {
-          path: "get-started",
-          name: "onboarding-screen-two",
-          component:OnboardingViewTwo
-        },
-        {
-          path: "crete-account",
-          name: "onboarding-screen-three",
-          component: OnboardingViewThree
-        },
-      ]
+      component: OnboardingView,
+
     },
     {
       name: "auth",

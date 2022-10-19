@@ -1,6 +1,7 @@
 {
   "name": "nitride",
   "version": "0.09.22",
+  "license": "MIT",
   "scripts": {
     "build": "run-p type-check build-only",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
@@ -9,6 +10,7 @@
     "build:apk": "npm run build && npm run build:sync && npm run build:compile",
     "build:sync": "npx cap sync",
     "build:compile":"npx cap open android",
+    "build:icon": "cordova-res --skip-config --copy",
     "dev": "vite",
     "preview": "vite preview --port 4173",
     "type-check": "vue-tsc --noEmit"

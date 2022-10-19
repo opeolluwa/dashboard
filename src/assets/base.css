@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Poppins;
+  src: url(/fonts/Poppins/Poppins-Black.ttf);
+}
+
 *,
 *::before,
 *::after {
@@ -7,6 +12,7 @@
   position: relative;
   font-weight: normal;
 }
+
 
 @tailwind base;
 @tailwind components;
@@ -94,15 +100,7 @@ button.disabled__button {
   --text-color: #f2f2f2 !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 700;
-  font-family: 'Comic Neue', cursive;
-}
+
 
 h1 {
   font-size: 1.75rem;
@@ -112,10 +110,7 @@ h1 {
   line-height: 28px;
   font-size: 1.02rem;
 }
-div,
-p {
-  font-family: 'Poppins', sans-serif;
-}
+
 
 a {
   font-family: 'Open Sans', sans-serif;

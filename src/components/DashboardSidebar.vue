@@ -39,11 +39,11 @@ export default defineComponent({
         icon: "mdi:format-list-checks",
         path: "todo",
       },
-      {
+   /*    {
         name: "projects",
         icon: "mdi:lightbulb-on-30",
         path: "projects",
-      },
+      }, */
       {
         name: "settings",
         icon: "mdi:cog-outline",
@@ -56,8 +56,8 @@ export default defineComponent({
     ...mapActions(useAuthStore, ["logoutRequest"]),
     logout() {
       //exec the call to the store mapped logout action
-      this.$router.push({ name: "login" });
-      // this.logoutRequest();
+      // this.$router.push({ name: "login" });
+      this.logoutRequest();
     },
     closeSidebar() {
       /**

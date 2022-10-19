@@ -77,14 +77,14 @@ export default defineComponent({
                 <h1>Login</h1>
                 <!--api response -->
                 <small class="error"> {{ apiResponseMsg }}</small>
-                <form action="" method="post">
+                <form action="" method="post" @submit.prevent="login">
                     <!--form field email-->
                     <BaseTextInput placeholder="email" label="email" v-model="form.email" type="email" class="field" />
                     <!--form field password-->
                     <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
                         class="field" />
                     <!--form field submit, change color to black while waiting for response from server-->
-                    <BaseButton text="" :disabled="disabledState" @click="goToHome">
+                    <BaseButton text="" :disabled="disabledState">
                         <span v-show="!isLoading">Login</span>
                         <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
                     </BaseButton>
@@ -92,8 +92,12 @@ export default defineComponent({
 
                 <!--custom install script-->
                 <!-- Install button, hidden by default -->
+                <div class="goto__sign__up">Don&apos;t have an account? <RouterLink :to="{name:'sign-up'}">Sign up</RouterLink>
+                </div>
             </div>
+            
         </div>
+        
     </main>
 </template>
 
@@ -101,6 +105,18 @@ export default defineComponent({
 .hidden {
     display: none !important;
 }
+
+.goto__sign__up {
+    font-size: 14px;
+    margin-top: 30px;
+    color: var(--secondary);
+    text-align: left  !important;
+}
+
+ .goto__sign__up a {
+    text-decoration: underline;
+
+} 
 
 #installContainer {
     background-color: red;
