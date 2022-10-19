@@ -58,6 +58,11 @@ export default defineComponent({
     login() {
       this.makeLoginRequest(this.form);
     },
+
+    //go to home, debug only
+    goToHome() {
+      this.$router.push({name:"home"})
+    }
   },
 });
 </script>
@@ -72,7 +77,7 @@ export default defineComponent({
         <h1>Login</h1>
         <!--api response -->
         <small class="error"> {{ apiResponseMsg }}</small>
-        <form action="" method="post" @submit.prevent="login">
+        <form action="" method="post" >
           <!--form field email-->
           <BaseTextInput
             placeholder="email"
@@ -90,7 +95,7 @@ export default defineComponent({
             class="field"
           />
           <!--form field submit, change color to black while waiting for response from server-->
-          <BaseButton text="" :disabled="disabledState">
+          <BaseButton text="" :disabled="disabledState" @click="goToHome">
             <span v-show="!isLoading">Login</span>
             <Spinner
               :animation-duration="1000"

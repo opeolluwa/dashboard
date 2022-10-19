@@ -7,7 +7,7 @@
     "build-only": "vite build",
     "build:ssr": "vite build --outDir views  --emptyOutDir",
     "build:apk": "npm run build && npm run build:sync",
-    "build:sync":"npx cap sync",
+    "build:sync": "npx cap sync",
     "dev": "vite",
     "preview": "vite preview --port 4173",
     "type-check": "vue-tsc --noEmit"
@@ -17,6 +17,7 @@
     "@capacitor/core": "^4.3.0",
     "@vueform/multiselect": "^2.5.6",
     "@vueform/toggle": "^2.1.2",
+    "animate.css": "^4.1.1",
     "axios": "^0.27.2",
     "chart.js": "^3.9.1",
     "pinia": "^2.0.21",
