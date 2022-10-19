@@ -6,6 +6,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "build-only": "vite build",
     "build:ssr": "vite build --outDir views  --emptyOutDir",
+    "build:apk": "npm run build && npm run build:sync",
+    "build:sync":"npx cap sync",
     "dev": "vite",
     "preview": "vite preview --port 4173",
     "type-check": "vue-tsc --noEmit"

@@ -1,4 +1,4 @@
-package com.drizzles.360Devs;
+package com.nitride.app;
 
 import com.getcapacitor.BridgeActivity;
 
