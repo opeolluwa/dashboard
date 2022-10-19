@@ -53,12 +53,13 @@ export default defineComponent({
     </div>
     <!--pictures and icons-->
     <div class="icons">
-      <RouterLink :to="{ name: 'emails' }">
-        <!--todo make this new messages-->
-        <Icon icon="mdi:email-outline" /><sup v-if="messages.length >= 1"></sup>
-      </RouterLink>
       <RouterLink :to="{ name: 'notification' }">
         <Icon icon="mdi:bell-outline" /> <sup></sup>
+      </RouterLink>
+
+      <RouterLink :to="{ name: 'settings' }">
+        <!--todo make this new messages-->
+        <Icon icon="mdi:account-circle" /><sup v-if="messages.length >= 1"></sup>
       </RouterLink>
     </div>
   </header>
@@ -83,7 +84,7 @@ h1 a,
 h2 a {
   font-size: 20px;
   font-weight: 500;
-  font-family: "Bakbak One", cursive;
+  /* font-family: "Bakbak One", cursive; */
   line-height: 36px;
   text-decoration: none;
   color: var(--default-dark);

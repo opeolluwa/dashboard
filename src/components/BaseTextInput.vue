@@ -15,7 +15,7 @@
     <!--use this template if the text input style is password template -->
     <template v-if="isPassword">
       <div class="password__input__field">
-        <input :type="passwordField" :id="label" :placeholder="'-- ' + placeholder + ' --'" @input="updateModelValue"
+        <input :type="passwordField" :id="label" :placeholder=" placeholder " @input="updateModelValue"
           :value="modelValue" />
         <!--icon to hid and show password visibility-->
         <Icon v-show="!isPasswordInput" icon="mdi:eye-off-outline" class="password__toggler"

@@ -2,7 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import AuthenticationView from "@/views/auth/AuthIndexView.vue";
 import BaseLayout from "@/views/IndexView.vue";
 import HomeView from "@/views/HomeView.vue";
-import OnboardingView from "@/views/onboarding/OnboardingIndexView.vue";
+import OnboardingView from "@/views/OnboardingIndexView.vue";
+import LoginView from "@/views/auth/LoginView.vue";
+import PasswordResetView from "@/views/auth/PasswordResetView.vue";
+import SignupView from "@/views/auth/SignupView.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -10,23 +13,7 @@ const router = createRouter({
       path: "/",
       name: "onboarding",
       component: OnboardingView,
-      children: [
-        {
-          path: "",
-          name: "onboarding-screen-one",
-          component: import("@/views/onboarding/OnboardingViewOne.vue"),
-        },
-        {
-          path: "get-started",
-          name: "onboarding-screen-two",
-          component: import("@/views/onboarding/OnboardingViewTwo.vue"),
-        },
-        {
-          path: "crete-account",
-          name: "onboarding-screen-three",
-          component: import("@/views/onboarding/OnboardingViewThree.vue"),
-        },
-      ]
+
     },
     {
       name: "auth",
@@ -36,17 +23,17 @@ const router = createRouter({
         {
           path: "",
           name: "sign-up",
-          component: import("@/views/auth/SignupView.vue"),
+          component: SignupView
         },
         {
           path: "login",
           name: "login",
-          component: import("@/views/auth/LoginView.vue"),
+          component: LoginView
         },
         {
           path: "reset-password",
           name: "reset-password",
-          component: import("@/views/auth/PasswordResetView.vue"),
+          component: PasswordResetView
         },
       ]
     },
