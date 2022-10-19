@@ -47,9 +47,9 @@ body {
   --light-text: #fff;
   --text-color: #101010;
   --dark-text: #101010;
-  --primary: #7714f1;
+  /* --primary: #7714f1; */
   /* --primary: var(--default-dark); */
-  /* --primary: rgb(36, 170, 36); */
+  --primary: #3c2c5b;
   --secondary: #707070;
   --tertiary: #7714f1;
   --warning: #fdca00;

@@ -12,17 +12,19 @@ export default {
 }
 </script>
 
-<style >
+<style>
 .onboarding__screen {
     display: flex;
     flex-direction: column;
+    max-height: 100vh;
     align-content: center;
-    justify-content: center;
-    height: 90vh;
+    position: relative;
+    padding-top: 25px;
 }
 
 .onboarding__screen h1 {
     text-transform: capitalize;
+    margin-top: 7vh;
 }
 
 .onboarding__screen p {
@@ -30,9 +32,9 @@ export default {
 }
 
 .onboarding__screen button {
-    margin-top: 35px;
-    background-color: #3c2c5b;
+    margin-top: 3vh;
     position: relative;
     bottom: 20px;
+
 }
 </style>

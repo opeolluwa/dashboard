@@ -22,7 +22,7 @@ export default defineComponent({
     },
     methods: {
         goToNext() {
-            this.$router.push({ name: "auth" })
+            this.$router.push({ name: "login" })
         }
     }
 })

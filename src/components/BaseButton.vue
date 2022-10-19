@@ -13,6 +13,7 @@ button {
   border-radius: 5px;
   font-size: 18px;
   background-color: var(--primary);
+  /* background-color: #3c2c5b; */
   color: var(--light-text);
   text-transform: capitalize;
   display: flex;
