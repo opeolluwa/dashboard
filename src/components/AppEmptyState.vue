@@ -18,7 +18,6 @@ export default defineComponent({
       default: "No data found! They will be displayed once you add them",
     },
   },
- 
 });
 </script>
 

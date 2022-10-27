@@ -61,8 +61,8 @@ export default defineComponent({
 
     //go to home, debug only
     goToHome() {
-      this.$router.push({name:"home"})
-    }
+      this.$router.push({ name: "home" });
+    },
   },
 });
 </script>
@@ -77,7 +77,7 @@ export default defineComponent({
         <h1>Login</h1>
         <!--api response -->
         <small class="error"> {{ apiResponseMsg }}</small>
-        <form action="" method="post" >
+        <form action="" method="post">
           <!--form field email-->
           <BaseTextInput
             placeholder="email"

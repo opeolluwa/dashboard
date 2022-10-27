@@ -59,7 +59,9 @@ export default defineComponent({
 
       <RouterLink :to="{ name: 'settings' }">
         <!--todo make this new messages-->
-        <Icon icon="mdi:account-circle" /><sup v-if="messages.length >= 1"></sup>
+        <Icon icon="mdi:account-circle" /><sup
+          v-if="messages.length >= 1"
+        ></sup>
       </RouterLink>
     </div>
   </header>

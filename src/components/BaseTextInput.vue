@@ -15,19 +15,43 @@
     <!--use this template if the text input style is password template -->
     <template v-if="isPassword">
       <div class="password__input__field">
-        <input :type="passwordField" :id="label" :placeholder=" placeholder " @input="updateModelValue"
-          :value="modelValue" />
+        <input
+          :type="passwordField"
+          :id="label"
+          :placeholder="placeholder"
+          @input="updateModelValue"
+          :value="modelValue"
+        />
         <!--icon to hid and show password visibility-->
-        <Icon v-show="!isPasswordInput" icon="mdi:eye-off-outline" class="password__toggler"
-          @click="togglePasswordVisibility" />
-        <Icon v-show="isPasswordInput" icon="mdi:eye-outline" class="password__toggler"
-          @click="togglePasswordVisibility" />
+        <Icon
+          v-show="!isPasswordInput"
+          icon="mdi:eye-off-outline"
+          class="password__toggler"
+          @click="togglePasswordVisibility"
+        />
+        <Icon
+          v-show="isPasswordInput"
+          icon="mdi:eye-outline"
+          class="password__toggler"
+          @click="togglePasswordVisibility"
+        />
+      </div>
+      <div class="forgotten_password" v-if="resetPassword">
+        <RouterLink :to="{ name: 'reset-password' }"
+          >Forgotten password?
+        </RouterLink>
       </div>
     </template>
 
     <!--for other input types-->
     <template v-else>
-      <input :type="type" :id="label" :placeholder=" placeholder" @input="updateModelValue" :value="modelValue" />
+      <input
+        :type="type"
+        :id="label"
+        :placeholder="placeholder"
+        @input="updateModelValue"
+        :value="modelValue"
+      />
     </template>
   </div>
 </template>
@@ -59,6 +83,10 @@ export default defineComponent({
       type: String,
       required: true,
       default: "text",
+    },
+    resetPassword: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
@@ -103,6 +131,24 @@ export default defineComponent({
 </script>
 
 <style>
+.forgotten_password {
+  font-size: 14px;
+  margin-top: 10px;
+  color: var(--secondary);
+  text-align: left !important;
+}
+
+.forgotten_password a {
+  text-decoration: underline;
+}
+
+.forgotten_password {
+  text-align: right !important;
+  text-transform: lowercase;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
 .form__field {
   margin-bottom: 35px;
   font-size: 16px;
@@ -155,7 +201,7 @@ export default defineComponent({
   transform: translateY(-50%);
   justify-content: center;
   align-items: center;
-  color: rgb(19, 18, 18);
+  color: rgb(85, 82, 82);
   cursor: pointer;
 }
 

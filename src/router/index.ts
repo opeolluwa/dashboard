@@ -5,37 +5,42 @@ import HomeView from "@/views/HomeView.vue";
 import OnboardingView from "@/views/OnboardingIndexView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
 import PasswordResetView from "@/views/auth/PasswordResetView.vue";
-import SignupView from "@/views/auth/SignupView.vue"
+import SignupView from "@/views/auth/SignupView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/helo",
       name: "onboarding",
       component: OnboardingView,
-
     },
     {
       name: "auth",
-      path: "/auth",
+      path: "/",
       component: AuthenticationView,
       children: [
         {
           path: "",
-          name: "sign-up",
-          component: SignupView
+          name: "login",
+          component: LoginView,
+          alias: "login",
         },
         {
-          path: "login",
-          name: "login",
-          component: LoginView
+          path: "sign-up",
+          name: "sign-up",
+          component: SignupView,
         },
         {
           path: "reset-password",
           name: "reset-password",
-          component: PasswordResetView
+          component: PasswordResetView,
         },
-      ]
+        {
+          path: "confirm-otp",
+          name: "confirm-otp",
+          component: () => import("@/views/auth/ConfirmOtpView.vue"),
+        },
+      ],
     },
     {
       path: "/u",

@@ -39,7 +39,7 @@ export default defineComponent({
         icon: "mdi:format-list-checks",
         path: "todo",
       },
-   /*    {
+      /*    {
         name: "projects",
         icon: "mdi:lightbulb-on-30",
         path: "projects",
