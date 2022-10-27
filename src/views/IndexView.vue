@@ -139,7 +139,6 @@ export default defineComponent({
   grid-template-areas: "sidebar content";
   column-gap: 0px;
   height: 100vh;
-  /* overflow-y: scroll; */
 }
 
 nav {
@@ -171,7 +170,7 @@ main > div {
   }
 
   nav {
-    height: unset !important;
+    /* height: unset !important; */
     padding-top: 55px;
     position: fixed;
     z-index: 1000;

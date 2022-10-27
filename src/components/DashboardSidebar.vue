@@ -32,7 +32,7 @@ export default defineComponent({
       {
         name: "notes",
         icon: "mdi:note-edit-outline",
-        path: "notes",
+        path: "all-notes",
       },
       {
         name: "todo",
@@ -76,34 +76,40 @@ export default defineComponent({
 </script>
 
 <template>
-  <nav>
-    <div>
+  <nav @click="closeSidebar">
+    <div id="nav__content">
       <!--the links-->
-      <RouterLink
-        v-for="route in routes.sort()"
-        class="link-item"
-        :to="{ name: route.path }"
-        @click="closeSidebar"
-        :key="route.name"
-      >
+      <RouterLink v-for="route in routes.sort()" class="link-item" :to="{ name: route.path }" @click="closeSidebar"
+        :key="route.name">
         <Icon :icon="route.icon" />
         <span class="capitalize">{{ route.name }}</span>
       </RouterLink>
     </div>
-    <BaseButton @click="logout" class="logout-button" text="Logout" />
+    <BaseButton @click="logout" class="logout-button d-noe" text="Logout" />
   </nav>
 </template>
 
 <style scoped>
 nav {
   padding-top: 100px;
+  background-color: rgba(0, 0, 0, 0.45);
   background-color: var(--primary);
   color: var(--light-text);
   position: relative;
   top: 0;
   left: 0;
   transition: display 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  height: 100vh;
+  overflow-y: scroll;
+  cursor: pointer;
+  /* z-index: 50000; */
 }
+
+/* nav {
+  background-color: var(--primary);
+  width: 75%;
+  height: 100%;
+} */
 
 nav .link-item {
   display: flex;

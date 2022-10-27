@@ -17,7 +17,7 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() {},
+    toggleSidebar() { },
     ...mapActions(useAuthStore, ["logoutRequest"]),
   },
   computed: {
@@ -29,7 +29,8 @@ export default defineComponent({
 
     // the current route name
     currentRouteName() {
-      return this.$route.name || "";
+      const route = this.$route.name;
+      return String(route).replaceAll("-", " ") || "360 Devs"
     },
   },
 });
@@ -59,9 +60,7 @@ export default defineComponent({
 
       <RouterLink :to="{ name: 'settings' }">
         <!--todo make this new messages-->
-        <Icon icon="mdi:account-circle" /><sup
-          v-if="messages.length >= 1"
-        ></sup>
+        <Icon icon="mdi:account-circle" /><sup v-if="messages.length >= 1"></sup>
       </RouterLink>
     </div>
   </header>
@@ -93,13 +92,13 @@ h2 a {
 }
 
 #current__route {
-  font-size: 20px;
-  font-weight: 300;
-  font-family: mulish;
-  line-height: 36px;
-  text-decoration: none;
-  color: var(--default-dark);
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
   text-transform: capitalize;
+  padding-left: 10px;
 }
 
 small {
@@ -184,6 +183,7 @@ sup {
   header h2 a {
     color: var(--light-text);
   }
+
   .header__nav__mobile svg {
     width: 24px;
     height: 24px;
