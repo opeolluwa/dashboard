@@ -3,22 +3,18 @@ import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
 import Spinner from "@/components/AppLoader.vue";
-import { useAuthStore } from "@/stores/auth";
-import { mapActions, mapState } from "pinia";
-import { Icon } from "@iconify/vue";
 export default defineComponent({
   name: "AuthView",
   components: {
     BaseTextInput: BaseTextInputVue,
     BaseButton: BaseButtonVue,
     Spinner,
-    Icon,
   },
   data: () => ({
     form: {
       email: "",
-      password: "",
     },
+    isLoading: false,
     //destructure the api response into this variable
     apiResponse: {
       message: "",
@@ -26,44 +22,22 @@ export default defineComponent({
     },
   }),
 
-  mounted() {
-    /**
-     * check if the user is already logged in and the token is still valid
-     * if true, go straight to the dashboard, else, stay on the login page
-     * once on the dashboard, make request for refresh token.
-     */
-    if (this.authorizationToken) {
-      this.getUserInformation(this.authorizationToken);
-      // router.push({ name: "home" });
-    }
-  },
+
   computed: {
-    ...mapState(useAuthStore, [
-      "isLoading",
-      "apiError",
-      "apiResponseMsg",
-      "authorizationToken",
-    ]),
     //disabled state
     disabledState() {
       return this.isLoading === true ? true : false;
     },
+    //api response message
+    apiResponseMsg() {
+      return this.apiResponse.message;
+    },
   },
   methods: {
-    //import the methods from store
-    ...mapActions(useAuthStore, {
-      makeLoginRequest: "loginRequest",
-      getUserInformation: "getUserInformation",
-    }),
-
-    //exec the login action coming from the store mapped actions
-    login() {
-      this.makeLoginRequest(this.form);
-    },
-
-    //go to home, debug only
-    goToHome() {
-      this.$router.push({ name: "home" });
+    //request password reset
+    requestPasswordReset() {
+      console.log("requested");
+      this.$router.push({ name: 'confirm-otp' })
     },
     goBack() {
       this.$router.go(-1);
@@ -79,37 +53,27 @@ export default defineComponent({
       <div></div>
       <!--logon form-->
       <div>
-        <div class="go__back">
-          <Icon icon="mdi:arrow-left" size="20" @click="goBack" />
-        </div>
+
         <div class="title">
           <h1>Account Recovery</h1>
-          <p class="sub__her__text">
-            Please provide your registered email address, an account recovery
-            instruction will be sent to you.
+          <p class="sub__hero__text">
+            Please provide your registered email address.
           </p>
         </div>
         <!--api response -->
         <small class="error"> {{ apiResponseMsg }}</small>
-        <form action="" method="post" @submit.prevent="login">
+        <form action="" method="post" @submit.prevent="requestPasswordReset">
           <!--form field email-->
-          <BaseTextInput
-            placeholder="example@mailer.com"
-            label="email"
-            v-model="form.email"
-            type="email"
-            class="field"
-          />
+          <BaseTextInput placeholder="example@mailer.com" label="email" v-model="form.email" type="email"
+            class="field" />
           <!--form field password-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Continue</span>
-            <Spinner
-              :animation-duration="1000"
-              :size="30"
-              :color="'#ffffff'"
-              v-show="isLoading"
-            />
+            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
+          <small class="goto__sign__up">Already have an account?
+            <RouterLink :to="{ name: 'login' }">Login </RouterLink>
+          </small>
         </form>
       </div>
     </div>
@@ -139,30 +103,28 @@ export default defineComponent({
   column-gap: 100px;
   grid-template-rows: 1fr;
   grid-template-areas: "bg form";
-  min-height: 80vh;
+  height: 100vh;
+  justify-content: center;
   position: relative;
 }
 
 /**the background container */
-#password__reset__page .container > div:first-child {
+#password__reset__page .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-main .container > div:last-child {
+#password__reset__page .container>div:last-child {
   padding: 100px 0;
   display: flex;
+  justify-content: center;
   flex-direction: column;
 }
 
-main .container > div:last-child h1 {
-  margin-bottom: 5px;
-  line-height: 64px;
-  font-size: 48px;
-}
 
-main .container > div:last-child h1 + small {
+
+#password__reset__page .container>div:last-child h1+small {
   margin-bottom: 30px;
 }
 
@@ -173,6 +135,30 @@ button,
   width: 500px;
 }
 
+#password__reset__page .title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+#password__reset__page .title h1 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+#password__reset__page .title p {
+  font-size: .95rem;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  color: var(--secondary);
+}
+
 /** -----------------------------small devices------------------------ */
 @media screen and (max-width: 768px) {
   #password__reset__page .container {
@@ -181,14 +167,14 @@ button,
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    min-height: 90vh;
+    /* min-height: 100vh; */
   }
 
-  #password__reset__page .container > div:first-child {
+  #password__reset__page .container>div:first-child {
     display: none;
   }
 
-  #password__reset__page .container > div:last-child {
+  #password__reset__page .container>div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -196,11 +182,10 @@ button,
     align-content: center;
     padding: 0 30px;
     place-content: center;
-    height: 90vh;
     margin: 0 auto;
   }
 
-  #password__reset__page .container > div:last-child h1 + small.error {
+  #password__reset__page .container>div:last-child h1+small.error {
     margin-bottom: 35px;
   }
 
@@ -217,29 +202,7 @@ button,
     width: auto;
   }
 
-  #password__reset__page .title {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-bottom: 25px;
-  }
 
-  #password__reset__page .title h1 {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 30px;
-  }
-
-  #password__reset__page .title p {
-    font-size: 0.85rem;
-    align-items: center;
-    justify-content: center;
-    line-height: 20px;
-    color: var(--secondary);
-  }
 
   .go__back {
     margin-bottom: 20px;

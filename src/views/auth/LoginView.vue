@@ -75,7 +75,7 @@ export default defineComponent({
       <!--logon form-->
       <div>
         <div class="title">
-          <h1>Login</h1>
+          <h1 class="text-8xl">Login</h1>
           <p class="sub__her__text">Please login to your account.</p>
         </div>
         <!--api response -->
@@ -94,6 +94,7 @@ export default defineComponent({
             placeholder="password"
             type="password"
             label="password"
+            class="field"
             v-model="form.password"
             :reset-password="true"
           />
@@ -144,7 +145,7 @@ export default defineComponent({
   column-gap: 100px;
   grid-template-rows: 1fr;
   grid-template-areas: "bg form";
-  min-height: 80vh;
+  height: 100vh;
   position: relative;
 }
 
@@ -155,17 +156,13 @@ export default defineComponent({
   background-position: center center;
 }
 
-main .container > div:last-child {
+#login__page .container > div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-main .container > div:last-child h1 {
-  margin-bottom: 5px;
-  line-height: 64px;
-  font-size: 48px;
-}
 
 main .container > div:last-child h1 + small {
   margin-bottom: 30px;
@@ -176,6 +173,30 @@ button,
 .form__field input,
 .field {
   width: 500px;
+}
+
+#login__page .title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+#login__page .title h1 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+#login__page .title p {
+  font-size: 0.85rem;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  color: var(--secondary);
 }
 
 /** -----------------------------small devices------------------------ */
@@ -227,28 +248,5 @@ button,
     display: none;
   }
 
-  #login__page .title {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin-bottom: 25px;
-  }
-
-  #login__page .title h1 {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 30px;
-  }
-
-  #login__page .title p {
-    font-size: 0.85rem;
-    align-items: center;
-    justify-content: center;
-    line-height: 20px;
-    color: var(--secondary);
-  }
 }
 </style>

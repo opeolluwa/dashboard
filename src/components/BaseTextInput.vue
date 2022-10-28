@@ -15,43 +15,24 @@
     <!--use this template if the text input style is password template -->
     <template v-if="isPassword">
       <div class="password__input__field">
-        <input
-          :type="passwordField"
-          :id="label"
-          :placeholder="placeholder"
-          @input="updateModelValue"
-          :value="modelValue"
-        />
+        <input :type="passwordField" :id="label" :placeholder="placeholder" @input="updateModelValue"
+          :value="modelValue" />
         <!--icon to hid and show password visibility-->
-        <Icon
-          v-show="!isPasswordInput"
-          icon="mdi:eye-off-outline"
-          class="password__toggler"
-          @click="togglePasswordVisibility"
-        />
-        <Icon
-          v-show="isPasswordInput"
-          icon="mdi:eye-outline"
-          class="password__toggler"
-          @click="togglePasswordVisibility"
-        />
+        <Icon v-show="!isPasswordInput" icon="mdi:eye-off-outline" class="password__toggler"
+          @click="togglePasswordVisibility" />
+        <Icon v-show="isPasswordInput" icon="mdi:eye-outline" class="password__toggler"
+          @click="togglePasswordVisibility" />
       </div>
       <div class="forgotten_password" v-if="resetPassword">
-        <RouterLink :to="{ name: 'reset-password' }"
-          >Forgotten password?
+        <RouterLink :to="{ name: 'reset-password' }">Forgotten password?
         </RouterLink>
       </div>
     </template>
 
     <!--for other input types-->
     <template v-else>
-      <input
-        :type="type"
-        :id="label"
-        :placeholder="placeholder"
-        @input="updateModelValue"
-        :value="modelValue"
-      />
+      <input :type="type" :id="label" :placeholder="placeholder" @input="updateModelValue" :value="modelValue"
+        :maxlength="maxlength" />
     </template>
   </div>
 </template>
@@ -68,22 +49,32 @@ export default defineComponent({
     isPasswordInput: true,
   }),
   props: {
+    //input field label
     label: {
       type: String,
       required: true,
     },
+    // the place holder
     placeholder: {
       type: String,
       required: true,
     },
+    //V-model  bindings
     modelValue: {
       type: String,
     },
+    //input field length
+    maxlength: {
+      type: Number,
+      required: false
+    },
+    //input field type, maps to HTML input types=> text, email, date e.t.c
     type: {
       type: String,
       required: true,
       default: "text",
     },
+    //a boolean to add reset password link to password input fields
     resetPassword: {
       type: Boolean,
       default: false,
