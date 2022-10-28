@@ -82,11 +82,18 @@ export default defineComponent({
   <!--if no todo was found bu it's empty-->
   <AppEmptyState v-if="todoArray?.length == 0" />
   <!--render the todo list -->
-  <AppTodoItem v-for="{ title, description, id, priority } in todoArray" :todo="{ title, description, id, priority }"
-    @delete-todo="deleteTodo(id)" />
+  <AppTodoItem
+    v-for="{ title, description, id, priority } in todoArray"
+    :todo="{ title, description, id, priority }"
+    @delete-todo="deleteTodo(id)"
+  />
   <!--default components-->
   <div class="header">
-    <BaseButton text="add new" class="add-new-button" @click="showTodoModal = true">
+    <BaseButton
+      text="add new"
+      class="add-new-button"
+      @click="showTodoModal = true"
+    >
       <IconPlus />
     </BaseButton>
   </div>
@@ -98,13 +105,34 @@ export default defineComponent({
     <Icon icon="mdi:plus" />
   </BaseButton>
   <!--the Todo modal-->
-  <AppModal v-show="showTodoModal" @close-modal="showTodoModal = false" title="Add New Todo">
+  <AppModal
+    v-show="showTodoModal"
+    @close-modal="showTodoModal = false"
+    title="Add New Todo"
+  >
     <template #content>
       <form action="" @submit.prevent="makeCreateTodo">
-        <BaseTextInput label="heading" type="text" placeholder="heading" v-model="todo.title" class="field" />
-        <BaseTextInput placeholder="description" label="description" v-model="todo.description" class="field" />
+        <BaseTextInput
+          label="heading"
+          type="text"
+          placeholder="heading"
+          v-model="todo.title"
+          class="field"
+        />
+        <BaseTextInput
+          placeholder="description"
+          label="description"
+          v-model="todo.description"
+          class="field"
+        />
 
-        <BaseTextInput placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
+        <BaseTextInput
+          placeholder="github url"
+          label="due date"
+          type="date"
+          :model="todo.date"
+          class="field"
+        />
 
         <div class="select__form__field">
           <label for="priority">Priority</label>
@@ -120,10 +148,19 @@ export default defineComponent({
         </div>
 
         <!--form field submit, change color to black while waiting for response from server-->
-        <BaseButton text="" type="submit" :disabled="disabledState"
-          :class="[disabledState == true ? 'disabled__button' : '']">
+        <BaseButton
+          text=""
+          type="submit"
+          :disabled="disabledState"
+          :class="[disabledState == true ? 'disabled__button' : '']"
+        >
           <span v-show="!isLoading">Add Todo</span>
-          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+          <Spinner
+            :animation-duration="1000"
+            :size="30"
+            :color="'#ffffff'"
+            v-show="isLoading"
+          />
         </BaseButton>
       </form>
     </template>
@@ -175,8 +212,6 @@ export default defineComponent({
   color: rgb(19, 18, 18);
   cursor: pointer;
 }
-
-
 
 .form__field {
   margin-bottom: 35px;

@@ -12,7 +12,7 @@ export default defineComponent({
   },
   data: () => ({
     form: {
-      email: "",
+      otp: "",
     },
     isLoading: false,
     //destructure the api response into this variable
@@ -36,6 +36,16 @@ export default defineComponent({
     //request password reset
     requestPasswordReset() {
       console.log("requested");
+    },
+
+    //request new token
+    requestNewToken() {
+      console.log("requested");
+    },
+
+    //confirm otp
+    confirmOtp() {
+      console.log("confirmed");
       this.$router.push({ name: "confirm-otp" });
     },
     goBack() {
@@ -46,32 +56,31 @@ export default defineComponent({
 </script>
 
 <template>
-  <div id="password__reset__page">
+  <div id="password__reset__confirm__otp__page">
     <div class="container">
       <!--bg-->
       <div></div>
       <!--logon form-->
       <div>
         <div class="title">
-          <h1>Account Recovery</h1>
-          <p class="sub__hero__text">
-            Please provide your registered email address.
-          </p>
+          <h1>Confirm OTP</h1>
+          <p class="sub__hero__text">Confirm the token sent to your email</p>
         </div>
         <!--api response -->
         <small class="error"> {{ apiResponseMsg }}</small>
-        <form action="" method="post" @submit.prevent="requestPasswordReset">
+        <form action="" method="post" @submit.prevent="confirmOtp">
           <!--form field email-->
           <BaseTextInput
-            placeholder="example@mailer.com"
-            label="email"
-            v-model="form.email"
-            type="email"
+            placeholder="XXXXXX"
+            label="Token"
+            v-model="form.otp"
+            type="text"
+            :maxlength="6"
             class="field"
           />
           <!--form field password-->
           <BaseButton text="" :disabled="disabledState">
-            <span v-show="!isLoading">Continue</span>
+            <span v-show="!isLoading">Proceed</span>
             <Spinner
               :animation-duration="1000"
               :size="30"
@@ -80,8 +89,8 @@ export default defineComponent({
             />
           </BaseButton>
           <small class="goto__sign__up"
-            >Already have an account?
-            <RouterLink :to="{ name: 'login' }">Login </RouterLink>
+            >Didn&apos;t receive any token?
+            <RouterLink :to="{ name: 'login' }">request new </RouterLink>
           </small>
         </form>
       </div>
@@ -105,7 +114,7 @@ export default defineComponent({
   text-decoration: underline;
 }
 
-#password__reset__page .container {
+#password__reset__confirm__otp__page .container {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -118,20 +127,20 @@ export default defineComponent({
 }
 
 /**the background container */
-#password__reset__page .container > div:first-child {
+#password__reset__confirm__otp__page .container > div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#password__reset__page .container > div:last-child {
+#password__reset__confirm__otp__page .container > div:last-child {
   padding: 100px 0;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-#password__reset__page .container > div:last-child h1 + small {
+#password__reset__confirm__otp__page .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
 
@@ -142,7 +151,7 @@ button,
   width: 500px;
 }
 
-#password__reset__page .title {
+#password__reset__confirm__otp__page .title {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -150,7 +159,7 @@ button,
   margin-bottom: 25px;
 }
 
-#password__reset__page .title h1 {
+#password__reset__confirm__otp__page .title h1 {
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
@@ -158,7 +167,7 @@ button,
   line-height: 30px;
 }
 
-#password__reset__page .title p {
+#password__reset__confirm__otp__page .title p {
   font-size: 0.95rem;
   align-items: center;
   justify-content: center;
@@ -168,7 +177,7 @@ button,
 
 /** -----------------------------small devices------------------------ */
 @media screen and (max-width: 768px) {
-  #password__reset__page .container {
+  #password__reset__confirm__otp__page .container {
     /* padding: 50px 0; */
     display: flex;
     flex-direction: column;
@@ -177,11 +186,11 @@ button,
     /* min-height: 100vh; */
   }
 
-  #password__reset__page .container > div:first-child {
+  #password__reset__confirm__otp__page .container > div:first-child {
     display: none;
   }
 
-  #password__reset__page .container > div:last-child {
+  #password__reset__confirm__otp__page .container > div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -192,11 +201,15 @@ button,
     margin: 0 auto;
   }
 
-  #password__reset__page .container > div:last-child h1 + small.error {
+  #password__reset__confirm__otp__page
+    .container
+    > div:last-child
+    h1
+    + small.error {
     margin-bottom: 35px;
   }
 
-  #password__reset__page .container div:last-child form {
+  #password__reset__confirm__otp__page .container div:last-child form {
     display: flex;
     flex-direction: column;
     justify-content: center;

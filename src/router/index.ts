@@ -4,38 +4,41 @@ import BaseLayout from "@/views/IndexView.vue";
 import HomeView from "@/views/HomeView.vue";
 import OnboardingView from "@/views/OnboardingIndexView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
-import PasswordResetView from "@/views/auth/PasswordResetView.vue";
-import SignupView from "@/views/auth/SignupView.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/helo",
       name: "onboarding",
       component: OnboardingView,
-
     },
     {
       name: "auth",
-      path: "/auth",
+      path: "/",
       component: AuthenticationView,
       children: [
         {
           path: "",
-          name: "sign-up",
-          component: SignupView
+          name: "login",
+          component: LoginView,
+          alias: "login",
         },
         {
-          path: "login",
-          name: "login",
-          component: LoginView
+          path: "sign-up",
+          name: "sign-up",
+          component: () => import("@/views/auth/SignupView.vue"),
         },
         {
           path: "reset-password",
           name: "reset-password",
-          component: PasswordResetView
+          component: () => import("@/views/auth/PasswordResetView.vue"),
         },
-      ]
+        {
+          path: "confirm-otp",
+          name: "confirm-otp",
+          component: () => import("@/views/auth/ConfirmOtpView.vue"),
+        },
+      ],
     },
     {
       path: "/u",
@@ -72,7 +75,14 @@ const router = createRouter({
         {
           path: "notes",
           name: "notes",
-          component: () => import("@/views/NotesView.vue"),
+          component: () => import("@/views/notes/NotesIndexView.vue"),
+          children: [
+            {
+              path: "",
+              name: "all-notes",
+              component: () => import("@/views/notes/AllNotesEntry.vue"),
+            },
+          ],
         },
         {
           path: "settings",

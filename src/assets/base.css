@@ -43,7 +43,7 @@ body {
   --default: #101010;
   --white: #f5f5f5;
   --text-color: #ffffff;
-  --border-color: #ccc;
+  --border-color: #e5e5e5;
   --default-dark: #0d1023;
   --default-white: #f1f1f1;
   --default-red: #f62b2b;
@@ -53,9 +53,8 @@ body {
   --light-text: #fff;
   --text-color: #101010;
   --dark-text: #101010;
-  /* --primary: #7714f1; */
-  /* --primary: var(--default-dark); */
-  --primary: #3c2c5b;
+  --primary: #7714f1;
+  --primary: #4916b1;
   --secondary: #707070;
   --tertiary: #7714f1;
   --warning: #fdca00;
@@ -107,7 +106,7 @@ h1 {
 }
 
 .sub__hero__text {
-  line-height: 28px;
+  line-height: 20px!important;
   font-size: 1.02rem;
 }
 
@@ -138,7 +137,7 @@ button {
 
 
 .d-none {
-  display: none;
+  display: none!important;
 }
 
 .uppercase {
@@ -199,4 +198,10 @@ svg {
 
 input[type=checkbox] {
   accent-color: var(--primary);
+}
+
+.animate__animated.animate__fadeIn,
+.animate__animated.animate__fadeOut {
+  --animate-duration: 300ms;
+  --animate-delay: 10ms;
 }

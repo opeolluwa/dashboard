@@ -96,7 +96,7 @@ export const useAuthStore = defineStore("authStore", {
       // const bearerToken = localStorage.getItem("token");
       //remove the item from the local storage
       localStorage.removeItem("token");
-      router.push({ name: "auth" });
+      router.push({ name: "login" });
       //send the server to the server to be blacklisted
       //TODO
     },
@@ -150,6 +150,7 @@ interface UserInformation {
   fullname: String;
   username: String;
   password: String | null;
+  avatar: String | null;
 }
 
 /**

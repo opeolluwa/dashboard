@@ -18,7 +18,6 @@ export default defineComponent({
       default: "No data found! They will be displayed once you add them",
     },
   },
- 
 });
 </script>
 
@@ -38,6 +37,7 @@ export default defineComponent({
 
 .empty-state img {
   width: 30%;
+  width: 150px;
 }
 
 .empty-state h1 {

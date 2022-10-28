@@ -7,11 +7,13 @@ import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
 import router from "@/router";
 import axios from "axios";
+import DashboardBottomNav from "@/components/DashboardBottomNav.vue";
 export default defineComponent({
   components: {
     DashboardSidebar: DashboardSidebarVue,
     DashboardHeader: DashboardHeaderVue,
     ViewLayout: ViewLayoutVue,
+    DashboardBottomNav
   },
   data: () => ({
     showSidebar: false,
@@ -114,19 +116,21 @@ export default defineComponent({
 
 <template>
   <div class="container">
-    <DashboardSidebar
-      v-show="showSidebar"
-      @close-sidebar="showSidebar = false"
-    />
+    <!-- the side bar-->
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
     <main>
+      <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
-      <div>
+      <!--inject all views here-->
+      <div id="view__box">
         <ViewLayout>
           <template #content>
             <RouterView />
           </template>
         </ViewLayout>
       </div>
+      <!--bottom navigation for mobile only-->
+      <DashboardBottomNav />
     </main>
   </div>
 </template>
@@ -139,7 +143,6 @@ export default defineComponent({
   grid-template-areas: "sidebar content";
   column-gap: 0px;
   height: 100vh;
-  /* overflow-y: scroll; */
 }
 
 nav {
@@ -151,17 +154,18 @@ main {
   grid-area: content;
   height: 100vh;
   overflow-y: scroll;
-  scrollbar-color: var(--tertiary) var(--default-dark);
+  scrollbar-color: var(--primary);
 }
 
 main header {
   grid-area: header;
 }
 
-main > div {
+main #view__box {
   grid-area: view;
   background-color: #f9f9f9;
   height: 100vh !important;
+  padding-top: 25px;
 }
 
 /**------------------styling on mobile devices----------------------- */
@@ -171,7 +175,7 @@ main > div {
   }
 
   nav {
-    height: unset !important;
+    /* height: unset !important; */
     padding-top: 55px;
     position: fixed;
     z-index: 1000;
@@ -192,11 +196,12 @@ main > div {
     height: unset;
   }
 
-  main > div {
+  main #view__box{
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;
     min-height: 100vh;
+    padding-top: unset;
   }
 }
 </style>

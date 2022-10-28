@@ -3,7 +3,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import AppModal from "@/components/AppModal.vue";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 import { Icon } from "@iconify/vue";
-import AppEmptyState from "../components/AppEmptyState.vue";
+import AppEmptyState from "../../components/AppEmptyState.vue";
 export default {
   name: "ProjectView",
   components: {

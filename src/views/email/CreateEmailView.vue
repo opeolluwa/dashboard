@@ -86,7 +86,7 @@ form label {
 
 form button {
   width: 100%;
-  background-color: var(--default-dark);
+  background-color: var(--primary);
 }
 
 form textarea {
