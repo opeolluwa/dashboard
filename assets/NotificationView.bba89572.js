@@ -1,0 +1,1 @@
+import{A as r}from"./AppNetworkError.f5e76b92.js";import{d as e,_ as t,r as n,o as p,l as s}from"./index.4c3a74aa.js";const c=e({name:"NotificationView",components:{AppNetworkError:r}});function a(i,_,f,m,d,k){const o=n("AppNetworkError");return p(),s(o)}const N=t(c,[["render",a]]);export{N as default};
