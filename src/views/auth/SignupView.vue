@@ -102,22 +102,45 @@ export default defineComponent({
         <!--api response -->
         <small class="error"> {{ apiResponseMsg }}</small>
         <form action="" method="post" @submit.prevent="login">
-          <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="form.fullname" type="text" class="field" />
+          <BaseTextInput
+            placeholder="Jane Doe"
+            label="fullname"
+            v-model="form.fullname"
+            type="text"
+            class="field"
+          />
           <!--form field email-->
-          <BaseTextInput placeholder="jane@mailer.com" label="email" v-model="form.email" type="email" class="field" />
+          <BaseTextInput
+            placeholder="jane@mailer.com"
+            label="email"
+            v-model="form.email"
+            type="email"
+            class="field"
+          />
           <!--form field password-->
-          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
-            class="field" />
+          <BaseTextInput
+            placeholder="password"
+            type="password"
+            label="password"
+            v-model="form.password"
+            class="field"
+          />
           <!--form field submit, change color to black while waiting for response from server-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Sign Up</span>
-            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+            <Spinner
+              :animation-duration="1000"
+              :size="30"
+              :color="'#ffffff'"
+              v-show="isLoading"
+            />
           </BaseButton>
         </form>
         <hr />
         <!--custom install script-->
         <!-- Install button, hidden by default -->
-        <small class="goto__sign__up">Already have an account?
+        <small class="goto__sign__up"
+          >Already have an account?
           <RouterLink :to="{ name: 'login' }">Login </RouterLink>
         </small>
       </div>
@@ -131,7 +154,7 @@ export default defineComponent({
 }
 
 .goto__sign__up {
-  font-size: .95rem;
+  font-size: 0.95rem;
   margin-top: 10px;
   color: var(--secondary);
   text-align: left !important;
@@ -140,7 +163,6 @@ export default defineComponent({
 .goto__sign__up a {
   text-decoration: underline;
 }
-
 
 #sign__up__page .container {
   width: 100%;
@@ -154,13 +176,13 @@ export default defineComponent({
 }
 
 /**the background container */
-#sign__up__page .container>div:first-child {
+#sign__up__page .container > div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#sign__up__page .container>div:last-child {
+#sign__up__page .container > div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -168,7 +190,7 @@ export default defineComponent({
   align-content: center;
 }
 
-#sign__up__page .container>div:last-child h1+small {
+#sign__up__page .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
 
@@ -201,7 +223,7 @@ button,
 }
 
 #sign__up__page .title p {
-  font-size: .95rem;
+  font-size: 0.95rem;
   align-items: center;
   justify-content: center;
 
@@ -223,11 +245,11 @@ button,
     padding: 0;
   }
 
-  #sign__up__page .container>div:first-child {
+  #sign__up__page .container > div:first-child {
     display: none;
   }
 
-  #sign__up__page .container>div:last-child {
+  #sign__up__page .container > div:last-child {
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
@@ -240,7 +262,7 @@ button,
     /* margin: 20px auto; */
   }
 
-  #sign__up__page .container>div:last-child h1+small.error {
+  #sign__up__page .container > div:last-child h1 + small.error {
     margin-bottom: 35px;
   }
 
@@ -257,13 +279,12 @@ button,
     width: auto;
   }
 
-
   #sign__up__page .continue__with__email {
     display: flex;
     flex-direction: row;
     column-gap: 15px;
     color: var(--secondary);
-    font-size: .95rem;
+    font-size: 0.95rem;
     text-align: center;
     vertical-align: middle;
     margin-top: 35px;

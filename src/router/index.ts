@@ -26,13 +26,12 @@ const router = createRouter({
         {
           path: "sign-up",
           name: "sign-up",
-          component: () => import("@/views/auth/SignupView.vue")
-
+          component: () => import("@/views/auth/SignupView.vue"),
         },
         {
           path: "reset-password",
           name: "reset-password",
-          component: () => import("@/views/auth/PasswordResetView.vue")
+          component: () => import("@/views/auth/PasswordResetView.vue"),
         },
         {
           path: "confirm-otp",
@@ -81,9 +80,9 @@ const router = createRouter({
             {
               path: "",
               name: "all-notes",
-              component: () => import("@/views/notes/AllNotesEntry.vue")
-            }
-          ]
+              component: () => import("@/views/notes/AllNotesEntry.vue"),
+            },
+          ],
         },
         {
           path: "settings",

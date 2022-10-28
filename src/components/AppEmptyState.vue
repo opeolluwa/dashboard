@@ -37,6 +37,7 @@ export default defineComponent({
 
 .empty-state img {
   width: 30%;
+  width: 150px;
 }
 
 .empty-state h1 {

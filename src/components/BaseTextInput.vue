@@ -15,24 +15,44 @@
     <!--use this template if the text input style is password template -->
     <template v-if="isPassword">
       <div class="password__input__field">
-        <input :type="passwordField" :id="label" :placeholder="placeholder" @input="updateModelValue"
-          :value="modelValue" />
+        <input
+          :type="passwordField"
+          :id="label"
+          :placeholder="placeholder"
+          @input="updateModelValue"
+          :value="modelValue"
+        />
         <!--icon to hid and show password visibility-->
-        <Icon v-show="!isPasswordInput" icon="mdi:eye-off-outline" class="password__toggler"
-          @click="togglePasswordVisibility" />
-        <Icon v-show="isPasswordInput" icon="mdi:eye-outline" class="password__toggler"
-          @click="togglePasswordVisibility" />
+        <Icon
+          v-show="!isPasswordInput"
+          icon="mdi:eye-off-outline"
+          class="password__toggler"
+          @click="togglePasswordVisibility"
+        />
+        <Icon
+          v-show="isPasswordInput"
+          icon="mdi:eye-outline"
+          class="password__toggler"
+          @click="togglePasswordVisibility"
+        />
       </div>
       <div class="forgotten_password" v-if="resetPassword">
-        <RouterLink :to="{ name: 'reset-password' }">Forgotten password?
+        <RouterLink :to="{ name: 'reset-password' }"
+          >Forgotten password?
         </RouterLink>
       </div>
     </template>
 
     <!--for other input types-->
     <template v-else>
-      <input :type="type" :id="label" :placeholder="placeholder" @input="updateModelValue" :value="modelValue"
-        :maxlength="maxlength" />
+      <input
+        :type="type"
+        :id="label"
+        :placeholder="placeholder"
+        @input="updateModelValue"
+        :value="modelValue"
+        :maxlength="maxlength"
+      />
     </template>
   </div>
 </template>
@@ -66,7 +86,7 @@ export default defineComponent({
     //input field length
     maxlength: {
       type: Number,
-      required: false
+      required: false,
     },
     //input field type, maps to HTML input types=> text, email, date e.t.c
     type: {

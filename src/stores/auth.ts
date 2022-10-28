@@ -150,6 +150,7 @@ interface UserInformation {
   fullname: String;
   username: String;
   password: String | null;
+  avatar: String | null;
 }
 
 /**

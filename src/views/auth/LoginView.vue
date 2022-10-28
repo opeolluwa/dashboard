@@ -163,7 +163,6 @@ export default defineComponent({
   justify-content: center;
 }
 
-
 main .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
@@ -247,6 +246,5 @@ button,
     margin-bottom: 0;
     display: none;
   }
-
 }
 </style>
