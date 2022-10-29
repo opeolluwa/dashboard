@@ -1,16 +1,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import AppNetworkError from "../components/AppNetworkError.vue";
 export default defineComponent({
   name: "NotificationView",
-  components: {
-    AppNetworkError,
-  },
+  components: {},
 });
 </script>
 
-<template>
-  <AppNetworkError />
-</template>
+<template></template>
 
 <style scoped></style>

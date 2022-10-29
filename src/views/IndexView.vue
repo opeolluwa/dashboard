@@ -13,9 +13,10 @@ export default defineComponent({
     DashboardSidebar: DashboardSidebarVue,
     DashboardHeader: DashboardHeaderVue,
     ViewLayout: ViewLayoutVue,
-    DashboardBottomNav
+    DashboardBottomNav,
   },
   data: () => ({
+    crumbs: ["Home", "Category", "Sub category"],
     showSidebar: false,
   }),
   /**
@@ -64,6 +65,7 @@ export default defineComponent({
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
+    //breadcrumb
   },
   created() {
     this.makeAuthRequest();
@@ -89,6 +91,10 @@ export default defineComponent({
       refreshToken: "getRefreshToken",
     }),
 
+    //track bread crumb
+    selected(crumb: any) {
+      console.log(crumb);
+    },
     /**
      * @function makeAuthRequest - make request to the server to get the user information
      * @returns {userInformation} - returns the user information
@@ -117,10 +123,14 @@ export default defineComponent({
 <template>
   <div class="container">
     <!-- the side bar-->
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
+    <DashboardSidebar
+      v-show="showSidebar"
+      @close-sidebar="showSidebar = false"
+    />
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
+
       <!--inject all views here-->
       <div id="view__box">
         <ViewLayout>
@@ -130,7 +140,7 @@ export default defineComponent({
         </ViewLayout>
       </div>
       <!--bottom navigation for mobile only-->
-      <DashboardBottomNav />
+      <DashboardBottomNav @close-sidebar="showSidebar = false" />
     </main>
   </div>
 </template>
@@ -196,7 +206,7 @@ main #view__box {
     height: unset;
   }
 
-  main #view__box{
+  main #view__box {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;

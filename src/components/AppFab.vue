@@ -32,7 +32,7 @@ export default defineComponent({
   align-items: center;
   left: calc(100vw - 80px);
   position: fixed;
-  bottom: 20px;
+  bottom: 50px;
   border-radius: 50%;
   border-color: transparent;
   padding: 10px;
@@ -43,7 +43,8 @@ export default defineComponent({
   box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: -3px -3px 27px 3px rgba(0, 0, 0, 0.3);
-  z-index: 10;
+  z-index: 1200;
+  display: none;
 }
 
 .fab:hover {
