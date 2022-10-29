@@ -2,12 +2,10 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "NotificationView",
-  components: {
-  },
+  components: {},
 });
 </script>
 
-<template>
-</template>
+<template></template>
 
 <style scoped></style>

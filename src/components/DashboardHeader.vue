@@ -17,7 +17,7 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() { },
+    toggleSidebar() {},
     ...mapActions(useAuthStore, ["logoutRequest"]),
   },
   computed: {
@@ -29,8 +29,9 @@ export default defineComponent({
 
     //get the user profile picture from the store, if not present use the default avatar
     userAvatar() {
-      const avatar = this.user?.avatar || "@/assets/img/illustration/default_user.png";
-      return String(avatar)
+      const avatar =
+        this.user?.avatar || "@/assets/img/illustration/default_user.png";
+      return String(avatar);
     },
     // the current route name
     currentRouteName() {
@@ -69,21 +70,16 @@ export default defineComponent({
           <Icon icon="mdi:bell-outline" /> <sup></sup>
         </RouterLink>
 
-      
         <RouterLink :to="{ name: 'emails' }">
           <Icon icon="mdi:email-outline" /> <sup></sup>
         </RouterLink>
-
-        
       </div>
       <!--account option-->
       <div class="account__options">
         <!--the user image or use the default-->
         <div class="avatar">
           <img src="@/assets/img/illustration/default_user.png" alt="user" />
-          <div>
-         
-          </div>
+          <div></div>
         </div>
       </div>
     </div>
@@ -143,7 +139,7 @@ h2 a {
   font-family: "Poppins";
   font-style: normal;
   /* font-weight: 400; */
-  font-size: 13px!important;
+  font-size: 13px !important;
   line-height: 30px;
   text-transform: capitalize;
   padding-left: 10px;

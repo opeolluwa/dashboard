@@ -51,6 +51,12 @@ export default defineComponent({
       },
     ],
   }),
+  computed: {
+    currentRouteName() {
+      const route = this.$route.name;
+      return String(route) || "360 Devs";
+    },
+  },
   methods: {
     //get the logout action from the store
     ...mapActions(useAuthStore, ["logoutRequest"]),
@@ -59,6 +65,7 @@ export default defineComponent({
       // this.$router.push({ name: "login" });
       this.logoutRequest();
     },
+
     closeSidebar() {
       /**
        * check if the device is mobile
@@ -79,8 +86,14 @@ export default defineComponent({
   <nav @click="closeSidebar">
     <div id="nav__content">
       <!--the links-->
-      <RouterLink v-for="route in routes.sort()" class="link-item" :to="{ name: route.path }" @click="closeSidebar"
-        :key="route.name">
+      <RouterLink
+        v-for="route in routes.sort()"
+        class="link__item"
+        :to="{ name: route.path }"
+        @click="closeSidebar"
+        :key="route.name"
+        :class="[route.name === currentRouteName ? 'active' : '']"
+      >
         <Icon :icon="route.icon" />
         <span class="capitalize">{{ route.name }}</span>
       </RouterLink>
@@ -111,7 +124,7 @@ nav {
   height: 100%;
 } */
 
-nav .link-item {
+nav .link__item {
   display: flex;
   width: 100%;
   align-items: center;
@@ -127,7 +140,10 @@ nav .link-item {
   transition: all 0.2s ease-in-out;
 }
 
-nav .link-item:hover {
+nav .link__item:hover,
+.link__item:active,
+.link__item:focus,
+.active {
   background-color: rgba(255, 255, 255, 0.1);
   cursor: pointer;
 }
@@ -178,11 +194,11 @@ nav .link-item:hover {
     position: static;
   }
 
-  nav .link-item {
+  nav .link__item {
     padding: 15px 30px;
   }
 
-  nav .link-item:first-child {
+  nav .link__item:first-child {
     margin-top: 35px;
   }
 

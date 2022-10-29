@@ -13,7 +13,7 @@
   <div class="form__field">
     <label :for="label">{{ label }}</label>
     <!--use this template if the text input style is password template -->
-    <template v-if="isPassword" >
+    <template v-if="isPassword">
       <div class="password__input__field">
         <input
           :type="passwordField"

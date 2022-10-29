@@ -16,7 +16,7 @@ export default defineComponent({
     DashboardBottomNav,
   },
   data: () => ({
-    crumbs: ['Home', 'Category', 'Sub category'],
+    crumbs: ["Home", "Category", "Sub category"],
     showSidebar: false,
   }),
   /**
@@ -65,8 +65,7 @@ export default defineComponent({
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
-    //breadcrumb 
-
+    //breadcrumb
   },
   created() {
     this.makeAuthRequest();
@@ -124,7 +123,10 @@ export default defineComponent({
 <template>
   <div class="container">
     <!-- the side bar-->
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
+    <DashboardSidebar
+      v-show="showSidebar"
+      @close-sidebar="showSidebar = false"
+    />
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />

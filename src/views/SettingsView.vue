@@ -42,9 +42,6 @@ export default defineComponent({
 
 <template>
   <div id="settings">
-
-
-
     <section>
       <h3>Preferences</h3>
       <div>
@@ -146,7 +143,7 @@ export default defineComponent({
   /* display: none; */
 }
 
-#settings-control>div {
+#settings-control > div {
   display: flex;
   align-items: center;
   align-content: center;
