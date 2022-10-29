@@ -41,41 +41,7 @@ export default {
   <!-- show the app empty state-->
   <AppEmptyState />
 
-  <!--add new project fab button-->
-  <BaseButton text="" class="add-new-fab" @click="showProjectModal = true">
-    <Icon icon="mdi:plus" />
-  </BaseButton>
-  <!--the project modal-->
-  <AppModal
-    v-show="showProjectModal"
-    @close-modal="showProjectModal = false"
-    title="Add New Project"
-  >
-    <template #content>
-      <form>
-        <BaseTextInput
-          label="name"
-          type="text"
-          placeholder="project name"
-          :model="addProject.name"
-          class="field"
-        />
-        <BaseTextInput
-          placeholder=" project description"
-          label="description"
-          :model="addProject.description"
-          class="field"
-        />
-        <BaseTextInput
-          placeholder="github url"
-          label="Repository URL"
-          :model="addProject.description"
-          class="field"
-        />
-        <BaseButton text="add project" class="field" />
-      </form>
-    </template>
-  </AppModal>
+  
 </template>
 
 <style scoped>

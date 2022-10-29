@@ -159,10 +159,9 @@ button,
 }
 
 #password__reset__page .title p {
-  font-size: 0.95rem;
   align-items: center;
   justify-content: center;
-  line-height: 20px;
+  line-height: 28px;
   color: var(--secondary);
 }
 

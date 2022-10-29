@@ -191,11 +191,10 @@ button,
 }
 
 #login__page .title p {
-  font-size: 0.85rem;
   align-items: center;
-  justify-content: center;
-  line-height: 20px;
-  color: var(--secondary);
+    justify-content: center;
+    line-height: 28px;
+    color: var(--secondary);
 }
 
 /** -----------------------------small devices------------------------ */
