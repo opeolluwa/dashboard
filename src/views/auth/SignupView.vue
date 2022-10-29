@@ -3,8 +3,7 @@ import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
 import Spinner from "@/components/AppLoader.vue";
-import { useAuthStore } from "@/stores/auth";
-import { mapActions, mapState } from "pinia";
+import axios from "axios";
 export default defineComponent({
   name: "AuthView",
   components: {
@@ -18,53 +17,44 @@ export default defineComponent({
       password: "",
       fullname: "",
     },
+    isLoading: false,
     //destructure the api response into this variable
-    apiResponse: {
-      message: "",
-      token: "",
-    },
+    apiResponseMsg: ""
   }),
+  methods: {
+    // fet the form body from, pass it to axios, toggle disable state to true
+    // and then set the api response message to the response message
+    async signUp() {
+      this.isLoading = true;
+      const { email, password, fullname } = this.form;
+      try {
+        const { data: response } = await axios.post("/auth/sign-up", {
+          email,
+          fullname,
+          password,
+        });
+        console.log(JSON.stringify(response));
 
-  mounted() {
-    /**
-     * check if the user is already logged in and the token is still valid
-     * if true, go straight to the dashboard, else, stay on the login page
-     * once on the dashboard, make request for refresh token.
-     */
-    if (this.authorizationToken) {
-      this.getUserInformation(this.authorizationToken);
-      // router.push({ name: "home" });
-    }
+        //TODO: integrate a toast
+        this.apiResponseMsg = response.message;
+        this.isLoading = false;
+      } catch (error: any) {
+        const response = error.response.data;
+        console.log({ error: error.response.data });
+        this.apiResponseMsg = response.message;
+        this.isLoading = false;
+
+
+      }
+
+    },
   },
+  //disabled state
   computed: {
-    ...mapState(useAuthStore, [
-      "isLoading",
-      "apiError",
-      "apiResponseMsg",
-      "authorizationToken",
-    ]),
-    //disabled state
     disabledState() {
       return this.isLoading === true ? true : false;
     },
-  },
-  methods: {
-    //import the methods from store
-    ...mapActions(useAuthStore, {
-      makeLoginRequest: "loginRequest",
-      getUserInformation: "getUserInformation",
-    }),
-
-    //exec the login action coming from the store mapped actions
-    login() {
-      this.makeLoginRequest(this.form);
-    },
-
-    //go to home, debug only
-    goToHome() {
-      this.$router.push({ name: "home" });
-    },
-  },
+  }
 });
 </script>
 
@@ -101,46 +91,23 @@ export default defineComponent({
         </small>
         <!--api response -->
         <small class="error"> {{ apiResponseMsg }}</small>
-        <form action="" method="post" @submit.prevent="login">
-          <BaseTextInput
-            placeholder="Jane Doe"
-            label="fullname"
-            v-model="form.fullname"
-            type="text"
-            class="field"
-          />
+        <form action="" method="post" @submit.prevent="signUp">
+          <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="form.fullname" type="text" class="field" />
           <!--form field email-->
-          <BaseTextInput
-            placeholder="jane@mailer.com"
-            label="email"
-            v-model="form.email"
-            type="email"
-            class="field"
-          />
+          <BaseTextInput placeholder="jane@mailer.com" label="email" v-model="form.email" type="email" class="field" />
           <!--form field password-->
-          <BaseTextInput
-            placeholder="password"
-            type="password"
-            label="password"
-            v-model="form.password"
-            class="field"
-          />
+          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
+            class="field" />
           <!--form field submit, change color to black while waiting for response from server-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Sign Up</span>
-            <Spinner
-              :animation-duration="1000"
-              :size="30"
-              :color="'#ffffff'"
-              v-show="isLoading"
-            />
+            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
         </form>
         <hr />
         <!--custom install script-->
         <!-- Install button, hidden by default -->
-        <small class="goto__sign__up"
-          >Already have an account?
+        <small class="goto__sign__up">Already have an account?
           <RouterLink :to="{ name: 'login' }">Login </RouterLink>
         </small>
       </div>
@@ -176,13 +143,13 @@ export default defineComponent({
 }
 
 /**the background container */
-#sign__up__page .container > div:first-child {
+#sign__up__page .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#sign__up__page .container > div:last-child {
+#sign__up__page .container>div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -190,7 +157,7 @@ export default defineComponent({
   align-content: center;
 }
 
-#sign__up__page .container > div:last-child h1 + small {
+#sign__up__page .container>div:last-child h1+small {
   margin-bottom: 30px;
 }
 
@@ -223,11 +190,9 @@ button,
 }
 
 #sign__up__page .title p {
-  font-size: 0.95rem;
   align-items: center;
   justify-content: center;
-
-  line-height: 12px;
+  line-height: 28px;
   color: var(--secondary);
 }
 
@@ -245,11 +210,11 @@ button,
     padding: 0;
   }
 
-  #sign__up__page .container > div:first-child {
+  #sign__up__page .container>div:first-child {
     display: none;
   }
 
-  #sign__up__page .container > div:last-child {
+  #sign__up__page .container>div:last-child {
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
@@ -262,7 +227,7 @@ button,
     /* margin: 20px auto; */
   }
 
-  #sign__up__page .container > div:last-child h1 + small.error {
+  #sign__up__page .container>div:last-child h1+small.error {
     margin-bottom: 35px;
   }
 

@@ -168,11 +168,10 @@ button,
 }
 
 #password__reset__confirm__otp__page .title p {
-  font-size: 0.95rem;
-  align-items: center;
-  justify-content: center;
-  line-height: 20px;
-  color: var(--secondary);
+    align-items: center;
+      justify-content: center;
+      line-height: 28px;
+      color: var(--secondary);
 }
 
 /** -----------------------------small devices------------------------ */
