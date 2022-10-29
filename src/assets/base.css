@@ -65,7 +65,7 @@ body {
 
 
 
-  --toggle-width: 3rem;
+  --toggle-width: 2.75rem;
   --toggle-height: 1.25rem;
   --toggle-border: 0.125rem;
   --toggle-font-size: 0.75rem;
@@ -74,11 +74,11 @@ body {
   --toggle-bg-off: #e5e7eb;
   --toggle-bg-on-disabled: #8dabd8;
   --toggle-bg-off-disabled: #e5e7eb;
-  --toggle-border-on: #aeb1b0;
+  --toggle-border-on: var(--border-color);
   --toggle-border-off: #e5e7eb;
   --toggle-border-on-disabled: #d1d5db;
   --toggle-border-off-disabled: #e5e7eb;
-  --toggle-ring-width: 3px;
+  --toggle-ring-width: 1px;
   --toggle-ring-color: transparent;
   --toggle-text-on: #ffffff;
   --toggle-text-off: hsl(217, 19%, 27%);

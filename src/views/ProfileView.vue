@@ -7,7 +7,7 @@ import { mapState } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 export default defineComponent({
-    name: "profileView",
+    name: "profile__pageView",
     components: { AppSwitch, Icon, BaseTextInput },
     methods: {
         toggleTheme() {
@@ -35,18 +35,19 @@ export default defineComponent({
             theme: "",
             showNetworkError: false,
             allowPushNotifications: false,
+            "enable2FA": true
         },
     }),
 });
 </script>
 
 <template>
-    <div id="profile">
+    <div id="profile__page">
         <!--avatar-->
         <div id="avatar">
             <!--icon-->
             <img src="@/assets/img/illustration/default_user.png" alt="avatar" />
-            <!--edit  profile-->
+            <!--edit  profile__page-->
             <button id="edit">
                 <Icon icon="mdi:pencil" />
             </button>
@@ -60,9 +61,9 @@ export default defineComponent({
 
         <section>
             <h3>Account Information</h3>
-            <BaseTextInput placeholder="Jane Doe" label="" />
-            <BaseTextInput placeholder="jane@mailer.com" label="" type="email" class="field" />
-            <BaseTextInput placeholder="dhje" label="" type="text" class="field" />
+            <BaseTextInput placeholder="Jane Doe" label="fullname" />
+            <BaseTextInput placeholder="jane@mailer.com" label="email" type="email" class="field" />
+            <BaseTextInput placeholder="" label="username" type="text" class="field" />
         </section>
 
         <section id="preferences">
@@ -77,56 +78,48 @@ export default defineComponent({
                 <AppSwitch v-model="profile.allowPushNotifications" /> allow push
                 notifications
             </div>
+            <div>
+                <AppSwitch v-model="profile.enable2FA" /> enable 2FA
+            </div>
         </section>
 
         <section>
             <h3>Security</h3>
+
+            <BaseTextInput placeholder="new password" label="Change Password" type="text" class="field" />
+
         </section>
     </div>
 </template>
 
 <style scoped>
-:root {
-    --toggle-width: 2rem;
-    --toggle-height: 1.25rem;
-    --toggle-border: 25px;
-    --toggle-font-size: 0.75rem;
-    --toggle-duration: 150ms;
-    --toggle-bg-on: var(--primary);
-    --toggle-bg-off: #e5e7eb;
-    --toggle-bg-on-disabled: #d1d5db;
-    --toggle-bg-off-disabled: #e5e7eb;
-    --toggle-border-on: #aeb1b0;
-    --toggle-border-off: #e5e7eb;
-    --toggle-border-on-disabled: #d1d5db;
-    --toggle-border-off-disabled: #e5e7eb;
-    --toggle-ring-width: 3px;
-    --toggle-ring-color: transparent;
-    --toggle-text-on: #ffffff;
-    --toggle-text-off: hsl(217, 19%, 27%);
-    --toggle-text-on-disabled: #9ca3af;
-    --toggle-text-off-disabled: #9ca3af;
-    --toggle-handle-enabled: #ffffff;
-    --toggle-handle-disabled: #f3f4f6;
+#profile__page {
+    text-transform: capitalize;
+    font-size: 15px;
 }
 
-#profile #avatar {
+#profile__page #avatar {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
     gap: 15px;
     text-align: center;
     position: relative;
+    /* display: none; */
 }
 
-#profile .form__field {
+#profile__page #user {
+    margin-top: -40px;
+    margin-bottom: 55px;
+}
+
+#profile__page .form__field {
     margin-bottom: 5px;
 
 }
 
-#profile small {
+#profile__page small {
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-family: "Open Sans", sans-serif;
@@ -134,13 +127,13 @@ export default defineComponent({
     color: #9ca3af;
 }
 
-#profile #avatar img {
+#profile__page #avatar img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
 }
 
-#profile button {
+#profile__page button {
     border-radius: 25px;
     background-color: var(--primary);
     color: #fff;
@@ -155,17 +148,22 @@ export default defineComponent({
     right: -30px;
 }
 
-#profile button svg {
+#profile__page button svg {
     width: 15px;
     height: 15px;
 }
 
-#profile section h3 {
-    color: var(--secondary);
+#profile__page section h3 {
+    font-size: 1.2rem;
+    font-family: "poppins";
+    font-weight: 500;
+    line-height: 28px;
+    color: #000;
+    margin-bottom: 18px;
 }
 
 
-#profile-control>div {
+#profile__page-control>div {
     display: flex;
     align-items: center;
     align-content: center;

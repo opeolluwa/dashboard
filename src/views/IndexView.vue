@@ -8,14 +8,12 @@ import { mapActions, mapState } from "pinia";
 import router from "@/router";
 import axios from "axios";
 import DashboardBottomNav from "@/components/DashboardBottomNav.vue";
-import Breadcrumb from "@/components/AppBreadCrumb.vue"
 export default defineComponent({
   components: {
     DashboardSidebar: DashboardSidebarVue,
     DashboardHeader: DashboardHeaderVue,
     ViewLayout: ViewLayoutVue,
     DashboardBottomNav,
-    Breadcrumb
   },
   data: () => ({
     crumbs: ['Home', 'Category', 'Sub category'],
@@ -131,7 +129,6 @@ export default defineComponent({
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
 
-      <Breadcrumb class="row justify-content-center mt-4" :crumbs="crumbs" @selected="selected" />
       <!--inject all views here-->
       <div id="view__box">
         <ViewLayout>
