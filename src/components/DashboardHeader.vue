@@ -24,7 +24,7 @@ export default defineComponent({
     //get the user from the store
     ...mapState(useAuthStore, { user: "userInformation" }),
     username() {
-      return this.user?.username || "";
+      return this.user?.username || "username";
     },
 
     //get the user profile picture from the store, if not present use the default avatar
@@ -39,7 +39,7 @@ export default defineComponent({
     },
     // the user fullname
     fullname() {
-      return this.user?.fullname || "Default uset";
+      return this.user?.fullname || "Default user";
     },
   },
 });
@@ -142,11 +142,12 @@ h2 a {
 #current__route {
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
+  /* font-weight: 400; */
+  font-size: 13px!important;
   line-height: 30px;
   text-transform: capitalize;
   padding-left: 10px;
+  /* display: none; */
 }
 
 small {

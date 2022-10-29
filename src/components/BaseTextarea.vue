@@ -71,7 +71,7 @@ export default {
   object-fit: contain;
   border-radius: 8px;
   padding: 10px 25px;
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--border-color);
   border-radius: 5px;
 }
 

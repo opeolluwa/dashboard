@@ -8,14 +8,17 @@ import { mapActions, mapState } from "pinia";
 import router from "@/router";
 import axios from "axios";
 import DashboardBottomNav from "@/components/DashboardBottomNav.vue";
+import Breadcrumb from "@/components/AppBreadCrumb.vue"
 export default defineComponent({
   components: {
     DashboardSidebar: DashboardSidebarVue,
     DashboardHeader: DashboardHeaderVue,
     ViewLayout: ViewLayoutVue,
-    DashboardBottomNav
+    DashboardBottomNav,
+    Breadcrumb
   },
   data: () => ({
+    crumbs: ['Home', 'Category', 'Sub category'],
     showSidebar: false,
   }),
   /**
@@ -64,6 +67,8 @@ export default defineComponent({
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
+    //breadcrumb 
+
   },
   created() {
     this.makeAuthRequest();
@@ -89,6 +94,10 @@ export default defineComponent({
       refreshToken: "getRefreshToken",
     }),
 
+    //track bread crumb
+    selected(crumb: any) {
+      console.log(crumb);
+    },
     /**
      * @function makeAuthRequest - make request to the server to get the user information
      * @returns {userInformation} - returns the user information
@@ -121,6 +130,8 @@ export default defineComponent({
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
+
+      <Breadcrumb class="row justify-content-center mt-4" :crumbs="crumbs" @selected="selected" />
       <!--inject all views here-->
       <div id="view__box">
         <ViewLayout>
@@ -130,7 +141,7 @@ export default defineComponent({
         </ViewLayout>
       </div>
       <!--bottom navigation for mobile only-->
-      <DashboardBottomNav />
+      <DashboardBottomNav @close-sidebar="showSidebar = false" />
     </main>
   </div>
 </template>
@@ -196,7 +207,7 @@ main #view__box {
     height: unset;
   }
 
-  main #view__box{
+  main #view__box {
     grid-area: view;
     background-color: #f9f9f9;
     height: unset !important;

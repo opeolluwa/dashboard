@@ -9,11 +9,13 @@
 
     -->
     <div id="bottom__nav">
-        <div class="bottom__nav__item" v-for="route in routes" :key="route.name">
+
+        <div class="bottom__nav__item" v-for="route in routes" :key="route.name"
+            :class="[route.name === currentRouteName ? 'active' : '']" @click="closeSidebar">
             <RouterLink :to="{ name: route.path }">
                 <Icon :icon="route.icon" />
             </RouterLink>
-            <span>Profile</span>
+            <span>{{ route.name }} </span>
         </div>
     </div>
 
@@ -29,12 +31,24 @@ export default defineComponent({
     },
     data: () => ({
         //the current route name
-        currentRouteName: '',
+        // currentRouteName: '',
         routes: [
             {
-                name: "Dashboard",
+                name: "home",
                 icon: "mdi:home-variant-outline",
                 path: "home",
+            },
+
+            {
+                name: "settings",
+                icon: "mdi:cog-outline",
+                path: "settings",
+            },
+
+            {
+                name: "notes",
+                icon: "mdi:plus-circle-outline",
+                path: "add-note",
             },
             {
                 name: "notification",
@@ -42,24 +56,37 @@ export default defineComponent({
                 path: "notification",
             },
             {
-                name: "notes",
-                icon: "mdi:pencil-outline",
-                path: "notes",
-            },
-            {
-                name: "settings",
-                icon: "mdi:cog-outline",
-                path: "settings",
-            },
-            {
-                //TODO: create profile
                 name: "profile",
-                icon: "mdi:account-circle",
-                path: "settings",
+                icon: "mdi:account",
+                path: "profile",
             },
 
         ]
-    })
+    }),
+    computed: {
+        currentRouteName() {
+            const route = this.$route.name;
+            return String(route) || "360 Devs";
+        },
+    },
+    methods: {
+        closeSidebar() {
+            /**
+             * check if the device is mobile
+             * if true, close the sidebar when a nav link is clicked
+             * if not do nothing
+             */
+            const isMobileDevice = window.matchMedia("(max-width: 400px)").matches;
+            if (isMobileDevice) {
+                this.$emit("close-sidebar");
+            }
+            return;
+        },
+        //get the current route nae and compare it with visited class
+        activeRoute(route: any) {
+            return route === this.currentRouteName //boolean
+        }
+    }
 })
 </script>
 
@@ -77,11 +104,10 @@ export default defineComponent({
     position: fixed;
     bottom: 0;
     left: 0;
-    background-color: var(--secondary);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px -1px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 4px -1px;
-    z-index: 1500;
-    display: none;
+    z-index: 1000;
+    border-top: 1px solid var(--border-color);
+    background-color: #f9f9f9;
+    /* display: none; */
 }
 
 .bottom__nav__item {
@@ -92,20 +118,34 @@ export default defineComponent({
     cursor: pointer;
     text-align: center;
     font-size: 14px;
-    /* color: rgb(104, 96, 96) */
+    /* padding: 5px; */
+    color: var(--secondary);
+    text-transform: capitalize;
 }
 
 .bottom__nav__item svg {
-    width: 24px;
-    height: 24px;
-    color: #fff;
+    width: 22px;
+    height: 22px
 }
 
 .bottom__nav__item span {
-    margin-top: 5px;
-    font-size: 12px;
+    margin-top: 2px;
+    font-size: 10px;
     font-weight: 500;
-    color: #e5e5e5;
-    /* display: none; */
+}
+
+.bottom__nav__item:hover,
+.bottom__nav__item:focus,
+.bottom__nav__item:link,
+.bottom__nav__item:active,
+.active {
+    color: var(--primary);
+    transition: 200ms ease-in-out;
+}
+
+@media screen and (min-width:768px) {
+    #bottom__nav {
+        display: none;
+    }
 }
 </style>

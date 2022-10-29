@@ -42,38 +42,8 @@ export default defineComponent({
 
 <template>
   <div id="settings">
-    <!--avatar-->
-    <div id="avatar">
-      <!--icon-->
-      <img src="@/assets/img/illustration/default_user.png" alt="avatar" />
-      <!--edit  profile-->
-      <button id="edit">
-        <Icon icon="mdi:pencil" />
-      </button>
 
-      <!---name and email-->
-      <div id="user">
-        <h3>{{ fullname }}</h3>
-        <small>{{ email }}</small>
-      </div>
-    </div>
 
-    <section>
-      <h3>Account Information</h3>
-      <BaseTextInput placeholder="fullname" label="fullname" />
-      <BaseTextInput
-        placeholder="email"
-        label="email"
-        type="email"
-        class="field"
-      />
-      <BaseTextInput
-        placeholder="email"
-        label="email"
-        type="email"
-        class="field"
-      />
-    </section>
 
     <section>
       <h3>Preferences</h3>
@@ -173,10 +143,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 5px;
-  display: none;
+  /* display: none; */
 }
 
-#settings-control > div {
+#settings-control>div {
   display: flex;
   align-items: center;
   align-content: center;

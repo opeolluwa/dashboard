@@ -82,12 +82,24 @@ const router = createRouter({
               name: "all-notes",
               component: () => import("@/views/notes/AllNotesEntry.vue"),
             },
+
+            {
+              path: "add-note",
+              name: "add-note",
+              component: () => import("@/views/notes/CreateNoteView.vue"),
+            },
           ],
         },
         {
           path: "settings",
           name: "settings",
           component: () => import("@/views/SettingsView.vue"),
+        },
+
+        {
+          path: "profile",
+          name: "profile",
+          component: () => import("@/views/ProfileView.vue"),
         },
         {
           path: "notification",

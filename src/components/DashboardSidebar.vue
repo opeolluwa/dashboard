@@ -79,18 +79,13 @@ export default defineComponent({
   <nav @click="closeSidebar">
     <div id="nav__content">
       <!--the links-->
-      <RouterLink
-        v-for="route in routes.sort()"
-        class="link-item"
-        :to="{ name: route.path }"
-        @click="closeSidebar"
-        :key="route.name"
-      >
+      <RouterLink v-for="route in routes.sort()" class="link-item" :to="{ name: route.path }" @click="closeSidebar"
+        :key="route.name">
         <Icon :icon="route.icon" />
         <span class="capitalize">{{ route.name }}</span>
       </RouterLink>
     </div>
-    <BaseButton @click="logout" class="logout-button d-noe" text="Logout" />
+    <BaseButton @click="logout" class="logout-button" text="Logout" />
   </nav>
 </template>
 
