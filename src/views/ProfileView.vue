@@ -6,26 +6,33 @@ import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 import BaseTextInput from "@/components/BaseTextInput.vue";
+import BaseButton from "@/components/BaseButton.vue";
 export default defineComponent({
   name: "profile__pageView",
-  components: { AppSwitch, Icon, BaseTextInput },
+  components: { AppSwitch, Icon, BaseTextInput, BaseButton },
   methods: {
     toggleTheme() {
       this.profile.theme = this.profile.theme == "darkMode" ? "" : "darkMode"; //toggles theme value
       document.documentElement.setAttribute("data-theme", this.profile.theme); // sets the data-theme attribute
       localStorage.setItem("theme", this.profile.theme); // stores theme value on local storage
     },
+    updateProfile() {
+      //TODO: implement this controller
+      // this.updateProfileRequest(this.profile);
+      console.log("updated");
+
+    }
   },
   computed: {
     ...mapState(useAuthStore, ["userInformation"]),
     fullname() {
-      return this.userInformation?.fullname || "Jane Doe";
+      return String(this.userInformation?.fullname) || "Jane Doe";
     },
     username() {
-      return this.userInformation?.username || "dhje";
+      return String(this.userInformation?.username) || "username";
     },
     email() {
-      return this.userInformation?.email || "jane@mailer.com";
+      return String(this.userInformation?.email) || "jane@mailer.com";
     },
   },
   data: () => ({
@@ -61,19 +68,12 @@ export default defineComponent({
 
     <section>
       <h3>Account Information</h3>
-      <BaseTextInput placeholder="Jane Doe" label="fullname" />
-      <BaseTextInput
-        placeholder="jane@mailer.com"
-        label="email"
-        type="email"
-        class="field"
-      />
-      <BaseTextInput
-        placeholder=""
-        label="username"
-        type="text"
-        class="field"
-      />
+      <form action="" @submit="updateProfile">
+        <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="fullname" />
+        <BaseTextInput placeholder="jane@mailer.com" label="email" type="email" class="field" v-model="email" />
+        <BaseTextInput placeholder="username" v-model="username" label="username" type="text" class="field" />
+        <BaseButton text="Save Changes" class="field" />
+      </form>
     </section>
 
     <section id="preferences">
@@ -88,23 +88,29 @@ export default defineComponent({
         <AppSwitch v-model="profile.allowPushNotifications" /> allow push
         notifications
       </div>
-      <div><AppSwitch v-model="profile.enable2FA" /> enable 2FA</div>
+      <div>
+        <AppSwitch v-model="profile.enable2FA" /> enable 2FA
+      </div>
     </section>
 
     <section>
       <h3>Security</h3>
 
-      <BaseTextInput
-        placeholder="new password"
-        label="Change Password"
-        type="text"
-        class="field"
-      />
+      <BaseTextInput placeholder="new password" label="Change Password" type="text" class="field" />
     </section>
   </div>
+
+
 </template>
 
 <style scoped>
+button {
+  color: var(--primary);
+  background-color: #f5f5f5;
+  border: 1px solid var(--primary);
+  margin-top: 15px;
+}
+
 #profile__page {
   text-transform: capitalize;
   font-size: 15px;
@@ -173,7 +179,7 @@ export default defineComponent({
   margin-bottom: 18px;
 }
 
-#profile__page-control > div {
+#profile__page-control>div {
   display: flex;
   align-items: center;
   align-content: center;
