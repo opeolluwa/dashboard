@@ -57,13 +57,29 @@ const router = createRouter({
               // get all emails
               path: "",
               name: "emails",
-              component: () => import("@/views/email/EmailView.vue"),
+              component: () => import("@/views/email/AllEmailView.vue"),
             },
             {
               // create new email
-              path: "new-email",
+              path: "new",
               name: "new-email",
               component: () => import("@/views/email/CreateEmailView.vue"),
+            },
+            //TODO:create category
+            {
+              path: "important",
+              name: "important-email",
+              component: () => import("@/views/email/ImportantEmailView.vue")
+            },
+            {
+              path: "starred",
+              name: "starred-email",
+              component: () => import("@/views/email/StarredEmailView.vue") 
+            },
+            {
+              path: "trashed",
+              name: "trashed-email",
+              component: () => import("@/views/email/StarredEmailView.vue")
             },
           ],
         },
@@ -109,7 +125,7 @@ const router = createRouter({
         {
           path: "todo",
           name: "todo",
-          component: () => import("@/views/todo/TodoIndexView.vue"),
+          component: () => import("@/views/todo/TodoIndexView.vue")
         },
       ],
       //add navigation guards here

@@ -40,8 +40,6 @@ export default {
   </div>
   <!-- show the app empty state-->
   <AppEmptyState />
-
-  
 </template>
 
 <style scoped>

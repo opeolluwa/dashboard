@@ -70,7 +70,7 @@ body {
   --toggle-border: 0.125rem;
   --toggle-font-size: 0.75rem;
   --toggle-duration: 150ms;
-  --toggle-bg-on: var(--primary);
+  --toggle-bg-on:#ccc;
   --toggle-bg-off: #e5e7eb;
   --toggle-bg-on-disabled: #8dabd8;
   --toggle-bg-off-disabled: #e5e7eb;

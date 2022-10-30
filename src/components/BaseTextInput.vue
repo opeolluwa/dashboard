@@ -99,6 +99,11 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    // the unresponsive value of the input field
+    /*  value: {
+      type: String,
+      required: false,
+    }, */
   },
   methods: {
     updateModelValue(event: any) {

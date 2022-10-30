@@ -212,6 +212,8 @@ main #view__box {
     height: unset !important;
     min-height: 100vh;
     padding-top: unset;
+    /* padding: 0  0  20px; */
+    margin-bottom: 25px;
   }
 }
 </style>

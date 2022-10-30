@@ -16,6 +16,7 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^1.0.2",
     "@capacitor/android": "^4.3.0",
     "@capacitor/core": "^4.3.0",
     "@capacitor/splash-screen": "^4.1.1",
