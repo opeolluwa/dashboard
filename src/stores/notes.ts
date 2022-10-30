@@ -11,7 +11,7 @@ const AUTH_TOKEN = authStore.getAuthToken;
 
 export const useNoteStore = defineStore("todoStore", {
   state: (): State => ({
-    noteEntries: null,
+    noteEntries: [],
     noOfRows: 10,
     pageIndex: 1,
     isLoading: false,
@@ -29,9 +29,9 @@ export const useNoteStore = defineStore("todoStore", {
      * @param null - accepts no parameter
      * @returns {NotesModel[]} - array of TodoModel or empty array or error
      */
-    async fetchAllNotes(): Promise<void> {
+    async fetchAllNotes(/* pagination:PaginationInterface */): Promise<void> {
       //show loading state of fetch note
-      this.isFetchingEntries = true;
+      this.isLoading = true;
       try {
         const { data: response } = await axios.get(
           "/notes?page=1&noOfRows=10",
@@ -40,21 +40,14 @@ export const useNoteStore = defineStore("todoStore", {
           }
         );
         //assign response to the state and hide the loading icon
-        this.noteEntries = response.data.note;
+        this.noteEntries = response.data.notes;
         this.noOfRows = response.data.noOfRows;
         this.pageIndex = response.DataTransfer.CurrentPage;
-        this.isFetchingEntries = false;
+        this.isLoading = false;
         console.log(JSON.stringify(response));
       } catch (error: any) {
-        this.isFetchingEntries = false;
-        // this.errorMessage = error.data.response.message;
-        // this.Entries = null;
-        //assign note to empty array if there is an error
-        /* const { data: response } = error.response;
-                                if (!response.success) {
-                                    this.errorMessage = response.message;
-                                    this.Entries = null
-                                } */
+        this.isLoading = false;
+
       }
     },
     /**
@@ -65,7 +58,7 @@ export const useNoteStore = defineStore("todoStore", {
      *
      * go on to make request to the endpoint
      */
-    async createNewEntry(payload: NoteInterface): Promise<void> {
+    async createNewEntry(payload: NoteInterface): Promise<Boolean> {
       const authStore = useAuthStore();
       this.isLoading = true;
       try {
@@ -86,13 +79,16 @@ export const useNoteStore = defineStore("todoStore", {
           this.isLoading = false;
           payload.title = "";
           payload.content = "";
+          return true
         }
+        return false
         // console.log(JSON.stringify(response));
       } catch (error: any) {
         this.errorFetchingNotes = true;
         this.isLoading = false;
+        return false
       }
-      this.isLoading = false;
+      // this.isLoading = false;
     },
     /**
      * @function deleteTodo
@@ -109,7 +105,7 @@ export const useNoteStore = defineStore("todoStore", {
         }
         console.log("the note id is ", noteId);
         console.log(JSON.stringify(response));
-      } catch (error) {}
+      } catch (error) { }
     },
   },
 });
@@ -130,7 +126,7 @@ interface State {
 export interface NoteInterface {
   title: String;
   content: String;
-  category: String;
+  category?: String;
 }
 
 /**
@@ -143,4 +139,9 @@ export interface FetchedNotesInterface extends NoteInterface {
   id: String;
   dateAdded: String | Date;
   lastUpdated: String;
+}
+
+interface PaginationInterface {
+  page: Number;
+  noOfRows: Number;
 }

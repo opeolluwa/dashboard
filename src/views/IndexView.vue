@@ -174,7 +174,7 @@ main header {
 main #view__box {
   grid-area: view;
   background-color: #f9f9f9;
-  height: 100vh !important;
+  min-height: 100vh !important;
   padding-top: 25px;
 }
 

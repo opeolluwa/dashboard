@@ -1,14 +1,11 @@
 <script lang="ts">
 import { Icon } from "@iconify/vue";
-import BaseButton from "./BaseButton.vue";
-// import router from "@/router";
 import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions } from "pinia";
 export default defineComponent({
   name: "AppNavigation",
   components: {
-    BaseButton,
     Icon,
   },
   data: () => ({
@@ -29,11 +26,11 @@ export default defineComponent({
         icon: "mdi:email-outline",
         path: "emails",
         children: [
-          /*   {
-              // get all emails
-              path: "",
-              name: "emails",
-            }, */
+          {
+            // get all emails
+            path: "emails",
+            name: "inbox",
+          },
           {
             // create new email
             name: "new",
@@ -52,7 +49,7 @@ export default defineComponent({
             name: "trashed",
             path: "trashed-email",
           },
-        ]
+        ],
       },
 
       {
@@ -68,7 +65,7 @@ export default defineComponent({
             name: "new entry",
             path: "add-note",
           },
-        ]
+        ],
       },
       {
         name: "todo",
@@ -120,8 +117,6 @@ export default defineComponent({
         item.nextElementSibling?.classList.toggle("show");
 
         // alert(item.?.innerHTML);
-
-        
       });
     });
   },
@@ -156,9 +151,8 @@ export default defineComponent({
       <!--the links-->
       <div v-for="route in routes.sort()" :key="route.name"
         :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']">
-
-        <!--use templates bases on if a route has children routes-->
-        <template v-if="route.children">
+        <!--use  this templates bases on if a route has children routes-->
+        <template v-if="route.children" @click="closeSidebar">
           <div class="nav__link__parent link__item dropdown">
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
@@ -167,22 +161,28 @@ export default defineComponent({
           <ul v-if="route.children" class="children__routes">
             <li v-for="child in route.children">
               <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name" class="child__route">
-                <span class="capitalize">{{ child.name.replaceAll("-", " ") }}</span>
+                <span class="capitalize">{{
+                    child.name.replaceAll("-", " ")
+                }}</span>
               </RouterLink>
             </li>
           </ul>
         </template>
 
-
-        <template v-else>
+        <!--use this template if -->
+        <template v-else @click="closeSidebar">
           <RouterLink :to="{ name: route.path }" class="link__item">
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
           </RouterLink>
         </template>
       </div>
+      <!-- the last out logout button-->
+      <div class="link__item" @click="logout">
+        <Icon icon="mdi:logout" />
+        <span>logout</span>
+      </div>
     </div>
-    <BaseButton @click="logout" class="logout-button" text="Logout" />
   </nav>
 </template>
 
@@ -199,16 +199,9 @@ nav {
   height: 100vh;
   overflow-y: scroll;
   cursor: pointer;
+  padding-bottom: 40px;
   /* z-index: 50000; */
 }
-
-/* nav {
-  background-color: var(--primary);
-  width: 75%;
-  height: 100%;
-} */
-
-
 
 .children__routes {
   margin-left: 80px;
@@ -217,20 +210,21 @@ nav {
   transition: all 200ms ease;
 }
 
-.children__route .child__route {
-  color: var(--light-text);
-  margin-bottom: 5px;
+.children__routes li.child__route {
+  margin-bottom: 25px;
+  /* padding: 15px 5px; */
+  /* display: none; */
 }
 
 .show {
   display: block !important;
 }
+
 nav .link__item {
   display: flex;
   width: 100%;
   align-items: center;
-  padding: 15px 50px;
-  height: 20px;
+  padding: 20px 30px 10px;
   border-radius: 5px;
   display: inline-flex;
   align-items: flex-end;
@@ -240,7 +234,6 @@ nav .link__item {
   font-size: 18px;
   transition: all 0.2s ease-in-out;
   position: relative;
-
 }
 
 nav .link__item:hover,
@@ -254,7 +247,7 @@ nav .link__item:hover,
 .logout-button {
   width: 80%;
   background-color: var(--white);
-  position: absolute;
+  /* position: absolute; */
   bottom: 35px;
   margin: 0 auto;
   display: block;
@@ -292,13 +285,8 @@ nav .link__item:hover,
     height: auto;
   }
 
-  .logout-button {
-    margin-top: 35px;
-    position: static;
-  }
-
   nav .link__item {
-    padding: 15px 30px;
+    padding: 8px 30px;
   }
 
   nav .link__item:first-child {

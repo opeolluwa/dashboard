@@ -1,39 +1,17 @@
 <template>
-  <form>
-    <BaseTextInput
-      label="title"
-      type="text"
-      placeholder="Ex: how to create repo"
-      :model="note.title"
-      class="field"
-    />
+  <form @submit.prevent="addEntry">
+    <BaseTextInput label="title" type="text" placeholder="Ex: how to create repo" v-model="note.title" class="field" />
     <!--text editor here -->
-    <BaseTextarea
-      v-if="!useMdEditor"
-      placeholder="provide note details here"
-      label="content"
-      v-model="note.content"
-    />
+    <BaseTextarea v-if="!useMdEditor" placeholder="provide note details here" label="content" v-model="note.content" />
     <!--markdown editor-->
     <div id="md__editor" v-else>
       <label for="Content">Content</label>
-      <MdEditor
-        v-model="note.content"
-        :preview="false"
-        language="en-US"
-        placeholder="provide note details here"
-        style="margin-bottom: 20px"
-      ></MdEditor>
+      <MdEditor v-model="note.content" :preview="false" language="en-US" placeholder="provide note details here"
+        style="margin-bottom: 20px"></MdEditor>
     </div>
     <div id="editor__type">
-      <input
-        type="checkbox"
-        name="editor-style"
-        id=""
-        v-model="useMdEditor"
-        :toolbarsExclude="mdToolBarExclude"
-        :showCodeRowNumber="true"
-      />
+      <input type="checkbox" name="editor-style" id="" v-model="useMdEditor" :toolbarsExclude="mdToolBarExclude"
+        :showCodeRowNumber="true" />
       <label for="editor-style">Use Markdown Editor</label>
     </div>
     <BaseButton text="Save Entry" class="field" />
@@ -47,6 +25,8 @@ import BaseTextInput from "@/components/BaseTextInput.vue";
 import { defineComponent } from "vue";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
+import { useNoteStore } from "@/stores/notes";
+import { mapActions } from "pinia";
 export default defineComponent({
   name: "CreateNewNoteEntry",
   data: () => ({
@@ -62,6 +42,16 @@ export default defineComponent({
     BaseTextInput,
     BaseTextarea,
     MdEditor,
+  },
+  methods: {
+    ...mapActions(useNoteStore, ["createNewEntry"]),
+    async addEntry() {
+      const successfulRequest = await this.createNewEntry({ ...this.note });
+      if (successfulRequest) {
+        Object.assign(this.note, { title: "", content: "" })
+        this.$router.replace({ name: "all-notes" });
+      }
+    },
   },
 });
 </script>

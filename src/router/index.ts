@@ -69,17 +69,17 @@ const router = createRouter({
             {
               path: "important",
               name: "important-email",
-              component: () => import("@/views/email/ImportantEmailView.vue")
+              component: () => import("@/views/email/ImportantEmailView.vue"),
             },
             {
               path: "starred",
               name: "starred-email",
-              component: () => import("@/views/email/StarredEmailView.vue") 
+              component: () => import("@/views/email/StarredEmailView.vue"),
             },
             {
               path: "trashed",
               name: "trashed-email",
-              component: () => import("@/views/email/StarredEmailView.vue")
+              component: () => import("@/views/email/StarredEmailView.vue"),
             },
           ],
         },
@@ -125,7 +125,7 @@ const router = createRouter({
         {
           path: "todo",
           name: "todo",
-          component: () => import("@/views/todo/TodoIndexView.vue")
+          component: () => import("@/views/todo/TodoIndexView.vue"),
         },
       ],
       //add navigation guards here
