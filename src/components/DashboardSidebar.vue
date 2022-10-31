@@ -149,8 +149,11 @@ export default defineComponent({
   <nav>
     <div id="nav__content">
       <!--the links-->
-      <div v-for="route in routes.sort()" :key="route.name"
-        :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']">
+      <div
+        v-for="route in routes.sort()"
+        :key="route.name"
+        :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']"
+      >
         <!--use  this templates bases on if a route has children routes-->
         <template v-if="route.children" @click="closeSidebar">
           <div class="nav__link__parent link__item dropdown">
@@ -160,9 +163,14 @@ export default defineComponent({
           </div>
           <ul v-if="route.children" class="children__routes">
             <li v-for="child in route.children">
-              <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name" class="child__route">
+              <RouterLink
+                @click="closeSidebar"
+                :to="{ name: child.path }"
+                :key="child.name"
+                class="child__route"
+              >
                 <span class="capitalize">{{
-                    child.name.replaceAll("-", " ")
+                  child.name.replaceAll("-", " ")
                 }}</span>
               </RouterLink>
             </li>

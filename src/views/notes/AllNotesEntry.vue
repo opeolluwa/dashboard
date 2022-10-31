@@ -8,7 +8,7 @@ import { useNoteStore } from "@/stores/notes";
 import { mapState, mapActions } from "pinia";
 import Spinner from "@/components/AppLoader.vue";
 import Timeago from "vue3-timeago";
-import Observer from 'vue-intersection-observer'
+import Observer from "vue-intersection-observer";
 export default {
   name: "ProjectView",
   components: {
@@ -19,7 +19,7 @@ export default {
     AppEmptyState,
     Spinner,
     Timeago,
-    Observer
+    Observer,
   },
   data: () => ({
     showProjectModal: false,
@@ -32,7 +32,7 @@ export default {
       technologies: "",
     },
   }),
-  created() {
+  mounted() {
     // watch the params of the route to fetch the data again
     this.$watch(
       () => this.$route.params,
@@ -43,7 +43,7 @@ export default {
       // fetch the data when the view is created and the data is
       // already being observed
       { immediate: true }
-    )
+    );
   },
   computed: {
     ...mapState(useNoteStore, [
@@ -60,9 +60,14 @@ export default {
     },
     // handle the intersection observer
     handleIntersection() {
-      alert("fool")
+      alert("fool");
       this.fetchNoteRequests();
-
+    },
+    editNote(noteId: String) {
+      this.$router.push({
+        name: "edit-note",
+        params: { noteId: String(noteId) },
+      });
     },
   },
 };
@@ -81,16 +86,26 @@ export default {
   <AppNetworkError v-if="!isLoading && noteEntries?.length === 0" />
   <!--display the data-->
   <div>
-    <div class="note__entry" v-for="noteEntry in noteEntries" :key="
-    noteEntry.id.toString()">
+    <div
+      class="note__entry"
+      v-for="noteEntry in noteEntries"
+      :key="noteEntry.id.toString()"
+      @click="editNote(noteEntry.id.toString())"
+    >
       <!--header-->
-      <div class="note__entry__header ">
+      <div class="note__entry__header">
         <h3 class="trim__text">{{ noteEntry.title }}</h3>
         <p class="note__entry__header__date">
-          {{ new Date(noteEntry.dateAdded.toString()).toLocaleDateString(undefined, {
-              weekday: 'short', year: 'numeric', month:
-                'short', day: 'numeric'
-            })
+          {{
+            new Date(noteEntry.dateAdded.toString()).toLocaleDateString(
+              undefined,
+              {
+                weekday: "short",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }
+            )
           }}
           <!-- <Timeago :datetime="noteEntry.dateAdded" /> -->
         </p>
@@ -98,7 +113,7 @@ export default {
         <!-- <timeago :datetime="noteEntry.dateAdded" /> -->
       </div>
       <!--content-->
-      <div class="note__entry__content ">
+      <div class="note__entry__content">
         <p class="trim__text">{{ noteEntry.content }}</p>
       </div>
     </div>
@@ -108,48 +123,6 @@ export default {
 </template>
 
 <style scoped>
-.note__entry {
-  padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
-  cursor: pointer;
-}
-
-.note__entry .note__entry__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.note__entry .note__entry__header h3 {
-  font-size: 1.2rem;
-  display: inline-block;
-  font-size: 18px;
-  line-height: 28px;
-  text-transform: capitalize;
-  width: 120px;
-}
-
-.note__entry .note__entry__content {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  color: var(--secondary);
-
-}
-
-.note__entry .note__entry__content p {
-  width: 200px;
-}
-
-
-.note__entry__header__date {
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--secondary);
-}
-
 .header {
   display: flex;
   flex-direction: flex-end;

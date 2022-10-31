@@ -25,7 +25,7 @@ export default defineComponent({
    * if token does not exists, redirect to login page
    * else use the token to make request to the server, if the server return a valid response, enter this routes else redirect to login page
    */
-  /* beforeRouteEnter(to, from, next) {
+  beforeRouteEnter(to, from, next) {
     // async function checkBearerTokenValidity() {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -61,7 +61,7 @@ export default defineComponent({
     }
     // }
     // checkBearerTokenValidity();
-  }, */
+  },
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
@@ -123,10 +123,7 @@ export default defineComponent({
 <template>
   <div class="container">
     <!-- the side bar-->
-    <DashboardSidebar
-      v-show="showSidebar"
-      @close-sidebar="showSidebar = false"
-    />
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />

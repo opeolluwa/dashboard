@@ -1,1 +1,1 @@
-declare module 'vue-intersection-observer'
+declare module "vue-intersection-observer";

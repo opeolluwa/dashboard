@@ -104,6 +104,12 @@ const router = createRouter({
               name: "add-note",
               component: () => import("@/views/notes/CreateNoteView.vue"),
             },
+            {
+              path: "edit-note/:noteId",
+              name: "edit-note",
+              props: true,
+              component: () => import("@/views/notes/EditNoteView.vue"),
+            },
           ],
         },
         {
