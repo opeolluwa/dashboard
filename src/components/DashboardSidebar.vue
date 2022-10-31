@@ -1,14 +1,11 @@
 <script lang="ts">
 import { Icon } from "@iconify/vue";
-import BaseButton from "./BaseButton.vue";
-// import router from "@/router";
 import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions } from "pinia";
 export default defineComponent({
   name: "AppNavigation",
   components: {
-    BaseButton,
     Icon,
   },
   data: () => ({
@@ -20,24 +17,72 @@ export default defineComponent({
         path: "home",
       },
       {
-        name: "emails",
-        icon: "mdi:email-outline",
-        path: "emails",
-      },
-      {
         name: "notification",
         icon: "mdi:bell-outline",
         path: "notification",
       },
       {
+        name: "emails",
+        icon: "mdi:email-outline",
+        path: "emails",
+        children: [
+          {
+            // get all emails
+            path: "emails",
+            name: "inbox",
+          },
+          {
+            // create new email
+            name: "new",
+            path: "new-email",
+          },
+          //TODO:create category
+          {
+            name: "important",
+            path: "important-email",
+          },
+          {
+            name: "starred",
+            path: "starred-email",
+          },
+          {
+            name: "trashed",
+            path: "trashed-email",
+          },
+        ],
+      },
+
+      {
         name: "notes",
         icon: "mdi:note-edit-outline",
         path: "all-notes",
+        children: [
+          {
+            name: "all entries",
+            path: "all-notes",
+          },
+          {
+            name: "new entry",
+            path: "add-note",
+          },
+        ],
       },
       {
         name: "todo",
         icon: "mdi:format-list-checks",
         path: "todo",
+        /*   children: [
+            {
+              name: "todo",
+              icon: "mdi:format-list-checks",
+              path: "todo",
+            },
+            {
+              name: "completed",
+              icon: "mdi:format-list-checks",
+              path: "completed",
+            },
+          ] */
       },
       {
         name: "profile",
@@ -49,6 +94,11 @@ export default defineComponent({
         icon: "mdi:cog-outline",
         path: "settings",
       },
+      {
+        name: "help",
+        icon: "mdi:help-circle-outline",
+        path: "settings",
+      },
     ],
   }),
   computed: {
@@ -56,6 +106,19 @@ export default defineComponent({
       const route = this.$route.name;
       return String(route) || "360 Devs";
     },
+  },
+  mounted() {
+    //display dropdown on click or on mouse over parent container
+    const dropdown = document.querySelectorAll(".dropdown");
+    dropdown.forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        // item.classList.toggle("show");
+        item.nextElementSibling?.classList.toggle("show");
+
+        // alert(item.?.innerHTML);
+      });
+    });
   },
   methods: {
     //get the logout action from the store
@@ -83,22 +146,43 @@ export default defineComponent({
 </script>
 
 <template>
-  <nav @click="closeSidebar">
+  <nav>
     <div id="nav__content">
       <!--the links-->
-      <RouterLink
-        v-for="route in routes.sort()"
-        class="link__item"
-        :to="{ name: route.path }"
-        @click="closeSidebar"
-        :key="route.name"
-        :class="[route.name === currentRouteName ? 'active' : '']"
-      >
-        <Icon :icon="route.icon" />
-        <span class="capitalize">{{ route.name }}</span>
-      </RouterLink>
+      <div v-for="route in routes.sort()" :key="route.name"
+        :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']">
+        <!--use  this templates bases on if a route has children routes-->
+        <template v-if="route.children" @click="closeSidebar">
+          <div class="nav__link__parent link__item dropdown">
+            <Icon :icon="route.icon" />
+            <span>{{ route.name }}</span>
+            <Icon icon="mdi:menu-down" />
+          </div>
+          <ul v-if="route.children" class="children__routes">
+            <li v-for="child in route.children">
+              <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name" class="child__route">
+                <span class="capitalize">{{
+                    child.name.replaceAll("-", " ")
+                }}</span>
+              </RouterLink>
+            </li>
+          </ul>
+        </template>
+
+        <!--use this template if -->
+        <template v-else @click="closeSidebar">
+          <RouterLink :to="{ name: route.path }" class="link__item">
+            <Icon :icon="route.icon" />
+            <span>{{ route.name }}</span>
+          </RouterLink>
+        </template>
+      </div>
+      <!-- the last out logout button-->
+      <div class="link__item" @click="logout">
+        <Icon icon="mdi:logout" />
+        <span>logout</span>
+      </div>
     </div>
-    <BaseButton @click="logout" class="logout-button" text="Logout" />
   </nav>
 </template>
 
@@ -115,22 +199,33 @@ nav {
   height: 100vh;
   overflow-y: scroll;
   cursor: pointer;
+  padding-bottom: 40px;
   /* z-index: 50000; */
 }
 
-/* nav {
-  background-color: var(--primary);
-  width: 75%;
-  height: 100%;
-} */
+.children__routes {
+  margin-left: 80px;
+  list-style: disc;
+  display: none;
+  transition: all 200ms ease;
+}
+
+.children__routes li.child__route {
+  margin-bottom: 25px;
+  /* padding: 15px 5px; */
+  /* display: none; */
+}
+
+.show {
+  display: block !important;
+}
 
 nav .link__item {
   display: flex;
   width: 100%;
   align-items: center;
-  padding: 15px 50px;
+  padding: 20px 30px 10px;
   border-radius: 5px;
-  margin-bottom: 15px;
   display: inline-flex;
   align-items: flex-end;
   text-decoration: none;
@@ -138,6 +233,7 @@ nav .link__item {
   column-gap: 15px;
   font-size: 18px;
   transition: all 0.2s ease-in-out;
+  position: relative;
 }
 
 nav .link__item:hover,
@@ -151,7 +247,7 @@ nav .link__item:hover,
 .logout-button {
   width: 80%;
   background-color: var(--white);
-  position: absolute;
+  /* position: absolute; */
   bottom: 35px;
   margin: 0 auto;
   display: block;
@@ -189,13 +285,8 @@ nav .link__item:hover,
     height: auto;
   }
 
-  .logout-button {
-    margin-top: 35px;
-    position: static;
-  }
-
   nav .link__item {
-    padding: 15px 30px;
+    padding: 8px 30px;
   }
 
   nav .link__item:first-child {

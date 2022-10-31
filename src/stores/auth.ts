@@ -110,7 +110,7 @@ export const useAuthStore = defineStore("authStore", {
       // console.log("go new token")
       try {
         const { data: response } = await axios.get("/auth", {
-          headers: { Authorization: `Bearer ${this.authorizationToken}` },
+          // headers: { Authorization: `Bearer ${this.authorizationToken}` },
         });
         //if the request is successful, store the data and
         if (response.success) {
@@ -121,6 +121,28 @@ export const useAuthStore = defineStore("authStore", {
       } catch (error: any) {
         console.log("something bad happened ", error.message);
       }
+    },
+    /**
+     * @function updateInformation the use account information
+     * on success, update the state
+     */
+    async updateUserInformation(payload: any) {
+      console.log(JSON.stringify(payload));
+
+      /* try {
+        const { data: response } = await axios.put("/auth/me", {
+          ...payload
+          // headers: { Authorization: `Bearer ${this.authorizationToken}` },
+        });
+        //if the request is successful, store the data and
+        if (response.success) {
+          localStorage.setItem("user", response.data.user);
+        } else {
+          console.log("something bad happened ");
+        }
+      } catch (error: any) {
+        console.log("something bad happened ", error.message);
+      } */
     },
   },
 });

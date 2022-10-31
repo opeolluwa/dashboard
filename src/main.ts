@@ -11,6 +11,14 @@ import { useAuthStore } from "@/stores/auth";
 
 //ccpacitor config
 import { SplashScreen } from "@capacitor/splash-screen";
+import timeago from 'vue-timeago3'
+const timeagoOptions = {
+  converterOptions: {
+    includeSeconds: false,
+  }
+}  
+//auth0 social login config
+// import { createAuth0 } from "@auth0/auth0-vue";
 const app = createApp(App);
 
 export {};
@@ -32,6 +40,7 @@ declare global {
 });
 app.use(createPinia());
 app.use(router);
+app.use(timeago, timeagoOptions);
 
 app.mount("#app");
 

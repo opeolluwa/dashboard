@@ -195,7 +195,7 @@ sup {
 /**--------------------mobile devices styling------------------------ */
 @media screen and (max-width: 768px) {
   header {
-    padding: 8px 30px;
+    padding: 8px 20px;
     position: fixed;
     top: 0;
     left: 0;

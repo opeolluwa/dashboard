@@ -192,9 +192,9 @@ button,
 
 #login__page .title p {
   align-items: center;
-    justify-content: center;
-    line-height: 28px;
-    color: var(--secondary);
+  justify-content: center;
+  line-height: 28px;
+  color: var(--secondary);
 }
 
 /** -----------------------------small devices------------------------ */
