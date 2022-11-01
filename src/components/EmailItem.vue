@@ -172,7 +172,7 @@ div.email__controls {
     align-items: flex-start;
     justify-content: flex-start;
     margin-right: 7.5px;
-    font-family: mulish;
+    
     row-gap: 2px;
   }
 

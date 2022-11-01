@@ -180,7 +180,7 @@ export default defineComponent({
 .select__form__field label {
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  font-family: "Open Sans";
+  
 }
 
 .select__form__field select {
@@ -226,7 +226,7 @@ export default defineComponent({
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  font-family: "Open Sans";
+  
 }
 
 .form__field select option {

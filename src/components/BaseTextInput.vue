@@ -151,15 +151,15 @@ export default defineComponent({
   font-size: 14px;
   margin-top: 10px;
   color: var(--secondary);
-  text-align: left !important;
+  text-align: right !important;
 }
 
 .forgotten_password a {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .forgotten_password {
-  text-align: right !important;
+  text-align: left !important;
   text-transform: lowercase;
   font-size: 0.85rem;
   margin-top: 5px;
@@ -174,7 +174,7 @@ export default defineComponent({
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  font-family: "Open Sans";
+  
 }
 
 .form__field input {

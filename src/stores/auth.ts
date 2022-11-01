@@ -73,7 +73,7 @@ export const useAuthStore = defineStore("authStore", {
         if (response.success) {
           this.userInformation = response.data.user;
           localStorage.setItem("user", response.data.user);
-          router.push({ name: "home" });
+          router.replace({ name: "home" });
         } else {
           //handle the error here bu going back to login page
           localStorage.removeItem("token");

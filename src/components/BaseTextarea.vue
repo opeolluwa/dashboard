@@ -62,7 +62,7 @@ export default {
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  font-family: "Open Sans";
+  
 }
 
 .form__field textarea {

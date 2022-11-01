@@ -1860,7 +1860,7 @@ svg#freepik_stories-404-error-with-a-cute-animal.animated
   }
   h1,
   h2 {
-    font-family: mulish;
+    
     display: none;
   }
 }

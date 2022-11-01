@@ -9,7 +9,25 @@ import { mapState, mapActions } from "pinia";
 import Spinner from "@/components/AppLoader.vue";
 import Timeago from "vue3-timeago";
 import Observer from "vue-intersection-observer";
-export default {
+import { defineComponent } from "vue";
+import { marked } from "marked";
+import hljs from "highlight.js"
+// `highlight` example uses https://highlightjs.org
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  highlight: function (code, lang) {
+    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+    return hljs.highlight(code, { language }).value;
+  },
+  langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+  pedantic: false,
+  gfm: true,
+  breaks: false,
+  sanitize: false,
+  smartypants: false,
+  xhtml: false
+});
+export default defineComponent({
   name: "ProjectView",
   components: {
     BaseButton,
@@ -52,6 +70,10 @@ export default {
       "pageIndex",
       "isLoading",
     ]),
+    /* markedContent() {
+      return marked.parse(String(this.fetchedNote.content));
+    } */
+
   },
   methods: {
     ...mapActions(useNoteStore, ["fetchAllNotes"]),
@@ -69,8 +91,12 @@ export default {
         params: { noteId: String(noteId) },
       });
     },
+    //render mark down
+    renderMarkDown(content: String) {
+      return marked.parse(String(content));
+    },
   },
-};
+});
 </script>
 
 <template>
@@ -86,26 +112,22 @@ export default {
   <AppNetworkError v-if="!isLoading && noteEntries?.length === 0" />
   <!--display the data-->
   <div>
-    <div
-      class="note__entry"
-      v-for="noteEntry in noteEntries"
-      :key="noteEntry.id.toString()"
-      @click="editNote(noteEntry.id.toString())"
-    >
+    <div class="note__entry" v-for="noteEntry in noteEntries" :key="noteEntry.id.toString()"
+      @click="editNote(noteEntry.id.toString())">
       <!--header-->
       <div class="note__entry__header">
         <h3 class="trim__text">{{ noteEntry.title }}</h3>
         <p class="note__entry__header__date">
           {{
-            new Date(noteEntry.dateAdded.toString()).toLocaleDateString(
-              undefined,
-              {
-                weekday: "short",
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              }
-            )
+              new Date(noteEntry.dateAdded.toString()).toLocaleDateString(
+                undefined,
+                {
+                  weekday: "short",
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                }
+              )
           }}
           <!-- <Timeago :datetime="noteEntry.dateAdded" /> -->
         </p>
@@ -114,7 +136,7 @@ export default {
       </div>
       <!--content-->
       <div class="note__entry__content">
-        <p class="trim__text">{{ noteEntry.content }}</p>
+        <p class="trim__text" v-html="renderMarkDown(noteEntry.content)"></p>
       </div>
     </div>
   </div>
@@ -127,6 +149,11 @@ export default {
   display: flex;
   flex-direction: flex-end;
   justify-content: flex-end;
+}
+
+.note__entry .note__entry__content p {
+  line-height: 1.5;
+  height: 30px;
 }
 
 .add-new-button,

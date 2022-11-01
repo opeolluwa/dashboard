@@ -53,7 +53,7 @@ export default defineComponent({
   width: 80%;
   align-items: center;
   margin: 0 auto;
-  font-family: "mulish", sans-serif;
+ 
 }
 
 .empty-state button {

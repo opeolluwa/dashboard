@@ -186,7 +186,7 @@ export default defineComponent({
         </template>
       </div>
       <!-- the last out logout button-->
-      <div class="link__item" @click="logout">
+      <div class="link__item" @click="logout" id="logout__btn">
         <Icon icon="mdi:logout" />
         <span>logout</span>
       </div>
@@ -239,7 +239,7 @@ nav .link__item {
   text-decoration: none;
   color: var(--light-text);
   column-gap: 15px;
-  font-size: 18px;
+  font-size: 17px;
   transition: all 0.2s ease-in-out;
   position: relative;
 }
@@ -294,13 +294,18 @@ nav .link__item:hover,
   }
 
   nav .link__item {
-    padding: 8px 30px;
+    padding: 7.5px 30px;
+  /* padding: 20px 30px 10px; */
   }
 
   nav .link__item:first-child {
-    margin-top: 35px;
+    margin-top: 20px;
   }
 
+  #logout__btn{
+    margin-top: 15px;
+    /* margin-top: 35px; */
+  }
   .close {
     position: absolute;
     top: 20px;

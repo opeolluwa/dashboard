@@ -186,7 +186,7 @@ export default defineComponent({
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 3px;
-  font-family: "mulish";
+
   font-weight: 600;
   font-size: 15.5px;
   width: 170px;

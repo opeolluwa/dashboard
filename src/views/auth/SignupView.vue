@@ -202,7 +202,7 @@ button,
 }
 
 #sign__up__page .title h1 {
-  font-family: "Poppins";
+  
   font-style: normal;
   font-weight: 500;
   font-size: 24px;

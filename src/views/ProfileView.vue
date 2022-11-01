@@ -94,33 +94,12 @@ export default defineComponent({
     <section id="user__information">
       <h3>Account Information</h3>
       <form action="" @submit.prevent="updateProfile">
-        <BaseTextInput
-          placeholder="Jane Doe"
-          label="fullname"
-          v-model="fullname"
-        />
-        <BaseTextInput
-          placeholder="jane@mailer.com"
-          label="email"
-          type="email"
-          class="field"
-          v-model="email"
-        />
-        <BaseTextInput
-          placeholder="username"
-          v-model="username"
-          label="username"
-          type="text"
-          class="field"
-        />
+        <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="fullname" />
+        <BaseTextInput placeholder="jane@mailer.com" label="email" type="email" class="field" v-model="email" />
+        <BaseTextInput placeholder="username" v-model="username" label="username" type="text" class="field" />
         <BaseButton text="" :disabled="disabledState">
           <span v-show="!isLoading">Save Changes</span>
-          <Spinner
-            :animation-duration="1000"
-            :size="30"
-            :color="'#ffffff'"
-            v-show="isLoading"
-          />
+          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
         </BaseButton>
       </form>
     </section>
@@ -139,34 +118,27 @@ export default defineComponent({
         <AppSwitch v-model="preferences.allowPushNotifications" /> allow push
         notifications
       </div>
-      <div><AppSwitch v-model="preferences.enable2FA" /> enable 2FA</div>
+      <div>
+        <AppSwitch v-model="preferences.enable2FA" /> enable 2FA
+      </div>
     </section>
 
     <section>
       <h3>Security</h3>
 
-      <BaseTextInput
-        placeholder="new password"
-        label="New Password"
-        type="password"
-        class="field"
-      />
-      <BaseTextInput
-        placeholder="new password"
-        label="Confirm Password"
-        type="password"
-        class="field"
-      />
+      <BaseTextInput placeholder="new password" label="New Password" type="password" class="field" />
+      <BaseTextInput placeholder="new password" label="Confirm Password" type="password" class="field" />
     </section>
   </div>
 </template>
 
 <style scoped>
 #user__information button {
-  color: var(--primary);
+  color: inherit;
   background-color: #f5f5f5;
   border: 1px solid var(--primary);
   margin-top: 25px;
+  width: unset;
 }
 
 #profile__page {
@@ -195,9 +167,9 @@ export default defineComponent({
 }
 
 #profile__page small {
-  font-family: "Inter", sans-serif;
+
   font-weight: 400;
-  font-family: "Open Sans", sans-serif;
+
   text-transform: lowercase;
   color: #9ca3af;
 }
@@ -229,15 +201,15 @@ export default defineComponent({
 }
 
 #profile__page section h3 {
-  font-size: 1.2rem;
-  font-family: "poppins";
+  font-size: 14.5px;
+  font-weight: 500;
   font-weight: 500;
   line-height: 28px;
-  color: #000;
+  color: var(--secondary);
   margin-bottom: 18px;
 }
 
-#profile__page-control > div {
+#profile__page-control>div {
   display: flex;
   align-items: center;
   align-content: center;
@@ -252,5 +224,12 @@ export default defineComponent({
 
 section {
   margin-bottom: 4.75rem;
+}
+
+@media screen and (max-width: 768px) {
+  #user__information button {
+    width: 100%;
+
+  }
 }
 </style>

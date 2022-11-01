@@ -40,7 +40,7 @@
             <!--content-->
             <h3 class="note__title">{{ fetchedNote.title }}</h3>
             <div class="note__entry__content">
-                <p>{{ fetchedNote.content }}</p>
+                <p v-html="markedContent"></p>
             </div>
         </div>
     </div>
@@ -52,6 +52,23 @@ import { mapState, mapActions } from "pinia";
 import { useNoteStore, type FetchedNoteInterface } from "@/stores/notes";
 import { Icon } from "@iconify/vue";
 import AppCard from "@/components/AppCard.vue";
+import { marked } from "marked";
+import hljs from "highlight.js"
+// `highlight` example uses https://highlightjs.org
+marked.setOptions({
+    renderer: new marked.Renderer(),
+    highlight: function (code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language }).value;
+    },
+    langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+    pedantic: false,
+    gfm: true,
+    breaks: false,
+    sanitize: false,
+    smartypants: false,
+    xhtml: false
+});
 export default defineComponent({
     name: "EditEmailView",
     components: {
@@ -71,6 +88,9 @@ export default defineComponent({
         fetchedNote(): FetchedNoteInterface {
             return this.getNoteById(String(this.noteId)) as unknown as FetchedNoteInterface;
         },
+        markedContent() {
+            return marked.parse(String(this.fetchedNote.content));
+        }
     },
     methods: {
         ...mapActions(useNoteStore, ["deleteNote"]),
@@ -134,12 +154,12 @@ export default defineComponent({
 }
 
 #edit__note__page .note__entry__header {
-    border-bottom: 1px solid var(--border-color);
+    /* border-bottom: 1px solid var(--border-color); */
     padding-bottom: 1rem;
 }
 
 #edit__note__page .note__entry .note__entry__content p {
-    width: unset;
+    width: 100%;
     line-height: 28px;
     color: unset;
 }
@@ -147,7 +167,7 @@ export default defineComponent({
 #edit__note__page h3.note__title {
     text-transform: capitalize;
     margin-top: 1.75rem;
-    /* margin-bottom: -3px; */
+    margin-bottom: 3px;
 }
 
 /* .delete{
