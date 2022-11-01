@@ -103,7 +103,7 @@ export default defineComponent({
   <!--show loader if fetching all todo-->
   <div v-if="isLoading" class="fetching__data">
     <Spinner />
-    <p>fetching todo</p>
+    <p>fetching entries </p>
   </div>
   <!-- show the app empty state if no entries -->
   <AppEmptyState v-if="noteEntries?.length === 0" />
@@ -111,7 +111,7 @@ export default defineComponent({
   <!--display for error-->
   <AppNetworkError v-if="!isLoading && noteEntries?.length === 0" />
   <!--display the data-->
-  <div>
+  <div v-else>
     <div class="note__entry" v-for="noteEntry in noteEntries" :key="noteEntry.id.toString()"
       @click="editNote(noteEntry.id.toString())">
       <!--header-->

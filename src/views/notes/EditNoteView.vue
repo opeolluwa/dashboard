@@ -22,7 +22,7 @@
                 <!--icon-->
                 <Icon icon="mdi:dots-vertical" @click="showOptions = true" @mouseover="showOptions = true" />
                 <!--controls-->
-                <div id="edit__note__controls" v-show="showOptions">
+                <div id="edit__note__controls" v-show="showOptions" @click="showOptions = false">
                     <div>
                         <Icon icon="mdi:star-outline" class="star" />
                         <span> Star </span>

@@ -149,28 +149,19 @@ export default defineComponent({
   <nav>
     <div id="nav__content">
       <!--the links-->
-      <div
-        v-for="route in routes.sort()"
-        :key="route.name"
-        :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']"
-      >
+      <div v-for="route in routes.sort()" :key="route.name">
         <!--use  this templates bases on if a route has children routes-->
         <template v-if="route.children" @click="closeSidebar">
-          <div class="nav__link__parent link__item dropdown">
+          <div class="nav__link__parent link__item dropdown capitalize">
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
             <Icon icon="mdi:menu-down" />
           </div>
           <ul v-if="route.children" class="children__routes">
-            <li v-for="child in route.children">
-              <RouterLink
-                @click="closeSidebar"
-                :to="{ name: child.path }"
-                :key="child.name"
-                class="child__route"
-              >
+            <li v-for="child in route.children" class="child__route" >
+              <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name"  :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']">
                 <span class="capitalize">{{
-                  child.name.replaceAll("-", " ")
+                    child.name.replaceAll("-", " ")
                 }}</span>
               </RouterLink>
             </li>
@@ -179,7 +170,7 @@ export default defineComponent({
 
         <!--use this template if -->
         <template v-else @click="closeSidebar">
-          <RouterLink :to="{ name: route.path }" class="link__item">
+          <RouterLink :to="{ name: route.path }" class="link__item"  :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']">
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
           </RouterLink>
@@ -219,9 +210,8 @@ nav {
 }
 
 .children__routes li.child__route {
-  margin-bottom: 25px;
-  /* padding: 15px 5px; */
-  /* display: none; */
+  /* margin-bottom: 25px; */
+  padding: 15px 5px;
 }
 
 .show {
@@ -232,7 +222,7 @@ nav .link__item {
   display: flex;
   width: 100%;
   align-items: center;
-  padding: 20px 30px 10px;
+  padding: 20px 30px;
   border-radius: 5px;
   display: inline-flex;
   align-items: flex-end;
@@ -242,35 +232,20 @@ nav .link__item {
   font-size: 17px;
   transition: all 0.2s ease-in-out;
   position: relative;
+  margin: 3px 0;
 }
 
 nav .link__item:hover,
 .link__item:active,
 .link__item:focus,
 .active {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
 
-.logout-button {
-  width: 80%;
-  background-color: var(--white);
-  /* position: absolute; */
-  bottom: 35px;
-  margin: 0 auto;
-  display: block;
-  left: 10%;
-  color: var(--primary);
-  color: var(--dark-text);
-  box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
-  -webkit-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
-  -moz-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
-}
 
-.logout-button:hover {
-  box-shadow: none;
-  transition: box-shadow 0.3s ease-in-out;
-}
+
+
 
 .close {
   display: none;
@@ -295,17 +270,18 @@ nav .link__item:hover,
 
   nav .link__item {
     padding: 7.5px 30px;
-  /* padding: 20px 30px 10px; */
+    /* padding: 20px 30px 10px; */
   }
 
   nav .link__item:first-child {
     margin-top: 20px;
   }
 
-  #logout__btn{
+  #logout__btn {
     margin-top: 15px;
     /* margin-top: 35px; */
   }
+
   .close {
     position: absolute;
     top: 20px;
