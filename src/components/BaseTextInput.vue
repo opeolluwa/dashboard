@@ -152,7 +152,6 @@ export default defineComponent({
 
 <style>
 .forgotten_password {
-  font-size: 14px;
   margin-top: 10px;
   color: var(--secondary);
   text-align: right !important;
@@ -165,7 +164,7 @@ export default defineComponent({
 .forgotten_password {
   text-align: left !important;
   text-transform: lowercase;
-  font-size: 0.85rem;
+  font-size: 13.5px;
   margin-top: 5px;
 }
 

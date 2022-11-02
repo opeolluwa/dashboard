@@ -81,21 +81,18 @@ export default defineComponent({
   <!--show loader if fetching all todo-->
   <div v-show="isFetchingTodoArray" class="fetching__todo">
     <Spinner />
-    <p>fetching todo</p>
+    <p>fetching tasks</p>
   </div>
   <!--id there is an error fetching the todo -->
   <!-- <AppNetworkError v-show="todoArray == null" /> -->
   <!--if no todo was found bu it's empty-->
   <AppEmptyState v-if="todoArray?.length == 0" />
   <!--render the todo list -->
-  <AppTodoItem v-for="{ title, description, id, priority } in todoArray" :todo="{ title, description, id, priority }"
-    @delete-todo="deleteTodo(id)" @click="editTodo(id)" />
-  <!--default components-->
-  <div class="header">
-    <BaseButton text="add new" class="add-new-button" @click="showTodoModal = true">
-      <IconPlus />
-    </BaseButton>
+  <div v-if="Number(todoArray?.length) > 0 && !isFetchingTodoArray">
+    <AppTodoItem v-for="{ title, description, id, priority } in todoArray" :todo="{ title, description, id, priority }"
+      @delete-todo="deleteTodo(id)" @click="editTodo(id)" />
   </div>
+
   <!--the Todo modal-->
 </template>
 

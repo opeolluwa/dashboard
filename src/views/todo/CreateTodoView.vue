@@ -1,9 +1,9 @@
 <template>
   <form action="" @submit.prevent="makeCreateTodo">
     <BaseTextInput label="heading" type="text" placeholder="heading" v-model="todo.title" class="field" />
-    <BaseTextInput placeholder="description" label="description" v-model="todo.description" class="field" />
+    <BaseTextarea placeholder="description" label="description" v-model="todo.description" class="field" />
 
-    <BaseTextInput placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
+    <BaseTextarea placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
 
     <div class="select__form__field">
       <label for="priority">Priority</label>
@@ -30,6 +30,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import BaseTextInput from "@/components/BaseTextInput.vue";
+import BaseTextarea from "@/components/BaseTextInput.vue";
 import { Icon } from "@iconify/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
@@ -45,6 +46,7 @@ export default defineComponent({
     AppEmptyState,
     Spinner,
     BaseButton,
+    BaseTextarea,
   },
   data: () => ({
     showTodoModal: false,

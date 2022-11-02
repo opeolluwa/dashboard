@@ -110,7 +110,7 @@ export default defineComponent({
   <!--display for error-->
   <AppNetworkError v-if="!isLoading && noteEntries?.length === 0" />
   <!--display the data-->
-  <div v-else>
+  <div v-if="Number(noteEntries?.length) > 0 && !isLoading">
     <div
       class="note__entry"
       v-for="noteEntry in noteEntries"
