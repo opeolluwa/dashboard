@@ -56,7 +56,7 @@ export default defineComponent({
       title: "",
       content: "",
     },
-    useMdEditor: true,
+    useMdEditor: false,
     mdToolBarExclude: ["github"],
   }),
   components: {
@@ -84,7 +84,7 @@ button {
   background-color: #f5f5f5;
   border: 1px solid var(--primary);
   margin-top: 15px;
-  width: unset!important;
+  width: unset !important;
 }
 
 #editor__type {
@@ -98,6 +98,5 @@ button {
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  
 }
 </style>

@@ -7,7 +7,7 @@ import { mapState, mapActions } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import Spinner from "@/components/AppLoader.vue";
+import Spinner from "@/components/Spinner.vue";
 export default defineComponent({
   name: "profile__pageView",
   components: {
@@ -94,12 +94,33 @@ export default defineComponent({
     <section id="user__information">
       <h3>Account Information</h3>
       <form action="" @submit.prevent="updateProfile">
-        <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="fullname" />
-        <BaseTextInput placeholder="jane@mailer.com" label="email" type="email" class="field" v-model="email" />
-        <BaseTextInput placeholder="username" v-model="username" label="username" type="text" class="field" />
+        <BaseTextInput
+          placeholder="Jane Doe"
+          label="fullname"
+          v-model="fullname"
+        />
+        <BaseTextInput
+          placeholder="jane@mailer.com"
+          label="email"
+          type="email"
+          class="field"
+          v-model="email"
+        />
+        <BaseTextInput
+          placeholder="username"
+          v-model="username"
+          label="username"
+          type="text"
+          class="field"
+        />
         <BaseButton text="" :disabled="disabledState">
           <span v-show="!isLoading">Save Changes</span>
-          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+          <Spinner
+            :animation-duration="1000"
+            :size="30"
+            :color="'#ffffff'"
+            v-show="isLoading"
+          />
         </BaseButton>
       </form>
     </section>
@@ -118,21 +139,34 @@ export default defineComponent({
         <AppSwitch v-model="preferences.allowPushNotifications" /> allow push
         notifications
       </div>
-      <div>
-        <AppSwitch v-model="preferences.enable2FA" /> enable 2FA
-      </div>
+      <div><AppSwitch v-model="preferences.enable2FA" /> enable 2FA</div>
     </section>
 
     <section>
       <h3>Security</h3>
 
-      <BaseTextInput placeholder="new password" label="New Password" type="password" class="field" />
-      <BaseTextInput placeholder="new password" label="Confirm Password" type="password" class="field" />
+      <BaseTextInput
+        placeholder="new password"
+        :show-icon="false"
+        label="New Password"
+        type="password"
+        class="field"
+      />
+      <BaseTextInput
+        placeholder="new password"
+        :show-icon="false"
+        label="Confirm Password"
+        type="password"
+        class="field"
+      />
     </section>
   </div>
 </template>
 
 <style scoped>
+#user__parofile .field {
+  display: none;
+}
 #user__information button {
   color: inherit;
   background-color: #f5f5f5;
@@ -167,7 +201,6 @@ export default defineComponent({
 }
 
 #profile__page small {
-
   font-weight: 400;
 
   text-transform: lowercase;
@@ -209,7 +242,7 @@ export default defineComponent({
   margin-bottom: 18px;
 }
 
-#profile__page-control>div {
+#profile__page-control > div {
   display: flex;
   align-items: center;
   align-content: center;
@@ -221,7 +254,14 @@ export default defineComponent({
   flex-direction: column;
   gap: 10px;
 }
-
+#preferences > div {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  /* flex-direction: column; */
+}
 section {
   margin-bottom: 4.75rem;
 }
@@ -229,7 +269,6 @@ section {
 @media screen and (max-width: 768px) {
   #user__information button {
     width: 100%;
-
   }
 }
 </style>

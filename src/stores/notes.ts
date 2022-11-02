@@ -103,12 +103,29 @@ export const useNoteStore = defineStore("todoStore", {
         const { data: response } = await axios.delete(`/notes/${noteId}`, {
           headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
         });
-        /* if (response.success) {
-          this.fetchAllNotes();
-        } */
         console.log("the note id is ", noteId);
         console.log(JSON.stringify(response));
-      } catch (error) {}
+      } catch (error) { }
+    },
+    /**
+     * @function updateTodo
+     * @param {uuid}  - the note id
+     * @param {object} - the updates
+     * @returns success (if no error) and updates the store
+     */
+    async editNote(noteId: String, payload: NoteInterface): Promise<Boolean> {
+      try {
+        const { data: response } = await axios.put(
+          `/notes/${noteId}`,
+          { ...payload },
+          {
+            headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
+          }
+        );
+        return response.data.success // true or false
+      } catch (error) {
+        return false
+      }
     },
   },
 });

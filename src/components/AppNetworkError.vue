@@ -79,7 +79,6 @@ export default defineComponent({
   width: 80%;
   align-items: center;
   margin: 0 auto;
-  
 }
 
 .network-error button {

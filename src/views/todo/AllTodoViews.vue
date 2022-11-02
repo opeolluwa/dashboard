@@ -1,50 +1,27 @@
-<template>
-  <form action="" @submit.prevent="makeCreateTodo">
-    <BaseTextInput label="heading" type="text" placeholder="heading" v-model="todo.title" class="field" />
-    <BaseTextInput placeholder="description" label="description" v-model="todo.description" class="field" />
-
-    <BaseTextInput placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
-
-    <div class="select__form__field">
-      <label for="priority">Priority</label>
-      <select v-model="todo.priority">
-        <option disabled value="">Please select priority</option>
-        <option>urgent</option>
-        <option>not urgent</option>
-        <option>delete</option>
-        <option>delicate</option>
-        <option>normal</option>
-      </select>
-      <Icon icon="mdi:menu-down" class="select__arrow__down" />
-    </div>
-
-    <!--form field submit, change color to black while waiting for response from server-->
-    <BaseButton text="" type="submit" :disabled="disabledState"
-      :class="[disabledState == true ? 'disabled__button' : '']">
-      <span v-show="!isLoading">Add Todo</span>
-      <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
-    </BaseButton>
-  </form>
-</template>
-
 <script lang="ts">
-import { defineComponent } from "vue";
+import BaseButton from "@/components/BaseButton.vue";
+import AppModal from "@/components/AppModal.vue";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 import { Icon } from "@iconify/vue";
-import BaseButton from "@/components/BaseButton.vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
+import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { useTodoStore, type TodoInterface } from "@/stores/todo";
+import { mapActions, mapState } from "pinia";
+import AppTodoItem from "../../components/TodoItem.vue";
+import AppNetworkError from "../../components/AppNetworkError.vue";
 import Spinner from "@/components/Spinner.vue";
-import { mapState, mapActions } from "pinia";
 export default defineComponent({
-  name: "CreateNewTask",
+  name: "TodoView",
   components: {
+    BaseButton,
     Icon,
+    AppModal,
     BaseTextInput,
     AppEmptyState,
+    AppTodoItem,
+    AppNetworkError,
     Spinner,
-    BaseButton,
   },
   data: () => ({
     showTodoModal: false,
@@ -55,7 +32,6 @@ export default defineComponent({
       priority: "",
     },
   }),
- 
   mounted() {
     console.log("mounted");
     // this.makeTodoRequest();
@@ -72,14 +48,17 @@ export default defineComponent({
       deleteTodo: "deleteTodo",
     }),
     async makeCreateTodo() {
-      const successfulRequest = await this.createTodo({
+      this.createTodo({
         ...this.todo,
         // date: this.todo.date,
       } as TodoInterface);
-      if (successfulRequest) {
-        Object.assign(this.todo, {});
-        this.$router.replace({ name: "all-task" });
-      }
+      this.showTodoModal = false;
+    },
+    editTodo(taskId: String) {
+      this.$router.push({
+        name: "edit-todo",
+        params: { noteId: String(taskId) },
+      });
     },
   },
   computed: {
@@ -98,15 +77,29 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-form button {
-  color: inherit;
-  background-color: #f5f5f5;
-  border: 1px solid var(--primary);
-  margin-top: 25px;
-  /* width: unset; */
-}
+<template>
+  <!--show loader if fetching all todo-->
+  <div v-show="isFetchingTodoArray" class="fetching__todo">
+    <Spinner />
+    <p>fetching todo</p>
+  </div>
+  <!--id there is an error fetching the todo -->
+  <!-- <AppNetworkError v-show="todoArray == null" /> -->
+  <!--if no todo was found bu it's empty-->
+  <AppEmptyState v-if="todoArray?.length == 0" />
+  <!--render the todo list -->
+  <AppTodoItem v-for="{ title, description, id, priority } in todoArray" :todo="{ title, description, id, priority }"
+    @delete-todo="deleteTodo(id)" @click="editTodo(id)" />
+  <!--default components-->
+  <div class="header">
+    <BaseButton text="add new" class="add-new-button" @click="showTodoModal = true">
+      <IconPlus />
+    </BaseButton>
+  </div>
+  <!--the Todo modal-->
+</template>
 
+<style scoped>
 .select__form__field {
   display: flex;
   flex-direction: column;

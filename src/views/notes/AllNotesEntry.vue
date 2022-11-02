@@ -6,26 +6,26 @@ import { Icon } from "@iconify/vue";
 import AppEmptyState from "../../components/AppEmptyState.vue";
 import { useNoteStore } from "@/stores/notes";
 import { mapState, mapActions } from "pinia";
-import Spinner from "@/components/AppLoader.vue";
+import Spinner from "@/components/Spinner.vue";
 import Timeago from "vue3-timeago";
 import Observer from "vue-intersection-observer";
 import { defineComponent } from "vue";
 import { marked } from "marked";
-import hljs from "highlight.js"
+import hljs from "highlight.js";
 // `highlight` example uses https://highlightjs.org
 marked.setOptions({
   renderer: new marked.Renderer(),
   highlight: function (code, lang) {
-    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+    const language = hljs.getLanguage(lang) ? lang : "plaintext";
     return hljs.highlight(code, { language }).value;
   },
-  langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+  langPrefix: "hljs language-", // highlight.js css expects a top-level 'hljs' class.
   pedantic: false,
   gfm: true,
   breaks: false,
   sanitize: false,
   smartypants: false,
-  xhtml: false
+  xhtml: false,
 });
 export default defineComponent({
   name: "ProjectView",
@@ -73,7 +73,6 @@ export default defineComponent({
     /* markedContent() {
       return marked.parse(String(this.fetchedNote.content));
     } */
-
   },
   methods: {
     ...mapActions(useNoteStore, ["fetchAllNotes"]),
@@ -87,7 +86,7 @@ export default defineComponent({
     },
     editNote(noteId: String) {
       this.$router.push({
-        name: "edit-note",
+        name: "view-note",
         params: { noteId: String(noteId) },
       });
     },
@@ -103,7 +102,7 @@ export default defineComponent({
   <!--show loader if fetching all todo-->
   <div v-if="isLoading" class="fetching__data">
     <Spinner />
-    <p>fetching entries </p>
+    <p>fetching entries</p>
   </div>
   <!-- show the app empty state if no entries -->
   <AppEmptyState v-if="noteEntries?.length === 0" />
@@ -112,22 +111,26 @@ export default defineComponent({
   <AppNetworkError v-if="!isLoading && noteEntries?.length === 0" />
   <!--display the data-->
   <div v-else>
-    <div class="note__entry" v-for="noteEntry in noteEntries" :key="noteEntry.id.toString()"
-      @click="editNote(noteEntry.id.toString())">
+    <div
+      class="note__entry"
+      v-for="noteEntry in noteEntries"
+      :key="noteEntry.id.toString()"
+      @click="editNote(noteEntry.id.toString())"
+    >
       <!--header-->
       <div class="note__entry__header">
         <h3 class="trim__text">{{ noteEntry.title }}</h3>
         <p class="note__entry__header__date">
           {{
-              new Date(noteEntry.dateAdded.toString()).toLocaleDateString(
-                undefined,
-                {
-                  weekday: "short",
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                }
-              )
+            new Date(noteEntry.dateAdded.toString()).toLocaleDateString(
+              undefined,
+              {
+                weekday: "short",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }
+            )
           }}
           <!-- <Timeago :datetime="noteEntry.dateAdded" /> -->
         </p>

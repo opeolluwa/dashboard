@@ -32,7 +32,7 @@ export default defineComponent({
   <!--greetings-->
   <div class="d-sm-none">
     <h3>
-      Hi <span style="text-transform: capitalize">{{ username }}! 😊 </span>
+      Hi <strong style="text-transform: capitalize">{{ username }}! 😊 </strong>
     </h3>
     <small>{{ greetings }}</small>
   </div>

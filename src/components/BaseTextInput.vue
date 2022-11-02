@@ -24,13 +24,13 @@
         />
         <!--icon to hid and show password visibility-->
         <Icon
-          v-show="!isPasswordInput"
+          v-show="!isPasswordInput && showIcon"
           icon="mdi:eye-off-outline"
           class="password__toggler"
           @click="togglePasswordVisibility"
         />
         <Icon
-          v-show="isPasswordInput"
+          v-show="isPasswordInput && showIcon"
           icon="mdi:eye-outline"
           class="password__toggler"
           @click="togglePasswordVisibility"
@@ -104,6 +104,10 @@ export default defineComponent({
       type: String,
       required: false,
     }, */
+    showIcon: {
+      type: Boolean,
+      default: true,
+    },
   },
   methods: {
     updateModelValue(event: any) {
@@ -167,14 +171,14 @@ export default defineComponent({
 
 .form__field {
   margin-bottom: 35px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .form__field label {
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  
+  font-size: 14px;
 }
 
 .form__field input {
@@ -186,12 +190,13 @@ export default defineComponent({
   border: 1.5px solid var(--border-color);
   border-radius: 5px;
   display: block;
+  font-size: 14px;
 }
 
 .form__field input::placeholder {
   display: inline-block;
   letter-spacing: 1.25px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 21px;
   letter-spacing: 0em;

@@ -17,7 +17,7 @@ export default defineComponent({
   },
   methods: {
     //control the nav bar visibility
-    toggleSidebar() { },
+    toggleSidebar() {},
     ...mapActions(useAuthStore, ["logoutRequest"]),
   },
   computed: {
@@ -134,7 +134,7 @@ h2 a {
 }
 
 #current__route {
-font-style: normal;
+  font-style: normal;
   font-weight: 500;
   font-size: 14.5px;
   line-height: 16px;

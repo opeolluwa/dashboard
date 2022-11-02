@@ -74,6 +74,7 @@ export const useAuthStore = defineStore("authStore", {
           this.userInformation = response.data.user;
           localStorage.setItem("user", response.data.user);
           router.replace({ name: "home" });
+          this.isAuthenticated = true;
         } else {
           //handle the error here bu going back to login page
           localStorage.removeItem("token");
@@ -129,9 +130,9 @@ export const useAuthStore = defineStore("authStore", {
     async updateUserInformation(payload: any) {
       console.log(JSON.stringify(payload));
 
-      /* try {
+      try {
         const { data: response } = await axios.put("/auth/me", {
-          ...payload
+          ...payload,
           // headers: { Authorization: `Bearer ${this.authorizationToken}` },
         });
         //if the request is successful, store the data and
@@ -142,7 +143,7 @@ export const useAuthStore = defineStore("authStore", {
         }
       } catch (error: any) {
         console.log("something bad happened ", error.message);
-      } */
+      }
     },
   },
 });

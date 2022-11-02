@@ -6,7 +6,7 @@ import router from "./router";
 
 import "./assets/main.css";
 import "animate.css";
-import 'highlight.js/styles/github.css';
+import "highlight.js/styles/github.css";
 // import "highlight.js/lib/languages/*"
 import "./axios.config";
 import { useAuthStore } from "@/stores/auth";

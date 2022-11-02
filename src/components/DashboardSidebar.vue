@@ -68,21 +68,23 @@ export default defineComponent({
         ],
       },
       {
-        name: "todo",
+        name: "task",
         icon: "mdi:format-list-checks",
-        path: "todo",
-        /*   children: [
-            {
-              name: "todo",
-              icon: "mdi:format-list-checks",
-              path: "todo",
-            },
-            {
-              name: "completed",
-              icon: "mdi:format-list-checks",
-              path: "completed",
-            },
-          ] */
+        path: "task",
+        children: [
+          {
+            name: "all task",
+            path: "all-task",
+          },
+          {
+            name: "new task",
+            path: "add-task",
+          },
+           /* {
+            name: "edit task",
+            path: "edit-task",
+          },  */
+        ],
       },
       {
         name: "profile",
@@ -113,12 +115,11 @@ export default defineComponent({
     dropdown.forEach((item) => {
       item.addEventListener("click", (e) => {
         e.stopPropagation();
-        // item.classList.toggle("show");
         item.nextElementSibling?.classList.toggle("show");
-
-        // alert(item.?.innerHTML);
       });
     });
+
+    // console.log(this.$router.Rou);
   },
   methods: {
     //get the logout action from the store
@@ -151,17 +152,29 @@ export default defineComponent({
       <!--the links-->
       <div v-for="route in routes.sort()" :key="route.name">
         <!--use  this templates bases on if a route has children routes-->
-        <template v-if="route.children" @click="closeSidebar">
+        <template v-if="route.children">
           <div class="nav__link__parent link__item dropdown capitalize">
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
             <Icon icon="mdi:menu-down" />
           </div>
           <ul v-if="route.children" class="children__routes">
-            <li v-for="child in route.children" class="child__route" >
-              <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name"  :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']">
+            <li
+              v-for="child in route.children"
+              class="child__route"
+              @click="closeSidebar"
+            >
+              <RouterLink
+                @click="closeSidebar"
+                :to="{ name: child.path }"
+                :key="child.name"
+                :class="[
+                  route.name === currentRouteName ? 'active' : '',
+                  'capitalize',
+                ]"
+              >
                 <span class="capitalize">{{
-                    child.name.replaceAll("-", " ")
+                  child.name.replaceAll("-", " ")
                 }}</span>
               </RouterLink>
             </li>
@@ -169,8 +182,16 @@ export default defineComponent({
         </template>
 
         <!--use this template if -->
-        <template v-else @click="closeSidebar">
-          <RouterLink :to="{ name: route.path }" class="link__item"  :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']">
+        <template v-else>
+          <RouterLink
+            :to="{ name: route.path }"
+            class="link__item"
+            :class="[
+              route.name === currentRouteName ? 'active' : '',
+              'capitalize',
+            ]"
+            @click="closeSidebar"
+          >
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
           </RouterLink>
@@ -242,10 +263,6 @@ nav .link__item:hover,
   background-color: rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
-
-
-
-
 
 .close {
   display: none;

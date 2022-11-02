@@ -9,13 +9,8 @@
   -->
   <div class="form__field">
     <label :for="label">{{ label }}</label>
-    <textarea
-      :id="label"
-      :placeholder="placeholder"
-      :value="modelValue"
-      rows="10"
-      cols="35"
-    ></textarea>
+    <textarea :id="label" :placeholder="placeholder" @input="updateModelValue" :value="modelValue" rows="10"
+      cols="35"></textarea>
     <!--  <textarea
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"
@@ -45,9 +40,9 @@ export default {
     },
   },
   methods: {
-    /*  updateModelValue(event: any) {
-       this.$emit("update:modelValue", event.target.value);
-     }, */
+    updateModelValue(event: any) {
+      this.$emit("update:modelValue", event.target.value);
+    },
   },
 };
 </script>
@@ -62,7 +57,6 @@ export default {
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  
 }
 
 .form__field textarea {

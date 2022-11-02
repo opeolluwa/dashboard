@@ -2,7 +2,7 @@
 import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
-import Spinner from "@/components/AppLoader.vue";
+import Spinner from "@/components/Spinner.vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
 export default defineComponent({
@@ -150,13 +150,13 @@ export default defineComponent({
 }
 
 /**the background container */
-#login__page .container>div:first-child {
+#login__page .container > div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#login__page .container>div:last-child {
+#login__page .container > div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -164,7 +164,7 @@ export default defineComponent({
   align-content: center;
 }
 
-#login__page .container>div:last-child h1+small {
+#login__page .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
 
@@ -189,7 +189,6 @@ button,
 }
 
 #login__page .title h1 {
-
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -217,11 +216,11 @@ button,
     padding: 0;
   }
 
-  #login__page .container>div:first-child {
+  #login__page .container > div:first-child {
     display: none;
   }
 
-  #login__page .container>div:last-child {
+  #login__page .container > div:last-child {
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
@@ -234,7 +233,7 @@ button,
     /* margin: 20px auto; */
   }
 
-  #login__page .container>div:last-child h1+small.error {
+  #login__page .container > div:last-child h1 + small.error {
     margin-bottom: 35px;
   }
 
