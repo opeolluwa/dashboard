@@ -4,6 +4,7 @@ import BaseLayout from "@/views/IndexView.vue";
 import HomeView from "@/views/HomeView.vue";
 import OnboardingView from "@/views/OnboardingIndexView.vue";
 import LoginView from "@/views/auth/LoginView.vue";
+import { useAuthStore } from "@/stores/auth";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -43,6 +44,9 @@ const router = createRouter({
     {
       path: "/u",
       component: BaseLayout,
+      meta: {
+        requiresAuth: true,
+      },
       children: [
         {
           path: "",
@@ -100,9 +104,21 @@ const router = createRouter({
             },
 
             {
-              path: "add-note",
+              path: "new",
               name: "add-note",
               component: () => import("@/views/notes/CreateNoteView.vue"),
+            },
+            {
+              path: "note/:noteId",
+              name: "view-note",
+              props: true,
+              component: () => import("@/views/notes/ViewNote.vue"),
+            },
+            {
+              path: "edit/:noteId",
+              name: "edit-note",
+              props: true,
+              component: () => import("@/views/notes/UpdateNote.vue"),
             },
           ],
         },
@@ -126,6 +142,24 @@ const router = createRouter({
           path: "todo",
           name: "todo",
           component: () => import("@/views/todo/TodoIndexView.vue"),
+          children: [
+            {
+              name: "all-task",
+              path: "",
+              component: () => import("@/views/todo/AllTodoViews.vue"),
+            },
+            {
+              name: "add-task",
+              path: "new",
+              component: () => import("@/views/todo/CreateTodoView.vue"),
+            },
+            /* {
+              name: "edit-task",
+              path: "edit/:taskId",
+              props: true,
+              component: () => import("@/views/todo/EditTodoView.vue"),
+            }, */
+          ],
         },
       ],
       //add navigation guards here
@@ -137,5 +171,19 @@ const router = createRouter({
     },
   ],
 });
+
+// console.log({ routes: JSON.stringify(router.getRoutes()) });
+
+// router.
+//   beforeEach((to, from, next) => {
+//     const store = useAuthStore()
+//     if (to.meta.requiresAuth && !store.isAuthenticated) {
+//       next({
+//         name: 'login'
+//       })
+//     } else {
+//       next()
+//     }
+//   })
 
 export default router;

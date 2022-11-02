@@ -49,9 +49,9 @@ export default defineComponent({
       },
 
       {
-        name: "notes",
+        name: "tasks",
         icon: "mdi:plus-circle-outline",
-        path: "add-note",
+        path: "add-task",
       },
       {
         name: "notification",

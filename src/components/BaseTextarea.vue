@@ -9,13 +9,8 @@
   -->
   <div class="form__field">
     <label :for="label">{{ label }}</label>
-    <textarea
-      :id="label"
-      :placeholder="placeholder"
-      :value="modelValue"
-      rows="10"
-      cols="35"
-    ></textarea>
+    <textarea :id="label" :placeholder="placeholder" @input="updateModelValue" :value="modelValue" rows="10"
+      cols="35"></textarea>
     <!--  <textarea
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"
@@ -28,7 +23,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: "BaseTextArea",
   props: {
     label: {
@@ -45,11 +42,11 @@ export default {
     },
   },
   methods: {
-    /*  updateModelValue(event: any) {
-       this.$emit("update:modelValue", event.target.value);
-     }, */
+    updateModelValue(event: any) {
+      this.$emit("update:modelValue", event.target.value);
+    },
   },
-};
+});
 </script>
 
 <style scoped>
@@ -62,7 +59,6 @@ export default {
   display: block;
   margin-bottom: 7.5px;
   text-transform: capitalize;
-  font-family: "Open Sans";
 }
 
 .form__field textarea {

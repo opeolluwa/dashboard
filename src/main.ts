@@ -6,17 +6,19 @@ import router from "./router";
 
 import "./assets/main.css";
 import "animate.css";
+import "highlight.js/styles/github.css";
+// import "highlight.js/lib/languages/*"
 import "./axios.config";
 import { useAuthStore } from "@/stores/auth";
 
 //ccpacitor config
 import { SplashScreen } from "@capacitor/splash-screen";
-import timeago from 'vue-timeago3'
+import timeago from "vue-timeago3";
 const timeagoOptions = {
   converterOptions: {
     includeSeconds: false,
-  }
-}  
+  },
+};
 //auth0 social login config
 // import { createAuth0 } from "@auth0/auth0-vue";
 const app = createApp(App);

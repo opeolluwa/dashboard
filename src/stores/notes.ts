@@ -22,6 +22,10 @@ export const useNoteStore = defineStore("todoStore", {
   getters: {
     //retrieve the array of tod s form store
     getAllTodo: (state) => state.noteEntries,
+    //retrieve the with the provided id
+    getNoteById: (state) => (noteId: String) => {
+      return state.noteEntries?.filter((note) => note.id === String(noteId))[0];
+    },
   },
   actions: {
     /**
@@ -47,7 +51,6 @@ export const useNoteStore = defineStore("todoStore", {
         console.log(JSON.stringify(response));
       } catch (error: any) {
         this.isLoading = false;
-
       }
     },
     /**
@@ -79,14 +82,14 @@ export const useNoteStore = defineStore("todoStore", {
           this.isLoading = false;
           payload.title = "";
           payload.content = "";
-          return true
+          return true;
         }
-        return false
+        return false;
         // console.log(JSON.stringify(response));
       } catch (error: any) {
         this.errorFetchingNotes = true;
         this.isLoading = false;
-        return false
+        return false;
       }
       // this.isLoading = false;
     },
@@ -100,12 +103,29 @@ export const useNoteStore = defineStore("todoStore", {
         const { data: response } = await axios.delete(`/notes/${noteId}`, {
           headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
         });
-        if (response.success) {
-          this.fetchAllNotes();
-        }
         console.log("the note id is ", noteId);
         console.log(JSON.stringify(response));
       } catch (error) { }
+    },
+    /**
+     * @function updateTodo
+     * @param {uuid}  - the note id
+     * @param {object} - the updates
+     * @returns success (if no error) and updates the store
+     */
+    async editNote(noteId: String, payload: NoteInterface): Promise<Boolean> {
+      try {
+        const { data: response } = await axios.put(
+          `/notes/${noteId}`,
+          { ...payload },
+          {
+            headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
+          }
+        );
+        return response.data.success // true or false
+      } catch (error) {
+        return false
+      }
     },
   },
 });
@@ -114,7 +134,7 @@ export const useNoteStore = defineStore("todoStore", {
  * the state type declaration
  */
 interface State {
-  noteEntries: Array<FetchedNotesInterface> | null; // array of note fetched from backend
+  noteEntries: Array<FetchedNoteInterface> | null; // array of note fetched from backend
   pageIndex: Number | String | null;
   noOfRows: Number | String | null;
   isLoading: boolean;
@@ -126,7 +146,6 @@ interface State {
 export interface NoteInterface {
   title: String;
   content: String;
-  category?: String;
 }
 
 /**
@@ -135,7 +154,7 @@ export interface NoteInterface {
  * @param {string} - description - the note body
  * @param {uuid} - the note id
  */
-export interface FetchedNotesInterface extends NoteInterface {
+export interface FetchedNoteInterface extends NoteInterface {
   id: String;
   dateAdded: String | Date;
   lastUpdated: String;

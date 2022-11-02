@@ -63,7 +63,7 @@ export const useTodoStore = defineStore("todoStore", {
      *
      * go on to make request to the endpoint
      */
-    async createTodo(payload: TodoInterface): Promise<void> {
+    async createTodo(payload: TodoInterface): Promise<Boolean> {
       const authStore = useAuthStore();
       this.isLoading = true;
       try {
@@ -86,28 +86,31 @@ export const useTodoStore = defineStore("todoStore", {
           this.isLoading = false;
           payload.title = "";
           payload.description = "";
+          return true;
         }
+        return false;
         // console.log(JSON.stringify(response));
       } catch (error: any) {
         this.errorFetchingTodo = true;
         this.isLoading = false;
       }
       this.isLoading = false;
+      return false;
     },
     /**
      * @function deleteTodo
      * @param {uuid}  - the todo id
      * @returns success (id no error) and updates the store
      */
-    async deleteTodo(todoId: String) {
+    async deleteTodo(taskId: String) {
       try {
-        const { data: response } = await axios.delete(`/todo/${todoId}`, {
+        const { data: response } = await axios.delete(`/todo/${taskId}`, {
           headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
         });
         if (response.success) {
           this.fetchAllTodo();
         }
-        console.log("the todo id is ", todoId);
+        console.log("the todo id is ", taskId);
         console.log(JSON.stringify(response));
       } catch (error) {}
     },

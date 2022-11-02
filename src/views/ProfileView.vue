@@ -7,7 +7,7 @@ import { mapState, mapActions } from "pinia";
 import { useAuthStore } from "@/stores/auth";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import Spinner from "@/components/AppLoader.vue";
+import Spinner from "@/components/Spinner.vue";
 export default defineComponent({
   name: "profile__pageView",
   components: {
@@ -147,12 +147,14 @@ export default defineComponent({
 
       <BaseTextInput
         placeholder="new password"
+        :show-icon="false"
         label="New Password"
         type="password"
         class="field"
       />
       <BaseTextInput
         placeholder="new password"
+        :show-icon="false"
         label="Confirm Password"
         type="password"
         class="field"
@@ -162,11 +164,15 @@ export default defineComponent({
 </template>
 
 <style scoped>
+#user__parofile .field {
+  display: none;
+}
 #user__information button {
-  color: var(--primary);
+  color: inherit;
   background-color: #f5f5f5;
   border: 1px solid var(--primary);
   margin-top: 25px;
+  width: unset;
 }
 
 #profile__page {
@@ -195,9 +201,8 @@ export default defineComponent({
 }
 
 #profile__page small {
-  font-family: "Inter", sans-serif;
   font-weight: 400;
-  font-family: "Open Sans", sans-serif;
+
   text-transform: lowercase;
   color: #9ca3af;
 }
@@ -229,11 +234,11 @@ export default defineComponent({
 }
 
 #profile__page section h3 {
-  font-size: 1.2rem;
-  font-family: "poppins";
+  font-size: 14.5px;
+  font-weight: 500;
   font-weight: 500;
   line-height: 28px;
-  color: #000;
+  color: var(--secondary);
   margin-bottom: 18px;
 }
 
@@ -249,8 +254,21 @@ export default defineComponent({
   flex-direction: column;
   gap: 10px;
 }
-
+#preferences > div {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  /* flex-direction: column; */
+}
 section {
   margin-bottom: 4.75rem;
+}
+
+@media screen and (max-width: 768px) {
+  #user__information button {
+    width: 100%;
+  }
 }
 </style>

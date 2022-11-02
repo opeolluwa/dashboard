@@ -68,21 +68,23 @@ export default defineComponent({
         ],
       },
       {
-        name: "todo",
+        name: "task",
         icon: "mdi:format-list-checks",
-        path: "todo",
-        /*   children: [
-            {
-              name: "todo",
-              icon: "mdi:format-list-checks",
-              path: "todo",
-            },
-            {
-              name: "completed",
-              icon: "mdi:format-list-checks",
-              path: "completed",
-            },
-          ] */
+        path: "task",
+        children: [
+          {
+            name: "all task",
+            path: "all-task",
+          },
+          {
+            name: "new task",
+            path: "add-task",
+          },
+           /* {
+            name: "edit task",
+            path: "edit-task",
+          },  */
+        ],
       },
       {
         name: "profile",
@@ -113,12 +115,11 @@ export default defineComponent({
     dropdown.forEach((item) => {
       item.addEventListener("click", (e) => {
         e.stopPropagation();
-        // item.classList.toggle("show");
         item.nextElementSibling?.classList.toggle("show");
-
-        // alert(item.?.innerHTML);
       });
     });
+
+    // console.log(this.$router.Rou);
   },
   methods: {
     //get the logout action from the store
@@ -149,20 +150,31 @@ export default defineComponent({
   <nav>
     <div id="nav__content">
       <!--the links-->
-      <div v-for="route in routes.sort()" :key="route.name"
-        :class="[route.name === currentRouteName ? 'active' : '', 'capitalize']">
+      <div v-for="route in routes.sort()" :key="route.name">
         <!--use  this templates bases on if a route has children routes-->
-        <template v-if="route.children" @click="closeSidebar">
-          <div class="nav__link__parent link__item dropdown">
+        <template v-if="route.children">
+          <div class="nav__link__parent link__item dropdown capitalize">
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
             <Icon icon="mdi:menu-down" />
           </div>
           <ul v-if="route.children" class="children__routes">
-            <li v-for="child in route.children">
-              <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name" class="child__route">
+            <li
+              v-for="child in route.children"
+              class="child__route"
+              @click="closeSidebar"
+            >
+              <RouterLink
+                @click="closeSidebar"
+                :to="{ name: child.path }"
+                :key="child.name"
+                :class="[
+                  route.name === currentRouteName ? 'active' : '',
+                  'capitalize',
+                ]"
+              >
                 <span class="capitalize">{{
-                    child.name.replaceAll("-", " ")
+                  child.name.replaceAll("-", " ")
                 }}</span>
               </RouterLink>
             </li>
@@ -170,15 +182,23 @@ export default defineComponent({
         </template>
 
         <!--use this template if -->
-        <template v-else @click="closeSidebar">
-          <RouterLink :to="{ name: route.path }" class="link__item">
+        <template v-else>
+          <RouterLink
+            :to="{ name: route.path }"
+            class="link__item"
+            :class="[
+              route.name === currentRouteName ? 'active' : '',
+              'capitalize',
+            ]"
+            @click="closeSidebar"
+          >
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
           </RouterLink>
         </template>
       </div>
       <!-- the last out logout button-->
-      <div class="link__item" @click="logout">
+      <div class="link__item" @click="logout" id="logout__btn">
         <Icon icon="mdi:logout" />
         <span>logout</span>
       </div>
@@ -211,9 +231,8 @@ nav {
 }
 
 .children__routes li.child__route {
-  margin-bottom: 25px;
-  /* padding: 15px 5px; */
-  /* display: none; */
+  /* margin-bottom: 25px; */
+  padding: 15px 5px;
 }
 
 .show {
@@ -224,44 +243,25 @@ nav .link__item {
   display: flex;
   width: 100%;
   align-items: center;
-  padding: 20px 30px 10px;
+  padding: 20px 30px;
   border-radius: 5px;
   display: inline-flex;
   align-items: flex-end;
   text-decoration: none;
   color: var(--light-text);
   column-gap: 15px;
-  font-size: 18px;
+  font-size: 17px;
   transition: all 0.2s ease-in-out;
   position: relative;
+  margin: 3px 0;
 }
 
 nav .link__item:hover,
 .link__item:active,
 .link__item:focus,
 .active {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.15);
   cursor: pointer;
-}
-
-.logout-button {
-  width: 80%;
-  background-color: var(--white);
-  /* position: absolute; */
-  bottom: 35px;
-  margin: 0 auto;
-  display: block;
-  left: 10%;
-  color: var(--primary);
-  color: var(--dark-text);
-  box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
-  -webkit-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
-  -moz-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
-}
-
-.logout-button:hover {
-  box-shadow: none;
-  transition: box-shadow 0.3s ease-in-out;
 }
 
 .close {
@@ -286,11 +286,17 @@ nav .link__item:hover,
   }
 
   nav .link__item {
-    padding: 8px 30px;
+    padding: 7.5px 30px;
+    /* padding: 20px 30px 10px; */
   }
 
   nav .link__item:first-child {
-    margin-top: 35px;
+    margin-top: 20px;
+  }
+
+  #logout__btn {
+    margin-top: 15px;
+    /* margin-top: 35px; */
   }
 
   .close {

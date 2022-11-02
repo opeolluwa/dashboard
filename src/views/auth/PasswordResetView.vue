@@ -2,7 +2,7 @@
 import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
-import Spinner from "@/components/AppLoader.vue";
+import Spinner from "@/components/Spinner.vue";
 export default defineComponent({
   name: "AuthView",
   components: {
@@ -151,7 +151,6 @@ button,
 }
 
 #password__reset__page .title h1 {
-  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
   font-size: 24px;

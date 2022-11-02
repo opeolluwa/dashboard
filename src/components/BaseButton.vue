@@ -11,7 +11,7 @@ button {
   padding: 7px 25px 7px 25px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 14px;
   background-color: var(--primary);
   /* background-color: #3c2c5b; */
   color: var(--light-text);
@@ -30,7 +30,7 @@ button:focus {
 @media screen and (max-width: 768px) {
   button {
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 </style>

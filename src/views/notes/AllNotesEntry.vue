@@ -6,10 +6,28 @@ import { Icon } from "@iconify/vue";
 import AppEmptyState from "../../components/AppEmptyState.vue";
 import { useNoteStore } from "@/stores/notes";
 import { mapState, mapActions } from "pinia";
-import Spinner from "@/components/AppLoader.vue";
+import Spinner from "@/components/Spinner.vue";
 import Timeago from "vue3-timeago";
-import Observer from 'vue-intersection-observer'
-export default {
+import Observer from "vue-intersection-observer";
+import { defineComponent } from "vue";
+import { marked } from "marked";
+import hljs from "highlight.js";
+// `highlight` example uses https://highlightjs.org
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  highlight: function (code, lang) {
+    const language = hljs.getLanguage(lang) ? lang : "plaintext";
+    return hljs.highlight(code, { language }).value;
+  },
+  langPrefix: "hljs language-", // highlight.js css expects a top-level 'hljs' class.
+  pedantic: false,
+  gfm: true,
+  breaks: false,
+  sanitize: false,
+  smartypants: false,
+  xhtml: false,
+});
+export default defineComponent({
   name: "ProjectView",
   components: {
     BaseButton,
@@ -19,7 +37,7 @@ export default {
     AppEmptyState,
     Spinner,
     Timeago,
-    Observer
+    Observer,
   },
   data: () => ({
     showProjectModal: false,
@@ -32,7 +50,7 @@ export default {
       technologies: "",
     },
   }),
-  created() {
+  mounted() {
     // watch the params of the route to fetch the data again
     this.$watch(
       () => this.$route.params,
@@ -43,7 +61,7 @@ export default {
       // fetch the data when the view is created and the data is
       // already being observed
       { immediate: true }
-    )
+    );
   },
   computed: {
     ...mapState(useNoteStore, [
@@ -52,6 +70,9 @@ export default {
       "pageIndex",
       "isLoading",
     ]),
+    /* markedContent() {
+      return marked.parse(String(this.fetchedNote.content));
+    } */
   },
   methods: {
     ...mapActions(useNoteStore, ["fetchAllNotes"]),
@@ -60,19 +81,28 @@ export default {
     },
     // handle the intersection observer
     handleIntersection() {
-      alert("fool")
+      alert("fool");
       this.fetchNoteRequests();
-
+    },
+    editNote(noteId: String) {
+      this.$router.push({
+        name: "view-note",
+        params: { noteId: String(noteId) },
+      });
+    },
+    //render mark down
+    renderMarkDown(content: String) {
+      return marked.parse(String(content));
     },
   },
-};
+});
 </script>
 
 <template>
   <!--show loader if fetching all todo-->
   <div v-if="isLoading" class="fetching__data">
     <Spinner />
-    <p>fetching todo</p>
+    <p>fetching entries</p>
   </div>
   <!-- show the app empty state if no entries -->
   <AppEmptyState v-if="noteEntries?.length === 0" />
@@ -80,17 +110,27 @@ export default {
   <!--display for error-->
   <AppNetworkError v-if="!isLoading && noteEntries?.length === 0" />
   <!--display the data-->
-  <div>
-    <div class="note__entry" v-for="noteEntry in noteEntries" :key="
-    noteEntry.id.toString()">
+  <div v-if="Number(noteEntries?.length) > 0 && !isLoading">
+    <div
+      class="note__entry"
+      v-for="noteEntry in noteEntries"
+      :key="noteEntry.id.toString()"
+      @click="editNote(noteEntry.id.toString())"
+    >
       <!--header-->
-      <div class="note__entry__header ">
+      <div class="note__entry__header">
         <h3 class="trim__text">{{ noteEntry.title }}</h3>
         <p class="note__entry__header__date">
-          {{ new Date(noteEntry.dateAdded.toString()).toLocaleDateString(undefined, {
-              weekday: 'short', year: 'numeric', month:
-                'short', day: 'numeric'
-            })
+          {{
+            new Date(noteEntry.dateAdded.toString()).toLocaleDateString(
+              undefined,
+              {
+                weekday: "short",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }
+            )
           }}
           <!-- <Timeago :datetime="noteEntry.dateAdded" /> -->
         </p>
@@ -98,8 +138,8 @@ export default {
         <!-- <timeago :datetime="noteEntry.dateAdded" /> -->
       </div>
       <!--content-->
-      <div class="note__entry__content ">
-        <p class="trim__text">{{ noteEntry.content }}</p>
+      <div class="note__entry__content">
+        <p class="trim__text" v-html="renderMarkDown(noteEntry.content)"></p>
       </div>
     </div>
   </div>
@@ -108,52 +148,15 @@ export default {
 </template>
 
 <style scoped>
-.note__entry {
-  padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
-  cursor: pointer;
-}
-
-.note__entry .note__entry__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.note__entry .note__entry__header h3 {
-  font-size: 1.2rem;
-  display: inline-block;
-  font-size: 18px;
-  line-height: 28px;
-  text-transform: capitalize;
-  width: 120px;
-}
-
-.note__entry .note__entry__content {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  color: var(--secondary);
-
-}
-
-.note__entry .note__entry__content p {
-  width: 200px;
-}
-
-
-.note__entry__header__date {
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--secondary);
-}
-
 .header {
   display: flex;
   flex-direction: flex-end;
   justify-content: flex-end;
+}
+
+.note__entry .note__entry__content p {
+  line-height: 1.5;
+  height: 30px;
 }
 
 .add-new-button,

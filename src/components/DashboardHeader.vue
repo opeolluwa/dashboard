@@ -50,9 +50,9 @@ export default defineComponent({
     <!--navigation button for small devices go here-->
     <div class="header__nav__mobile">
       <Icon icon="mdi:menu" @click="$emit('open-sidebar')" />
-      <h1 id="current__route">
+      <div id="current__route">
         <RouterLink :to="{ name: 'home' }">{{ currentRouteName }}</RouterLink>
-      </h1>
+      </div>
     </div>
 
     <!--greetings-->
@@ -129,21 +129,20 @@ h1 a,
 h2 a {
   font-size: 20px;
   font-weight: 500;
-  /* font-family: "Bakbak One", cursive; */
-  line-height: 36px;
   text-decoration: none;
   color: var(--default-dark);
 }
 
 #current__route {
-  font-family: "Poppins";
   font-style: normal;
-  /* font-weight: 400; */
-  font-size: 13px !important;
-  line-height: 30px;
-  text-transform: capitalize;
-  padding-left: 10px;
-  /* display: none; */
+  font-weight: 500;
+  font-size: 14.5px;
+  line-height: 16px;
+  margin-left: 10px;
+}
+
+#current__route::first-letter {
+  text-transform: uppercase;
 }
 
 small {
@@ -219,7 +218,7 @@ sup {
   .header__nav__mobile h1 {
     font-size: 22px;
     font-weight: 500;
-    font-family: "Bakbak One", cursive;
+
     line-height: 36px;
     margin-left: 10px;
     color: var(--light-text);

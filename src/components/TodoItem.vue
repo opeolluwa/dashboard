@@ -19,12 +19,8 @@
         </div>
       </div>
 
-      <div
-        class="todo__item__header__actions"
-        v-show="isSelected"
-        @click="$emit('show-options')"
-      >
-        <Icon icon="mdi:dots-vertical" />
+      <div class="todo__item__header__actions" v-show="isSelected" @click="$emit('show-options')">
+        <Icon icon="mdi:dots-vertical" class="d-none" />
       </div>
     </div>
   </AppListItem>
@@ -113,6 +109,7 @@ export default defineComponent({
 .list__item {
   border-radius: 3px;
   margin-bottom: 15px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .is__selected {
@@ -128,34 +125,30 @@ export default defineComponent({
   gap: 15px;
 }
 
+.todo__item svg {
+  color: var(--secondary);
+}
+
 /**implement eisenhower matrix*/
 .todo__item--normal {
   border: none;
 }
 
 .todo__item--urgent {
-  border-left: 2px solid var(--default-green);
-  background-color: var(--default-green);
-  color: var(--default-white);
+  border-left: 2.75px solid var(--default-green);
 }
 
 .todo__item--not__urgent {
   /* display: none; */
-  background-color: var(--default-yellow);
-  border-left: 2px solid var(--default-yellow);
-  color: var(--default-white);
+  border-left: 2.75px solid var(--default-yellow);
 }
 
 .todo__item--delete {
-  border-left: 2px solid var(--default-red);
-  background-color: var(--default-red);
-  color: var(--default-white);
+  border-left: 2.75px solid var(--default-red);
 }
 
 .todo__item--delicate {
-  border-left: 2px solid var(--primary);
-  background-color: var(--primary);
-  color: var(--default-white);
+  border-left: 2.75px solid var(--primary);
 }
 
 .todo__item__header__actions__delete {
@@ -173,7 +166,6 @@ export default defineComponent({
 .todo__item__content {
   font-size: 14px;
   width: 200px;
-  color: var(--secondary);
 }
 
 .todo__item__header {
@@ -186,7 +178,7 @@ export default defineComponent({
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 3px;
-  font-family: "mulish";
+
   font-weight: 600;
   font-size: 15.5px;
   width: 170px;
@@ -200,14 +192,13 @@ export default defineComponent({
   /* margin-top: 5px; */
   font-size: 14px;
   line-height: 18px;
-  color: var(--secondary);
 }
 
 .todo__item--delete p,
 .todo__item--delicate p,
 .todo__item--not__urgent p,
 .todo__item--urgent p {
-  color: var(--default-white);
+  color: var(--secondary);
 }
 
 .todo__item__content::first-letter {

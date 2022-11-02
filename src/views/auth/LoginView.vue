@@ -2,7 +2,7 @@
 import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
-import Spinner from "@/components/AppLoader.vue";
+import Spinner from "@/components/Spinner.vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
 export default defineComponent({
@@ -128,7 +128,7 @@ export default defineComponent({
 }
 
 .goto__sign__up {
-  font-size: 14px;
+  font-size: 0.95rem;
   margin-top: 10px;
   color: var(--secondary);
   text-align: left !important;
@@ -145,7 +145,7 @@ export default defineComponent({
   column-gap: 100px;
   grid-template-rows: 1fr;
   grid-template-areas: "bg form";
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -161,9 +161,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-content: center;
 }
 
-main .container > div:last-child h1 + small {
+#login__page .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
 
@@ -174,16 +175,20 @@ button,
   width: 500px;
 }
 
+#login__page .continue__with__email,
+#login__page .social__login__icons {
+  display: none;
+}
+
 #login__page .title {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 #login__page .title h1 {
-  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
@@ -198,14 +203,17 @@ button,
 }
 
 /** -----------------------------small devices------------------------ */
+
 @media screen and (max-width: 768px) {
   #login__page .container {
-    /* padding: 50px 0; */
-    display: flex;
-    flex-direction: column;
+    display: block;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "bg" "form";
     justify-content: center;
-    align-content: center;
-    min-height: 90vh;
+    align-items: center;
+    margin: 0;
+    padding: 0;
   }
 
   #login__page .container > div:first-child {
@@ -213,15 +221,16 @@ button,
   }
 
   #login__page .container > div:last-child {
-    padding: 0;
+    padding: 50px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    padding: 0 30px;
+    /* padding: 0 30px; */
     place-content: center;
-    height: 90vh;
-    margin: 0 auto;
+    /* place-items: center; */
+    min-height: 90vh;
+    /* margin: 20px auto; */
   }
 
   #login__page .container > div:last-child h1 + small.error {
@@ -241,9 +250,52 @@ button,
     width: auto;
   }
 
-  .form__field:last-child {
-    margin-bottom: 0;
-    display: none;
+  #login__page .continue__with__email {
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 35px;
+    justify-content: center;
+
+    /* display: none; */
+  }
+
+  #login__page .continue__with__email .divider__line {
+    color: var(--border-color);
+    font-weight: 500;
+    letter-spacing: -1px;
+  }
+
+  #login__page .social__login__icons {
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    column-gap: 15px;
+  }
+
+  #login__page .social__login__icons .icon {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    padding: 7.5px;
+    display: flex;
+    background-color: #f5f5f5;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+  }
+
+  #login__page .social__login__icons .icon img {
+    max-width: 100%;
+    object-fit: contain;
+    width: 27px;
   }
 }
 </style>
