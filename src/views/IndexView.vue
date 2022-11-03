@@ -129,7 +129,7 @@ export default defineComponent({
     />
     <main>
       <!-- the header-->
-      <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
+      <DashboardHeader @open-sidebar="showSidebar = !showSidebar"  />
 
       <!--inject all views here-->
       <div id="view__box">

@@ -80,10 +80,10 @@ export default defineComponent({
             name: "new task",
             path: "add-task",
           },
-           /* {
-            name: "edit task",
-            path: "edit-task",
-          },  */
+          /* {
+           name: "edit task",
+           path: "edit-task",
+         },  */
         ],
       },
       {
@@ -148,7 +148,13 @@ export default defineComponent({
 
 <template>
   <nav>
+
     <div id="nav__content">
+      <!-- nave header-->
+      <div id="nav__header">
+
+      </div>
+
       <!--the links-->
       <div v-for="route in routes.sort()" :key="route.name">
         <!--use  this templates bases on if a route has children routes-->
@@ -159,22 +165,13 @@ export default defineComponent({
             <Icon icon="mdi:menu-down" />
           </div>
           <ul v-if="route.children" class="children__routes">
-            <li
-              v-for="child in route.children"
-              class="child__route"
-              @click="closeSidebar"
-            >
-              <RouterLink
-                @click="closeSidebar"
-                :to="{ name: child.path }"
-                :key="child.name"
-                :class="[
-                  route.name === currentRouteName ? 'active' : '',
-                  'capitalize',
-                ]"
-              >
+            <li v-for="child in route.children" class="child__route" @click="closeSidebar">
+              <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name" :class="[
+                route.name === currentRouteName ? 'active' : '',
+                'capitalize',
+              ]">
                 <span class="capitalize">{{
-                  child.name.replaceAll("-", " ")
+                    child.name.replaceAll("-", " ")
                 }}</span>
               </RouterLink>
             </li>
@@ -183,15 +180,10 @@ export default defineComponent({
 
         <!--use this template if -->
         <template v-else>
-          <RouterLink
-            :to="{ name: route.path }"
-            class="link__item"
-            :class="[
-              route.name === currentRouteName ? 'active' : '',
-              'capitalize',
-            ]"
-            @click="closeSidebar"
-          >
+          <RouterLink :to="{ name: route.path }" class="link__item" :class="[
+            route.name === currentRouteName ? 'active' : '',
+            'capitalize',
+          ]" @click="closeSidebar">
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
           </RouterLink>
@@ -209,10 +201,8 @@ export default defineComponent({
 <style scoped>
 nav {
   padding-top: 100px;
-  background-color: rgba(0, 0, 0, 0.45);
   background-color: var(--primary);
   color: var(--light-text);
-  position: relative;
   top: 0;
   left: 0;
   transition: display 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -281,12 +271,45 @@ nav .link__item:hover,
 /**---------------mobile scree styling----------------- */
 @media screen and (max-width: 768px) {
   nav {
-    padding: 65px 0;
+    /* padding: 65px 0; */
+    padding: 0;
+    margin: 0;
     height: auto;
+    background-color: rgba(0, 0, 0, 0.45);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 5000;
+  }
+
+  nav #nav__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    height: 150px;
+    border-radius: 0 0 4px 4px;
+    background-color: var(--primary);
+    background-image: url("@/assets/img/bg/sidebar-avatar.svg");
+    background-size: cover;
+    background-position: center center;
+  }
+
+  nav #nav__content {
+    max-width: 75%;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--primary);
+    background-color: var(--border-color);
+    padding: 0;
+    margin: 0;
   }
 
   nav .link__item {
     padding: 7.5px 30px;
+    color: var(--default-dark);
+
     /* padding: 20px 30px 10px; */
   }
 
