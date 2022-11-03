@@ -276,7 +276,7 @@ nav .link__item:hover,
     margin: 0;
     height: auto;
     background-color: rgba(0, 0, 0, 0.45);
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
 
