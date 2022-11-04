@@ -14,9 +14,9 @@ axios.defaults.timeout = 12500;
 //   axios.defaults.baseURL = "https://nitride.onrender.com/api/v1";
 // }
 // else {
-//   axios.defaults.baseURL = "https://127.0.0.1:4835/api/v1"
+  axios.defaults.baseURL = "http://127.0.0.1:4835/api/v1"
 // }
-axios.defaults.baseURL = "https://nitride.onrender.com/api/v1";
+// axios.defaults.baseURL = "https://nitride.onrender.com/api/v1";
 // axios.defaults.baseURL = "http://127.0.0.1:4835/api/v1";
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   "token"

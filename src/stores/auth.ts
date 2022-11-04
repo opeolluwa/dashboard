@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import router from "@/router";
 
+
 export const useAuthStore = defineStore("authStore", {
   state: (): State => ({
     isLoading: false, // the request is in progress
@@ -111,7 +112,7 @@ export const useAuthStore = defineStore("authStore", {
       // console.log("go new token")
       try {
         const { data: response } = await axios.get("/auth", {
-          // headers: { Authorization: `Bearer ${this.authorizationToken}` },
+          headers: { Authorization: `Bearer ${this.authorizationToken}` },
         });
         //if the request is successful, store the data and
         if (response.success) {
@@ -133,7 +134,7 @@ export const useAuthStore = defineStore("authStore", {
       try {
         const { data: response } = await axios.put("/auth/me", {
           ...payload,
-          // headers: { Authorization: `Bearer ${this.authorizationToken}` },
+          headers: { Authorization: `Bearer ${this.authorizationToken}` },
         });
         //if the request is successful, store the data and
         if (response.success) {
@@ -145,6 +146,22 @@ export const useAuthStore = defineStore("authStore", {
         console.log("something bad happened ", error.message);
       }
     },
+    //change user password
+    async changePassword(payload: PasswordChangeInterface) {
+      try {
+        const { data: response } = await axios.put(
+          "/auth/reset-password",
+          { ...payload },
+          { headers: { Authorization: `Bearer ${this.authorizationToken}` } }
+        );
+        console.log(JSON.stringify(response));
+
+      } catch (error) {
+        console.log((error as Error).message);
+
+      }
+
+    }
   },
 });
 
@@ -182,4 +199,11 @@ interface UserInformation {
 interface AuthCredentials {
   email: String;
   password: String;
+}
+
+
+// change password payload
+export interface PasswordChangeInterface {
+  newPassword: String,
+  confirmPassword: String
 }

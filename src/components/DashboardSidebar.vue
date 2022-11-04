@@ -376,7 +376,7 @@ nav .link__item:hover,
     width: 100%;
     min-height: 100vh;
     background-color: var(--primary);
-    background-color: var(--border-color);
+    background-color: var(--light-text);
     padding: 0;
     margin: 0;
   }

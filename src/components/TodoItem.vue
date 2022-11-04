@@ -70,8 +70,8 @@ export default defineComponent({
         return "todo__item--delicate";
       } else if (type === "not-urgent") {
         return "todo__item--not__urgent";
-      } else if (type === "delete") {
-        return "todo__item--delete";
+      } else if (type === "important") {
+        return "todo__item--important";
       } else {
         return "todo__item--normal";
       }
@@ -148,7 +148,7 @@ export default defineComponent({
   border-left: 2.75px solid var(--default-yellow);
 }
 
-.todo__item--delete {
+.todo__item--important {
   border-left: 2.75px solid var(--default-red);
 }
 
@@ -161,7 +161,7 @@ export default defineComponent({
   color: var(--default-red);
 }
 
-.todo__item--delete .todo__item__header__actions__delete,
+.todo__item--important .todo__item__header__actions__delete,
 .todo__item--delicate .todo__item__header__actions__delete,
 .todo__item--not__urgent .todo__item__header__actions__delete,
 .todo__item--urgent .todo__item__header__actions__delete {
@@ -199,7 +199,7 @@ export default defineComponent({
   line-height: 18px;
 }
 
-.todo__item--delete p,
+.todo__item--important p,
 .todo__item--delicate p,
 .todo__item--not__urgent p,
 .todo__item--urgent p {
