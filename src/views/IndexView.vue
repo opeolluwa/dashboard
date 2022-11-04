@@ -194,6 +194,7 @@ main #view__box {
     box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
     -webkit-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
     -moz-box-shadow: 4px 17px 31px -3px rgba(64, 60, 82, 0.6);
+    height:100vh;
   }
 
   main {

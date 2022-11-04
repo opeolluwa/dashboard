@@ -4,6 +4,9 @@ import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
 import Spinner from "@/components/Spinner.vue";
 import axios from "axios";
+import { useToast } from 'vue-toastification'
+
+const appToastComponent = useToast();
 export default defineComponent({
   name: "AuthView",
   components: {
@@ -34,15 +37,22 @@ export default defineComponent({
           password,
         });
         console.log(JSON.stringify(response));
-
-        //TODO: integrate a toast
+        if (response.success) {
+          appToastComponent.success(response.message)
+        }
+        else {
+          appToastComponent.error(response.message)
+        }
         this.apiResponseMsg = response.message;
         this.isLoading = false;
+        return;
       } catch (error: any) {
-        const response = error.response.data;
-        console.log({ error: error.response.data });
-        this.apiResponseMsg = response.message;
         this.isLoading = false;
+        const { data: response } = error.response;
+        if (!response.success) {
+          this.apiResponseMsg = response.message;
+          appToastComponent.error(response.message)
+        }
       }
     },
   },
@@ -68,7 +78,7 @@ export default defineComponent({
         </div>
 
         <!--social icons-->
-        <div class="social__login__icons">
+        <div class="social__login__icons d-none">
           <div class="icon">
             <img src="@/assets/icons/google.png" alt="google" />
           </div>
@@ -81,53 +91,28 @@ export default defineComponent({
         </div>
 
         <!--continue with email-->
-        <small class="continue__with__email">
+        <small class="continue__with__email d-none">
           <span class="divider__line"> ------------------ </span>
           <span> continue with email </span>
           <span class="divider__line"> ---------------- </span>
         </small>
-        <!--api response -->
-        <small class="error"> {{ apiResponseMsg }}</small>
         <form action="" method="post" @submit.prevent="signUp">
-          <BaseTextInput
-            placeholder="Jane Doe"
-            label="fullname"
-            v-model="form.fullname"
-            type="text"
-            class="field"
-          />
+          <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="form.fullname" type="text" class="field" />
           <!--form field email-->
-          <BaseTextInput
-            placeholder="jane@mailer.com"
-            label="email"
-            v-model="form.email"
-            type="email"
-            class="field"
-          />
+          <BaseTextInput placeholder="jane@mailer.com" label="email" v-model="form.email" type="email" class="field" />
           <!--form field password-->
-          <BaseTextInput
-            placeholder="password"
-            type="password"
-            label="password"
-            v-model="form.password"
-            class="field"
-          />
+          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
+            class="field" />
           <!--form field submit, change color to black while waiting for response from server-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Sign Up</span>
-            <Spinner
-              :animation-duration="1000"
-              :size="30"
-              :color="'#ffffff'"
-              v-show="isLoading"
-            />
+            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
         </form>
         <hr />
         <!--custom install script-->
         <!-- Install button, hidden by default -->
-        <small class="goto__sign__up"
-          >Already have an account?
+        <small class="goto__sign__up">Already have an account?
           <RouterLink :to="{ name: 'login' }">Login </RouterLink>
         </small>
       </div>
@@ -163,13 +148,13 @@ export default defineComponent({
 }
 
 /**the background container */
-#sign__up__page .container > div:first-child {
+#sign__up__page .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#sign__up__page .container > div:last-child {
+#sign__up__page .container>div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -177,7 +162,7 @@ export default defineComponent({
   align-content: center;
 }
 
-#sign__up__page .container > div:last-child h1 + small {
+#sign__up__page .container>div:last-child h1+small {
   margin-bottom: 30px;
 }
 
@@ -229,11 +214,11 @@ button,
     padding: 0;
   }
 
-  #sign__up__page .container > div:first-child {
+  #sign__up__page .container>div:first-child {
     display: none;
   }
 
-  #sign__up__page .container > div:last-child {
+  #sign__up__page .container>div:last-child {
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
@@ -246,7 +231,7 @@ button,
     /* margin: 20px auto; */
   }
 
-  #sign__up__page .container > div:last-child h1 + small.error {
+  #sign__up__page .container>div:last-child h1+small.error {
     margin-bottom: 35px;
   }
 

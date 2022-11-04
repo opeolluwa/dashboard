@@ -37,6 +37,7 @@ export default defineComponent({
     async changePasswordRequest() {
       this.changePassword(this.security as unknown as PasswordChangeInterface)
     }
+    // return `this` pointer
   },
   computed: {
     ...mapState(useAuthStore, ["userInformation", "isLoading"]),
@@ -58,7 +59,7 @@ export default defineComponent({
       return this.isLoading === true ? true : false;
     },
     profile: () => ({
-      fullname: "",
+      fullname:"",
       username: "",
       email: "",
       theme: "",
@@ -89,7 +90,7 @@ export default defineComponent({
       <img src="@/assets/img/illustration/default_user.png" alt="avatar" />
       <!--edit  profile__page-->
       <button id="edit__button">
-        <Icon icon="mdi:pencil" />
+        <Icon icon="mdi:camera" />
       </button>
 
       <!---name and email-->
