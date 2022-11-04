@@ -175,11 +175,7 @@ export default defineComponent({
       <div id="nav__header">
         <div id="avatar">
           <!--icon-->
-          <img
-            src="@/assets/img/illustration/default_user.png"
-            alt="avatar"
-            @click="goToProfile"
-          />
+          <img src="@/assets/img/illustration/default_user.png" alt="avatar" @click="goToProfile" />
           <!---name and email-->
           <div id="user">
             <h3>{{ fullname }}</h3>
@@ -188,59 +184,47 @@ export default defineComponent({
         </div>
       </div>
 
-      <!--the links-->
-      <div v-for="route in routes.sort()" :key="route.name">
-        <!--use  this templates bases on if a route has children routes-->
-        <template v-if="route.children">
-          <div class="nav__link__parent link__item dropdown capitalize">
-            <Icon :icon="route.icon" />
-            <span>{{ route.name }}</span>
-            <Icon icon="mdi:menu-down" />
-          </div>
-          <ul v-if="route.children" class="children__routes">
-            <li
-              v-for="child in route.children"
-              class="child__route"
-              @click="closeSidebar"
-            >
-              <RouterLink
-                @click="closeSidebar"
-                :to="{ name: child.path }"
-                :key="child.name"
-                :class="[
+      <div id="routes">
+        <!--the links-->
+        <div v-for="route in routes.sort()" :key="route.name">
+          <!--use  this templates bases on if a route has children routes-->
+          <template v-if="route.children">
+            <div class="nav__link__parent link__item dropdown capitalize">
+              <Icon :icon="route.icon" />
+              <span>{{ route.name }}</span>
+              <Icon icon="mdi:menu-down" />
+            </div>
+            <ul v-if="route.children" class="children__routes">
+              <li v-for="child in route.children" class="child__route" @click="closeSidebar">
+                <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name" :class="[
                   route.name === currentRouteName ? 'active' : '',
                   'capitalize',
-                ]"
-              >
-                <span class="capitalize">{{
-                  child.name.replaceAll("-", " ")
-                }}</span>
-              </RouterLink>
-            </li>
-          </ul>
-        </template>
-        <!-- <hr><hr/> -->
-        <!--use this template if -->
-        <template v-else>
-          <!-- <hr class=divider> -->
-          <RouterLink
-            :to="{ name: route.path }"
-            class="link__item"
-            :class="[
+                ]">
+                  <span class="capitalize">{{
+                      child.name.replaceAll("-", " ")
+                  }}</span>
+                </RouterLink>
+              </li>
+            </ul>
+          </template>
+          <!-- <hr><hr/> -->
+          <!--use this template if -->
+          <template v-else>
+            <!-- <hr class=divider> -->
+            <RouterLink :to="{ name: route.path }" class="link__item" :class="[
               route.name === currentRouteName ? 'active' : '',
               'capitalize',
-            ]"
-            @click="closeSidebar"
-          >
-            <Icon :icon="route.icon" />
-            <span>{{ route.name }}</span>
-          </RouterLink>
-        </template>
-      </div>
-      <!-- the last out logout button-->
-      <div class="link__item" @click="logout" id="logout__btn">
-        <Icon icon="mdi:logout" />
-        <span>logout</span>
+            ]" @click="closeSidebar">
+              <Icon :icon="route.icon" />
+              <span>{{ route.name }}</span>
+            </RouterLink>
+          </template>
+        </div>
+        <!-- the last out logout button-->
+        <div class="link__item" @click="logout" id="logout__btn">
+          <Icon icon="mdi:logout" />
+          <span>logout</span>
+        </div>
       </div>
     </div>
   </nav>
@@ -263,10 +247,10 @@ nav {
   left: 0;
   transition: display 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
   cursor: pointer;
   padding-bottom: 40px;
-  /* z-index: 50000; */
 }
 
 .children__routes {
@@ -335,7 +319,6 @@ nav .link__item:hover,
     position: absolute;
     top: 0;
     left: 0;
-
     z-index: 5000;
   }
 
@@ -346,11 +329,13 @@ nav .link__item:hover,
     align-items: flex-start;
     padding: 20px 30px;
     min-height: 150px;
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 7px 7px;
     background-color: var(--primary);
     background-image: url("@/assets/img/bg/sidebar-avatar.svg");
     background-size: cover;
     background-position: top center;
+    max-height: 40vh;
+    position: sticky;
   }
 
   #nav__header #avatar {
@@ -373,12 +358,17 @@ nav .link__item:hover,
 
   nav #nav__content {
     max-width: 75%;
+    overflow-y: scroll;
     width: 100%;
     min-height: 100vh;
-    background-color: var(--primary);
     background-color: var(--light-text);
     padding: 0;
     margin: 0;
+  }
+
+  nav #routes {
+    height: 60vh !important;
+    overflow-y: scroll;
   }
 
   nav .link__item {
@@ -410,6 +400,9 @@ nav .link__item:hover,
     right: 20px;
     cursor: pointer;
     display: block;
+  }
+  nav svg{
+    color:var(--secondary)
   }
 }
 </style>

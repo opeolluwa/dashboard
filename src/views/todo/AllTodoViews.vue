@@ -5,7 +5,7 @@ import { Icon } from "@iconify/vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
 import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
-import { useTodoStore, type TodoInterface } from "@/stores/todo";
+import { useTodoStore, type TodoInterface } from "@/stores/tasks";
 import { mapActions, mapState } from "pinia";
 import AppTodoItem from "../../components/TodoItem.vue";
 import AppNetworkError from "../../components/AppNetworkError.vue";

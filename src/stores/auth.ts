@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import router from "@/router";
+import { useToast } from 'vue-toastification'
 
+const appToastComponent = useToast()
 
 export const useAuthStore = defineStore("authStore", {
   state: (): State => ({
@@ -59,6 +61,7 @@ export const useAuthStore = defineStore("authStore", {
         const { data: response } = error.response;
         if (!response.success) {
           this.apiResponseMsg = response.message;
+          appToastComponent.error(response.message)
         }
         // console.log(JSON.stringify(error.response.data));
       }
@@ -148,6 +151,7 @@ export const useAuthStore = defineStore("authStore", {
     },
     //change user password
     async changePassword(payload: PasswordChangeInterface) {
+      this.isLoading = true;
       try {
         const { data: response } = await axios.put(
           "/auth/reset-password",
@@ -155,10 +159,20 @@ export const useAuthStore = defineStore("authStore", {
           { headers: { Authorization: `Bearer ${this.authorizationToken}` } }
         );
         console.log(JSON.stringify(response));
-
-      } catch (error) {
-        console.log((error as Error).message);
-
+        if (response.success) {
+          appToastComponent.success(response.message)
+        }
+        else {
+          appToastComponent.error(response.message)
+        }
+        return;
+      } catch (error: any) {
+        this.isLoading = false;
+        const { data: response } = error.response;
+        if (!response.success) {
+          this.apiResponseMsg = response.message;
+          appToastComponent.error(response.message)
+        }
       }
 
     }

@@ -36,7 +36,7 @@ import { Icon } from "@iconify/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
 import { useAuthStore } from "@/stores/auth";
-import { useTodoStore, type TodoInterface } from "@/stores/todo";
+import { useTodoStore, type TodoInterface } from "@/stores/tasks";
 import Spinner from "@/components/Spinner.vue";
 import { mapState, mapActions } from "pinia";
 export default defineComponent({

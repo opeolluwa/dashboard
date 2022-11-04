@@ -8,6 +8,8 @@ import { useAuthStore } from "./auth";
  */
 const authStore = useAuthStore();
 const AUTH_TOKEN = authStore.getAuthToken;
+console.log({AUTH_TOKEN});
+
 
 export const useNoteStore = defineStore("todoStore", {
   state: (): State => ({

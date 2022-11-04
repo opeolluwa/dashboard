@@ -39,7 +39,6 @@ export default defineComponent({
     ...mapState(useAuthStore, [
       "isLoading",
       "apiError",
-      "apiResponseMsg",
       "authorizationToken",
     ]),
     //disabled state
@@ -78,8 +77,6 @@ export default defineComponent({
           <h1 class="text-8xl">Login</h1>
           <p class="sub__her__text">Please login to your account.</p>
         </div>
-        <!--api response -->
-        <small class="error"> {{ apiResponseMsg }}</small>
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
           <BaseTextInput

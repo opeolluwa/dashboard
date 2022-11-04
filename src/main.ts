@@ -7,9 +7,17 @@ import router from "./router";
 import "./assets/main.css";
 import "animate.css";
 import "highlight.js/styles/github.css";
-// import "highlight.js/lib/languages/*"
+
 import "./axios.config";
 import { useAuthStore } from "@/stores/auth";
+
+
+import Toast, { type PluginOptions } from "vue-toastification";
+import "vue-toastification/dist/index.css";
+const toastOptions: PluginOptions = {
+  // You can set your default options here
+};
+
 
 //ccpacitor config
 import { SplashScreen } from "@capacitor/splash-screen";
@@ -23,7 +31,7 @@ const timeagoOptions = {
 // import { createAuth0 } from "@auth0/auth0-vue";
 const app = createApp(App);
 
-export {};
+export { };
 declare global {
   interface Navigator {
     setAppBadge: Promise<void>;
@@ -43,7 +51,7 @@ declare global {
 app.use(createPinia());
 app.use(router);
 app.use(timeago, timeagoOptions);
-
+app.use(Toast, toastOptions)
 app.mount("#app");
 
 //export the auth store to make it accessible globally
