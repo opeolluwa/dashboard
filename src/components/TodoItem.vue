@@ -19,7 +19,11 @@
         </div>
       </div>
 
-      <div class="todo__item__header__actions" v-show="isSelected" @click="$emit('show-options')">
+      <div
+        class="todo__item__header__actions"
+        v-show="isSelected"
+        @click="$emit('show-options')"
+      >
         <Icon icon="mdi:dots-vertical" class="d-none" />
       </div>
     </div>
@@ -109,7 +113,8 @@ export default defineComponent({
 .list__item {
   border-radius: 3px;
   margin-bottom: 15px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .is__selected {

@@ -2,7 +2,6 @@
   <div id="settings__page">
     <h3>Connect social account</h3>
     <div id="social__account">
-
       <div class="social__account__icon">
         <img src="@/assets/icons/twitter.png" alt="twitter" />
         <span>Twitter</span>
@@ -32,7 +31,7 @@ export default defineComponent({
 
 <style scoped>
 #settings__page h3 {
- font-weight: 500;
+  font-weight: 500;
 }
 #social__account {
   margin: 10px 0;
@@ -45,7 +44,7 @@ export default defineComponent({
 }
 
 #social__account .social__account__icon {
- color: var(--secondary);
+  color: var(--secondary);
   width: 100%;
   height: 40px;
   border-radius: 5px;
@@ -53,9 +52,8 @@ export default defineComponent({
   display: flex;
   margin: 5px 0;
   align-items: center;
-
 }
-#social__account .social__account__icon:first-child{
+#social__account .social__account__icon:first-child {
   margin-top: 0;
   padding-top: 3px;
 }

@@ -1,6 +1,5 @@
 <script lang="ts">
 import BaseButton from "@/components/BaseButton.vue";
-import AppModal from "@/components/AppModal.vue";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 import { Icon } from "@iconify/vue";
 import AppEmptyState from "@/components/AppEmptyState.vue";
@@ -16,7 +15,6 @@ export default defineComponent({
   components: {
     BaseButton,
     Icon,
-    AppModal,
     BaseTextInput,
     AppEmptyState,
     AppTodoItem,
@@ -89,8 +87,12 @@ export default defineComponent({
   <AppEmptyState v-if="todoArray?.length == 0" />
   <!--render the todo list -->
   <div v-if="Number(todoArray?.length) > 0 && !isFetchingTodoArray">
-    <AppTodoItem v-for="{ title, description, id, priority } in todoArray" :todo="{ title, description, id, priority }"
-      @delete-todo="deleteTodo(id)" @click="editTodo(id)" />
+    <AppTodoItem
+      v-for="{ title, description, id, priority } in todoArray"
+      :todo="{ title, description, id, priority }"
+      @delete-todo="deleteTodo(id)"
+      @click="editTodo(id)"
+    />
   </div>
 
   <!--the Todo modal-->

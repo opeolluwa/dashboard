@@ -1,9 +1,26 @@
 <template>
   <form action="" @submit.prevent="makeCreateTodo">
-    <BaseTextInput label="heading" type="text" placeholder="heading" v-model="todo.title" class="field" />
-    <BaseTextarea placeholder="description" label="description" v-model="todo.description" class="field" />
+    <BaseTextInput
+      label="heading"
+      type="text"
+      placeholder="heading"
+      v-model="todo.title"
+      class="field"
+    />
+    <BaseTextarea
+      placeholder="description"
+      label="description"
+      v-model="todo.description"
+      class="field"
+    />
 
-    <BaseTextarea placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
+    <BaseTextarea
+      placeholder="github url"
+      label="due date"
+      type="date"
+      :model="todo.date"
+      class="field"
+    />
 
     <div class="select__form__field">
       <label for="priority">Priority</label>
@@ -19,10 +36,19 @@
     </div>
 
     <!--form field submit, change color to black while waiting for response from server-->
-    <BaseButton text="" type="submit" :disabled="disabledState"
-      :class="[disabledState == true ? 'disabled__button' : '']">
+    <BaseButton
+      text=""
+      type="submit"
+      :disabled="disabledState"
+      :class="[disabledState == true ? 'disabled__button' : '']"
+    >
       <span v-show="!isLoading">Add Todo</span>
-      <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+      <Spinner
+        :animation-duration="1000"
+        :size="30"
+        :color="'#ffffff'"
+        v-show="isLoading"
+      />
     </BaseButton>
   </form>
 </template>
@@ -57,7 +83,7 @@ export default defineComponent({
       priority: "",
     },
   }),
- 
+
   mounted() {
     console.log("mounted");
     // this.makeTodoRequest();

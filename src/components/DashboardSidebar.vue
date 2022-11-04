@@ -2,7 +2,7 @@
 import { Icon } from "@iconify/vue";
 import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 export default defineComponent({
   name: "AppNavigation",
   components: {
@@ -104,6 +104,16 @@ export default defineComponent({
     ],
   }),
   computed: {
+    ...mapState(useAuthStore, ["userInformation", "isLoading"]),
+    fullname() {
+      return String(this.userInformation?.fullname) || "Jane Doe";
+    },
+    username() {
+      return String(this.userInformation?.username) || "username";
+    },
+    email() {
+      return String(this.userInformation?.email) || "jane@mailer.com";
+    },
     currentRouteName() {
       const route = this.$route.name;
       return String(route) || "360 Devs";
@@ -119,7 +129,15 @@ export default defineComponent({
       });
     });
 
-    // console.log(this.$router.Rou);
+    //hide nav on click outside nav__content if device is mobile device
+    const isMobileDevice = window.matchMedia("(max-width: 600px)").matches;
+    const navigation = document.querySelector("nav");
+    if (isMobileDevice) {
+      navigation?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.$emit("close-sidebar");
+      });
+    }
   },
   methods: {
     //get the logout action from the store
@@ -136,11 +154,15 @@ export default defineComponent({
        * if true, close the sidebar when a nav link is clicked
        * if not do nothing
        */
-      const isMobileDevice = window.matchMedia("(max-width: 400px)").matches;
+      const isMobileDevice = window.matchMedia("(max-width: 600px)").matches;
       if (isMobileDevice) {
         this.$emit("close-sidebar");
       }
       return;
+    },
+    goToProfile() {
+      this.$router.push({ name: "profile" });
+      this.closeSidebar();
     },
   },
 });
@@ -148,11 +170,22 @@ export default defineComponent({
 
 <template>
   <nav>
-
     <div id="nav__content">
       <!-- nave header-->
       <div id="nav__header">
-
+        <div id="avatar">
+          <!--icon-->
+          <img
+            src="@/assets/img/illustration/default_user.png"
+            alt="avatar"
+            @click="goToProfile"
+          />
+          <!---name and email-->
+          <div id="user">
+            <h3>{{ fullname }}</h3>
+            <small>{{ email }}</small>
+          </div>
+        </div>
       </div>
 
       <!--the links-->
@@ -165,25 +198,40 @@ export default defineComponent({
             <Icon icon="mdi:menu-down" />
           </div>
           <ul v-if="route.children" class="children__routes">
-            <li v-for="child in route.children" class="child__route" @click="closeSidebar">
-              <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name" :class="[
-                route.name === currentRouteName ? 'active' : '',
-                'capitalize',
-              ]">
+            <li
+              v-for="child in route.children"
+              class="child__route"
+              @click="closeSidebar"
+            >
+              <RouterLink
+                @click="closeSidebar"
+                :to="{ name: child.path }"
+                :key="child.name"
+                :class="[
+                  route.name === currentRouteName ? 'active' : '',
+                  'capitalize',
+                ]"
+              >
                 <span class="capitalize">{{
-                    child.name.replaceAll("-", " ")
+                  child.name.replaceAll("-", " ")
                 }}</span>
               </RouterLink>
             </li>
           </ul>
         </template>
-
+        <!-- <hr><hr/> -->
         <!--use this template if -->
         <template v-else>
-          <RouterLink :to="{ name: route.path }" class="link__item" :class="[
-            route.name === currentRouteName ? 'active' : '',
-            'capitalize',
-          ]" @click="closeSidebar">
+          <!-- <hr class=divider> -->
+          <RouterLink
+            :to="{ name: route.path }"
+            class="link__item"
+            :class="[
+              route.name === currentRouteName ? 'active' : '',
+              'capitalize',
+            ]"
+            @click="closeSidebar"
+          >
             <Icon :icon="route.icon" />
             <span>{{ route.name }}</span>
           </RouterLink>
@@ -199,6 +247,14 @@ export default defineComponent({
 </template>
 
 <style scoped>
+#nav__header {
+  display: none;
+}
+
+.dividter {
+  border: 0.5px solid var(--border-color);
+}
+
 nav {
   padding-top: 100px;
   background-color: var(--primary);
@@ -285,15 +341,34 @@ nav .link__item:hover,
 
   nav #nav__header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
     padding: 20px 30px;
-    height: 150px;
+    min-height: 150px;
     border-radius: 0 0 4px 4px;
     background-color: var(--primary);
     background-image: url("@/assets/img/bg/sidebar-avatar.svg");
     background-size: cover;
-    background-position: center center;
+    background-position: top center;
+  }
+
+  #nav__header #avatar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+  }
+
+  #nav__header #user {
+    margin-top: 15px;
+  }
+
+  #nav__header #avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
   }
 
   nav #nav__content {
@@ -309,8 +384,15 @@ nav .link__item:hover,
   nav .link__item {
     padding: 7.5px 30px;
     color: var(--default-dark);
+  }
 
-    /* padding: 20px 30px 10px; */
+  .children__routes {
+    color: var(--default-dark);
+  }
+
+  .children__routes li.child__route {
+    /* margin-bottom: 25px; */
+    padding: 10px 3px;
   }
 
   nav .link__item:first-child {

@@ -9,8 +9,14 @@
   -->
   <div class="form__field">
     <label :for="label">{{ label }}</label>
-    <textarea :id="label" :placeholder="placeholder" @input="updateModelValue" :value="modelValue" rows="10"
-      cols="35"></textarea>
+    <textarea
+      :id="label"
+      :placeholder="placeholder"
+      @input="updateModelValue"
+      :value="modelValue"
+      rows="10"
+      cols="35"
+    ></textarea>
     <!--  <textarea
       :id="label"
       :placeholder="'-- ' + placeholder + ' --'"
@@ -23,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "BaseTextArea",

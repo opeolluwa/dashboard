@@ -8,21 +8,29 @@
       <div class="note__entry__header">
         <p class="note__entry__header__date">
           {{
-              new Date(fetchedNote.dateAdded.toString()).toLocaleDateString(
-                undefined,
-                {
-                  weekday: "short",
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                }
-              )
+            new Date(fetchedNote.dateAdded.toString()).toLocaleDateString(
+              undefined,
+              {
+                weekday: "short",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              }
+            )
           }}
         </p>
         <!--icon-->
-        <Icon icon="mdi:dots-vertical" @click="showOptions = true" @mouseover="showOptions = true" />
+        <Icon
+          icon="mdi:dots-vertical"
+          @click="showOptions = true"
+          @mouseover="showOptions = true"
+        />
         <!--controls-->
-        <div id="edit__note__controls" v-show="showOptions" @click="showOptions = false">
+        <div
+          id="edit__note__controls"
+          v-show="showOptions"
+          @click="showOptions = false"
+        >
           <div>
             <Icon icon="mdi:star-outline" class="star" />
             <span> Star </span>
@@ -106,7 +114,7 @@ export default defineComponent({
         name: "edit-note",
         params: { noteId: String(this.fetchedNote.id) },
       });
-    }
+    },
   },
   /// make request to update the todo
 });
@@ -139,7 +147,7 @@ export default defineComponent({
   gap: 15px;
 }
 
-#edit__note__page #edit__note__controls>div * {
+#edit__note__page #edit__note__controls > div * {
   display: inline-block;
   margin-right: 10px;
 }

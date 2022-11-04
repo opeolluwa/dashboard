@@ -5,8 +5,6 @@ import ViewLayoutVue from "@/components/ViewLayout.vue";
 import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
-import router from "@/router";
-import axios from "axios";
 import DashboardBottomNav from "@/components/DashboardBottomNav.vue";
 export default defineComponent({
   components: {
@@ -130,7 +128,7 @@ export default defineComponent({
     />
     <main>
       <!-- the header-->
-      <DashboardHeader @open-sidebar="showSidebar = !showSidebar"  />
+      <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
 
       <!--inject all views here-->
       <div id="view__box">
@@ -187,9 +185,9 @@ main #view__box {
 
   nav {
     /* height: unset !important; */
-    padding-top: 55px;
+    /* padding-top: 55px; */
     position: fixed;
-    z-index: 1000;
+    z-index: 5000;
     top: 0;
     left: 0;
     width: 100%;
