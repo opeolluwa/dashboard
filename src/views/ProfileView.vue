@@ -4,7 +4,7 @@ import AppSwitch from "@vueform/toggle";
 import "@vueform/toggle/themes/default.css";
 import { defineComponent } from "vue";
 import { mapState, mapActions } from "pinia";
-import { useAuthStore } from "@/stores/auth";
+import { useAuthStore, type PasswordChangeInterface } from "@/stores/auth";
 import BaseTextInput from "@/components/BaseTextInput.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import Spinner from "@/components/Spinner.vue";
@@ -18,7 +18,7 @@ export default defineComponent({
     Spinner,
   },
   methods: {
-    ...mapActions(useAuthStore, ["updateUserInformation"]),
+    ...mapActions(useAuthStore, ["updateUserInformation", "changePassword"]),
     toggleTheme() {
       this.preferences.theme =
         this.preferences.theme == "darkMode" ? "" : "darkMode"; //toggles theme value
@@ -33,6 +33,10 @@ export default defineComponent({
       this.updateUserInformation(this.profile);
       console.log("updated");
     },
+    //change user password 
+    async changePasswordRequest() {
+      this.changePassword(this.security as unknown as PasswordChangeInterface)
+    }
   },
   computed: {
     ...mapState(useAuthStore, ["userInformation", "isLoading"]),
@@ -69,6 +73,10 @@ export default defineComponent({
       allowPushNotifications: false,
       enable2FA: true,
     },
+    security: {
+      newPassword: "",
+      confirmPassword: "",
+    }
   }),
 });
 </script>
@@ -94,33 +102,12 @@ export default defineComponent({
     <section id="user__information">
       <h3>Account Information</h3>
       <form action="" @submit.prevent="updateProfile">
-        <BaseTextInput
-          placeholder="Jane Doe"
-          label="fullname"
-          v-model="fullname"
-        />
-        <BaseTextInput
-          placeholder="jane@mailer.com"
-          label="email"
-          type="email"
-          class="field"
-          v-model="email"
-        />
-        <BaseTextInput
-          placeholder="username"
-          v-model="username"
-          label="username"
-          type="text"
-          class="field"
-        />
-        <BaseButton text="" :disabled="disabledState">
+        <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="fullname" />
+        <BaseTextInput placeholder="jane@mailer.com" label="email" type="email" class="field" v-model="email" />
+        <BaseTextInput placeholder="username" v-model="username" label="username" type="text" class="field" />
+        <BaseButton text="" :disabled="disabledState" class="action__trigger">
           <span v-show="!isLoading">Save Changes</span>
-          <Spinner
-            :animation-duration="1000"
-            :size="30"
-            :color="'#ffffff'"
-            v-show="isLoading"
-          />
+          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
         </BaseButton>
       </form>
     </section>
@@ -139,26 +126,23 @@ export default defineComponent({
         <AppSwitch v-model="preferences.allowPushNotifications" /> allow push
         notifications
       </div>
-      <div><AppSwitch v-model="preferences.enable2FA" /> enable 2FA</div>
+      <div>
+        <AppSwitch v-model="preferences.enable2FA" /> enable 2FA
+      </div>
     </section>
 
     <section>
       <h3>Security</h3>
-
-      <BaseTextInput
-        placeholder="new password"
-        :show-icon="false"
-        label="New Password"
-        type="password"
-        class="field"
-      />
-      <BaseTextInput
-        placeholder="new password"
-        :show-icon="false"
-        label="Confirm Password"
-        type="password"
-        class="field"
-      />
+      <form action="" @submit.prevent="changePasswordRequest">
+        <BaseTextInput placeholder="new password" :show-icon="false" label="New Password" type="password" class="field"
+          v-model="security.newPassword" />
+        <BaseTextInput placeholder="new password" :show-icon="false" label="Confirm Password" type="password"
+          class="field" v-model="security.confirmPassword" />
+        <BaseButton text="" :disabled="disabledState">
+          <span v-show="!isLoading">Update Password</span>
+          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+        </BaseButton>
+      </form>
     </section>
   </div>
 </template>
@@ -167,7 +151,11 @@ export default defineComponent({
 #user__parofile .field {
   display: none;
 }
-#user__information button {
+
+#profile__page section .form__field {
+  margin-bottom: 18px;
+}
+#profile__page button {
   color: inherit;
   background-color: #f5f5f5;
   border: 1px solid var(--primary);
@@ -192,7 +180,7 @@ export default defineComponent({
 }
 
 #profile__page #user {
-  margin-top: -40px;
+  margin-top: -60px;
   margin-bottom: 55px;
 }
 
@@ -224,8 +212,9 @@ export default defineComponent({
   align-items: center;
   flex-direction: row-reverse;
   position: relative;
-  top: -35px;
+  top: -56px;
   right: -30px;
+  width: unset !important;
 }
 
 #profile__page #edit__button svg {
@@ -242,7 +231,7 @@ export default defineComponent({
   margin-bottom: 18px;
 }
 
-#profile__page-control > div {
+#profile__page-control>div {
   display: flex;
   align-items: center;
   align-content: center;
@@ -254,7 +243,8 @@ export default defineComponent({
   flex-direction: column;
   gap: 10px;
 }
-#preferences > div {
+
+#preferences>div {
   display: flex;
   align-items: center;
   align-content: center;
@@ -262,12 +252,13 @@ export default defineComponent({
   margin-bottom: 10px;
   /* flex-direction: column; */
 }
+
 section {
   margin-bottom: 4.75rem;
 }
 
 @media screen and (max-width: 768px) {
-  #user__information button {
+  #profile__page button {
     width: 100%;
   }
 }

@@ -14,7 +14,6 @@ export default {
 .view {
   position: relative;
   padding-bottom: 75px;
-  /* padding-bottom: 120px; */
 }
 /**set top padding for first child element of view layout */
 .view > *:first-child {

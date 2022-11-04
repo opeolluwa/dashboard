@@ -105,7 +105,7 @@ export const useNoteStore = defineStore("todoStore", {
         });
         console.log("the note id is ", noteId);
         console.log(JSON.stringify(response));
-      } catch (error) { }
+      } catch (error) {}
     },
     /**
      * @function updateTodo
@@ -122,9 +122,9 @@ export const useNoteStore = defineStore("todoStore", {
             headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
           }
         );
-        return response.data.success // true or false
+        return response.data.success; // true or false
       } catch (error) {
-        return false
+        return false;
       }
     },
   },

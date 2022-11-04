@@ -5,8 +5,6 @@ import ViewLayoutVue from "@/components/ViewLayout.vue";
 import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
-import router from "@/router";
-import axios from "axios";
 import DashboardBottomNav from "@/components/DashboardBottomNav.vue";
 export default defineComponent({
   components: {
@@ -25,7 +23,7 @@ export default defineComponent({
    * if token does not exists, redirect to login page
    * else use the token to make request to the server, if the server return a valid response, enter this routes else redirect to login page
    */
-  beforeRouteEnter(to, from, next) {
+  /*beforeRouteEnter(to, from, next) {
     // async function checkBearerTokenValidity() {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -62,6 +60,7 @@ export default defineComponent({
     // }
     // checkBearerTokenValidity();
   },
+  */
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
@@ -186,9 +185,9 @@ main #view__box {
 
   nav {
     /* height: unset !important; */
-    padding-top: 55px;
+    /* padding-top: 55px; */
     position: fixed;
-    z-index: 1000;
+    z-index: 5000;
     top: 0;
     left: 0;
     width: 100%;

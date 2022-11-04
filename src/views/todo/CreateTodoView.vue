@@ -3,20 +3,21 @@
     <BaseTextInput label="heading" type="text" placeholder="heading" v-model="todo.title" class="field" />
     <BaseTextarea placeholder="description" label="description" v-model="todo.description" class="field" />
 
-    <BaseTextarea placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
-
     <div class="select__form__field">
       <label for="priority">Priority</label>
       <select v-model="todo.priority">
         <option disabled value="">Please select priority</option>
         <option>urgent</option>
         <option>not urgent</option>
-        <option>delete</option>
+        <option>important</option>
         <option>delicate</option>
         <option>normal</option>
       </select>
       <Icon icon="mdi:menu-down" class="select__arrow__down" />
     </div>
+
+    <BaseTextInput placeholder="github url" label="due date" type="date" :model="todo.date" class="field" />
+
 
     <!--form field submit, change color to black while waiting for response from server-->
     <BaseButton text="" type="submit" :disabled="disabledState"
@@ -57,7 +58,7 @@ export default defineComponent({
       priority: "",
     },
   }),
- 
+
   mounted() {
     console.log("mounted");
     // this.makeTodoRequest();
@@ -125,7 +126,7 @@ form button {
 
 .select__form__field select {
   appearance: none;
-  background-color: transparent;
+  background-color: #fff;
   border: none;
   margin: 0;
   padding: 0 1em 0 0;

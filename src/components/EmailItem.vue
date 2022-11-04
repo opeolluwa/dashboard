@@ -74,7 +74,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 div.email__item {
   display: flex;
   align-items: center;
