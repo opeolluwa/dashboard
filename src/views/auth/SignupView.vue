@@ -78,7 +78,7 @@ export default defineComponent({
         </div>
 
         <!--social icons-->
-        <div class="social__login__icons d-none">
+        <div class="social__login__icons">
           <div class="icon">
             <img src="@/assets/icons/google.png" alt="google" />
           </div>
