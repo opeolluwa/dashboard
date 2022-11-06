@@ -17,31 +17,30 @@ const toastOptions: PluginOptions = {
   // You can set your default options here
 };
 
-//status bar
+// capacitor status bar
 import { StatusBar, Style } from '@capacitor/status-bar';
 const statusBarOption = {
   color: "#4916b1"
 }
 StatusBar.setBackgroundColor(statusBarOption);
 
+//capacitor storage
+import { Preferences } from '@capacitor/preferences';
+export async function storeData(data: StorageInterface) {
+  const { key, value } = data;
+  await Preferences.set({
+    key: key.toString(),
+    value: value
+  });
+}
 
-import { Capacitor } from "@capacitor/core";
-import { CapacitorSQLite, SQLiteConnection } from "@capacitor-community/sqlite";
-import {
-  defineCustomElements as jeepSqlite,
-  applyPolyfills,
-} from "jeep-sqlite/loader";
+// JSON "get" example
+export async function getStoredData(key: String) {
+  const data = await Preferences.get({ key: key.toString() });
+  return data.value;
+}
 
-applyPolyfills().then(() => {
-  jeepSqlite(window);
-});
-
-import VueDarkMode from "@growthbunker/vuedarkmode";
-
-// Vue.use(VueDarkMode);
-// Vue.use(VueDarkMode);
-
-//ccpacitor config
+//capacitor config
 import { SplashScreen } from "@capacitor/splash-screen";
 import timeago from "vue-timeago3";
 const timeagoOptions = {
@@ -79,3 +78,9 @@ app.mount("#app");
 
 //export the auth store to make it accessible globally
 export const authStore = useAuthStore();
+
+
+interface StorageInterface {
+  key: String,
+  value: any
+}

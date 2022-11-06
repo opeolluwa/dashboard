@@ -41,22 +41,21 @@ export default defineComponent({
         icon: "mdi:home-variant-outline",
         path: "home",
       },
-
       {
-        name: "settings",
-        icon: "mdi:cog-outline",
-        path: "settings",
+        name: "notification",
+        icon: "mdi:bell-outline",
+        path: "notification",
       },
-
+  
       {
         name: "tasks",
         icon: "mdi:plus-circle-outline",
         path: "add-task",
       },
       {
-        name: "notification",
-        icon: "mdi:bell-outline",
-        path: "notification",
+        name: "dark mode",
+        icon: "mdi:brightness-4",
+        path: "settings",
       },
       {
         name: "profile",

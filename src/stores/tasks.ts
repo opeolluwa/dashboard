@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { useAuthStore } from "./auth";
 import { useToast } from "vue-toastification";
+import { getStoredData } from "@/main";
 
 const appToastComponent = useToast();
 /**
@@ -9,7 +10,6 @@ const appToastComponent = useToast();
  * add the token to the request anf get the todos
  */
 const authStore = useAuthStore();
-const AUTH_TOKEN = authStore.getAuthToken;
 
 export const useTodoStore = defineStore("todoStore", {
   state: (): State => ({
@@ -24,6 +24,11 @@ export const useTodoStore = defineStore("todoStore", {
   getters: {
     //retrieve the array of tod s form store
     getAllTodo: (state) => state.todoArray,
+    async getAuthToken(state) {
+      const AUTH_TOKEN_FOR_MOBILE = await getStoredData("authorizationToken")
+      const AUTH_TOKEN = authStore.getAuthToken;
+      return AUTH_TOKEN || AUTH_TOKEN_FOR_MOBILE;
+    }
   },
   actions: {
     /**
@@ -34,6 +39,7 @@ export const useTodoStore = defineStore("todoStore", {
     async fetchAllTodo() {
       //show loading state of fetch todo
       this.isFetchingTodoArray = true;
+      const AUTH_TOKEN = authStore.getAuthToken ? authStore.getAuthToken : await getStoredData("authorizationToken")
 
       try {
         const { data: response } = await axios.get("/todo", {
@@ -47,14 +53,7 @@ export const useTodoStore = defineStore("todoStore", {
         console.log(JSON.stringify(response));
       } catch (error: any) {
         this.isFetchingTodoArray = false;
-        // this.errorMessage = error.data.response.message;
-        // this.todoArray = null;
-        //assign todo to empty array if there is an error
-        /* const { data: response } = error.response;
-                        if (!response.success) {
-                            this.errorMessage = response.message;
-                            this.todoArray = null
-                        } */
+  
       }
     },
     /**
@@ -66,7 +65,7 @@ export const useTodoStore = defineStore("todoStore", {
      * go on to make request to the endpoint
      */
     async createTodo(payload: TodoInterface): Promise<Boolean> {
-      const authStore = useAuthStore();
+      const AUTH_TOKEN = authStore.getAuthToken ? authStore.getAuthToken : await getStoredData("authorizationToken")
       this.isLoading = true;
       try {
         /**
@@ -111,6 +110,7 @@ export const useTodoStore = defineStore("todoStore", {
      */
     async deleteTodo(taskId: String) {
       try {
+        const AUTH_TOKEN = authStore.getAuthToken ? authStore.getAuthToken : await getStoredData("authorizationToken")
         const { data: response } = await axios.delete(`/todo/${taskId}`, {
           headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
         });
