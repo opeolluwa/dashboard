@@ -33,10 +33,10 @@ export default defineComponent({
       this.updateUserInformation(this.profile);
       console.log("updated");
     },
-    //change user password 
+    //change user password
     async changePasswordRequest() {
-      this.changePassword(this.security as unknown as PasswordChangeInterface)
-    }
+      this.changePassword(this.security as unknown as PasswordChangeInterface);
+    },
     // return `this` pointer
   },
   computed: {
@@ -59,7 +59,7 @@ export default defineComponent({
       return this.isLoading === true ? true : false;
     },
     profile: () => ({
-      fullname:"",
+      fullname: "",
       username: "",
       email: "",
       theme: "",
@@ -77,7 +77,7 @@ export default defineComponent({
     security: {
       newPassword: "",
       confirmPassword: "",
-    }
+    },
   }),
 });
 </script>
@@ -103,12 +103,33 @@ export default defineComponent({
     <section id="user__information">
       <h3>Account Information</h3>
       <form action="" @submit.prevent="updateProfile">
-        <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="fullname" />
-        <BaseTextInput placeholder="jane@mailer.com" label="email" type="email" class="field" v-model="email" />
-        <BaseTextInput placeholder="username" v-model="username" label="username" type="text" class="field" />
+        <BaseTextInput
+          placeholder="Jane Doe"
+          label="fullname"
+          v-model="fullname"
+        />
+        <BaseTextInput
+          placeholder="jane@mailer.com"
+          label="email"
+          type="email"
+          class="field"
+          v-model="email"
+        />
+        <BaseTextInput
+          placeholder="username"
+          v-model="username"
+          label="username"
+          type="text"
+          class="field"
+        />
         <BaseButton text="" :disabled="disabledState" class="action__trigger">
           <span v-show="!isLoading">Save Changes</span>
-          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+          <Spinner
+            :animation-duration="1000"
+            :size="30"
+            :color="'#ffffff'"
+            v-show="isLoading"
+          />
         </BaseButton>
       </form>
     </section>
@@ -127,21 +148,36 @@ export default defineComponent({
         <AppSwitch v-model="preferences.allowPushNotifications" /> allow push
         notifications
       </div>
-      <div>
-        <AppSwitch v-model="preferences.enable2FA" /> enable 2FA
-      </div>
+      <div><AppSwitch v-model="preferences.enable2FA" /> enable 2FA</div>
     </section>
 
     <section>
       <h3>Security</h3>
       <form action="" @submit.prevent="changePasswordRequest">
-        <BaseTextInput placeholder="new password" :show-icon="false" label="New Password" type="password" class="field"
-          v-model="security.newPassword" />
-        <BaseTextInput placeholder="new password" :show-icon="false" label="Confirm Password" type="password"
-          class="field" v-model="security.confirmPassword" />
+        <BaseTextInput
+          placeholder="new password"
+          :show-icon="false"
+          label="New Password"
+          type="password"
+          class="field"
+          v-model="security.newPassword"
+        />
+        <BaseTextInput
+          placeholder="new password"
+          :show-icon="false"
+          label="Confirm Password"
+          type="password"
+          class="field"
+          v-model="security.confirmPassword"
+        />
         <BaseButton text="" :disabled="disabledState">
           <span v-show="!isLoading">Update Password</span>
-          <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+          <Spinner
+            :animation-duration="1000"
+            :size="30"
+            :color="'#ffffff'"
+            v-show="isLoading"
+          />
         </BaseButton>
       </form>
     </section>
@@ -232,7 +268,7 @@ export default defineComponent({
   margin-bottom: 18px;
 }
 
-#profile__page-control>div {
+#profile__page-control > div {
   display: flex;
   align-items: center;
   align-content: center;
@@ -245,7 +281,7 @@ export default defineComponent({
   gap: 10px;
 }
 
-#preferences>div {
+#preferences > div {
   display: flex;
   align-items: center;
   align-content: center;

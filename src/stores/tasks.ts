@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import { useAuthStore } from "./auth";
-import { useToast } from 'vue-toastification'
+import { useToast } from "vue-toastification";
 
-const appToastComponent = useToast()
+const appToastComponent = useToast();
 /**
  * get th e bearer token from the authentication store
  * add the token to the request anf get the todos
@@ -90,7 +90,6 @@ export const useTodoStore = defineStore("todoStore", {
           payload.description = "";
           appToastComponent.success(response.message);
           return true;
-
         }
         return false;
         // console.log(JSON.stringify(response));
@@ -99,7 +98,7 @@ export const useTodoStore = defineStore("todoStore", {
         this.isLoading = false;
         const { data: response } = error.response;
         if (!response.success) {
-          appToastComponent.error(response.message)
+          appToastComponent.error(response.message);
         }
       }
       this.isLoading = false;
@@ -117,14 +116,14 @@ export const useTodoStore = defineStore("todoStore", {
         });
         if (response.success) {
           this.fetchAllTodo();
-          appToastComponent.success(response.message)
+          appToastComponent.success(response.message);
         }
         console.log("the todo id is ", taskId);
         console.log(JSON.stringify(response));
       } catch (error: any) {
         const { data: response } = error.response;
         if (!response.success) {
-          appToastComponent.error(response.message)
+          appToastComponent.error(response.message);
         }
       }
     },

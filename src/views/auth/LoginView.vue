@@ -36,11 +36,7 @@ export default defineComponent({
     }
   },
   computed: {
-    ...mapState(useAuthStore, [
-      "isLoading",
-      "apiError",
-      "authorizationToken",
-    ]),
+    ...mapState(useAuthStore, ["isLoading", "apiError", "authorizationToken"]),
     //disabled state
     disabledState() {
       return this.isLoading === true ? true : false;
@@ -74,65 +70,93 @@ export default defineComponent({
       <!--logon form-->
       <div>
         <div class="title">
-          <h1 class="text-8xl">Login</h1>
+          <h1>Login</h1>
           <p class="sub__her__text">Please login to your account.</p>
         </div>
+
+        <!--socila login buttons-->
+        <BaseButton text="continue with Google" class="social__login">
+          <img src="@/assets/icons/google.png" alt="continue with google" />
+        </BaseButton>
+        <BaseButton text="Continue with GitHub" class="social__login">
+          <img src="@/assets/icons/github.png" alt="continue with google" />
+        </BaseButton>
+        <BaseButton text="Continue with Twitter" class="social__login">
+          <img src="@/assets/icons/twitter.png" alt="continue with google" />
+        </BaseButton>
+
+        <!--continue with google-->
+        <!--continue with email-->
+        <small class="continue__with__email">
+          <span class="divider__line"> ------------------ </span>
+          <span> continue with email </span>
+          <span class="divider__line"> ---------------- </span>
+        </small>
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
-          <BaseTextInput
-            placeholder="example@mailer.com"
-            label="email"
-            v-model="form.email"
-            type="email"
-            class="field"
-          />
+          <BaseTextInput placeholder="example@mailer.com" label="email" v-model="form.email" type="email"
+            class="field" />
           <!--form field password-->
-          <BaseTextInput
-            placeholder="password"
-            type="password"
-            label="password"
-            class="field"
-            v-model="form.password"
-            :reset-password="true"
-          />
+          <BaseTextInput placeholder="password" type="password" label="password" class="field" v-model="form.password"
+            :reset-password="false" />
           <!--form field submit, change color to black while waiting for response from server-->
-
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Login</span>
-            <Spinner
-              :animation-duration="1000"
-              :size="30"
-              :color="'#ffffff'"
-              v-show="isLoading"
-            />
+            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
         </form>
 
         <!--custom install script-->
         <!-- Install button, hidden by default -->
-        <div class="goto__sign__up">
+        <small class="goto__page">
           Don&apos;t have an account?
-          <RouterLink :to="{ name: 'sign-up' }">Sign up </RouterLink>
-        </div>
+          <RouterLink :to="{ name: 'sign-up' }" class="emphasis" style="font-size:13px">Sign up </RouterLink>
+        </small>
+
+        <small class="goto__page">
+          <RouterLink :to="{ name: 'sign-up' }" class="emphasis" style="font-size:13px">Forgotten password </RouterLink>
+        </small>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.social__login img {
+  width: 35px;
+  padding: 5px;
+}
+
+.social__login {
+  background-color: #f3f3f3;
+  color: var(--default-dark);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: unset;
+  margin-top: 20px;
+}
+
 .hidden {
   display: none !important;
 }
 
-.goto__sign__up {
-  font-size: 0.95rem;
+.goto__page {
+  /* font-size: 0.95rem; */
   margin-top: 10px;
   color: var(--secondary);
   text-align: left !important;
+  display: block;
+  /* display: none; */
+}
+
+.goto__page:first-child {
+  margin-top: 120px;
 }
 
 .goto__sign__up a {
-  text-decoration: underline;
+  font-size: inherit !important;
+  text-decoration: none;
 }
 
 #login__page .container {
@@ -147,13 +171,13 @@ export default defineComponent({
 }
 
 /**the background container */
-#login__page .container > div:first-child {
+#login__page .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#login__page .container > div:last-child {
+#login__page .container>div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -161,7 +185,7 @@ export default defineComponent({
   align-content: center;
 }
 
-#login__page .container > div:last-child h1 + small {
+#login__page .container>div:last-child h1+small {
   margin-bottom: 30px;
 }
 
@@ -213,11 +237,11 @@ button,
     padding: 0;
   }
 
-  #login__page .container > div:first-child {
+  #login__page .container>div:first-child {
     display: none;
   }
 
-  #login__page .container > div:last-child {
+  #login__page .container>div:last-child {
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
@@ -230,7 +254,7 @@ button,
     /* margin: 20px auto; */
   }
 
-  #login__page .container > div:last-child h1 + small.error {
+  #login__page .container>div:last-child h1+small.error {
     margin-bottom: 35px;
   }
 
@@ -239,7 +263,7 @@ button,
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    column-gap: 15px;
+    /* column-gap: -15px; */
   }
 
   .form__field,
@@ -294,5 +318,11 @@ button,
     object-fit: contain;
     width: 27px;
   }
+
+  #login__page .form__field {
+    margin-bottom: 15px;
+  }
+
+
 }
 </style>

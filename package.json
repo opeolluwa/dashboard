@@ -20,6 +20,7 @@
     "@capacitor/android": "^4.3.0",
     "@capacitor/core": "^4.3.0",
     "@capacitor/splash-screen": "^4.1.1",
+    "@growthbunker/vuedarkmode": "^0.5.56",
     "@vueform/multiselect": "^2.5.6",
     "@vueform/toggle": "^2.1.2",
     "animate.css": "^4.1.1",

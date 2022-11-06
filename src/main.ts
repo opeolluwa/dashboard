@@ -11,13 +11,15 @@ import "highlight.js/styles/github.css";
 import "./axios.config";
 import { useAuthStore } from "@/stores/auth";
 
-
 import Toast, { type PluginOptions } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 const toastOptions: PluginOptions = {
   // You can set your default options here
 };
 
+import VueDarkMode from "@growthbunker/vuedarkmode";
+
+// Vue.use(VueDarkMode);
 
 //ccpacitor config
 import { SplashScreen } from "@capacitor/splash-screen";
@@ -31,7 +33,7 @@ const timeagoOptions = {
 // import { createAuth0 } from "@auth0/auth0-vue";
 const app = createApp(App);
 
-export { };
+export {};
 declare global {
   interface Navigator {
     setAppBadge: Promise<void>;
@@ -51,7 +53,8 @@ declare global {
 app.use(createPinia());
 app.use(router);
 app.use(timeago, timeagoOptions);
-app.use(Toast, toastOptions)
+app.use(Toast, toastOptions);
+// app.use(VueDarkMode)
 app.mount("#app");
 
 //export the auth store to make it accessible globally

@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import router from "@/router";
-import { useToast } from 'vue-toastification'
+import { useToast } from "vue-toastification";
 
-const appToastComponent = useToast()
+const appToastComponent = useToast();
 
 export const useAuthStore = defineStore("authStore", {
   state: (): State => ({
@@ -61,7 +61,7 @@ export const useAuthStore = defineStore("authStore", {
         const { data: response } = error.response;
         if (!response.success) {
           this.apiResponseMsg = response.message;
-          appToastComponent.error(response.message)
+          appToastComponent.error(response.message);
         }
         // console.log(JSON.stringify(error.response.data));
       }
@@ -160,10 +160,9 @@ export const useAuthStore = defineStore("authStore", {
         );
         console.log(JSON.stringify(response));
         if (response.success) {
-          appToastComponent.success(response.message)
-        }
-        else {
-          appToastComponent.error(response.message)
+          appToastComponent.success(response.message);
+        } else {
+          appToastComponent.error(response.message);
         }
         return;
       } catch (error: any) {
@@ -171,11 +170,10 @@ export const useAuthStore = defineStore("authStore", {
         const { data: response } = error.response;
         if (!response.success) {
           this.apiResponseMsg = response.message;
-          appToastComponent.error(response.message)
+          appToastComponent.error(response.message);
         }
       }
-
-    }
+    },
   },
 });
 
@@ -215,9 +213,8 @@ interface AuthCredentials {
   password: String;
 }
 
-
 // change password payload
 export interface PasswordChangeInterface {
-  newPassword: String,
-  confirmPassword: String
+  newPassword: String;
+  confirmPassword: String;
 }
