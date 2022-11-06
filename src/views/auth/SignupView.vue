@@ -135,7 +135,7 @@ export default defineComponent({
         <!-- Install button, hidden by default -->
         <small class="goto__sign__up"
           >Already have an account?
-          <RouterLink :to="{ name: 'login' }">Login </RouterLink>
+          <RouterLink :to="{ name: 'login' }" class="emphasis" style="font-size:13px">Login </RouterLink>
         </small>
       </div>
     </div>

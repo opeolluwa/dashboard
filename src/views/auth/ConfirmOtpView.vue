@@ -90,7 +90,7 @@ export default defineComponent({
           </BaseButton>
           <small class="goto__sign__up"
             >Didn&apos;t receive any token?
-            <RouterLink :to="{ name: 'login' }">request new </RouterLink>
+            <RouterLink :to="{ name: 'login' }" class="emphasis" style="font-size:13px">request new </RouterLink>
           </small>
         </form>
       </div>

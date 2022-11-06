@@ -114,7 +114,7 @@ export default defineComponent({
         </small>
 
         <small class="goto__page">
-          <RouterLink :to="{ name: 'sign-up' }" class="emphasis" style="font-size:13px">Forgotten password </RouterLink>
+          <RouterLink :to="{ name: 'reset-password' }" class="emphasis" style="font-size:13px">Forgotten password </RouterLink>
         </small>
       </div>
     </div>

@@ -17,8 +17,28 @@ const toastOptions: PluginOptions = {
   // You can set your default options here
 };
 
+//status bar
+import { StatusBar, Style } from '@capacitor/status-bar';
+const statusBarOption = {
+  color: "#4916b1"
+}
+StatusBar.setBackgroundColor(statusBarOption);
+
+
+import { Capacitor } from "@capacitor/core";
+import { CapacitorSQLite, SQLiteConnection } from "@capacitor-community/sqlite";
+import {
+  defineCustomElements as jeepSqlite,
+  applyPolyfills,
+} from "jeep-sqlite/loader";
+
+applyPolyfills().then(() => {
+  jeepSqlite(window);
+});
+
 import VueDarkMode from "@growthbunker/vuedarkmode";
 
+// Vue.use(VueDarkMode);
 // Vue.use(VueDarkMode);
 
 //ccpacitor config
@@ -33,7 +53,7 @@ const timeagoOptions = {
 // import { createAuth0 } from "@auth0/auth0-vue";
 const app = createApp(App);
 
-export {};
+export { };
 declare global {
   interface Navigator {
     setAppBadge: Promise<void>;
