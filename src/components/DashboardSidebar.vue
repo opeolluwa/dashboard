@@ -385,7 +385,7 @@ nav .link__item:hover,
   }
 
   nav #routes {
-    height: 80vh !important;
+    height: 60vh !important;
     overflow-y: scroll;
   }
 

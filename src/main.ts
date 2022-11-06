@@ -20,7 +20,7 @@ const toastOptions: PluginOptions = {
 // capacitor status bar
 import { StatusBar, Style } from '@capacitor/status-bar';
 const statusBarOption = {
-  color: "#4916b1"
+  color: "#2f0e73"
 }
 StatusBar.setBackgroundColor(statusBarOption);
 
