@@ -46,7 +46,7 @@
       <Spinner
         :animation-duration="1000"
         :size="30"
-        :color="'#ffffff'"
+        :color="'#101010'"
         v-show="isLoading"
       />
     </BaseButton>

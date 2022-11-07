@@ -87,7 +87,7 @@ export default defineComponent({
 
         <!--continue with google-->
         <!--continue with email-->
-        <small class="continue__with__email">
+        <small class="continue__with__email d-none">
           <span class="divider__line"> ------------------ </span>
           <span> continue with email </span>
           <span class="divider__line"> ---------------- </span>
@@ -114,7 +114,7 @@ export default defineComponent({
         </small>
 
         <small class="goto__page">
-          <RouterLink :to="{ name: 'reset-password' }" class="emphasis" style="font-size:13px">Forgotten password </RouterLink>
+          <RouterLink :to="{ name: 'reset-password' }" class="emphasis" style="font-size:13px">Forgotten password? </RouterLink>
         </small>
       </div>
     </div>
@@ -135,6 +135,7 @@ export default defineComponent({
   flex-direction: row-reverse;
   text-align: unset;
   margin-top: 20px;
+  display: none;
 }
 
 .hidden {

@@ -16,6 +16,7 @@ export default defineComponent({
   data: () => ({
     crumbs: ["Home", "Category", "Sub category"],
     showSidebar: false,
+    userTheme: "light-theme"
   }),
   /**
    * before entering the route we check if the user is logged in
@@ -78,6 +79,8 @@ export default defineComponent({
     let localTheme = localStorage.getItem("theme"); //gets stored theme value if any
     document.documentElement.setAttribute("data-theme", localTheme as string); // updates the data-theme attribute
 
+    const initUserTheme = this.getTheme() || this.getMediaPreference();
+    this.setTheme(initUserTheme);
     //  * get the refresh token every 20 minutes
     const refreshToken = () => {
       this.refreshToken();
@@ -89,6 +92,32 @@ export default defineComponent({
       getUser: "getUserInformation",
       refreshToken: "getRefreshToken",
     }),
+    getTheme() {
+      return localStorage.getItem("user-theme");
+    },
+    setTheme(theme: string) {
+      localStorage.setItem("user-theme", theme);
+      this.userTheme = theme;
+      document.documentElement.className = theme;
+    },
+    toggleTheme() {
+      const activeTheme = localStorage.getItem("user-theme");
+      if (activeTheme === "light-theme") {
+        this.setTheme("dark-theme");
+      } else {
+        this.setTheme("light-theme");
+      }
+    },
+    getMediaPreference() {
+      const hasDarkPreference = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      if (hasDarkPreference) {
+        return "dark-theme";
+      } else {
+        return "light-theme";
+      }
+    },
 
     //track bread crumb
     selected(crumb: any) {
@@ -122,10 +151,7 @@ export default defineComponent({
 <template>
   <div class="container">
     <!-- the side bar-->
-    <DashboardSidebar
-      v-show="showSidebar"
-      @close-sidebar="showSidebar = false"
-    />
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />

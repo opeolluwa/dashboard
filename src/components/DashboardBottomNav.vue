@@ -9,18 +9,23 @@
 
     -->
   <div id="bottom__nav">
-    <div
-      class="bottom__nav__item"
-      v-for="route in routes"
-      :key="route.name"
-      :class="[route.name === currentRouteName ? 'active' : '']"
-      @click="closeSidebar"
-    >
-      <RouterLink :to="{ name: route.path }">
-        <Icon :icon="route.icon" />
-      </RouterLink>
-      <span>{{ route.name }} </span>
+    <div class="bottom__nav__item" v-for="route in routes" :key="route.name"
+      :class="[route.name === currentRouteName ? 'active' : '']" @click="closeSidebar">
+      <template v-if="route.isButton != true">
+        <RouterLink :to="{ name: route.path }">
+          <Icon :icon="route.icon" />
+        </RouterLink>
+        <span>{{ route.name }} </span>
+      </template>
+      <template v-else>
+        <div>
+          <Icon :icon="route.icon" />
+        </div>
+        <span>{{ route.name }} </span>
+      </template>
     </div>
+
+
   </div>
 </template>
 
@@ -46,16 +51,17 @@ export default defineComponent({
         icon: "mdi:bell-outline",
         path: "notification",
       },
-  
+
       {
         name: "tasks",
         icon: "mdi:plus-circle-outline",
         path: "add-task",
       },
       {
-        name: "dark mode",
+        name: "theme",
         icon: "mdi:brightness-4",
         path: "settings",
+        isButton: true
       },
       {
         name: "profile",

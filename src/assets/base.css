@@ -88,6 +88,15 @@ body {
   --toggle-handle-disabled: #f3f4f6;
 }
 
+
+/* Define styles for the root window with dark - mode preference */
+:root.dark-theme {
+  --background-color-primary: #1e1e1e;
+  --background-color-secondary: #2d2d30;
+  --accent-color: #3f3f3f;
+  --text-primary-color: #ddd;
+}
+
 /**give disabled button dark background**/
 button.disabled__button {
   background-color: var(--default-dark);
