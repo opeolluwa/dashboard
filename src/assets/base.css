@@ -25,20 +25,24 @@
 
 body {
   min-height: 100vh;
-
-  /* transition: color 0.5s, background-color 0.5s; */
-  /* line-height: 1.6; */
-  
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
   font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
-  /* background-color: #020514!important; */
+  background-color: var(--background-color-primary);
 }
 
 :root {
+  --background-color-primary: #ebebeb;
+    --background-color-secondary: #fafafa;
+    --accent-color: #cacaca;
+    --text-primary-color: #222;
+
+
   --default: #101010;
   --white: #f5f5f5;
   --text-color: #ffffff;

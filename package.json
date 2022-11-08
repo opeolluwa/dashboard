@@ -21,6 +21,7 @@
     "@capacitor/android": "^4.3.0",
     "@capacitor/core": "^4.3.0",
     "@capacitor/preferences": "^4.0.1",
+    "@capacitor/push-notifications": "^4.1.1",
     "@capacitor/splash-screen": "^4.1.1",
     "@capacitor/status-bar": "^4.0.1",
     "@growthbunker/vuedarkmode": "^0.5.56",

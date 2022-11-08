@@ -199,6 +199,7 @@ main header {
 main #view__box {
   grid-area: view;
   background-color: #f9f9f9;
+  /* background-color: var(--background-color-primary); */
   min-height: 100vh !important;
   padding-top: 25px;
 }
@@ -234,7 +235,7 @@ main #view__box {
 
   main #view__box {
     grid-area: view;
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9; */
     height: unset !important;
     min-height: 100vh;
     padding-top: unset;

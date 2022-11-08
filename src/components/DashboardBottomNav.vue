@@ -18,7 +18,7 @@
         <span>{{ route.name }} </span>
       </template>
       <template v-else>
-        <div>
+        <div @click="$emit('toggle-theme')">
           <Icon :icon="route.icon" />
         </div>
         <span>{{ route.name }} </span>
@@ -60,7 +60,7 @@ export default defineComponent({
       {
         name: "theme",
         icon: "mdi:brightness-4",
-        path: "settings",
+        path:"settings",
         isButton: true
       },
       {
@@ -77,6 +77,9 @@ export default defineComponent({
     },
   },
   methods: {
+    alert() {
+     window.alert("message") 
+    },
     closeSidebar() {
       /**
        * check if the device is mobile
