@@ -33,7 +33,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
-  background-color: var(--background-color-primary);
 }
 
 :root {
@@ -58,7 +57,6 @@ body {
   --dark-text: #101010;
   --primary: #7714f1;
   --primary: #4916b1;
-  /* --primary:#1e0e47; */
   --secondary: #707070;
   --tertiary: #7714f1;
   --warning: #fdca00;
@@ -122,8 +120,6 @@ h1 {
   line-height: 20px !important;
   font-size: 1.02rem;
 }
-
-
 
 
 input,

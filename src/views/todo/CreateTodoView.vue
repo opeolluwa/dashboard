@@ -31,7 +31,7 @@
       placeholder="github url"
       label="due date"
       type="date"
-      :model="todo.date"
+      v-model="todo.date"
       class="field"
     />
 
@@ -100,6 +100,8 @@ export default defineComponent({
       deleteTodo: "deleteTodo",
     }),
     async makeCreateTodo() {
+      console.log(JSON.stringify({todo: this.todo}));
+      
       const successfulRequest = await this.createTodo({
         ...this.todo,
         // date: this.todo.date,
