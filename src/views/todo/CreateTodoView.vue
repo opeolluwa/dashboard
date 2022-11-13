@@ -153,7 +153,7 @@ form button {
 
 .select__form__field select {
   appearance: none;
-  background-color: #fff;
+  background-color: transparent;
   border: none;
   margin: 0;
   padding: 0 1em 0 0;

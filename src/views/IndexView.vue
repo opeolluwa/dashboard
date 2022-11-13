@@ -6,6 +6,7 @@ import { defineComponent } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
 import DashboardBottomNav from "@/components/DashboardBottomNav.vue";
+import { useDarkMode } from "@/stores/theme";
 export default defineComponent({
   components: {
     DashboardSidebar: DashboardSidebarVue,
@@ -65,6 +66,8 @@ export default defineComponent({
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
+    ...mapState(useDarkMode, ["enabledDarkMode"]),
+
     //breadcrumb
   },
   created() {
@@ -79,8 +82,7 @@ export default defineComponent({
     let localTheme = localStorage.getItem("theme"); //gets stored theme value if any
     document.documentElement.setAttribute("data-theme", localTheme as string); // updates the data-theme attribute
 
-    const initUserTheme = this.getTheme() || this.getMediaPreference();
-    this.setTheme(initUserTheme);
+
     //  * get the refresh token every 20 minutes
     const refreshToken = () => {
       this.refreshToken();
@@ -92,6 +94,7 @@ export default defineComponent({
       getUser: "getUserInformation",
       refreshToken: "getRefreshToken",
     }),
+    ...mapActions(useDarkMode, ["toggleColorTheme"]),
     getTheme() {
       return localStorage.getItem("user-theme");
     },
@@ -100,24 +103,8 @@ export default defineComponent({
       this.userTheme = theme;
       document.documentElement.className = theme;
     },
-    toggleTheme() {
-      const activeTheme = localStorage.getItem("user-theme");
-      if (activeTheme === "light-theme") {
-        this.setTheme("dark-theme");
-      } else {
-        this.setTheme("light-theme");
-      }
-    },
-    getMediaPreference() {
-      const hasDarkPreference = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      if (hasDarkPreference) {
-        return "dark-theme";
-      } else {
-        return "light-theme";
-      }
-    },
+
+
 
     //track bread crumb
     selected(crumb: any) {
@@ -151,13 +138,14 @@ export default defineComponent({
 <template>
   <div class="container">
     <!-- the side bar-->
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false" />
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false"
+      :class="{ 'dark__mode': enabledDarkMode }" />
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
 
       <!--inject all views here-->
-      <div id="view__box">
+      <div id="view__box" :class="{ 'dark__mode': enabledDarkMode }">
         <ViewLayout>
           <template #content>
             <RouterView />
@@ -165,7 +153,7 @@ export default defineComponent({
         </ViewLayout>
       </div>
       <!--bottom navigation for mobile only-->
-      <DashboardBottomNav @close-sidebar="showSidebar = false" />
+      <DashboardBottomNav @close-sidebar="showSidebar = false" @toggle-theme="toggleColorTheme" />
     </main>
   </div>
 </template>
@@ -199,7 +187,6 @@ main header {
 main #view__box {
   grid-area: view;
   background-color: #f9f9f9;
-  /* background-color: var(--background-color-primary); */
   min-height: 100vh !important;
   padding-top: 25px;
 }

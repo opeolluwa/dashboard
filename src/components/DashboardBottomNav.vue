@@ -8,7 +8,7 @@
     - profile
 
     -->
-  <div id="bottom__nav">
+  <div id="bottom__nav" >
     <div class="bottom__nav__item" v-for="route in routes" :key="route.name"
       :class="[route.name === currentRouteName ? 'active' : '']" @click="closeSidebar">
       <template v-if="route.isButton != true">
@@ -30,7 +30,9 @@
 </template>
 
 <script lang="ts">
+import { useDarkMode } from "@/stores/theme";
 import { Icon } from "@iconify/vue";
+import { mapState } from "pinia";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "DashboardBottomNav",
@@ -75,6 +77,8 @@ export default defineComponent({
       const route = this.$route.name;
       return String(route) || "360 Devs";
     },
+    ...mapState(useDarkMode, ["enabledDarkMode"]),
+
   },
   methods: {
     alert() {
