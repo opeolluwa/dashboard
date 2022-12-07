@@ -10,7 +10,7 @@ import { getStoredData, storeData } from "@/main";
 export const useDarkMode = defineStore("colorTheme", {
     state: (): State => ({
         isDarkMode: false,
-        colorTheme: "dark-theme"
+        colorTheme: "light-theme"
     }),
 
     getters: {

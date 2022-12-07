@@ -74,7 +74,7 @@ export default defineComponent({
           <p class="sub__her__text">Please login to your account.</p>
         </div>
 
-        <!--socila login buttons-->
+        <!--social login buttons-->
         <BaseButton text="continue with Google" class="social__login">
           <img src="@/assets/icons/google.png" alt="continue with google" />
         </BaseButton>
@@ -87,7 +87,7 @@ export default defineComponent({
 
         <!--continue with google-->
         <!--continue with email-->
-        <small class="continue__with__email d-none">
+        <small class="continue__with__email">
           <span class="divider__line"> ------------------ </span>
           <span> continue with email </span>
           <span class="divider__line"> ---------------- </span>
@@ -114,7 +114,8 @@ export default defineComponent({
         </small>
 
         <small class="goto__page">
-          <RouterLink :to="{ name: 'reset-password' }" class="emphasis" style="font-size:13px">Forgotten password? </RouterLink>
+          <RouterLink :to="{ name: 'reset-password' }" class="emphasis" style="font-size:13px">Forgotten password?
+          </RouterLink>
         </small>
       </div>
     </div>
@@ -135,7 +136,6 @@ export default defineComponent({
   flex-direction: row-reverse;
   text-align: unset;
   margin-top: 20px;
-  display: none;
 }
 
 .hidden {
@@ -264,6 +264,7 @@ button,
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    margin-bottom: 10px;
     /* column-gap: -15px; */
   }
 
@@ -281,6 +282,7 @@ button,
     text-align: center;
     vertical-align: middle;
     margin-top: 35px;
+    margin-bottom: 25px;
     justify-content: center;
 
     /* display: none; */
