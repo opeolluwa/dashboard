@@ -70,26 +70,14 @@ export default defineComponent({
         <small class="error"> {{ apiResponseMsg }}</small>
         <form action="" method="post" @submit.prevent="confirmOtp">
           <!--form field email-->
-          <BaseTextInput
-            placeholder="XXXXXX"
-            label="Token"
-            v-model="form.otp"
-            type="text"
-            :maxlength="6"
-            class="field"
-          />
+          <BaseTextInput placeholder="XXXXXX" label="Token" v-model="form.otp" type="text" :maxlength="6"
+            class="field" />
           <!--form field password-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Proceed</span>
-            <Spinner
-              :animation-duration="1000"
-              :size="30"
-              :color="'#ffffff'"
-              v-show="isLoading"
-            />
+            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
-          <small class="goto__sign__up"
-            >Didn&apos;t receive any token?
+          <small class="goto__sign__up">Didn&apos;t receive any token?
             <RouterLink :to="{ name: 'login' }" class="emphasis" style="font-size:13px">request new </RouterLink>
           </small>
         </form>
@@ -127,20 +115,20 @@ export default defineComponent({
 }
 
 /**the background container */
-#password__reset__confirm__otp__page .container > div:first-child {
+#password__reset__confirm__otp__page .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#password__reset__confirm__otp__page .container > div:last-child {
+#password__reset__confirm__otp__page .container>div:last-child {
   padding: 100px 0;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-#password__reset__confirm__otp__page .container > div:last-child h1 + small {
+#password__reset__confirm__otp__page .container>div:last-child h1+small {
   margin-bottom: 30px;
 }
 
@@ -149,6 +137,10 @@ button,
 .form__field input,
 .field {
   width: 500px;
+}
+
+#password__reset__confirm__otp__page ::placeholder {
+  letter-spacing: 3px;
 }
 
 #password__reset__confirm__otp__page .title {
@@ -184,11 +176,11 @@ button,
     /* min-height: 100vh; */
   }
 
-  #password__reset__confirm__otp__page .container > div:first-child {
+  #password__reset__confirm__otp__page .container>div:first-child {
     display: none;
   }
 
-  #password__reset__confirm__otp__page .container > div:last-child {
+  #password__reset__confirm__otp__page .container>div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -196,14 +188,9 @@ button,
     align-content: center;
     padding: 0 30px;
     place-content: center;
-    margin: 0 auto;
   }
 
-  #password__reset__confirm__otp__page
-    .container
-    > div:last-child
-    h1
-    + small.error {
+  #password__reset__confirm__otp__page .container>div:last-child h1+small.error {
     margin-bottom: 35px;
   }
 

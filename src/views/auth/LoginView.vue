@@ -71,7 +71,7 @@ export default defineComponent({
       <div>
         <div class="title">
           <h1>Login</h1>
-          <p class="sub__her__text">Please login to your account.</p>
+          <p class="sub__hero__text">Please login to your account.</p>
         </div>
 
         <!--social login buttons-->
@@ -202,6 +202,21 @@ button,
   display: none;
 }
 
+#login__page .continue__with__email {
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  color: var(--secondary);
+  font-size: 0.95rem;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 35px;
+  margin-bottom: 25px;
+  justify-content: center;
+
+  /* display: none; */
+}
+
 #login__page .title {
   display: flex;
   flex-direction: column;
@@ -273,20 +288,7 @@ button,
     width: auto;
   }
 
-  #login__page .continue__with__email {
-    display: flex;
-    flex-direction: row;
-    column-gap: 15px;
-    color: var(--secondary);
-    font-size: 0.95rem;
-    text-align: center;
-    vertical-align: middle;
-    margin-top: 35px;
-    margin-bottom: 25px;
-    justify-content: center;
 
-    /* display: none; */
-  }
 
   #login__page .continue__with__email .divider__line {
     color: var(--border-color);
