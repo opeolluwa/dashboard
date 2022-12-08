@@ -89,7 +89,7 @@ export default defineComponent({
         <!--continue with email-->
         <small class="continue__with__email">
           <span class="divider__line"> ------------------ </span>
-          <span> continue with email </span>
+          <small> continue with email </small>
           <span class="divider__line"> ---------------- </span>
         </small>
         <form action="" method="post" @submit.prevent="login">
