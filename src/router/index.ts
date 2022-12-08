@@ -69,7 +69,7 @@ const router = createRouter({
               name: "new-email",
               component: () => import("@/views/email/CreateEmailView.vue"),
             },
-            //TODO:create category
+            //tasks:create category
             {
               path: "important",
               name: "important-email",
@@ -141,23 +141,23 @@ const router = createRouter({
         {
           path: "todo",
           name: "todo",
-          component: () => import("@/views/todo/TodoIndexView.vue"),
+          component: () => import("@/views/tasks/TodoIndexView.vue"),
           children: [
             {
               name: "all-task",
               path: "",
-              component: () => import("@/views/todo/AllTodoViews.vue"),
+              component: () => import("@/views/tasks/AllTodoViews.vue"),
             },
             {
               name: "add-task",
               path: "new",
-              component: () => import("@/views/todo/CreateTodoView.vue"),
+              component: () => import("@/views/tasks/CreateTodoView.vue"),
             },
             /* {
               name: "edit-task",
               path: "edit/:taskId",
               props: true,
-              component: () => import("@/views/todo/EditTodoView.vue"),
+              component: () => import("@/views/tasks/EditTodoView.vue"),
             }, */
           ],
         },

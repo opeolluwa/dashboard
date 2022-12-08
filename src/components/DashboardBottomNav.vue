@@ -60,10 +60,10 @@ export default defineComponent({
         path: "add-task",
       },
       {
-        name: "theme",
-        icon: "mdi:brightness-4",
+        name: "settings",
+        icon: "mdi:cog-outline",
         path:"settings",
-        isButton: true
+        isButton: false
       },
       {
         name: "profile",
