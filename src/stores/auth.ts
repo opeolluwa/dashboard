@@ -47,7 +47,7 @@ export const useAuthStore = defineStore("authStore", {
         console.log({ token: response.data.token });
         if (response.success) {
           this.isLoading = false;
-          //save the token to local storage,
+          //save the token to local storage and shared preferences 
           localStorage.setItem("token", response.data.token);
           await storeData({ key: "authorizationToken", value: response.data.token });
           //redirect to the dashboard
@@ -99,10 +99,11 @@ export const useAuthStore = defineStore("authStore", {
      * send the token to the server
      */
     logoutRequest() {
-      // get the token
-      // const bearerToken = localStorage.getItem("token");
-      //remove the item from the local storage
+      // get the token and remove the item from the local storage in web or shared preference in mobile
       localStorage.removeItem("token");
+      (async function removeAuthToken() {
+        await storeData({ key: "authorizationToken", value: "" });
+      })()
       router.push({ name: "login" });
       //send the server to the server to be blacklisted
       //TODO
