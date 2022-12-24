@@ -4,7 +4,7 @@ import router from "@/router";
 import { useToast } from "vue-toastification";
 import { getStoredData, storeData } from "@/main";
 import { Preferences } from "@capacitor/preferences";
-// import 
+// import
 const appToastComponent = useToast();
 export const useAuthStore = defineStore("authStore", {
   state: (): State => ({
@@ -47,9 +47,12 @@ export const useAuthStore = defineStore("authStore", {
         console.log({ token: response.data.token });
         if (response.success) {
           this.isLoading = false;
-          //save the token to local storage and shared preferences 
+          //save the token to local storage and shared preferences
           localStorage.setItem("token", response.data.token);
-          await storeData({ key: "authorizationToken", value: response.data.token });
+          await storeData({
+            key: "authorizationToken",
+            value: response.data.token,
+          });
           //redirect to the dashboard
           this.getUserInformation(response.data.token);
         } else {
@@ -103,7 +106,7 @@ export const useAuthStore = defineStore("authStore", {
       localStorage.removeItem("token");
       (async function removeAuthToken() {
         await storeData({ key: "authorizationToken", value: "" });
-      })()
+      })();
       router.push({ name: "login" });
       //send the server to the server to be blacklisted
       //TODO
@@ -117,9 +120,13 @@ export const useAuthStore = defineStore("authStore", {
     async getRefreshToken() {
       // console.log("go new token")
       try {
-        const AUTH_TOKEN_FOR_MOBILE = await getStoredData("authorizationToken")
+        const AUTH_TOKEN_FOR_MOBILE = await getStoredData("authorizationToken");
         const { data: response } = await axios.get("/auth", {
-          headers: { Authorization: `Bearer ${this.authorizationToken || AUTH_TOKEN_FOR_MOBILE}` },
+          headers: {
+            Authorization: `Bearer ${
+              this.authorizationToken || AUTH_TOKEN_FOR_MOBILE
+            }`,
+          },
         });
         //if the request is successful, store the data and
         if (response.success) {
@@ -139,10 +146,14 @@ export const useAuthStore = defineStore("authStore", {
       console.log(JSON.stringify(payload));
 
       try {
-        const AUTH_TOKEN_FOR_MOBILE = await getStoredData("authorizationToken")
+        const AUTH_TOKEN_FOR_MOBILE = await getStoredData("authorizationToken");
         const { data: response } = await axios.put("/auth/me", {
           ...payload,
-          headers: { Authorization: `Bearer ${this.authorizationToken || AUTH_TOKEN_FOR_MOBILE}` },
+          headers: {
+            Authorization: `Bearer ${
+              this.authorizationToken || AUTH_TOKEN_FOR_MOBILE
+            }`,
+          },
         });
         //if the request is successful, store the data and
         if (response.success) {
@@ -157,12 +168,18 @@ export const useAuthStore = defineStore("authStore", {
     //change user password
     async changePassword(payload: PasswordChangeInterface) {
       this.isLoading = true;
-      const AUTH_TOKEN_FOR_MOBILE = await getStoredData("authorizationToken")
+      const AUTH_TOKEN_FOR_MOBILE = await getStoredData("authorizationToken");
       try {
         const { data: response } = await axios.put(
           "/auth/reset-password",
           { ...payload },
-          { headers: { Authorization: `Bearer ${this.authorizationToken || AUTH_TOKEN_FOR_MOBILE}` } }
+          {
+            headers: {
+              Authorization: `Bearer ${
+                this.authorizationToken || AUTH_TOKEN_FOR_MOBILE
+              }`,
+            },
+          }
         );
         console.log(JSON.stringify(response));
         if (response.success) {

@@ -17,7 +17,7 @@ export default defineComponent({
   data: () => ({
     crumbs: ["Home", "Category", "Sub category"],
     showSidebar: false,
-    userTheme: "light-theme"
+    userTheme: "light-theme",
   }),
   /**
    * before entering the route we check if the user is logged in
@@ -82,7 +82,6 @@ export default defineComponent({
     let localTheme = localStorage.getItem("theme"); //gets stored theme value if any
     document.documentElement.setAttribute("data-theme", localTheme as string); // updates the data-theme attribute
 
-
     //  * get the refresh token every 20 minutes
     const refreshToken = () => {
       this.refreshToken();
@@ -103,8 +102,6 @@ export default defineComponent({
       this.userTheme = theme;
       document.documentElement.className = theme;
     },
-
-
 
     //track bread crumb
     selected(crumb: any) {
@@ -138,14 +135,17 @@ export default defineComponent({
 <template>
   <div class="container">
     <!-- the side bar-->
-    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false"
-      :class="{ 'dark__mode': enabledDarkMode }" />
+    <DashboardSidebar
+      v-show="showSidebar"
+      @close-sidebar="showSidebar = false"
+      :class="{ dark__mode: enabledDarkMode }"
+    />
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
 
       <!--inject all views here-->
-      <div id="view__box" :class="{ 'dark__mode': enabledDarkMode }">
+      <div id="view__box" :class="{ dark__mode: enabledDarkMode }">
         <ViewLayout>
           <template #content>
             <RouterView />
@@ -153,7 +153,10 @@ export default defineComponent({
         </ViewLayout>
       </div>
       <!--bottom navigation for mobile only-->
-      <DashboardBottomNav @close-sidebar="showSidebar = false" @toggle-theme="toggleColorTheme" />
+      <DashboardBottomNav
+        @close-sidebar="showSidebar = false"
+        @toggle-theme="toggleColorTheme"
+      />
     </main>
   </div>
 </template>

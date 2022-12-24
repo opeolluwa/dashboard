@@ -2,52 +2,57 @@
 import EmailItem from "@/components/EmailItem.vue";
 import NewEmail from "@/components/AppFab.vue";
 import { defineComponent } from "vue";
+import { mapActions, mapState } from "pinia";
+import AppNetworkError from "../../components/AppNetworkError.vue";
+import { useEmailsStore } from "@/stores/emails";
+
 export default defineComponent({
   name: "EmailView",
   components: { EmailItem, Fab: NewEmail },
+  created() {
+    this.getEmailsRequest();
+  },
+  methods: {
+    ...mapActions(useEmailsStore, {
+      getEmailsRequest: "fetchAllEmails",
+    }),
+  },
+  computed: {
+    ...mapState(useEmailsStore, ["allEmails"]),
+  }
 });
 </script>
 
 <template>
-  <EmailItem
-    title="Re: charles@example.com"
-    content="past compound cast solution observe word typical major thy smoke tone recently sport appropriate wherever feed discovery universe fall probably due dead me learn"
-  />
-  <EmailItem
-    title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone"
-  />
-  <EmailItem
-    title="Promotion"
-    content="behind palace shelter raw sea means mathematics ball policeman value alphabet party fly machinery draw bit exercise church ants tune oldest wrote load direct"
-  />
+  <div v-for="email in allEmails" :key="email.id.toString()">
+    <EmailItem :title="email.emailSubject.toString()" :content="email.emailBody.toString()" />
 
-  <EmailItem
-    title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone"
-  />
+  </div>
+  <!--  <EmailItem title="Re: charles@example.com"
+    content="past compound cast solution observe word typical major thy smoke tone recently sport appropriate wherever feed discovery universe fall probably due dead me learn" />
+  <EmailItem title="Invitation for interview"
+    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
+  <EmailItem title="Promotion"
+    content="behind palace shelter raw sea means mathematics ball policeman value alphabet party fly machinery draw bit exercise church ants tune oldest wrote load direct" />
 
-  <EmailItem
-    title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone"
-  />
+  <EmailItem title="Invitation for interview"
+    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
 
-  <EmailItem
-    title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone"
-  />
+  <EmailItem title="Invitation for interview"
+    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
 
-  <EmailItem
-    title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone"
-  />
+  <EmailItem title="Invitation for interview"
+    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
 
-  <EmailItem
-    title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone"
-  />
+  <EmailItem title="Invitation for interview"
+    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
+
+  <EmailItem title="Invitation for interview"
+    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" /> -->
   <!--add new email fab-->
   <Fab route="new-email" icon="mdi:email-plus-outline" />
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

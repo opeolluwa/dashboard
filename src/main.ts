@@ -18,19 +18,19 @@ const toastOptions: PluginOptions = {
 };
 
 // capacitor status bar
-import { StatusBar, Style } from '@capacitor/status-bar';
+import { StatusBar, Style } from "@capacitor/status-bar";
 const statusBarOption = {
-  color: "#2f0e73"
-}
+  color: "#2f0e73",
+};
 StatusBar.setBackgroundColor(statusBarOption);
 
 //capacitor storage
-import { Preferences } from '@capacitor/preferences';
+import { Preferences } from "@capacitor/preferences";
 export async function storeData(data: StorageInterface) {
   const { key, value } = data;
   await Preferences.set({
     key: key.toString(),
-    value: value
+    value: value,
   });
 }
 
@@ -52,7 +52,7 @@ const timeagoOptions = {
 // import { createAuth0 } from "@auth0/auth0-vue";
 const app = createApp(App);
 
-export { };
+export {};
 declare global {
   interface Navigator {
     setAppBadge: Promise<void>;
@@ -79,8 +79,7 @@ app.mount("#app");
 //export the auth store to make it accessible globally
 export const authStore = useAuthStore();
 
-
 interface StorageInterface {
-  key: String,
-  value: any
+  key: String;
+  value: any;
 }

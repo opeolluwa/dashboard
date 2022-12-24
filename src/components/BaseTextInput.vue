@@ -15,24 +15,45 @@
     <!--use this template if the text input style is password template -->
     <template v-if="isPassword">
       <div class="password__input__field">
-        <input :type="passwordField" :id="label" :placeholder="placeholder" @input="updateModelValue"
-          :value="modelValue" v-bind="inputAttributes" />
+        <input
+          :type="passwordField"
+          :id="label"
+          :placeholder="placeholder"
+          @input="updateModelValue"
+          :value="modelValue"
+          v-bind="inputAttributes"
+        />
         <!--icon to hid and show password visibility-->
-        <Icon v-show="!isPasswordInput && showIcon" icon="mdi:eye-off-outline" class="password__toggler"
-          @click="togglePasswordVisibility" />
-        <Icon v-show="isPasswordInput && showIcon" icon="mdi:eye-outline" class="password__toggler"
-          @click="togglePasswordVisibility" />
+        <Icon
+          v-show="!isPasswordInput && showIcon"
+          icon="mdi:eye-off-outline"
+          class="password__toggler"
+          @click="togglePasswordVisibility"
+        />
+        <Icon
+          v-show="isPasswordInput && showIcon"
+          icon="mdi:eye-outline"
+          class="password__toggler"
+          @click="togglePasswordVisibility"
+        />
       </div>
       <div class="forgotten_password" v-if="resetPassword">
-        <RouterLink :to="{ name: 'reset-password' }">Forgotten password?
+        <RouterLink :to="{ name: 'reset-password' }"
+          >Forgotten password?
         </RouterLink>
       </div>
     </template>
 
     <!--for other input types-->
     <template v-else>
-      <input :type="type" :id="label" :placeholder="placeholder" @input="updateModelValue" :value="modelValue"
-        :maxlength="maxlength" />
+      <input
+        :type="type"
+        :id="label"
+        :placeholder="placeholder"
+        @input="updateModelValue"
+        :value="modelValue"
+        :maxlength="maxlength"
+      />
     </template>
   </div>
 </template>
@@ -89,13 +110,13 @@ export default defineComponent({
       default: true,
     },
     /**
-     * accept an n number of props as object 
+     * accept an n number of props as object
      * this allow flexibility
      */
-    inputAttributes:{
-      type:Object,
-      default:{}
-    }
+    inputAttributes: {
+      type: Object,
+      default: {},
+    },
   },
   methods: {
     updateModelValue(event: any) {
@@ -140,7 +161,7 @@ export default defineComponent({
 
 <style>
 .password__toggler {
-  color: var(--secondary)!important;
+  color: var(--secondary) !important;
 }
 
 .forgotten_password {

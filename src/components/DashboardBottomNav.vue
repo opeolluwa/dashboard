@@ -8,9 +8,14 @@
     - profile
 
     -->
-  <div id="bottom__nav" >
-    <div class="bottom__nav__item" v-for="route in routes" :key="route.name"
-      :class="[route.name === currentRouteName ? 'active' : '']" @click="closeSidebar">
+  <div id="bottom__nav">
+    <div
+      class="bottom__nav__item"
+      v-for="route in routes"
+      :key="route.name"
+      :class="[route.name === currentRouteName ? 'active' : '']"
+      @click="closeSidebar"
+    >
       <template v-if="route.isButton != true">
         <RouterLink :to="{ name: route.path }">
           <Icon :icon="route.icon" />
@@ -24,8 +29,6 @@
         <span>{{ route.name }} </span>
       </template>
     </div>
-
-
   </div>
 </template>
 
@@ -62,8 +65,8 @@ export default defineComponent({
       {
         name: "settings",
         icon: "mdi:cog-outline",
-        path:"settings",
-        isButton: false
+        path: "settings",
+        isButton: false,
       },
       {
         name: "profile",
@@ -78,11 +81,10 @@ export default defineComponent({
       return String(route) || "360 Devs";
     },
     ...mapState(useDarkMode, ["enabledDarkMode"]),
-
   },
   methods: {
     alert() {
-     window.alert("message") 
+      window.alert("message");
     },
     closeSidebar() {
       /**

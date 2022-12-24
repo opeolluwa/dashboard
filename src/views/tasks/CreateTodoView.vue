@@ -100,8 +100,8 @@ export default defineComponent({
       deleteTodo: "deleteTodo",
     }),
     async makeCreateTodo() {
-      console.log(JSON.stringify({todo: this.todo}));
-      
+      console.log(JSON.stringify({ todo: this.todo }));
+
       const successfulRequest = await this.createTodo({
         ...this.todo,
         // date: this.todo.date,

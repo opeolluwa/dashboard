@@ -79,6 +79,7 @@ div.email__item {
   display: flex;
   align-items: center;
   text-align: center;
+  justify-content: space-between;
   background-color: white;
   margin: 0.75rem 0;
   padding: 20px;
@@ -146,13 +147,13 @@ div.email__item svg.star-email:hover {
   color: var(--default-yellow);
 }
 
-div.email__controls {
+/* div.email__controls {
   display: grid;
   grid-template-columns: repeat(3, 25px);
   column-gap: 5px;
   position: absolute;
   right: 20px;
-}
+} */
 
 @media screen and (max-width: 768px) {
   div.email__item input {

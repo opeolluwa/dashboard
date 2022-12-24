@@ -81,7 +81,12 @@ export default defineComponent({
           </BaseButton>
           <small class="goto__sign__up"
             >Already have an account?
-            <RouterLink :to="{ name: 'login' }" class="emphasis" style="font-size:13px">Login </RouterLink>
+            <RouterLink
+              :to="{ name: 'login' }"
+              class="emphasis"
+              style="font-size: 13px"
+              >Login
+            </RouterLink>
           </small>
         </form>
       </div>
@@ -162,6 +167,7 @@ button,
   justify-content: center;
   line-height: 28px;
   color: var(--secondary);
+  margin-top: 3px;
 }
 
 /** -----------------------------small devices------------------------ */

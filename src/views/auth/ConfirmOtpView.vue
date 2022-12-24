@@ -3,7 +3,7 @@ import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
 import Spinner from "@/components/Spinner.vue";
-import VueCountdown from '@chenfengyuan/vue-countdown';
+import VueCountdown from "@chenfengyuan/vue-countdown";
 import axios from "axios";
 import { getStoredData } from "@/main";
 import { useToast } from "vue-toastification";
@@ -16,7 +16,7 @@ export default defineComponent({
     BaseTextInput: BaseTextInputVue,
     BaseButton: BaseButtonVue,
     Spinner,
-    VueCountdown
+    VueCountdown,
   },
   data: () => ({
     form: {
@@ -26,7 +26,7 @@ export default defineComponent({
     counting: false,
     inputFieldProps: {
       pattern: "[0-9]",
-      type: "number"
+      type: "number",
     },
     //destructure the api response into this variable
     apiResponse: {
@@ -66,31 +66,33 @@ export default defineComponent({
       /**
        * gt the otp from the data object
        * get the bearer token from stored in shared preferences
-       * pass it to axios show loading state 
+       * pass it to axios show loading state
        * destructure response
        */
       try {
         const { otp } = this.form;
         const bearerToken = await getStoredData("confirm-account-token");
         this.isLoading = true;
-        const { data: response } = await axios.post("/auth/verify-email", {
-          token: otp,
-        }, {
-          headers: {
-            Authorization: `Bearer ${bearerToken}`
+        const { data: response } = await axios.post(
+          "/auth/verify-email",
+          {
+            token: otp,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${bearerToken}`,
+            },
           }
-        });
+        );
         console.log(JSON.stringify(response));
 
         // if there is a success response to to login else fire error toast
         if (response.success) {
           this.$router.push({ name: "login" });
-          appToastComponent.success(response.message)
+          appToastComponent.success(response.message);
           return;
-
-        }
-        else {
-          appToastComponent.error(response.message)
+        } else {
+          appToastComponent.error(response.message);
         }
         this.isLoading = false;
       } catch (error: any) {
@@ -123,26 +125,55 @@ export default defineComponent({
         <small class="error"> {{ apiResponseMsg }}</small>
         <form action="" method="post" @submit.prevent="confirmOtp">
           <!--form field email-->
-          <BaseTextInput placeholder="XXXXXX" label="Token" v-model="form.otp" type="text" :maxlength="6" class="field"
-            :input-attributes="inputFieldProps" :disabled="counting || isLoading" />
+          <BaseTextInput
+            placeholder="XXXXXX"
+            label="Token"
+            v-model="form.otp"
+            type="text"
+            :maxlength="6"
+            class="field"
+            :input-attributes="inputFieldProps"
+            :disabled="counting || isLoading"
+          />
           <!--form field password-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Proceed</span>
-            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
+            <Spinner
+              :animation-duration="1000"
+              :size="30"
+              :color="'#ffffff'"
+              v-show="isLoading"
+            />
           </BaseButton>
-          <VueCountdown v-if="counting" :time="60000" v-slot="{ seconds }" @end="onCountdownEnd"
-            style="color: var(--secondary)">
+          <VueCountdown
+            v-if="counting"
+            :time="60000"
+            v-slot="{ seconds }"
+            @end="onCountdownEnd"
+            style="color: var(--secondary)"
+          >
             <small>
-              Request new OTP after <strong style="font-size:13px">{{ seconds }}</strong> seconds.
+              Request new OTP after
+              <strong style="font-size: 13px">{{ seconds }}</strong> seconds.
             </small>
           </VueCountdown>
-          <button v-else class="goto__sign__up">Didn&apos;t receive any token?
-            <small class="emphasis" style="font-size:13px" @click="startCountdown">request new </small>
+          <button v-else class="goto__sign__up">
+            Didn&apos;t receive any token?
+            <small
+              class="emphasis"
+              style="font-size: 13px"
+              @click="startCountdown"
+              >request new
+            </small>
           </button>
-
         </form>
         <button class="goto__sign__up">
-          Go back <RouterLink :to="{ name: 'sign-up' }" class="emphasis" style="font-size:13px">Sign Up
+          Go back
+          <RouterLink
+            :to="{ name: 'sign-up' }"
+            class="emphasis"
+            style="font-size: 13px"
+            >Sign Up
           </RouterLink>
         </button>
       </div>
@@ -179,20 +210,20 @@ export default defineComponent({
 }
 
 /**the background container */
-#password__reset__confirm__otp__page .container>div:first-child {
+#password__reset__confirm__otp__page .container > div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#password__reset__confirm__otp__page .container>div:last-child {
+#password__reset__confirm__otp__page .container > div:last-child {
   padding: 100px 0;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-#password__reset__confirm__otp__page .container>div:last-child h1+small {
+#password__reset__confirm__otp__page .container > div:last-child h1 + small {
   margin-bottom: 30px;
 }
 
@@ -226,6 +257,7 @@ button,
   align-items: center;
   justify-content: center;
   line-height: 28px;
+  margin-top: 3px;
   color: var(--secondary);
 }
 
@@ -240,11 +272,11 @@ button,
     /* min-height: 100vh; */
   }
 
-  #password__reset__confirm__otp__page .container>div:first-child {
+  #password__reset__confirm__otp__page .container > div:first-child {
     display: none;
   }
 
-  #password__reset__confirm__otp__page .container>div:last-child {
+  #password__reset__confirm__otp__page .container > div:last-child {
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -254,7 +286,11 @@ button,
     place-content: center;
   }
 
-  #password__reset__confirm__otp__page .container>div:last-child h1+small.error {
+  #password__reset__confirm__otp__page
+    .container
+    > div:last-child
+    h1
+    + small.error {
     margin-bottom: 35px;
   }
 

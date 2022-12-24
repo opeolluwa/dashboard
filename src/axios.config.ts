@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Preferences } from '@capacitor/preferences';
+import { Preferences } from "@capacitor/preferences";
 const BASE_URL = import.meta.env.VITE_APP_URL;
 // const BASE_URL = import.meta.env.VITE_ENVIRONMENT
 const NODE_ENV = import.meta.env.MODE;
@@ -9,7 +9,6 @@ const NODE_ENV = import.meta.env.MODE;
  * use the deployed url
  * else use the base url
  */
-
 
 // JSON "set" example
 // async function setObject() {
@@ -30,7 +29,7 @@ const NODE_ENV = import.meta.env.MODE;
 
 console.log({ BASE_URL });
 axios.defaults.timeout = 12500;
-axios.defaults.baseURL = "http://127.0.0.1:4835/api/v1"
+axios.defaults.baseURL = "http://127.0.0.1:4835/api/v1";
 // axios.defaults.baseURL = "https://nitride.onrender.com/api/v1";
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   "token"

@@ -1,5 +1,5 @@
 <template>
-  <div class="list__item" >
+  <div class="list__item">
     <slot></slot>
   </div>
 </template>

@@ -35,7 +35,9 @@ export const useNoteStore = defineStore("todoStore", {
     async fetchAllNotes(/* pagination:PaginationInterface */): Promise<void> {
       //show loading state of fetch note
       this.isLoading = true;
-      const AUTH_TOKEN = authStore.getAuthToken ? authStore.getAuthToken : await getStoredData("authorizationToken")
+      const AUTH_TOKEN = authStore.getAuthToken
+        ? authStore.getAuthToken
+        : await getStoredData("authorizationToken");
 
       try {
         const { data: response } = await axios.get(
@@ -63,7 +65,9 @@ export const useNoteStore = defineStore("todoStore", {
      * go on to make request to the endpoint
      */
     async createNewEntry(payload: NoteInterface): Promise<Boolean> {
-      const AUTH_TOKEN = authStore.getAuthToken ? authStore.getAuthToken : await getStoredData("authorizationToken")
+      const AUTH_TOKEN = authStore.getAuthToken
+        ? authStore.getAuthToken
+        : await getStoredData("authorizationToken");
       this.isLoading = true;
       try {
         /**
@@ -101,7 +105,9 @@ export const useNoteStore = defineStore("todoStore", {
      */
     async deleteNote(noteId: String) {
       try {
-        const AUTH_TOKEN = authStore.getAuthToken ? authStore.getAuthToken : await getStoredData("authorizationToken")
+        const AUTH_TOKEN = authStore.getAuthToken
+          ? authStore.getAuthToken
+          : await getStoredData("authorizationToken");
         const { data: response } = await axios.delete(`/notes/${noteId}`, {
           headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
         });
@@ -117,7 +123,9 @@ export const useNoteStore = defineStore("todoStore", {
      */
     async editNote(noteId: String, payload: NoteInterface): Promise<Boolean> {
       try {
-        const AUTH_TOKEN = authStore.getAuthToken ? authStore.getAuthToken : await getStoredData("authorizationToken")
+        const AUTH_TOKEN = authStore.getAuthToken
+          ? authStore.getAuthToken
+          : await getStoredData("authorizationToken");
         const { data: response } = await axios.put(
           `/notes/${noteId}`,
           { ...payload },
