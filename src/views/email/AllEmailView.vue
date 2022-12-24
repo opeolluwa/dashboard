@@ -4,11 +4,12 @@ import NewEmail from "@/components/AppFab.vue";
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import AppNetworkError from "../../components/AppNetworkError.vue";
+import AppEmptyState from "../../components/AppEmptyState.vue";
 import { useEmailsStore } from "@/stores/emails";
 
 export default defineComponent({
   name: "EmailView",
-  components: { EmailItem, Fab: NewEmail },
+  components: { EmailItem, Fab: NewEmail, AppNetworkError, AppEmptyState },
   created() {
     this.getEmailsRequest();
   },
@@ -25,31 +26,10 @@ export default defineComponent({
 
 <template>
   <div v-for="email in allEmails" :key="email.id.toString()">
-    <EmailItem :title="email.emailSubject.toString()" :content="email.emailBody.toString()" />
-
+    <EmailItem :title="email.emailSubject.toString()" :content="email.emailBody.toString()"
+      :is-starred="email.isStarred" />
   </div>
-  <!--  <EmailItem title="Re: charles@example.com"
-    content="past compound cast solution observe word typical major thy smoke tone recently sport appropriate wherever feed discovery universe fall probably due dead me learn" />
-  <EmailItem title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
-  <EmailItem title="Promotion"
-    content="behind palace shelter raw sea means mathematics ball policeman value alphabet party fly machinery draw bit exercise church ants tune oldest wrote load direct" />
-
-  <EmailItem title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
-
-  <EmailItem title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
-
-  <EmailItem title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
-
-  <EmailItem title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" />
-
-  <EmailItem title="Invitation for interview"
-    content="spell position ocean serve natural fly enter becoming worker heavy want divide fog lamp shells pilot white sold successful blind choice willing start alone" /> -->
-  <!--add new email fab-->
+  <AppNetworkError v-if="allEmails.length === 0" />
   <Fab route="new-email" icon="mdi:email-plus-outline" />
 </template>
 

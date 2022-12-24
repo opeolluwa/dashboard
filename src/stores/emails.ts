@@ -30,9 +30,9 @@ export const useEmailsStore = defineStore("emailStore", {
         getStarredEmail: (state) => {
             return state.allEmails?.filter((email) => email.isStarred == true);
         },
-        /*  getStarredEmail: (state) => {
-                     return state.allEmails?.filter((email) => email.isStarred == true)
-                 }, */
+        getDeletedEmail: (state) => {
+            return state.allEmails?.filter((email) => email.isStarred == true)
+        },
     },
     actions: {
         async fetchAllEmails(/* pagination:PaginationInterface */): Promise<void> {

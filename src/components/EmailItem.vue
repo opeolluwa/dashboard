@@ -11,7 +11,8 @@
       </span>
     </div>
     <div class="email__controls">
-      <Icon icon="mdi:star-outline" class="star-email" />
+      <Icon icon="mdi:star" :class="[isStarred?'starred__email':'','star']" v-if="isStarred" />
+      <Icon icon="mdi:star-outline" class="email" v-else />
       <Icon icon="mdi:trash-can-outline" class="delete" />
       <Icon icon="mdi:dots-vertical" class="more-options" />
     </div>
@@ -25,12 +26,17 @@ export default {
     title: {
       type: String,
       required: true,
-      default: "Alert",
+      default: "Example title",
     },
     content: {
       type: String,
       required: true,
       default: "This is an example truncated email content...",
+    },
+    isStarred: {
+      type: Boolean,
+      // required: true,
+      default: false,
     },
   },
   components: { Icon },
@@ -146,7 +152,9 @@ div.email__item svg.delete:hover {
 div.email__item svg.star-email:hover {
   color: var(--default-yellow);
 }
-
+.starred__email{
+  color: var(--default-yellow)!important;
+}
 /* div.email__controls {
   display: grid;
   grid-template-columns: repeat(3, 25px);
