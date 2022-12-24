@@ -6,6 +6,10 @@ import Spinner from "@/components/Spinner.vue";
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import axios from "axios";
 import { getStoredData } from "@/main";
+import { useToast } from "vue-toastification";
+
+const appToastComponent = useToast();
+
 export default defineComponent({
   name: "AuthView",
   components: {
@@ -78,10 +82,23 @@ export default defineComponent({
         });
         console.log(JSON.stringify(response));
 
-        this.isLoading = false;
-        this.$router.push({ name: "confirm-otp" });
-      } catch (error) {
+        // if there is a success response to to login else fire error toast
+        if (response.success) {
+          this.$router.push({ name: "login" });
+          appToastComponent.success(response.message)
+          return;
 
+        }
+        else {
+          appToastComponent.error(response.message)
+        }
+        this.isLoading = false;
+      } catch (error: any) {
+        this.isLoading = false;
+        const { data: response } = error.response;
+        if (!response.success) {
+          appToastComponent.error(response.message);
+        }
       }
     },
     goBack() {
@@ -113,7 +130,7 @@ export default defineComponent({
             <span v-show="!isLoading">Proceed</span>
             <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
-          <VueCountdown v-if="!counting" :time="60000" v-slot="{ seconds }" @end="onCountdownEnd"
+          <VueCountdown v-if="counting" :time="60000" v-slot="{ seconds }" @end="onCountdownEnd"
             style="color: var(--secondary)">
             <small>
               Request new OTP after <strong style="font-size:13px">{{ seconds }}</strong> seconds.
