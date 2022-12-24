@@ -5,6 +5,7 @@ import { defineComponent } from "vue";
 import Spinner from "@/components/Spinner.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
+import { storeData } from "@/main";
 
 const appToastComponent = useToast();
 export default defineComponent({
@@ -39,8 +40,19 @@ export default defineComponent({
         console.log(JSON.stringify(response));
         if (response.success) {
           appToastComponent.success(response.message);
+          // route to confirm otp page
+          setTimeout(() => {
+            this.$router.push({ name: "confirm-otp" });
+          }, 200);
+          //store the otp in preferences 
+          storeData({
+            key: "confirm-account-token",
+            value: response.data.token,
+          })
         } else {
           appToastComponent.error(response.message);
+          /// route to the confirm-otp screen after 200ms wc is the delay of toast above 
+
         }
         this.apiResponseMsg = response.message;
         this.isLoading = false;
@@ -77,7 +89,7 @@ export default defineComponent({
         </div>
 
         <!--social icons-->
-        <div class="social__login__icons d-none">
+        <div class="social__login__icons d-non">
           <div class="icon">
             <img src="@/assets/icons/google.png" alt="google" />
           </div>
@@ -89,52 +101,29 @@ export default defineComponent({
           </div>
         </div>
 
-        <!--continue with email-->
-        <small class="continue__with__email d-none">
+        <small class="continue__with__email">
           <span class="divider__line"> ------------------ </span>
-          <span> continue with email </span>
+          <small> continue with email </small>
           <span class="divider__line"> ---------------- </span>
         </small>
+
         <form action="" method="post" @submit.prevent="signUp">
-          <BaseTextInput
-            placeholder="Jane Doe"
-            label="fullname"
-            v-model="form.fullname"
-            type="text"
-            class="field"
-          />
+          <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="form.fullname" type="text" class="field" />
           <!--form field email-->
-          <BaseTextInput
-            placeholder="jane@mailer.com"
-            label="email"
-            v-model="form.email"
-            type="email"
-            class="field"
-          />
+          <BaseTextInput placeholder="jane@mailer.com" label="email" v-model="form.email" type="email" class="field" />
           <!--form field password-->
-          <BaseTextInput
-            placeholder="password"
-            type="password"
-            label="password"
-            v-model="form.password"
-            class="field"
-          />
+          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
+            class="field" />
           <!--form field submit, change color to black while waiting for response from server-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Sign Up</span>
-            <Spinner
-              :animation-duration="1000"
-              :size="30"
-              :color="'#ffffff'"
-              v-show="isLoading"
-            />
+            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
         </form>
         <hr />
         <!--custom install script-->
         <!-- Install button, hidden by default -->
-        <small class="goto__sign__up"
-          >Already have an account?
+        <small class="goto__sign__up">Already have an account?
           <RouterLink :to="{ name: 'login' }" class="emphasis" style="font-size:13px">Login </RouterLink>
         </small>
       </div>
@@ -170,13 +159,13 @@ export default defineComponent({
 }
 
 /**the background container */
-#sign__up__page .container > div:first-child {
+#sign__up__page .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#sign__up__page .container > div:last-child {
+#sign__up__page .container>div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -184,7 +173,7 @@ export default defineComponent({
   align-content: center;
 }
 
-#sign__up__page .container > div:last-child h1 + small {
+#sign__up__page .container>div:last-child h1+small {
   margin-bottom: 30px;
 }
 
@@ -195,18 +184,6 @@ button,
   width: 500px;
 }
 
-#sign__up__page .continue__with__email,
-#sign__up__page .social__login__icons {
-  display: none;
-}
-
-#sign__up__page .title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  margin-bottom: 35px;
-}
 
 #sign__up__page .title h1 {
   font-style: normal;
@@ -220,6 +197,25 @@ button,
   justify-content: center;
   line-height: 28px;
   color: var(--secondary);
+}
+
+#sign__up__page .continue__with__email {
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  color: var(--secondary);
+  font-size: 0.95rem;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 35px;
+  margin-bottom: 25px;
+  justify-content: center;
+}
+
+#sign__up__page .continue__with__email .divider__line {
+  color: var(--border-color);
+  font-weight: 500;
+  letter-spacing: -1px;
 }
 
 /** -----------------------------small devices------------------------ */
@@ -236,11 +232,11 @@ button,
     padding: 0;
   }
 
-  #sign__up__page .container > div:first-child {
+  #sign__up__page .container>div:first-child {
     display: none;
   }
 
-  #sign__up__page .container > div:last-child {
+  #sign__up__page .container>div:last-child {
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
@@ -253,7 +249,7 @@ button,
     /* margin: 20px auto; */
   }
 
-  #sign__up__page .container > div:last-child h1 + small.error {
+  #sign__up__page .container>div:last-child h1+small.error {
     margin-bottom: 35px;
   }
 
@@ -270,25 +266,7 @@ button,
     width: auto;
   }
 
-  #sign__up__page .continue__with__email {
-    display: flex;
-    flex-direction: row;
-    column-gap: 15px;
-    color: var(--secondary);
-    font-size: 0.95rem;
-    text-align: center;
-    vertical-align: middle;
-    margin-top: 35px;
-    justify-content: center;
 
-    /* display: none; */
-  }
-
-  #sign__up__page .continue__with__email .divider__line {
-    color: var(--border-color);
-    font-weight: 500;
-    letter-spacing: -1px;
-  }
 
   #sign__up__page .social__login__icons {
     margin: 10px 0;

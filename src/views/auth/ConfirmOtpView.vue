@@ -3,18 +3,27 @@ import BaseTextInputVue from "@/components/BaseTextInput.vue";
 import BaseButtonVue from "@/components/BaseButton.vue";
 import { defineComponent } from "vue";
 import Spinner from "@/components/Spinner.vue";
+import VueCountdown from '@chenfengyuan/vue-countdown';
+import axios from "axios";
+import { getStoredData } from "@/main";
 export default defineComponent({
   name: "AuthView",
   components: {
     BaseTextInput: BaseTextInputVue,
     BaseButton: BaseButtonVue,
     Spinner,
+    VueCountdown
   },
   data: () => ({
     form: {
       otp: "",
     },
     isLoading: false,
+    counting: false,
+    inputFieldProps: {
+      pattern: "[0-9]",
+      type: "number"
+    },
     //destructure the api response into this variable
     apiResponse: {
       message: "",
@@ -42,11 +51,38 @@ export default defineComponent({
     requestNewToken() {
       console.log("requested");
     },
-
+    startCountdown: function () {
+      this.counting = true;
+    },
+    onCountdownEnd: function () {
+      this.counting = false;
+    },
     //confirm otp
-    confirmOtp() {
-      console.log("confirmed");
-      this.$router.push({ name: "confirm-otp" });
+    async confirmOtp() {
+      /**
+       * gt the otp from the data object
+       * get the bearer token from stored in shared preferences
+       * pass it to axios show loading state 
+       * destructure response
+       */
+      try {
+        const { otp } = this.form;
+        const bearerToken = await getStoredData("confirm-account-token");
+        this.isLoading = true;
+        const { data: response } = await axios.post("/auth/verify-email", {
+          token: otp,
+        }, {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`
+          }
+        });
+        console.log(JSON.stringify(response));
+
+        this.isLoading = false;
+        this.$router.push({ name: "confirm-otp" });
+      } catch (error) {
+
+      }
     },
     goBack() {
       this.$router.go(-1);
@@ -70,17 +106,28 @@ export default defineComponent({
         <small class="error"> {{ apiResponseMsg }}</small>
         <form action="" method="post" @submit.prevent="confirmOtp">
           <!--form field email-->
-          <BaseTextInput placeholder="XXXXXX" label="Token" v-model="form.otp" type="text" :maxlength="6"
-            class="field" />
+          <BaseTextInput placeholder="XXXXXX" label="Token" v-model="form.otp" type="text" :maxlength="6" class="field"
+            :input-attributes="inputFieldProps" :disabled="counting || isLoading" />
           <!--form field password-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Proceed</span>
             <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
-          <small class="goto__sign__up">Didn&apos;t receive any token?
-            <RouterLink :to="{ name: 'login' }" class="emphasis" style="font-size:13px">request new </RouterLink>
-          </small>
+          <VueCountdown v-if="!counting" :time="60000" v-slot="{ seconds }" @end="onCountdownEnd"
+            style="color: var(--secondary)">
+            <small>
+              Request new OTP after <strong style="font-size:13px">{{ seconds }}</strong> seconds.
+            </small>
+          </VueCountdown>
+          <button v-else class="goto__sign__up">Didn&apos;t receive any token?
+            <small class="emphasis" style="font-size:13px" @click="startCountdown">request new </small>
+          </button>
+
         </form>
+        <button class="goto__sign__up">
+          Go back <RouterLink :to="{ name: 'sign-up' }" class="emphasis" style="font-size:13px">Sign Up
+          </RouterLink>
+        </button>
       </div>
     </div>
   </div>

@@ -16,7 +16,7 @@
     <template v-if="isPassword">
       <div class="password__input__field">
         <input :type="passwordField" :id="label" :placeholder="placeholder" @input="updateModelValue"
-          :value="modelValue" />
+          :value="modelValue" v-bind="inputAttributes" />
         <!--icon to hid and show password visibility-->
         <Icon v-show="!isPasswordInput && showIcon" icon="mdi:eye-off-outline" class="password__toggler"
           @click="togglePasswordVisibility" />
@@ -88,6 +88,14 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    /**
+     * accept an n number of props as object 
+     * this allow flexibility
+     */
+    inputAttributes:{
+      type:Object,
+      default:{}
+    }
   },
   methods: {
     updateModelValue(event: any) {

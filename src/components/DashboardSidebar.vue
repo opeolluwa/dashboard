@@ -174,11 +174,7 @@ export default defineComponent({
       <div id="nav__header">
         <div id="avatar">
           <!--icon-->
-          <img
-            src="@/assets/img/illustration/default_user.png"
-            alt="avatar"
-            @click="goToProfile"
-          />
+          <img src="@/assets/img/illustration/default_user.png" alt="avatar" @click="goToProfile" />
           <!---name and email-->
           <div id="user">
             <h3>{{ fullname }}</h3>
@@ -198,40 +194,25 @@ export default defineComponent({
               <Icon icon="mdi:menu-down" />
             </div>
             <ul v-if="route.children" class="children__routes">
-              <li
-                v-for="child in route.children"
-                class="child__route"
-                @click="closeSidebar"
-              >
-                <RouterLink
-                  @click="closeSidebar"
-                  :to="{ name: child.path }"
-                  :key="child.name"
-                  :class="[
-                    route.name === currentRouteName ? 'active' : '',
-                    'capitalize',
-                  ]"
-                >
+              <li v-for="child in route.children" class="child__route" @click="closeSidebar" :class="[
+                // route.name === currentRouteName ? 'active' : '',
+                'capitalize',
+              ]">
+                <RouterLink @click="closeSidebar" :to="{ name: child.path }" :key="child.name">
                   <span class="capitalize">{{
-                    child.name.replaceAll("-", " ")
+                      child.name.replaceAll("-", " ")
                   }}</span>
                 </RouterLink>
               </li>
             </ul>
           </template>
-          <!-- <hr><hr/> -->
           <!--use this template if -->
           <template v-else>
             <!-- <hr class=divider> -->
-            <RouterLink
-              :to="{ name: route.path }"
-              class="link__item"
-              :class="[
-                route.name === currentRouteName ? 'active' : '',
-                'capitalize',
-              ]"
-              @click="closeSidebar"
-            >
+            <RouterLink :to="{ name: route.path }" class="link__item" :class="[
+              route.name === currentRouteName ? 'active' : '',
+              'capitalize',
+            ]" @click="closeSidebar">
               <Icon :icon="route.icon" />
               <span>{{ route.name }}</span>
             </RouterLink>
@@ -418,6 +399,7 @@ nav .link__item:hover,
     cursor: pointer;
     display: block;
   }
+
   nav svg {
     color: var(--secondary);
   }
