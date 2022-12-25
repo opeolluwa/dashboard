@@ -6,6 +6,7 @@ import Spinner from "@/components/Spinner.vue";
 import axios from "axios";
 import { useToast } from "vue-toastification";
 import { storeData } from "@/main";
+import SocialAccountAuth from "@/components/SocialAccountAuth.vue";
 
 const appToastComponent = useToast();
 export default defineComponent({
@@ -14,6 +15,7 @@ export default defineComponent({
     BaseTextInput: BaseTextInputVue,
     BaseButton: BaseButtonVue,
     Spinner,
+    SocialAccountAuth
   },
   data: () => ({
     form: {
@@ -88,69 +90,31 @@ export default defineComponent({
         </div>
 
         <!--social icons-->
-        <div class="social__login__icons d-non">
-          <div class="icon">
-            <img src="@/assets/icons/google.png" alt="google" />
-          </div>
-          <div class="icon">
-            <img src="@/assets/icons/github.png" alt="github" />
-          </div>
-          <div class="icon">
-            <img src="@/assets/icons/twitter.png" alt="twitter" />
-          </div>
-        </div>
-
-        <small class="continue__with__email">
+        <SocialAccountAuth />
+        <small class="continue__with__email d-none">
           <span class="divider__line"> ------------------ </span>
           <small> continue with email </small>
           <span class="divider__line"> ---------------- </span>
         </small>
 
         <form action="" method="post" @submit.prevent="signUp">
-          <BaseTextInput
-            placeholder="Jane Doe"
-            label="fullname"
-            v-model="form.fullname"
-            type="text"
-            class="field"
-          />
+          <BaseTextInput placeholder="Jane Doe" label="fullname" v-model="form.fullname" type="text" class="field" />
           <!--form field email-->
-          <BaseTextInput
-            placeholder="jane@mailer.com"
-            label="email"
-            v-model="form.email"
-            type="email"
-            class="field"
-          />
+          <BaseTextInput placeholder="jane@mailer.com" label="email" v-model="form.email" type="email" class="field" />
           <!--form field password-->
-          <BaseTextInput
-            placeholder="password"
-            type="password"
-            label="password"
-            v-model="form.password"
-            class="field"
-          />
+          <BaseTextInput placeholder="password" type="password" label="password" v-model="form.password"
+            class="field" />
           <!--form field submit, change color to black while waiting for response from server-->
           <BaseButton text="" :disabled="disabledState">
             <span v-show="!isLoading">Sign Up</span>
-            <Spinner
-              :animation-duration="1000"
-              :size="30"
-              :color="'#ffffff'"
-              v-show="isLoading"
-            />
+            <Spinner :animation-duration="1000" :size="30" :color="'#ffffff'" v-show="isLoading" />
           </BaseButton>
         </form>
         <hr />
         <!--custom install script-->
         <!-- Install button, hidden by default -->
-        <small class="goto__sign__up"
-          >Already have an account?
-          <RouterLink
-            :to="{ name: 'login' }"
-            class="emphasis"
-            style="font-size: 13px"
-            >Login
+        <small class="goto__sign__up">Already have an account?
+          <RouterLink :to="{ name: 'login' }" class="emphasis" style="font-size: 13px">Login
           </RouterLink>
         </small>
       </div>
@@ -164,7 +128,7 @@ export default defineComponent({
 }
 
 .goto__sign__up {
-  font-size: 0.95rem;
+  /* font-size: 0.95rem; */
   margin-top: 10px;
   color: var(--secondary);
   text-align: left !important;
@@ -186,13 +150,13 @@ export default defineComponent({
 }
 
 /**the background container */
-#sign__up__page .container > div:first-child {
+#sign__up__page .container>div:first-child {
   background-image: url("@/assets/img/bg/login-bg.svg");
   background-size: cover;
   background-position: center center;
 }
 
-#sign__up__page .container > div:last-child {
+#sign__up__page .container>div:last-child {
   padding: 100px 0;
   display: flex;
   flex-direction: column;
@@ -200,7 +164,7 @@ export default defineComponent({
   align-content: center;
 }
 
-#sign__up__page .container > div:last-child h1 + small {
+#sign__up__page .container>div:last-child h1+small {
   margin-bottom: 30px;
 }
 
@@ -260,24 +224,21 @@ button,
     padding: 0;
   }
 
-  #sign__up__page .container > div:first-child {
+  #sign__up__page .container>div:first-child {
     display: none;
   }
 
-  #sign__up__page .container > div:last-child {
+  #sign__up__page .container>div:last-child {
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    /* padding: 0 30px; */
     place-content: center;
-    /* place-items: center; */
     min-height: 90vh;
-    /* margin: 20px auto; */
   }
 
-  #sign__up__page .container > div:last-child h1 + small.error {
+  #sign__up__page .container>div:last-child h1+small.error {
     margin-bottom: 35px;
   }
 
@@ -287,39 +248,12 @@ button,
     justify-content: center;
     align-content: center;
     column-gap: 15px;
+    margin-top: 2.75rem;
   }
 
   .form__field,
   button {
     width: auto;
-  }
-
-  #sign__up__page .social__login__icons {
-    margin: 10px 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    column-gap: 15px;
-  }
-
-  #sign__up__page .social__login__icons .icon {
-    width: 100%;
-    height: 40px;
-    border-radius: 5px;
-    padding: 7.5px;
-    display: flex;
-    background-color: #f5f5f5;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #e5e5e5;
-  }
-
-  #sign__up__page .social__login__icons .icon img {
-    max-width: 100%;
-    object-fit: contain;
-    width: 27px;
   }
 }
 </style>
