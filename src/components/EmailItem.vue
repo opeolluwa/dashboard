@@ -6,13 +6,15 @@
       <div class="title">
         {{ title }}
       </div>
-      <span class="content">
+      <span class="content" @click="$emit('preview-email')">
         {{ content }}
       </span>
     </div>
     <div class="email__controls">
-      <Icon icon="mdi:star" :class="[isStarred?'starred__email':'','star']" v-if="isStarred" />
-      <Icon icon="mdi:star-outline" class="email" v-else />
+      <span @click="$emit('star-email')">
+        <Icon icon="mdi:star" :class="[isStarred ? 'starred__email' : '', 'star']" v-if="isStarred" />
+        <Icon icon="mdi:star-outline" class="email" v-else />
+      </span>
       <Icon icon="mdi:trash-can-outline" class="delete" />
       <Icon icon="mdi:dots-vertical" class="more-options" />
     </div>
@@ -94,6 +96,7 @@ div.email__item {
   -webkit-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
   -moz-box-shadow: 1px 3px 12px -9px rgba(0, 0, 0, 0.79);
   position: relative;
+  cursor: pointer;
 }
 
 .email__item div.email__content {
@@ -152,9 +155,11 @@ div.email__item svg.delete:hover {
 div.email__item svg.star-email:hover {
   color: var(--default-yellow);
 }
-.starred__email{
-  color: var(--default-yellow)!important;
+
+.starred__email {
+  color: var(--default-yellow) !important;
 }
+
 /* div.email__controls {
   display: grid;
   grid-template-columns: repeat(3, 25px);
