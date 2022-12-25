@@ -57,8 +57,8 @@ export const useEmailsStore = defineStore("emailStore", {
     },
     /**
      * get an email id
-     * make the request to update the emai 
-     * update the store 
+     * make the request to update the emai
+     * update the store
      */
     async starEmail(emailId: String) {
       try {
@@ -70,10 +70,69 @@ export const useEmailsStore = defineStore("emailStore", {
         });
         console.log("the note id is ", emailId);
         console.log(JSON.stringify(response));
-        //upadate the store 
-        await this.fetchAllEmails()
+        //upadate the store
+        await this.fetchAllEmails();
       } catch (error) { }
-    }
+    },
+
+    async unStarEmail(emailId: String) {
+      try {
+        const AUTH_TOKEN = authStore.getAuthToken
+          ? authStore.getAuthToken
+          : await getStoredData("authorizationToken");
+        const { data: response } = await axios.put(`/emails/un-star/${emailId}`, {
+          headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
+        });
+        console.log("the note id is ", emailId);
+        console.log(JSON.stringify(response));
+        //upadate the store
+        await this.fetchAllEmails();
+      } catch (error) { }
+    },
+
+    /**
+     * toggle star
+     * check if mail is starred, make request to un star if
+     * if not to otherwise
+     */
+    async toggleStar(isEmailStarred: boolean, emailId: String) {
+      if (isEmailStarred === true) {
+        await this.unStarEmail(emailId)
+
+      }
+      else {
+        await this.starEmail(emailId)
+
+      }
+    },
+    /**
+     * fetch email by id
+     * 
+     */
+    async fetchById(emailId: String) {
+      try {
+        const AUTH_TOKEN = authStore.getAuthToken
+          ? authStore.getAuthToken
+          : await getStoredData("authorizationToken");
+        const { data: response } = await axios.get(`/email/${emailId}`, {
+          headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
+        });
+        return response;
+        console.log(JSON.stringify(response));
+      } catch (error) { }
+    },
+
+    async deleteNote(emailId: String) {
+      try {
+        const AUTH_TOKEN = authStore.getAuthToken
+          ? authStore.getAuthToken
+          : await getStoredData("authorizationToken");
+        const { data: response } = await axios.delete(`/emails/${emailId}`, {
+          headers: { Authorization: `Bearer ${AUTH_TOKEN}` },
+        });
+        console.log(JSON.stringify(response));
+      } catch (error) { }
+    },
   },
 });
 

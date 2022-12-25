@@ -7,6 +7,8 @@ import { useAuthStore } from "@/stores/auth";
 import { mapActions, mapState } from "pinia";
 import DashboardBottomNav from "@/components/DashboardBottomNav.vue";
 import { useDarkMode } from "@/stores/theme";
+import axios from "axios";
+import router from "@/router";
 export default defineComponent({
   components: {
     DashboardSidebar: DashboardSidebarVue,
@@ -25,8 +27,8 @@ export default defineComponent({
    * if token does not exists, redirect to login page
    * else use the token to make request to the server, if the server return a valid response, enter this routes else redirect to login page
    */
-  /*beforeRouteEnter(to, from, next) {
-    // async function checkBearerTokenValidity() {
+  beforeRouteEnter(to, from, next) {
+    async function checkBearerTokenValidity() {
     const token = localStorage.getItem("token");
     if (!token) {
       next("/login");
@@ -59,10 +61,10 @@ export default defineComponent({
         console.log("something bad happened ");
       }
     }
-    // }
-    // checkBearerTokenValidity();
+    }
+    checkBearerTokenValidity();
   },
-  */
+
 
   computed: {
     ...mapState(useAuthStore, ["authorizationToken", "userInformation"]),
@@ -135,11 +137,8 @@ export default defineComponent({
 <template>
   <div class="container">
     <!-- the side bar-->
-    <DashboardSidebar
-      v-show="showSidebar"
-      @close-sidebar="showSidebar = false"
-      :class="{ dark__mode: enabledDarkMode }"
-    />
+    <DashboardSidebar v-show="showSidebar" @close-sidebar="showSidebar = false"
+      :class="{ dark__mode: enabledDarkMode }" />
     <main>
       <!-- the header-->
       <DashboardHeader @open-sidebar="showSidebar = !showSidebar" />
@@ -153,10 +152,7 @@ export default defineComponent({
         </ViewLayout>
       </div>
       <!--bottom navigation for mobile only-->
-      <DashboardBottomNav
-        @close-sidebar="showSidebar = false"
-        @toggle-theme="toggleColorTheme"
-      />
+      <DashboardBottomNav @close-sidebar="showSidebar = false" @toggle-theme="toggleColorTheme" />
     </main>
   </div>
 </template>

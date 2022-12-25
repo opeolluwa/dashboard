@@ -5,8 +5,8 @@ import { useAuthStore } from "@/stores/auth";
 //routes
 import emailRoutes from "./email";
 import notesRoutes from "./notes";
-import authRoutes from './auth';
-import todoRoutes from "./task"
+import authRoutes from "./auth";
+import todoRoutes from "./task";
 import notificationRoutes from "./notification";
 import profileRoutes from "./profile";
 import settingsRoutes from "./settings";
@@ -43,16 +43,16 @@ const router = createRouter({
 
 // console.log({ routes: JSON.stringify(router.getRoutes()) });
 
-router.
-  beforeEach((to, from, next) => {
-    const store = useAuthStore()
-    if (to.meta.requiresAuth && !store.isAuthenticated) {
-      next({
-        name: 'login'
-      })
-    } else {
-      next()
-    }
-  })
+// router.
+//   beforeEach((to, from, next) => {
+//     const store = useAuthStore()
+//     if (to.meta.requiresAuth && !store.isAuthenticated) {
+//       next({
+//         name: 'login'
+//       })
+//     } else {
+//       next()
+//     }
+//   })
 
 export default router;

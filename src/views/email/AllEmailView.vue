@@ -17,6 +17,7 @@ export default defineComponent({
     ...mapActions(useEmailsStore, {
       getEmailsRequest: "fetchAllEmails",
       starEmailRequest: "starEmail",
+      toggleEmailStar: "toggleStar"
     }),
     /**
      * @function previewEmail go to preview email
@@ -31,7 +32,7 @@ export default defineComponent({
      */
     starEmail(emailId: string) {
       this.starEmailRequest(emailId);
-    }
+    },
   },
   computed: {
     ...mapState(useEmailsStore, ["allEmails"]),
@@ -43,7 +44,7 @@ export default defineComponent({
   <div v-for="email in allEmails" :key="email.id.toString()">
     <EmailItem :title="email.emailSubject.toString()" :content="email.emailBody.toString()"
       :is-starred="email.isStarred" @preview-email="previewEmail(email.id.trim().toString())"
-      @star-email="starEmail(email.id.trim().toString())" />
+      @star-email="toggleEmailStar(email.isStarred, email.id.trim().toString())" />
   </div>
   <AppNetworkError v-if="allEmails.length === 0" />
   <Fab route="new-email" icon="mdi:email-plus-outline" />

@@ -12,7 +12,11 @@
     </div>
     <div class="email__controls">
       <span @click="$emit('star-email')">
-        <Icon icon="mdi:star" :class="[isStarred ? 'starred__email' : '', 'star']" v-if="isStarred" />
+        <Icon
+          icon="mdi:star"
+          :class="[isStarred ? 'starred__email' : '', 'star']"
+          v-if="isStarred"
+        />
         <Icon icon="mdi:star-outline" class="email" v-else />
       </span>
       <Icon icon="mdi:trash-can-outline" class="delete" />
