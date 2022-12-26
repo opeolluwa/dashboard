@@ -60,6 +60,7 @@ export default defineComponent({
     goToHome() {
       this.$router.push({ name: "home" });
     },
+  
   },
 });
 </script>
@@ -77,6 +78,7 @@ export default defineComponent({
         </div>
         <!--social login buttons-->
         <SocialAccountAuth />
+        <!-- <GoogleLogin :callback="callback" /> -->
         <form action="" method="post" @submit.prevent="login">
           <!--form field email-->
           <BaseTextInput placeholder="example@mailer.com" label="email" v-model="form.email" type="email"

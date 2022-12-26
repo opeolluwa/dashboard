@@ -1,15 +1,36 @@
-<script lang="ts">
+<!-- <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
     name: "SocialAccountAuth",
+    setup() {
+        const socialLogin = () => {
+            console.log("social login");
+        };
+        return {
+            socialLogin,
+        };
+    },
 });
+</script> -->
+
+<script lang="ts" setup>
+import { decodeCredential } from 'vue3-google-login'
+const callback = (response: { credential: string; }) => {
+    // decodeCredential will retrive the JWT payload from the credential
+    const userData = decodeCredential(response.credential)
+    console.log("Handle the userData", userData)
+}
 </script>
+
 
 <template>
     <div class="social__login__icons d-non">
-        <div class="icon">
-            <img src="@/assets/icons/google.png" alt="google" />
-        </div>
+        <GoogleLogin :callback="callback">
+            <div class="icon">
+                <img src="@/assets/icons/google.png" alt="google" />
+            </div>
+        </GoogleLogin>
+
         <div class="icon">
             <img src="@/assets/icons/github.png" alt="github" />
         </div>
@@ -21,7 +42,7 @@ export default defineComponent({
 
 
 <style scoped>
- .social__login__icons {
+.social__login__icons {
     margin: 10px 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -41,11 +62,16 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     border: 1px solid #e5e5e5;
+    cursor: pointer;
 }
 
 .social__login__icons .icon img {
     max-width: 100%;
     object-fit: contain;
     width: 22px;
+}
+
+svg {
+    cursor: pointer;
 }
 </style>

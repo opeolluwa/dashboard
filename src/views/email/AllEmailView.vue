@@ -41,12 +41,16 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-for="email in allEmails" :key="email.id.toString()">
+  <!--id there is an error fetching the todo -->
+  <!-- <AppNetworkError v-show="todoArray == null" /> -->
+  <!--if no todo was found bu it's empty-->
+  <AppEmptyState v-if="allEmails?.length == 0" />
+  <div v-for="email in allEmails" :key="email.id.toString()" v-else>
     <EmailItem :title="email.emailSubject.toString()" :content="email.emailBody.toString()"
       :is-starred="email.isStarred" @preview-email="previewEmail(email.id.trim().toString())"
       @star-email="toggleEmailStar(email.isStarred, email.id.trim().toString())" />
   </div>
-  <AppNetworkError v-if="allEmails.length === 0" />
+  <!-- <AppNetworkError v-if="allEmails.length === 0" /> -->
   <Fab route="new-email" icon="mdi:email-plus-outline" />
 </template>
 

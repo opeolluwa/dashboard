@@ -1,3 +1,4 @@
+
 <template>
     <div v-if="email">
         <div class="email__header">

@@ -1,8 +1,8 @@
 <template>
   <div class="view">
-    <div v-if="!isHomePage" class="view__header d-none">
+    <div v-if="!isHomePage" class="view__header">
       <Icon icon="mdi:arrow-left-thin" @click="goBack" />
-      <Icon icon="mdi:arrow-right-thin" @click="goForward" />
+      <Icon icon="mdi:arrow-right-thin" @click="goForward" class="d-none" />
     </div>
     <slot name="content"></slot>
   </div>
@@ -13,6 +13,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: var(--secondary);
+  font-size: 1.35rem;
 }
 
 .view__header svg {

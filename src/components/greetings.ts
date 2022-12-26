@@ -94,7 +94,6 @@ const options = {
     "Up so early, huh?",
     "Up so early?",
     "Working Late",
-    "Hi there!",
     "Aren't you sleeping?",
   ],
   //--------------------------------Special Occasion--------------------

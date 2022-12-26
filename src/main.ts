@@ -17,6 +17,8 @@ const toastOptions: PluginOptions = {
   // You can set your default options here
 };
 
+//google auth
+import GoogleLogin from 'vue3-google-login'
 // capacitor status bar
 import { StatusBar, Style } from "@capacitor/status-bar";
 const statusBarOption = {
@@ -74,6 +76,9 @@ app.use(router);
 app.use(timeago, timeagoOptions);
 app.use(Toast, toastOptions);
 // app.use(VueDarkMode)
+app.use(GoogleLogin, {
+  clientId: '922542500824-bssqki67kdmfpcf11sapl8ignghgvu2d.apps.googleusercontent.com'
+})
 app.mount("#app");
 
 //export the auth store to make it accessible globally
